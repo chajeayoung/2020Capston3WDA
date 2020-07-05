@@ -13,7 +13,7 @@ class Header_top extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-sm-6">
+                        {/* <div className="col-sm-6">
                             <div className="social-icons pull-right">
                                 <ul className="nav navbar-nav">
                                     <li><a href="#"><i className="fa fa-facebook"></i></a></li>
@@ -23,7 +23,7 @@ class Header_top extends React.Component {
                                     <li><a href="#"><i className="fa fa-google-plus"></i></a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div >
             </div >

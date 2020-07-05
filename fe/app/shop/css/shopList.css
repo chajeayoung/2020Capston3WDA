@@ -9,7 +9,14 @@
 .searchBox{
     float: right;
 }
-@media(max-width:940px){
+.searchButton{
+    background: #FE980F;
+    border: 1px solid #F5A9A9;
+    color: white;
+    padding: 4px;
+    border-radius: 9px;
+}
+@media(max-width:767px){
     .pagenation{
         place-content: center;
     }

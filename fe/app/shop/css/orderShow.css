@@ -1,4 +1,27 @@
 #orderShow{
     text-align: -webkit-center;
 }
-
+.imgDiv{
+    width: 400px;
+    max-height: 400px;
+    overflow: hidden;
+}
+.imgDiv img{
+    width: 400px;
+}
+td{
+    padding: 10px;
+}
+.orderInfoDiv{
+    color: #819FF7 ;
+}
+@media(max-width:800px){
+    .imgDiv{
+        width: 200px !important;
+        max-height: 200px !important;
+        margin-bottom: 15px;
+    }
+    .imgDiv img{
+        width: 200px;
+    }
+}

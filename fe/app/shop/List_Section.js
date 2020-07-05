@@ -16,7 +16,7 @@ export default class List_Section extends React.Component {
             <section>
                 <div className="search">
                     <div className="searchBox">
-                        <input type="text" placeholder="검색어" id="itemSearch"></input><button type="button" onClick={this.props.search.bind(this,this.props.that)}>검색</button>
+                        <input type="text" placeholder="검색어" id="itemSearch"></input><button className="searchButton" type="button" onClick={this.props.search.bind(this,this.props.that)}>검색</button>
                     </div>
                 </div>
                 <div className="container">

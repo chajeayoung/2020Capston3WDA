@@ -1,0 +1,30 @@
+.imgDiv{
+    max-width: 200px;
+    overflow: hidden;
+    height: 200px;
+}
+.productinfo {
+    text-align: -webkit-center;
+}
+
+
+@media(max-width:767px){
+    .imgDiv{
+        max-width: 300px;
+        height: 300px;
+    }
+    .imgDiv img {
+        width: 300px;
+    }
+    .productName{
+        font-size: 20px;
+    }
+    .product_Top_div{
+        border: 1px solid #F7F7F5;
+        display: inline-block;
+    }
+    .product-image-wrapper{
+        border: none !important;
+    }
+
+}
