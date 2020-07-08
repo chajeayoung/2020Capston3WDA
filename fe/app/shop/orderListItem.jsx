@@ -17,11 +17,15 @@ export default class OrderListItem extends React.Component {
                             </div>
                         </td>
                         <td>
-                            <div>상품명: {prd.name}</div>
+                            <a href={"/shop/orderShow/"+prd.orderListId}>상품명: {prd.name}</a>
                         </td>
                     </tr>
-                    <div>옵션명: {prd.oTitle}</div>
-                    <div>가격: {prd.itemPrice}</div>
+                    <tr>
+                        <td>옵션명: {prd.oTitle}</td>
+                    </tr>
+                    <tr>
+                        <td>가격: {prd.itemPrice}</td>
+                    </tr>
 
                 </tbody>
             )

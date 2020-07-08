@@ -6,7 +6,7 @@ import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
 
 import './css/show.css'
-
+import "./css/imgModal.css";
 
 
 var url = document.location.href;
@@ -36,7 +36,7 @@ class PrdShow extends React.Component {
         });
         // console.log("sub:"+sub);
 
-        this.setState({sub:sub, prd:data[0], option:data[2], color:data[3], size:data[4], manager:data[5], info:info})
+        this.setState({sub:sub, prd:data[0], option:data[2], color:data[3], size:data[4], manager:data[5], info:info, modal:1,img:''})
 
         console.log(data);
         this.setOption();
@@ -81,6 +81,16 @@ class PrdShow extends React.Component {
             console.log(img)
             imgTag.attr("src",'/uploads/'+img.productImage)
             imgTag.attr("class","subImg");
+            // imgTag.click( this.modalOn(img.productImage))
+            // imgTag.bind('click', this.modalOn(img.productImage));
+            var modalImg = img.productImage 
+            var that = this
+            // imgTag.attr('onClick',this.modalOn.bind(this,modalImg))
+            imgTag.bind("click",function(){
+                that.modalOn(modalImg)
+            })
+                
+            
             div.append(imgTag);
         })
         
@@ -145,6 +155,18 @@ class PrdShow extends React.Component {
         "/shop/order?productId="+this.state.prd.productId+"&optionId="+$('#selectOption').val()+"&quantity="+$('#quantity').val()
 
     }
+    
+    modalOn(img){
+        console.log(img,"모달 온")
+        this.setState({modal : 0, img})
+    }
+    modalOff(){
+        this.setState({modal:1})
+    }
+    modalOnSub(that, img){
+        that.setState({modal : 0, img})
+    }
+
     render() {
         var prd = this.state.prd;
         
@@ -157,7 +179,7 @@ class PrdShow extends React.Component {
                 <div className="grid">
                     <div className="imgs" >
                         <div className="sum">
-                        <img src={"/uploads/"+prd.img} ></img>
+                        <img src={"/uploads/"+prd.img} onClick={this.modalOn.bind(this,prd.img)}></img>
                         </div>
                         <div className="sub">
 
@@ -209,7 +231,7 @@ class PrdShow extends React.Component {
                             {
                                 this.state.info.map((img, index)=>{
                                     console.log(img)
-                                    return <div key={img.no} className="infoImage_item"><img className="infoImage" src={"/uploads/"+img.productImage}></img></div>
+                                    return <div key={img.no} className="infoImage_item"><img className="infoImage" src={"/uploads/"+img.productImage} onClick={this.modalOn.bind(this,img.productImage)}></img></div>
                                 })
                             }
 
@@ -222,6 +244,20 @@ class PrdShow extends React.Component {
                     <div>판매자: {this.state.manager.name}</div>
                     <div>연락처: {this.state.manager.phone?this.state.manager.phone:"X"}</div>
                 </div>
+                {
+                    this.state.modal == 0? (
+                        <div className="modal">
+                            <div className="modalContentBox">
+                                <div className="modalItem">
+                                    <img className="modalImg" src={"/uploads/"+this.state.img}></img>
+                                </div>
+                                <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
+                            </div>
+                        </div>
+                    ):(
+                        <div></div>
+                    )
+                }
             </div>
             
         )
