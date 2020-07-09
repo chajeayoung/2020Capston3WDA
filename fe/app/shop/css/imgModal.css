@@ -11,9 +11,10 @@
     z-index:10;
     
 }
+
 .modalImg{
     width: 100%;
-    max-height: 361px;
+    /* max-height: 361px; */
 }
 .modalContentBox{
     background: white;
@@ -25,6 +26,7 @@
 }
 .modalItem{
     overflow: scroll;
+    max-height: 500px;
 }
 
 .closeBtn{
@@ -55,6 +57,7 @@
     }
     .modalItem{
         overflow: scroll;
+        max-height: 300px;
     }
     /* .usrAdd{
         overflow: scroll;
