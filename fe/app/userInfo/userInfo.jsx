@@ -79,7 +79,7 @@ class Index extends Component {
                  <tr><td><input type="file" name="profile2"/></td></tr>
                  <tr><td>닉네임<input   type="text" name="nickname" placeholder="입력해주세요" defaultValue={p.nickname}/></td></tr>
                  <tr><td colSpan="2"><hr></hr></td></tr>
-                 <tr><td>이름<input type="text" name="username" placeholder="이름" value={p.username} readOnly/></td></tr>
+                 <tr><td>이름<input type="text" name="name" placeholder="이름" defaultValue={p.username}/></td></tr>
                  <tr><td>생년월일<input  type="date" name="birth" defaultValue={p.birth} /></td></tr>
                  <tr>
                  <td className="register_left_td"><input className="register_gender" className="test" type="radio"  name="gender" value="0" required/>남자</td>
@@ -94,7 +94,7 @@ class Index extends Component {
             <input type="hidden" name="profile" value={p.profile?p.profile:'/img/defaultProfile.png'}></input>
             <input type="hidden" name="userid" value={p.userid}></input>
             <input type="hidden" name="no" value={p.r_id}></input>
-            <input type="hidden" name="name" value={p.username}></input>
+            {/* <input type="hidden" name="name" value={p.username}></input> */}
             <button className="submit_button" type="submit">수정하기</button>
             </div> 
             )}
