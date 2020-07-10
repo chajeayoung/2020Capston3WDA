@@ -52,6 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/introduce/read/**").permitAll()
 			.antMatchers("/introduce/apply/**").permitAll()
 
+			//채팅방
+			.antMatchers("/soket.io-client").permitAll()
+
 			
 			
 

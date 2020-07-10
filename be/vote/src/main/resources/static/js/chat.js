@@ -1,6 +1,14 @@
+
+//  import io from "/soket.io-client"
 $(document).ready(function() {
+   
     $(function() {
-        var socket = io("http://localhost:4000");
+        // var socket = io("http://localhost:4000");
+    //    var rirochat=
+        // console.log(rirochat)
+    //     var socket = io(rirochat);
+
+        var socket = io($("#rirochat").val());
         $('#chatform').submit(function(e) {
             e.preventDefault(); // prevents page reloading
             socket.emit('chat message', $("#username").text() + " : " +  $('#chatinput').val());
