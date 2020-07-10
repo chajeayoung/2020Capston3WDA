@@ -31,10 +31,12 @@ th:fragment="layout(content,js,title,link)">
     
     <!-- <link rel="stylesheet" href="/shop/css/bootstrap.min.css"> -->
 
-    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script src="http://125.190.146.207:4000/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<link href="/css/chat.css" rel="stylesheet">
-	<script src="/js/chat.js"></script>
+	<script type="module" src="/js/chat.js"></script>
 	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 	
@@ -51,6 +53,7 @@ th:fragment="layout(content,js,title,link)">
                     <img th:unless="${#authentication.principal.img}" src="/img/defaultProfile.png" width="25" height="25">
                 </div>
                 <span id="username" sec:authentication="principal.name"></span><span> 님</span> 
+                <input id="rirochat" type="hidden" th:value="${@environment.getProperty('rirochat')}">
                 <a></a>
                 <form class="top_form"action="/logout" method="post">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
