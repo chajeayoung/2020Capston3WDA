@@ -82,7 +82,12 @@
 
                 <div>
                     <div id="list"></div>
-                    <div id="result"></div>
+                    <div id="result">
+                        <th:block th:if="${result.size() >=1}">
+                            <h4>당첨자</h4>
+                            <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
+                        </th:block>
+                    </div>
                 </div>
                     
 
