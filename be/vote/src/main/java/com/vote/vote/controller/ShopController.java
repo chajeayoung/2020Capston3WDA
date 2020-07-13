@@ -145,8 +145,8 @@ public class ShopController {
 		
 		JSONArray json = new JSONArray();
 		json.add(0,customPrdRepository.getCategorySelect(4)); // 카테고리별로 4개 씩.
-		json.add(1,customPrdRepository.getRecommendPrd(1,4));
-		json.add(2,customPrdRepository.getRecommendPrd(5,8));
+		json.add(1,customPrdRepository.getRecommendPrd(1,4)); 
+		json.add(2,customPrdRepository.getRecommendPrd(5,8)); 
 
 		return json;
 
@@ -967,6 +967,16 @@ public class ShopController {
 			return "redirect:/shop/order/ok";
 		}
 		
+		@RequestMapping(value={"/shop/kakaoPayCancel","/shop/kakaoPayCancel/"})
+		public String kakaoPayCancle(){
+
+			return "/shop/orderError";
+		}
+		@RequestMapping(value={"/shop/kakaoPayFail","/shop/kakaoPayFail"})
+		public String kakaoPayFail(){
+
+			return "/shop/orderError";
+		}
 
 
 

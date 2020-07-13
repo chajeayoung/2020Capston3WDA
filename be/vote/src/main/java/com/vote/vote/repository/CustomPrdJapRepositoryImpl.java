@@ -77,10 +77,23 @@ public class CustomPrdJapRepositoryImpl implements CustomPrdJapRepository {
     @Override
     public List<CustomPrdRecommend> getRecommendPrd(int start, int end) {
 
-        String sql = "select p.product_id productId, p.p_name name, TO_CHAR(DBMS_LOB.SUBSTR(p.image, 4000)) img,  nvl(sum(l.count),0) sum "
-                + "from orderlist l, product p " + "where l.PRODUCT_ID = p.PRODUCT_ID " + "and rownum >=" + start
-                + " and rownum <=" + end + " group by p.product_id, p.p_name, TO_CHAR(DBMS_LOB.SUBSTR(p.image, 4000)) "
-                + "order by sum desc";
+        String sql = 
+            " select r.*  "
+            + " from  "
+                + " ( select rownum rnum , a.* "
+                + " from ( "
+                        + " select p.product_id productId, p.p_name name, TO_CHAR(DBMS_LOB.SUBSTR(p.image, 4000)) img,  nvl(sum(l.count),0) sum "
+                        + " from orderlist l, product p " 
+                        + " where l.PRODUCT_ID = p.PRODUCT_ID " 
+                        + " group by p.product_id, p.p_name, TO_CHAR(DBMS_LOB.SUBSTR(p.image, 4000)) "
+                        + " order by sum desc "
+                +" ) a "
+            +" )r "
+            +"where r.rnum between "+start+" and "+end;
+
+
+                // +" where rownum >= "+start
+                // +" and rownum <= "+end;
 
         Query nativeQuery = em.createNativeQuery(sql);
         // .setParameter("mId", managerId);

@@ -37,7 +37,7 @@ export default class Section extends React.Component {
                                         <div className="item active"> 
                                             <Item2 data={this.props.data[1]}/>
                                         </div>
-                                        <div className="item active"> 
+                                        <div className="item"> 
                                             <Item2 data={this.props.data[2]}/>
                                         </div>
                                     </div>
