@@ -6,7 +6,7 @@ import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
 
 import './css/show.css'
-
+import "./css/imgModal.css";
 
 
 var url = document.location.href;
@@ -36,7 +36,7 @@ class PrdShow extends React.Component {
         });
         // console.log("sub:"+sub);
 
-        this.setState({sub:sub, prd:data[0], option:data[2], color:data[3], size:data[4], manager:data[5], info:info})
+        this.setState({sub:sub, prd:data[0], option:data[2], color:data[3], size:data[4], manager:data[5], info:info, modal:1,img:''})
 
         console.log(data);
         this.setOption();
@@ -81,6 +81,16 @@ class PrdShow extends React.Component {
             console.log(img)
             imgTag.attr("src",'/uploads/'+img.productImage)
             imgTag.attr("class","subImg");
+            // imgTag.click( this.modalOn(img.productImage))
+            // imgTag.bind('click', this.modalOn(img.productImage));
+            var modalImg = img.productImage 
+            var that = this
+            // imgTag.attr('onClick',this.modalOn.bind(this,modalImg))
+            imgTag.bind("click",function(){
+                that.modalOn(modalImg)
+            })
+                
+            
             div.append(imgTag);
         })
         
@@ -145,58 +155,109 @@ class PrdShow extends React.Component {
         "/shop/order?productId="+this.state.prd.productId+"&optionId="+$('#selectOption').val()+"&quantity="+$('#quantity').val()
 
     }
+    
+    modalOn(img){
+        console.log(img,"모달 온")
+        this.setState({modal : 0, img})
+    }
+    modalOff(){
+        this.setState({modal:1})
+    }
+    modalOnSub(that, img){
+        that.setState({modal : 0, img})
+    }
+
     render() {
         var prd = this.state.prd;
         
         return (
             <div className="topDiv">
-                <div><a href="/shop/mybag">장바구니</a></div>
+                <div className="linkDiv">
+                    <a href="/shop/list" className="list" >상품목록</a>
+                    <a href="/shop/mybag" className="myBag">장바구니</a>
+                </div>
                 <div className="grid">
                     <div className="imgs" >
                         <div className="sum">
-                        <img src={"/uploads/"+prd.img} ></img>
+                        <img src={"/uploads/"+prd.img} onClick={this.modalOn.bind(this,prd.img)}></img>
                         </div>
                         <div className="sub">
 
                         </div>
                     </div>
                     <div className="itemInfo">
-                        <div>상품명:{prd.name}</div>
-                        <div>제품 설명:{prd.content}</div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>상품명: </td>
+                                    <td>{prd.name}</td>
+                                </tr>    
+                                <tr>
+                                <td>제품설명: </td>
+                                    <td>{prd.content}</td>
+                                </tr>
+                                <tr>
+                                    <td>재고: </td>
+                                    <td>{prd.stock} 개</td>
+                                </tr>
+                                <tr>
+                                    <td>가격: </td>
+                                    <td>{prd.price} 원</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        {/* <div>상품명: {prd.name}</div>
+                        <div>제품 설명: {prd.content}</div>
                         <div>재고: {prd.stock} 개</div>
-                        <div>가격: {prd.price} 원</div>
+                        <div>가격: {prd.price} 원</div> */}
                         <div>옵션</div>
                         <div id="optionSelect"></div>
                         <div>수량</div>
                         <div><input type="number" id="quantity" min="1" max="9999" defaultValue="1" onChange={this.sumPriceSet.bind(this)}/></div>
                         <div>총 가격</div>
-                        <h3 id="sumPrice">{prd.price}원</h3>
+                        <h3 id="sumPrice">{prd.price} 원</h3>
                         
-                        <input type="button" value="장바구니 추가" onClick={this.addMybag.bind(this)}/>
-                        <input type="button" value="구매" onClick={this.order.bind(this)}/>
+                        <input type="button" className="goBag" value="장바구니 추가" onClick={this.addMybag.bind(this)}/>
+                        <input type="button" className="goOrder" value="구매" onClick={this.order.bind(this)}/>
                     </div>
                 </div>
                 <div className="itemDetails">
-                    <div>
+                    <div className="product_info">
                         {/* 상세 설명 부분 */}
-                        <div>상세 세부 설명 ....</div>
+                        <div className="detail_title">상품 상세설명</div>
                         <div>
                             <div id="infoImage">
                             {
                                 this.state.info.map((img, index)=>{
                                     console.log(img)
-                                    return <img className="infoImage" key={img.no}src={"/uploads/"+img.productImage}></img>
+                                    return <div key={img.no} className="infoImage_item"><img className="infoImage" src={"/uploads/"+img.productImage} onClick={this.modalOn.bind(this,img.productImage)}></img></div>
                                 })
                             }
 
                             </div>
                             <div>{prd.p_DETAIL}</div>
                         </div>
-                        
+                        <div className="prd_detail"><span>{prd.detail}</span></div>
                     </div>
+                    <div className="seller">판매자 정보</div>
                     <div>판매자: {this.state.manager.name}</div>
-                    <div>판매자 연락처: {this.state.manager.phone?this.state.manager.phone:"X"}</div>
+                    <div>연락처: {this.state.manager.phone?this.state.manager.phone:"X"}</div>
                 </div>
+                {
+                    this.state.modal == 0? (
+                        <div className="modal">
+                            <div className="modalContentBox">
+                                <div className="modalItem">
+                                    <img className="modalImg" src={"/uploads/"+this.state.img}></img>
+                                </div>
+                                <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
+                            </div>
+                        </div>
+                    ):(
+                        <div></div>
+                    )
+                }
             </div>
             
         )

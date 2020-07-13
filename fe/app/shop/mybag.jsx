@@ -14,7 +14,7 @@ window.$ = window.jQuery = jQuery;
 class Mybag extends React.Component {
     constructor(props){
         super(props)
-        this.state = { mybags: [], pageNum: 1 , count: 0};
+        this.state = { mybags: [], pageNum: 1 , count: 0, sumPrice: 0};
         this.url = '/shop/mybag/axios?page='+(this.state.pageNum-1)+'&size='+3+'&sort="id"';
         this.buyItems = []
         this.buyUrl = '/shop/order?'
@@ -51,12 +51,19 @@ class Mybag extends React.Component {
         
         location.reload();
     }
-    check(that,index,e){
+    check(that,index,price,e){
+        console.log(price);
+
         if($(e.target).is(":checked")){
             that.buyItems.push(index);
+            var sum = that.state.sumPrice+price
+            that.setState({sumPrice: sum})
         }else{
             that.buyItems.splice(that.buyItems.indexOf(index),1)
+            var sum = that.state.sumPrice-price
+            that.setState({sumPrice: sum})
         }    
+        
     }
     gotoBuy(){
         if(this.buyItems.length == 0)
@@ -87,15 +94,31 @@ class Mybag extends React.Component {
         
         return (
             <div>
-                <div> 장바구니 </div>
-                <div><a href="/shop/orderList">주문 목록</a></div>
-                <div>
-                    <div>
+                <div className="link_div">
+                    <a href="/shop/list"><h5>상품 목록</h5></a>
+                    &nbsp;&nbsp;
+                    <a href="/shop/orderList"><h5>주문 목록</h5></a>
+                </div>
+                <div className="menuTitle">
+                    <h4>장바구니 목록</h4>
+                </div>
+                <div className="grid">
+                    <div className="items">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>주문</th>
+                                <th>이미지</th>
+                                <th>상품 정보</th>
+                            </tr>
+                        </thead>
                         <BagItem data={this.state.mybags} event={this.deleteItem} check={this.check} this={this}/>
                         {/* <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination> */}
+                    </table>
                     </div>
-                    <div>
-                        <div>총 상품 가격</div>
+                    <div className="centerOrderGo">
+                        <div className="sumPriceTitle">총 상품 가격</div>
+                        <div><h2 className="sumPrice">{this.state.sumPrice} 원</h2></div>
                         <div><input type="button" onClick={this.gotoBuy.bind(this)} value="주문하기"/></div>
                     </div>
                 </div>

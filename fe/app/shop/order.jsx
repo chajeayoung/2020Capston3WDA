@@ -4,6 +4,7 @@ const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 import jQuery from "jquery";
 import './css/order.css'
+import './css/mybag.css'
 import OrderItem from './orderItem.jsx'
 
 window.$ = window.jQuery = jQuery;
@@ -41,7 +42,9 @@ class Order extends React.Component {
     }
     buy(e){
         // e.preventDefault();
-        alert("상품을 구매하시겠습니까?");
+        // alert("상품을 구매하시겠습니까?");
+        if(!confirm("상품을 구매하시겠습니까?"))
+            e.preventDefault();
     }
     render() {
         console.log(this.state.data)
@@ -49,35 +52,61 @@ class Order extends React.Component {
             <div>
                 <form  action="/shop/order" method="post">
                     <input type="hidden" name="_csrf" value={document.cookie.split("=")[1]}/>
+                        <div className="link_div">
+                        <a href="/shop/list"><h5>상품 목록</h5></a>
+                        &nbsp;&nbsp;
+                        <a href="/shop/orderList"><h5>주문 목록</h5></a>
+                        &nbsp;&nbsp;
+                        <a href="/shop/mybag"><h5>장바구니 목록</h5></a>
+                    </div>
                     <div className="grid">
-                        <div>
+                        <div className="orderLeft">
                             <div>
-                                <div>구매상품</div>
                                 <div>
-                                    <OrderItem data={this.state.data}/>
+                                    <div className="userInfoTitle"><h4>주문상품 정보</h4></div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>이미지</th>
+                                                <th>상품 정보</th>
+                                            </tr>
+                                        </thead>
+                                        <OrderItem data={this.state.data}/>
+                                    </table>
                                 </div>
                             </div>
-                            <div>
-                                <div>수취자 정보</div>
-                                <div>주소</div>
-                                <input type="text" name="addr" placeholder="도로명주소" required/>
-                                <input type="text" name="addr2" placeholder="상세주소" required/>
-                                <div>받는분 성함</div>
-                                <input type="text" name="receiver" required/>
-                                <div>연락처</div>
-                                <input type="text" name="phone" required/>
+                            <div className="userInfo">
+                                <div className="userInfoTitle"><h4>수취자 정보</h4></div>
+                                
+                                <table className="userInfoTable">
+                                    <tr>
+                                        <td>도로명 주소</td>
+                                        <td><input type="text" name="addr" placeholder="도로명주소" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>상세 주소</td>
+                                        <td><input type="text" name="addr2" placeholder="상세주소" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>받는분 성함</td>
+                                        <td><input type="text" name="receiver" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>연락처</td>
+                                        <td><input type="text" name="phone" required/></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                         <div>
-                            <div>
+                            <div className="orderDiv">
                                 <div><h3>총 금액</h3></div>
                                 <div id="sumPrice">---원</div>
                                 <div><h3>이용약관</h3></div>
-                                <div>반품불가</div>
-                                <div><input type="checkbox" required/></div>
-                            </div>
-                            <div>
-                                <input type="submit" onSubmit={this.buy.bind(this)} value="구매"/><a href="/shop/index">취소</a>
+                                <div>반품불가 <input type="checkbox" required/></div>
+                                <div>
+                                    <input type="submit" className="buy" onSubmit={this.buy.bind(this)} value="구매"/><a   className="cancle" href="/shop/index">취소</a>
+                                </div>
                             </div>
                         </div>
                     </div>

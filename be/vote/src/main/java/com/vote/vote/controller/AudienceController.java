@@ -56,7 +56,6 @@ import net.minidev.json.JSONObject;
 import org.springframework.util.StringUtils;
 
 @Controller
-@RequestMapping("/audience")
 public class AudienceController {
 
     @Autowired
@@ -89,7 +88,7 @@ public class AudienceController {
 
     // -----------------------------------------사용자
     // 모든프로그램 게시글 리스트
-    @GetMapping(value = { "/", "/list" })
+    @GetMapping(value = { "/audience/", "/audience/list" })
     public String audienceAllList(@PageableDefault Pageable pageable, Model model) {
 
         Page<Audience> boardList = audienceService.getBoardList(pageable);
@@ -99,7 +98,7 @@ public class AudienceController {
     }
 
     // 게시글 보기
-    @RequestMapping("/read/{applyId}")
+    @RequestMapping("/audience/read/{applyId}")
     public String read(Model model, @PathVariable int applyId) {
         model.addAttribute("audience", audienceJpaRepository.findById(applyId));
         Audience audience = audienceJpaRepository.findById(applyId);
@@ -109,7 +108,7 @@ public class AudienceController {
     }
 
     // 응모 ajax
-    @GetMapping("/apply")
+    @GetMapping("/audience/apply")
     @ResponseBody
     public String result(Audience audience, Principal principal, ADetail aDetail) {
         Member member = memberRepository.findByUserid(principal.getName());
@@ -140,13 +139,13 @@ public class AudienceController {
 
     // --------------------------------------------------------관리자
     // 게시글 업로드(관리자)
-    @GetMapping("/create")
+    @GetMapping("/audience/create")
     public String mUpload(Model model) {
         model.addAttribute("audience", new Audience());
         return "audience/mCreate";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/audience/create")
     public String mUpload(@Valid Audience audience, BindingResult bindingResult, SessionStatus sessionStatus,
             Principal principal, Model model, RedirectAttributes redirAttrs,
             @RequestParam(name = "filename") MultipartFile filename) {
@@ -181,7 +180,7 @@ public class AudienceController {
     }
 
     // 게시글 삭제
-    @GetMapping("/delete/{applyId}")
+    @GetMapping("/audience/delete/{applyId}")
     public String delete(@PathVariable int applyId, Model model) {
         aDetailRepository.deleteByApplyId(applyId);
         audienceJpaRepository.deleteById(applyId);
@@ -189,14 +188,14 @@ public class AudienceController {
     }
 
     // 게시글 수정
-    @GetMapping("/update/{applyId}")
+    @GetMapping("/audience/update/{applyId}")
     public String update(@PathVariable int applyId, Model model) {
         model.addAttribute("audience", audienceJpaRepository.findById(applyId));
         model.addAttribute("newAudience", new Audience());
         return "audience/mUpdate";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/audience/update")
     public String update(@Valid Audience audience, BindingResult bindingResult, SessionStatus sessionStatus,
             Principal principal, Model model, RedirectAttributes redirAttrs,
             @RequestParam(name = "filename") MultipartFile filename) {
@@ -212,7 +211,7 @@ public class AudienceController {
     }
 
     // 내가 작성한 게시글(관리자)
-    @GetMapping(value = { "/mlist" })
+    @GetMapping(value = { "/userInfo/audience/mlist" })
     public String mList(Principal principal, Pageable pageable, Model model) {
         Member member = memberRepository.findByUserid(principal.getName());
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
@@ -225,7 +224,7 @@ public class AudienceController {
     }
 
     // 내가 작성한 게시글 보기(관리자)
-    @RequestMapping("/mread/{applyId}")
+    @RequestMapping("/userInfo/audience/mread/{applyId}")
     public String mRead(Model model, @PathVariable int applyId) {
         model.addAttribute("audience", audienceJpaRepository.findById(applyId));
         Audience audience = audienceJpaRepository.findById(applyId);
@@ -235,7 +234,7 @@ public class AudienceController {
     }
 
     // 응모인원 리스트 ajax
-    @GetMapping("/showList")
+    @GetMapping("/audience/showList")
     @ResponseBody
     public JSONArray showList(Model model, Audience audience) {
 
@@ -254,7 +253,7 @@ public class AudienceController {
         return array;
     }
 
-    @GetMapping("/showResult")
+    @GetMapping("/audience/showResult")
     @ResponseBody
     public JSONArray showResult(Model model, Audience audience) {
         int people = audience.getARecruits();

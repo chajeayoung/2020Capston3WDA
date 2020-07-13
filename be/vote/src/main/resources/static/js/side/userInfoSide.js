@@ -38,8 +38,12 @@
 		if(userRole=="2")
 		$("#side").append("<li><a href='/userInfo/myProgram/'>프로그램관리</a></li>");	 
 		$("#side").append("<li><a href='/userInfo/myCommunity/'>팬클럽관리</a></li>");	 
-		$("#side").append("<li><a href='/userInfo/hotclib'>핫클립관리</a></li>");	 
-		$("#side").append("<li><a href='#'>방첨권추첨</a></li>");	 
+
+
+		$("#side").append("<li><a href='/hotclib'>핫클립관리</a></li>");	 
+		$("#side").append("<li><a href='userInfo/audience/mlist'>방청권추첨</a></li>");	 
+
+
 			    
 		//굿즈샵관리
 		$("#side").append("<li><a href='/userInfo/manage/product'>상품관리</a></li>");	 

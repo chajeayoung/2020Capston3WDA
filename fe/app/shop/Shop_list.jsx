@@ -8,6 +8,7 @@ import Footer from './Footer.js';
 import Footer2 from './Footer2.js';
 import Chat from './Chat.jsx';
 // import Section from './Section.js'
+import './css/shopList.css'
 import Pagination from '@material-ui/lab/Pagination';
 import List_Section from './List_Section.js'
 const regeneratorRuntime = require("regenerator-runtime");
@@ -124,7 +125,7 @@ class Shop_list extends React.Component {
     render() {
             return (
                 <Fragment>
-                    <Header_top></Header_top>
+                    {/* <Header_top></Header_top> */}
                     <Header_middle></Header_middle>
                     <Header_bottom></Header_bottom>
                     <SliderFrame></SliderFrame>

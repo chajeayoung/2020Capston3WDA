@@ -6,7 +6,7 @@ const axios = require('axios');
 import jQuery from "jquery";
 
 import '../smart.css';
-
+import './css/ItemCreate.css'
 window.$ = window.jQuery = jQuery;
 
 
@@ -201,7 +201,6 @@ class ItemEdit extends React.Component {
         return (
             <form method="post" encType="multipart/form-data" action={"/shop/update/"+$("#prdId").val()}>
                 <div className="createItemBody">
-                    <div className="div_center">상품 등록</div>
                     <input type="hidden" name="_csrf" value={document.cookie.split("=")[1]}/>
                     <div className="item">
                         <div className="leftBox">
@@ -243,8 +242,8 @@ class ItemEdit extends React.Component {
                             <div className="prdOption"></div>
                         </div>
                         <div>
-                            <button>수정완료</button>
-                            <a href="/userInfo/manage/product">취소</a>
+                            <button className="submitButton">수정완료</button>
+                            <a href="/userInfo/manage/product" className="cancle">취소</a>
                         </div>
                     </div>
                 </div>

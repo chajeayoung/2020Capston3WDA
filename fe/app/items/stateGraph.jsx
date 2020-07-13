@@ -4,6 +4,7 @@ import Dataset from '@bit/nexxtway.react-rainbow.dataset';
 
 const containerStyles = {
   width: 600,
+  margin: "auto"
 };
 
 // npm i @bit/nexxtway.react-rainbow.chart
@@ -56,7 +57,7 @@ export default class LineChartExample extends React.Component {
         console.log(this.props.data);
         return (
             <div>
-                <div style={containerStyles}>
+                <div id="graph_chart" style={containerStyles}>
                     <Chart labels={labels} type="line">
                         {this.renderDatasets(datasets)}
                     </Chart>

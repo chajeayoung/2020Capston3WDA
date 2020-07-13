@@ -1,0 +1,29 @@
+.pagenation{
+    /* place-content: center; */
+    display: table;
+}
+.search{
+    margin-bottom: 20px;
+ 
+}
+.searchBox{
+    float: right;
+}
+.searchButton{
+    background: #FE980F;
+    border: 1px solid #F5A9A9;
+    color: white;
+    padding: 4px;
+    border-radius: 9px;
+}
+@media(max-width:767px){
+    .pagenation{
+        place-content: center;
+    }
+    .search{
+        text-align-last: center;
+    }
+    .searchBox{
+        float: none;
+    }
+}

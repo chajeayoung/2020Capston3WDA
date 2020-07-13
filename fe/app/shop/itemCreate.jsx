@@ -149,7 +149,7 @@ class ItemCreate extends React.Component {
         return (
             <form method="post" encType="multipart/form-data" action="/shop/store">
                 <div className="createItemBody">
-                    <div className="div_center">상품 등록</div>
+                    {/* <div className="div_center">상품 등록</div> */}
                     <input type="hidden" name="_csrf" value={document.cookie.split("=")[1]}/>
                     <div className="item">
                         <div className="leftBox">
@@ -187,8 +187,8 @@ class ItemCreate extends React.Component {
                             <div className="prdOption"></div>
                         </div>
                         <div>
-                            <button>상품 등록</button>
-                            <a href="/userInfo/manage/product">취소</a>
+                            <button className="submitButton">상품 등록</button>
+                            <a href="/userInfo/manage/product" className="cancle">취소</a>
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,11 @@ export default class List_Section extends React.Component {
         console.log(this.props)
         return (
             <section>
-                <div><input type="text" placeholder="검색어" id="itemSearch"></input><button type="button" onClick={this.props.search.bind(this,this.props.that)}>검색</button></div>
+                <div className="search">
+                    <div className="searchBox">
+                        <input type="text" placeholder="검색어" id="itemSearch"></input><button className="searchButton" type="button" onClick={this.props.search.bind(this,this.props.that)}>검색</button>
+                    </div>
+                </div>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-3"> {/* 왼쪽 카테고리, 프로그램 별... */} 
@@ -26,7 +30,7 @@ export default class List_Section extends React.Component {
                         </div>
                         <div>
                             {/* display: inline-block; */}
-                            <Pagination count={this.props.data.count} page={this.props.data.pageNum} onChange={this.props.paging.bind(this, this.props.that)}> </Pagination>
+                            <Pagination className="pagenation" count={this.props.data.count} page={this.props.data.pageNum} onChange={this.props.paging.bind(this, this.props.that)}> </Pagination>
                         </div>
                     </div>
                 </div>

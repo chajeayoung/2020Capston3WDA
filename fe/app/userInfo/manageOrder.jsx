@@ -139,12 +139,12 @@ class OrderList extends React.Component {
 
     render() {
         return  this.props?this.props.data.map((order,index)=>{
-            
+            console.log(order)
             return (
                 <TableRow key={'div'+index}>
                              
                     <TableCell className="smart" key={index}>{order.productId}</TableCell>
-                    <TableCell>{order.name}</TableCell>
+                    <TableCell><a href={"/shop/product/"+order.productId}>{order.name}</a></TableCell>
                     <TableCell className="smart">{order.itemPrice}</TableCell>
                     <TableCell>{order.count}</TableCell>
                     <TableCell className="smart">{order.rId}</TableCell>

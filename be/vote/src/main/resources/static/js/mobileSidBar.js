@@ -39,8 +39,7 @@ function w3_open() {
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/myProgram/'>프로그램관리</a></div>");	 
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/myCommunity/'>팬클럽관리</a></div>");	 
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/hotclib'>핫클립관리</a></div>");	 
-		$("#mobileMenus").append("<div class='sideMenu'><a href='#'>방첨권추첨</a></div>");	 
-		$("#mobileMenus").append("<div class='sideMenu'><a href='#'>팬클럽관리</a></div>");
+		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/audience/mlist'>방청권추첨</a></div>");	 
 		    
 		//굿즈샵관리
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/manage/product'>상품관리</a></div>");	 
@@ -74,7 +73,7 @@ function w3_open() {
 
       $("#mobileMenus").
       append("<a href='/vote' class='sideMenu'> <div class='sideMenu'>투표</div> </a> <div class='dropMenu sideMenu'><a href='/community'><div href='/community' class='sideMenu'>커뮤니티</div> </a><div class='drop'>"+
-" <a href='#'>팬클럽</a><a href='#'>인기투표</a><a href='/hotclib'>주간Hot Clip</a><a href='/audience/ulist'>방청권응모</a> </div> </div> <a href='/shop/index' class='sideMenu'> <div class='/shop/index'>굿즈샵</div> </a> ");
+" <a href='#'>팬클럽</a><a href='#'>인기투표</a><a href='/hotclib'>주간Hot Clip</a><a href='userInfo/audience/ulist'>방청권응모</a> </div> </div> <a href='/shop/index' class='sideMenu'> <div class='/shop/index'>굿즈샵</div> </a> ");
     
        
      }

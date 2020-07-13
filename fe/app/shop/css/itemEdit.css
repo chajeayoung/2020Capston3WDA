@@ -1,0 +1,5 @@
+@media(max-width:940px){
+    .rightBox img{
+        max-width: 180px;
+    }
+}

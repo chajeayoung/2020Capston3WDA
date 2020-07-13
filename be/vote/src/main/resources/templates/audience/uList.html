@@ -117,7 +117,7 @@
                 <a href="" class="pg_page pg_end">맨끝</a>
             </span>
         </nav> -->
-        <nav style="text-align: center;">
+        <nav style="text-align: center; place-content: center;">
             <ul class="pagination"
                 th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
                             last=(${start + 9 < boardList.totalPages ? start + 4 : boardList.totalPages})">

@@ -2,3 +2,49 @@
     display: grid;
     grid-template-columns: 40% 40%;
 }
+.orderDiv{
+    padding: 50px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    text-align: -webkit-center;
+    background-color: #F5EFFB;
+}
+.userInfoTitle{
+    text-align: center;
+    margin-top: 20px;
+    color: #A9BCF5;
+}
+.userInfoTable td{
+    padding: 5px 10px;
+}
+.buy{
+    background: #F6CECE;
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+}
+.cancle{
+    background: #CEF6CE;
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+}
+#sumPrice{
+    font-size: 20px;
+    color: #F78181;
+}
+@media(max-width:940px){
+    .grid{
+        grid-template-columns: none;
+    }
+    .orderItem img{
+        max-width: 180px;
+    }
+    .orderDiv{
+        text-align: -webkit-center;
+        width: 200px;
+        margin: auto;
+    }
+}

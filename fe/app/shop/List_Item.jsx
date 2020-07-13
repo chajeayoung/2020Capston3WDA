@@ -3,6 +3,7 @@ import React from 'react';
 // import NewItem from './NewItem';
 // import CateTab from './CateTab';
 // import Item2 from './Item2'; 
+import './css/list_item.css'
 export default class List_Item extends React.Component {
     
     constructor(props){
@@ -18,9 +19,13 @@ export default class List_Item extends React.Component {
                             <div className="single-products">
                                 <div className="productinfo text-center">
                                     <a href={"/shop/product/"+prd.productId}>
-                                        <img src={"/uploads/"+prd.img} alt="" />
-                                        <h2></h2>
-                                        <p>{prd.name}</p>
+                                        <div className="product_Top_div">
+                                            <div className="imgDiv">
+                                                <img src={"/uploads/"+prd.img} alt="" />
+                                            </div>
+                                            <h2></h2>
+                                            <p>{prd.name}</p>
+                                        </div>
                                     </a>
                                     {/* <a href="#"className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart"></i>장바구니에 추가</a> */}
                                 </div>

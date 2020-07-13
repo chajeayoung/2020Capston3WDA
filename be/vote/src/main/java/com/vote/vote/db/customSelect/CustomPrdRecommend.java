@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 public class  CustomPrdRecommend {
     
+    private int rnum;
     private int productId;
     private String name;
     private String img;
@@ -54,11 +55,20 @@ public class  CustomPrdRecommend {
         this.sum = sum;
     }
 
-    public CustomPrdRecommend(BigDecimal productId, String name, String img, BigDecimal sum) {
+    public CustomPrdRecommend(BigDecimal rnum,BigDecimal productId, String name, String img, BigDecimal sum) {
+        this.rnum = rnum.intValue();
         this.productId = productId.intValue();
         this.name = name;
         this.img = img;
         this.sum = sum.intValue();
+    }
+
+    public int getRnum() {
+        return rnum;
+    }
+
+    public void setRnum(int rnum) {
+        this.rnum = rnum;
     }
 
  

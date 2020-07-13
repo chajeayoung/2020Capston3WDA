@@ -1,0 +1,40 @@
+.imgDiv{
+    max-width: 150px !important;
+    overflow: hidden !important;
+    height: 150px !important;
+}
+
+.productinfo {
+    text-align: -webkit-center;
+}
+
+@media(max-width:991px){
+    .imgDiv{
+        max-width: 150px !important;
+        height: 100px !important;
+    }
+    
+
+}
+
+
+@media(max-width:767px){
+    .imgDiv{
+        max-width: 300px !important;
+        height: 300px !important;
+    }
+    .imgDiv img {
+        width: 300px;
+    }
+    .productName{
+        font-size: 20px;
+    }
+    .product_Top_div{
+        border: 1px solid #F7F7F5;
+        display: inline-block;
+    }
+    .product-image-wrapper{
+        border: none !important;
+    }
+
+}

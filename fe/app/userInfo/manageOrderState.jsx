@@ -5,6 +5,9 @@ import Graph from '../items/stateGraph.jsx'
 import OrderStateItem from './orderStateItem.jsx'
 window.$ = window.jQuery = jQuery;
 
+import './orderState.css'
+import '../shop/css/mybag.css'
+
 // npm i @bit/nexxtway.react-rainbow.chart
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
@@ -50,9 +53,23 @@ class ManageOrderState extends React.Component{
         // console.log(this.state.vote)
         return(
             <div>
-                <div>주문추이</div>
-                <Graph data={stateData}/>
-                <OrderStateItem data={this.state.item}/>
+                <div className="stateTitle"><h4>판매추이 그래프</h4></div>
+                <div className="graphDiv">
+                    <Graph data={stateData}/>
+                </div>
+                <div className="itemTitle"><h4>상품정보</h4></div>
+                <div className="itemDiv">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>이미지</th>
+                                <th>상품 정보</th>
+                            </tr>
+                        </thead>
+                        <OrderStateItem data={this.state.item}/>
+                    </table>
+                </div>
+                
             </div>
         )
     }

@@ -1,4 +1,7 @@
 import React from 'react';
+import './css/item2.css'
+
+
 export default class Item2 extends React.Component {
     constructor(props){
         super(props)
@@ -15,9 +18,13 @@ export default class Item2 extends React.Component {
                                 <div className="single-products">
                                     <div className="productinfo text-center">
                                         <a href={"/shop/product/"+prd.productId}>
-                                            <img src={"/uploads/"+prd.img} alt="" />
-                                            <h2></h2>
-                                            <p>{prd.name}</p>
+                                            <div className="product_Top_div">
+                                                <div className="imgDiv">
+                                                    <img src={"/uploads/"+prd.img} alt="" />
+                                                </div>
+                                                <h2></h2>
+                                                <p className="productName">{prd.name}</p>
+                                            </div>
                                         </a>
                                         {/* <a href="#"className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart"></i>장바구니에 추가</a> */}
                                     </div>

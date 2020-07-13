@@ -54,7 +54,7 @@
 	#fboardlist{padding-bottom:10px;overflow:hidden; clear:both;}
 	
 	.btn_bo_user li{margin-bottom:5px;}
-	#bo_sch{float:none;max-width:100%; clear:both;}
+	#bo_sch{float:none;max-width:90%; clear:both;}
 }
 
 
