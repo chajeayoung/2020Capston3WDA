@@ -13,12 +13,14 @@ import javax.validation.Valid;
 import com.google.gson.JsonObject;
 import com.vote.vote.db.dto.ADetaiId;
 import com.vote.vote.db.dto.ADetail;
+import com.vote.vote.db.dto.ApplyResult;
 import com.vote.vote.db.dto.Audience;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Rfile;
 import com.vote.vote.repository.ADetailRepository;
+import com.vote.vote.repository.ApplyResultJpaRepository;
 import com.vote.vote.repository.AudienceJpaRepository;
 import com.vote.vote.repository.CustomProgramRepositoryImpl;
 import com.vote.vote.repository.MemberJpaRepository;
@@ -81,6 +83,12 @@ public class AudienceController {
     @Autowired
     private StorageService storageService;
 
+    @Autowired
+    private ApplyResultJpaRepository applyResultRepository;
+
+    @Autowired
+    
+
     public AudienceController(AudienceService audienceService) {
         this.audienceService = audienceService;
 
@@ -104,6 +112,11 @@ public class AudienceController {
         Audience audience = audienceJpaRepository.findById(applyId);
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
+
+        model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
+
+
+
         return "audience/uRead";
     }
 
@@ -113,6 +126,9 @@ public class AudienceController {
     public String result(Audience audience, Principal principal, ADetail aDetail) {
         Member member = memberRepository.findByUserid(principal.getName());
 
+        Audience audi = audienceJpaRepository.findById(audience.getApplyId());
+        if(audi.getResult() ==1 )
+            return "이미 추첨이 완료된 응모입니다.";
         aDetail.setApplyId(audience.getApplyId());
         aDetail.setRId(member.getNo());
         // aDetaiId.setApplyId(audience.getApplyId());
@@ -175,7 +191,7 @@ public class AudienceController {
             // rfileRepository.saveAndFlush(rfile);
             // sessionStatus.setComplete();
             System.out.println("게시글업로드완료");
-            return "redirect:/audience/mlist";
+            return "redirect:/userInfo/audience/mlist";
         }
     }
 
@@ -184,7 +200,7 @@ public class AudienceController {
     public String delete(@PathVariable int applyId, Model model) {
         aDetailRepository.deleteByApplyId(applyId);
         audienceJpaRepository.deleteById(applyId);
-        return "redirect:/audience/mlist";
+        return "redirect:/userInfo/audience/mlist";
     }
 
     // 게시글 수정
@@ -207,7 +223,7 @@ public class AudienceController {
                 audience.getAContent(), audience.getApplyId());
         System.out.println("수정햇엉");
 
-        return "redirect:/audience/mlist";
+        return "redirect:/userInfo/audience/mlist";
     }
 
     // 내가 작성한 게시글(관리자)
@@ -230,6 +246,9 @@ public class AudienceController {
         Audience audience = audienceJpaRepository.findById(applyId);
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
+
+        model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
+
         return "audience/mRead";
     }
 
@@ -255,26 +274,49 @@ public class AudienceController {
 
     @GetMapping("/audience/showResult")
     @ResponseBody
-    public JSONArray showResult(Model model, Audience audience) {
-        int people = audience.getARecruits();
+    public JSONObject showResult(Model model, Audience audience) {
+        Audience audi = audienceJpaRepository.findById(audience.getApplyId());
+
+        JSONObject json = new JSONObject();
+        
+
+        if(audi.getResult() == 1 ){
+            json.put("message", "이미 추첨한 방청권 응모입니다.");
+            json.put("state", 1);
+            return json;
+        }
+            
+
+        int people = audi.getARecruits(); // 추첨 인원
         List<Member> list = new ArrayList<>();
         List<Member> result = new ArrayList<>();
         List<Member> result2 = new ArrayList<>();
-        list = mr.getInfoNoDistincList(audience.getApplyId());
-        JSONObject obj = new JSONObject();
-        JSONArray array = new JSONArray();
+        // list = mr.getInfoNoDistincList(audience.getApplyId()); // 응모 리스트
+        list = mr.getInfo(audi.getApplyId());// 중복제거
+        // JSONObject obj = new JSONObject();
+        // JSONArray array = new JSONArray();
         if (people >= list.size()) {
-            list = mr.getInfo(audience.getApplyId());
+            // list = mr.getInfo(audience.getApplyId());// 중복제거
             for (Member list2 : list) {
-                obj = new JSONObject();
-                obj.put("name", list2.getName());
-                obj.put("phone", list2.getPhone());
-                array.add(obj);
+                // obj = new JSONObject();
+                // obj.put("name", list2.getName());
+                // obj.put("phone", list2.getPhone());
+                // array.add(obj);
+                ApplyResult applyResult = new ApplyResult();
+                applyResult.setApplyId(audi.getApplyId());
+                applyResult.setName(list2.getName());
+                applyResult.setPhone(list2.getPhone());
+                applyResultRepository.saveAndFlush(applyResult);
+
             }
-            return array;
+            audi.setResult(1);// 추첨 완료
+            audienceJpaRepository.saveAndFlush(audi);
+            json.put("message", "추첨 완료");
+            json.put("state", 0);
+            return json;
 
         } else {
-
+            list = mr.getInfoNoDistincList(audi.getApplyId()); // 응모 리스트
             while (result2.size() < people) {
                 double randomValue = Math.random();
                 int ran = (int) (randomValue * list.size());
@@ -287,12 +329,24 @@ public class AudienceController {
             }
             System.out.println(result2);
             for (Member list2 : result2) {
-                obj = new JSONObject();
-                obj.put("name", list2.getName());
-                obj.put("phone", list2.getPhone());
-                array.add(obj);
+                // obj = new JSONObject();
+                // obj.put("name", list2.getName());
+                // obj.put("phone", list2.getPhone());
+                // array.add(obj);
+
+                ApplyResult applyResult = new ApplyResult();
+                applyResult.setApplyId(audi.getApplyId());
+                applyResult.setName(list2.getName());
+                applyResult.setPhone(list2.getPhone());
+                applyResultRepository.saveAndFlush(applyResult);
             }
         }
-        return array;
+        audi.setResult(1);// 추첨 완료
+        audienceJpaRepository.saveAndFlush(audi);
+        json.put("message", "추첨 완료");
+        json.put("state", 0);
+        return json;
     }
+
+    
 }

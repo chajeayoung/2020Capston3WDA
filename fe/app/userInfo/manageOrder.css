@@ -41,6 +41,11 @@
     margin-bottom: 15px;
 }
 
+.shopImg{
+    max-width: 250px;
+    max-height: 250px;
+    overflow: hidden;
+}
 @media(max-width:950px){
     .modalContentBox{
         width: 100%;

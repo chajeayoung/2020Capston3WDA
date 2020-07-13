@@ -104,7 +104,9 @@ class ManageOrder extends React.Component{
                                 <div className="modalContentBox">
                                     <div className="modalItem">
                                         <div>주문 상세 정보</div>
-                                        <img className="smartImg" id="orderImg" src={"/uploads/"+order.img}/>
+                                        <div className="shopImg">
+                                            <img className="smartImg" id="orderImg" src={"/uploads/"+order.img}/>
+                                        </div>
                                         <div>상품명: {order.name}</div>
                                         <div>옵션: {order.oTitle}</div>
                                         <div>수량: {order.count}</div>

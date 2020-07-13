@@ -14,13 +14,13 @@ $(document).ready(function(){
             dataType: "text",
             data : audience,
             success: function(data){
-        
+                
                 alert(data);
         
             },
         
             error: function (request, status, error){        
-        
+                console.log("error");
         
         
             }

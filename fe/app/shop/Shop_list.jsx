@@ -82,7 +82,7 @@ class Shop_list extends React.Component {
         this.setState({categoryD:data})
     }
     async initItem(){
-        let {data} = await axios.get("/shop/list/axios");
+        let {data} = await axios.get("/shop/list/axios?&page=0&size=8&sort=0");
         console.log(data);
         this.state.count = Math.ceil((data.count*1.0)/8)
         this.setState({data})

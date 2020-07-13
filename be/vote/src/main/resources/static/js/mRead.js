@@ -30,13 +30,20 @@ $(document).ready(function () {
     })
 
     $('#showResult').click(function () {
-        alert("추첨시 추첨결과를 저장하고 재추첨할 수 없습니다. 추첨 하시겠습니까?")
+        if(! confirm("추첨시 추첨결과를 저장하고 재추첨할 수 없습니다. 추첨 하시겠습니까? a")){
+            return ;
+        }
+
         $.ajax({
             url: "/audience/showResult",
             type: "get",
             dataType: 'json',
             data: audience,
             success: function (data) {
+                if(data.state == 1){
+                    return alert(data.message);
+                }
+                alert(data.message);
                 $("#list").empty();
                 var tableData = "";
                 $.each(data, function (key, value) {
