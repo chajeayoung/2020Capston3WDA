@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 
-
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,13 +26,20 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import org.springframework.lang.Nullable;
+
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionCon;
+import com.vote.vote.db.dto.AuditionOption;
+import com.vote.vote.db.dto.AuditionOptionValue;
 import com.vote.vote.db.dto.AuditionResult;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.repository.AuditionJpaRepository;
+import com.vote.vote.repository.AuditionOptionJpaRepository;
+import com.vote.vote.repository.AuditionOptionValueJpaRepository;
+import com.vote.vote.repository.CustomAuditionOptionRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.service.StorageService;
@@ -55,6 +62,15 @@ public class AuditionConController {
 	
 	@Autowired
 	private AuditionJpaRepository auditionRepository;
+
+	@Autowired
+	private AuditionOptionJpaRepository auditionOptionReopository;
+
+	@Autowired
+	private AuditionOptionValueJpaRepository auditionOptionValueRepository;
+
+	@Autowired
+	private CustomAuditionOptionRepository customAuditionOptionRepository;
 	
 	@RequestMapping("/sendAddress")
 	public String serch1(@RequestParam(value="confirm") String confirm, Model model) {
@@ -116,34 +132,41 @@ public class AuditionConController {
 	
 	@GetMapping("/audition_con/read/{formid}")
 	public String read(Model model, @PathVariable int formid){
-		
-		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
-		auditionConRepository.save(auditioncon);
+		System.out.println("auditioncon.getAuditionid(): "+auditioncon.getAuditionid());
+		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
+		model.addAttribute("options", customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(),formid));
+		
 		return "audition_con/read";
 	}
 	
 
-	@GetMapping("/audition_con/form")
+	@GetMapping("/audition_con/form/{auditionId}")
 	public String form(Model model
-//			, @PathVariable int auditionid
+			, @PathVariable int auditionId
 			) {
 		
 		AuditionCon auditionCon = new AuditionCon();
 
 		model.addAttribute("auditionCon",new AuditionCon());
+		model.addAttribute("auditionId", auditionId);
+		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionId));
+
 		return "audition_con/form";
 	}
 	
 	/////////////////////////////////////////////////////////////
 	
-	@PostMapping("/audition_con/form")
+	@PostMapping("/audition_con/form/{auditionId}")
 	public String write(@Valid AuditionCon auditioncon, BindingResult bindingResult, SessionStatus sessionStatus,
-			Principal principal, Model model, RedirectAttributes redirAttrs,
-            @RequestParam(name = "filename") MultipartFile filename	) {
+			Principal principal, Model model, RedirectAttributes redirAttrs, @Nullable @RequestParam("option") String[] options,
+			@PathVariable int auditionId,
+			@RequestParam(name = "filename") MultipartFile filename	,
+			@Nullable Authentication authentication ) {
 		
-
-		
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			
+			System.out.println(" 신청인 정보 : "+auditioncon);
 		if(bindingResult.hasErrors()) {
 			return "/audition_con/form";
 		} else if(filename.isEmpty()) {
@@ -169,8 +192,9 @@ public class AuditionConController {
             
             auditionConRepository.saveAndFlush(auditioncon);
 
-          auditioncon.setFdate(new Date());
-
+         	auditioncon.setFdate(new Date());
+			auditioncon.setAuditionid(auditionId);
+			auditioncon.setRid(Integer.valueOf(userDetails.getR_ID()));
 			auditionConRepository.save(auditioncon);
 
             
@@ -178,7 +202,23 @@ public class AuditionConController {
             // 파일 저장
             storageService.store(filename);
 
-            sessionStatus.setComplete();
+			sessionStatus.setComplete();
+		
+			if(options != null && !options[0].isEmpty()){
+
+				List<AuditionOption> a_ops = auditionOptionReopository.findByAuditionIdOrderByNo(auditionId); // 오디션 옵션들.
+
+				for(int i=0; i<options.length; i++){
+					AuditionOptionValue result = new AuditionOptionValue();
+					result.setAuditionId(auditionId);
+					result.setOptionNo(a_ops.get(i).getNo());
+					result.setValue(options[i]);
+					result.setAuditionCon(auditioncon.getFormid());
+					auditionOptionValueRepository.saveAndFlush(result);
+				}			
+			}
+				
+
             System.out.println("게시글업로드완료");
             return "redirect:/audition/complete";
             
@@ -299,7 +339,8 @@ public class AuditionConController {
 	}
 
 	@PostMapping("/audition_con/update/{formid}")
-	public String update(AuditionCon auditioncon, BindingResult bindingResult){
+	public String update(AuditionCon auditioncon, BindingResult bindingResult
+	){
 		if (bindingResult.hasErrors()) {
 			return "/audition_con/list";
 		} else {
