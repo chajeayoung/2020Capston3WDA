@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ManageVote from './../userInfo/manageVote.jsx';
+import VoteTable from './../userInfo/manageVote.jsx';
 
 class UserIndex extends React.Component {
     render() {
         return (
             <div>일반
-                        <ManageVote/>   
+                        <VoteTable></VoteTable> 
             </div>
         );
       }
