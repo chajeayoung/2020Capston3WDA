@@ -42,7 +42,9 @@ class Order extends React.Component {
     }
     buy(e){
         // e.preventDefault();
-        alert("상품을 구매하시겠습니까?");
+        // alert("상품을 구매하시겠습니까?");
+        if(!confirm("상품을 구매하시겠습니까?"))
+            e.preventDefault();
     }
     render() {
         console.log(this.state.data)

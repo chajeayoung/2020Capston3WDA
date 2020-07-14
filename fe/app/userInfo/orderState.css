@@ -21,6 +21,26 @@
 .itemDiv{
     text-align: -webkit-center;
 }
+#page-content-wrapper{
+    padding: 0px !important;
+}
+.itemDiv{
+    margin-top: 30px;
+}
+.graphDiv{
+    margin-top: 30px;
+}
+.stateTitle{
+    color: #FF7946;
+    text-align: center;
+}
+.itemTitle{
+    color: #5495FF;
+    text-align: center;
+}
+/* .graph_chart{
+    margin: auto;
+} */
 /* .bagItem{
     padding: 10px;
     border: 1px solid black;

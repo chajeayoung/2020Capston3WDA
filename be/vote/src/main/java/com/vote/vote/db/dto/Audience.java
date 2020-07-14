@@ -68,6 +68,8 @@ public class Audience {
     @Column(name = "img")
     private String img; // 이미지
 
+    @Column
+    private int result;
    
 
     public int getApplyId() {
@@ -188,6 +190,14 @@ public class Audience {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
     }
     
     

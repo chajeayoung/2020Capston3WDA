@@ -13,15 +13,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+
  
 @Service
+@Component
 public class KakaoAPIService {
-    
+    @Value("${riroip}")
+    public String riroip;
+
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
+        
         
         try {
             URL url = new URL(reqURL);
@@ -36,7 +44,9 @@ public class KakaoAPIService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=e8669f9bcfca75260c3c64f470e04978");
-            sb.append("&redirect_uri=http://localhost:3000/auth/oauth2/code/kakao");
+            //   sb.append("&redirect_uri=http://localhost:3000/auth/oauth2/code/kakao");
+            System.out.println("0-----------------------0: "+riroip);
+            sb.append("&redirect_uri="+riroip+"/auth/oauth2/code/kakao");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();

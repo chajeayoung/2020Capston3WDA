@@ -1,5 +1,7 @@
+
+//  import io from "/soket.io-client"
 $(document).ready(function() {
-    const socket = io("http://localhost:4000");
+var socket = io($("#rirochat").val());
     if($('#username').text()==''){
         $("#chatinput").attr("disabled",true);
         $("#chatinput").attr('placeholder', '로그인이 필요합니다.' );
@@ -26,6 +28,7 @@ $(document).ready(function() {
                 $("#messages").scrollTop($("#messages")[0].scrollHeight);
     
             });
+
         });
     }   
     

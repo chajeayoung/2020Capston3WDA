@@ -6,8 +6,25 @@
 .productinfo {
     text-align: -webkit-center;
 }
-
-
+.category-tab{
+    width: 90% !important;
+    margin: auto !important;
+}
+.recommended_items{
+    width: 90%;
+    margin: auto;
+}
+.col-sm-3{
+    width: 22% !important;
+    padding: 10px !important;
+}
+.col-sm-12{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+#recommended-item-carousel .carousel-inner .item {
+    padding-left: 3% !important;
+}
 @media(max-width:767px){
     .imgDiv{
         max-width: 300px;
@@ -25,6 +42,9 @@
     }
     .product-image-wrapper{
         border: none !important;
+    }
+    .col-sm-3{
+        width: auto !important;
     }
 
 }

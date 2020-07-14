@@ -31,7 +31,7 @@ class Shop_index extends React.Component {
     render() {
             return (
                 <Fragment>
-                    <Header_top></Header_top>
+                    {/* <Header_top></Header_top> */}
                     <Header_middle></Header_middle>
                     <Header_bottom></Header_bottom>
                     <SliderFrame></SliderFrame>

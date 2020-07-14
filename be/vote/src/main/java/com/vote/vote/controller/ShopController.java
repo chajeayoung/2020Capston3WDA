@@ -21,8 +21,8 @@ import com.vote.vote.db.dto.PrdColor;
 import com.vote.vote.db.dto.PrdImage;
 import com.vote.vote.db.dto.PrdOption;
 import com.vote.vote.db.dto.PrdSize;
-import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Program;
+import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.repository.Asdf;
 import com.vote.vote.repository.CustomMybagRepository;
 import com.vote.vote.repository.CustomOrderListRepository;
@@ -41,9 +41,11 @@ import com.vote.vote.repository.PrdOptionJpaRepository;
 import com.vote.vote.repository.PrdSizeJpaRepository;
 import com.vote.vote.repository.ProgramJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.service.KakaoPayService;
 import com.vote.vote.service.StorageService;
+import com.vote.vote.service.dto.BuyProductsDTO;
+import com.vote.vote.service.dto.KakaoPayApprovalVO;
 
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -124,6 +126,10 @@ public class ShopController {
 	@Autowired
 	private ProgramJpaRepository programRepository;
 
+
+	@Autowired
+	private KakaoPayService kakaoPay;
+
 	@RequestMapping("/shop/index")
 	public String index(Model model,Principal user) {
 //		model.addAttribute("username",user.getName());
@@ -139,8 +145,8 @@ public class ShopController {
 		
 		JSONArray json = new JSONArray();
 		json.add(0,customPrdRepository.getCategorySelect(4)); // 카테고리별로 4개 씩.
-		json.add(1,customPrdRepository.getRecommendPrd(1,4));
-		json.add(2,customPrdRepository.getRecommendPrd(5,8));
+		json.add(1,customPrdRepository.getRecommendPrd(1,4)); 
+		json.add(2,customPrdRepository.getRecommendPrd(5,8)); 
 
 		return json;
 
@@ -791,83 +797,188 @@ public class ShopController {
 				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 				
 				//재고 감소, 검증
+				// System.out.println("카카오 과연 되는것인가? "+kakaoPay.kakaoPayReady());
 
 				for(int i=0; i<optionIds.length; i++){
 					PrdOption option = pOptionRepository.findByOptionId(optionIds[i]);
 					if( !(option.getpStock() < quantitys[i]) ){//재고가 있므면.
-						option.setpStock( option.getpStock() - quantitys[i]);
+						// option.setpStock( option.getpStock() - quantitys[i]);
 						
 
-						if(option.getoTitle().equals("기본")){
-							System.out.println("기본옵션임");
-							Prd productItem5 = prdRepository.findByProductId(option.getProductId());			
+						// if(option.getoTitle().equals("기본")){
+						// 	System.out.println("기본옵션임");
+						// 	Prd productItem5 = prdRepository.findByProductId(option.getProductId());			
 							
 							
-							System.out.println(productItem5.toString());
-							try{
-								// StringUtil dateError = new StringUtil(productItem5.getEndDate());
+						// 	System.out.println(productItem5.toString());
+						// 	try{
+						// 		// StringUtil dateError = new StringUtil(productItem5.getEndDate());
 
-								productItem5.setEndDate(productItem5.getEndDate().split(" ")[0]);
-								productItem5.setStock(option.getpStock());
-								prdRepository.saveAndFlush(productItem5);
-							}catch(Exception e){
-								e.printStackTrace();
-							}
+						// 		productItem5.setEndDate(productItem5.getEndDate().split(" ")[0]);
+						// 		productItem5.setStock(option.getpStock());
+						// 		prdRepository.saveAndFlush(productItem5);
+						// 	}catch(Exception e){
+						// 		e.printStackTrace();
+						// 	}
 							
-						}
+						// }
 						
-						pOptionRepository.saveAndFlush(option);
+						// pOptionRepository.saveAndFlush(option);
+
+						
 
 					}else{
 						return "redirect:/shop/order/error";
 					}
 				}
 
+				// 윗쪽 재고 관리.  아랫쪽은 주문 정보 입력.
 				
-				
+				String title = "";
+				int  sum = 0;
+				int count = 0;
+
 				for(int i=0;i<productIds.length;i++){
 
 					Prd prd = prdRepository.findByProductId(productIds[i]);
 					PrdOption option = pOptionRepository.findByOptionId(optionIds[i]);
 
-					Order order = new Order();
-					order.setrId(userDetails.getR_ID());
-					order.setAddr(addr);
-					order.setAddr2(addr2);
-					// order.setInvoice(invoice);
-					order.setPhone(phone);
-					order.setReceiver(receiver);
-					order.setPrice((prd.getPrice()+option.getoPrice())*quantitys[i]);
-					order.setState("0");
-					orderRepository.saveAndFlush(order);
-
-					
-
-					OrderList orderList = new OrderList();
-					
-					orderList.setCount(quantitys[i]);
-					orderList.setOptionId(option.getOptionId());
-					orderList.setOrderId(order.getOrderId());
-					orderList.setPrice((prd.getPrice()+option.getoPrice())*quantitys[i]);
-					orderList.setProductId(prd.getProductId());
-					
-					orderListRepository.saveAndFlush(orderList);
-				}
-				
-
-				
-				
-				
-				if(bagId[0] != 0){// bagId 값이 넘어오지 않으면, [ 0 ]  으로 초기화 되는 듯 하다. @Nullable
-
-					for(int id : bagId){
-						
-						mybagRepository.deleteById(id);
+					if(i ==0 ){
+						title = prd.getName();
 					}
+				// 	Order order = new Order();
+				// 	order.setrId(userDetails.getR_ID());
+				// 	order.setAddr(addr);
+				// 	order.setAddr2(addr2);
+				// 	// order.setInvoice(invoice);
+				// 	order.setPhone(phone);
+				// 	order.setReceiver(receiver);
+				// 	order.setPrice((prd.getPrice()+option.getoPrice())*quantitys[i]);
+				// 	order.setState("0");
+				// 	orderRepository.saveAndFlush(order);
+
+					
+				// 	OrderList orderList = new OrderList();
+					
+				// 	orderList.setCount(quantitys[i]);
+				// 	orderList.setOptionId(option.getOptionId());
+				// 	orderList.setOrderId(order.getOrderId());
+				// 	orderList.setPrice((prd.getPrice()+option.getoPrice())*quantitys[i]);
+				// 	orderList.setProductId(prd.getProductId());
+					
+				// 	orderListRepository.saveAndFlush(orderList);
+					sum += (prd.getPrice()+option.getoPrice())*quantitys[i];
+					count += quantitys[i];
 				}
+				title += " 외"+(count-1)+"개 상품";
+
+				
+				
+				
+				// if(bagId[0] != 0){// bagId 값이 넘어오지 않으면, [ 0 ]  으로 초기화 되는 듯 하다. @Nullable
+
+				// 	for(int id : bagId){
+						
+				// 		mybagRepository.deleteById(id);
+				// 	}
+				// }
+			
+			BuyProductsDTO buy = new BuyProductsDTO(productIds, optionIds, quantitys, addr, addr2, receiver, phone, bagId);
+			
+
+			return "redirect:"+kakaoPay.kakaoPayReady(title,count,sum,buy);// 상품명, 개수, 금액, dto
+			// return "redirect:/shop/order/ok";
+		}
+
+		@RequestMapping(value="/shop/kakaoPaySuccess")
+		public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, @Nullable Authentication authentication ){
+
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+			System.out.println("카카오 토큰 : "+pg_token);
+			// System.out.println("카카오 결제 생세 정보 : "+kakaoPay.kakaoPayInfo(pg_token));
+			KakaoPayApprovalVO kakao  = kakaoPay.kakaoPayInfo(pg_token);
+			System.out.println("aaa: "+ kakao.getPrd());
+			BuyProductsDTO prd =  kakao.getPrd();
+			int[] optionIds = prd.getOptionIds();
+			int[] quantitys = prd.getQuantitys();
+			int[] productIds = prd.getProductIds();
+
+
+			for(int i=0; i<optionIds.length; i++){
+				PrdOption option = pOptionRepository.findByOptionId(optionIds[i]);
+				// if( !(option.getpStock() < quantitys[i]) ){//재고가 있므면.
+					option.setpStock( option.getpStock() - quantitys[i]);
+					
+
+					if(option.getoTitle().equals("기본")){
+						System.out.println("기본옵션임");
+						Prd productItem5 = prdRepository.findByProductId(option.getProductId());			
+						
+						
+						System.out.println(productItem5.toString());
+						try{
+							// StringUtil dateError = new StringUtil(productItem5.getEndDate());
+
+							productItem5.setEndDate(productItem5.getEndDate().split(" ")[0]);
+							productItem5.setStock(option.getpStock());
+							prdRepository.saveAndFlush(productItem5);
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						
+					}
+					
+					pOptionRepository.saveAndFlush(option);
+
+				// }else{
+					// return "redirect:/shop/order/error";
+				// }
+			}
+
+			for(int i=0;i<productIds.length;i++){
+
+				Prd product = prdRepository.findByProductId(productIds[i]);
+				PrdOption option = pOptionRepository.findByOptionId(optionIds[i]);
+
+				Order order = new Order();
+				order.setrId(userDetails.getR_ID());
+				order.setAddr(prd.getAddr());
+				order.setAddr2(prd.getAddr2());
+				// order.setInvoice(invoice);
+				order.setPhone(prd.getPhone());
+				order.setReceiver(prd.getReceiver());
+				order.setPrice((product.getPrice()+option.getoPrice())*quantitys[i]);
+				order.setState("0");
+				orderRepository.saveAndFlush(order);
+
+				OrderList orderList = new OrderList();
+				
+				orderList.setCount(quantitys[i]);
+				orderList.setOptionId(option.getOptionId());
+				orderList.setOrderId(order.getOrderId());
+				orderList.setPrice((product.getPrice()+option.getoPrice())*quantitys[i]);
+				orderList.setProductId(product.getProductId());
+				
+				orderListRepository.saveAndFlush(orderList);
+
+			}
 
 			return "redirect:/shop/order/ok";
 		}
+		
+		@RequestMapping(value={"/shop/kakaoPayCancel","/shop/kakaoPayCancel/"})
+		public String kakaoPayCancle(){
+
+			return "/shop/orderError";
+		}
+		@RequestMapping(value={"/shop/kakaoPayFail","/shop/kakaoPayFail"})
+		public String kakaoPayFail(){
+
+			return "/shop/orderError";
+		}
+
+
 
 		@RequestMapping(value={"/shop/order/ok","/shop/order/ok/"}, method=RequestMethod.GET)
 		public String orderBuyOk() {
@@ -946,6 +1057,11 @@ public class ShopController {
 			return result;
 		}
 		
+		// @RequestMapping(value="/kakaoPay", method=RequestMethod.POST)
+		// public String kakaoPay() {
+		// 	return "redirect" + kakaoPay.kakaoPayReady();
+		// }
+
 		
 }
 
