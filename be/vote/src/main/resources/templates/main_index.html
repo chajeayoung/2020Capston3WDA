@@ -171,6 +171,27 @@
     </header>
     <contents>
         <div class="contents">
+  
+           
+<!-- 
+            <div th:switch="${type}">
+                       <div th:case="'2'">
+
+                    <script src="../assets/voteEndShow.js"></script>      
+                </div>
+            </div> -->
+
+        <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
+        <span style="display:none" id="userRole" sec:authentication="principal.ROLE"></span>
+          
+
+        <div id="managerIndex"></div>
+        <script src="/assets/managerIndex.js"></script>
+
+        <div id="userIndex"></div>
+        <script src="/assets/userIndex.js"></script>
+        </th:block>
+
 
         </div>
     </contents>
