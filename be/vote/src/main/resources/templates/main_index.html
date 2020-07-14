@@ -171,25 +171,35 @@
     </header>
     <contents>
         <div class="contents">
-  
-           
-<!-- 
-            <div th:switch="${type}">
-                       <div th:case="'2'">
-
-                    <script src="../assets/voteEndShow.js"></script>      
-                </div>
-            </div> -->
 
         <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
-        <span style="display:none" id="userRole" sec:authentication="principal.ROLE"></span>
-          
 
-        <div id="managerIndex"></div>
-        <script src="/assets/managerIndex.js"></script>
+        <!-- <a th:href="@{${#authentication.principal.username}}">마이페이지</a>
+        <a th:href="@{${#authentication.principal.R_ID}}">R_ID</a>-->
+        <a th:href="@{${#authentication.principal.ROLE}}">ROLE</a> 
 
-        <div id="userIndex"></div>
-        <script src="/assets/userIndex.js"></script>
+        <!-- 사용자별 메인뷰 -->
+        <div th:switch="@{${#authentication.principal.ROLE}}">
+                <div th:case="0">
+                    0
+                    <div id="userIndex"></div>
+                    <script src="/assets/userIndex.js"></script>
+                </div>
+
+                <div th:case="1">
+                    1
+                    <div id="managerIndex"></div>
+                    <script src="/assets/managerIndex.js"></script>
+                </div>
+
+                <div th:case="2">
+                    2
+                    <div id="managerIndex"></div>
+                    <script src="/assets/managerIndex.js"></script>
+                </div>
+        </div>          
+  
+
         </th:block>
 
 

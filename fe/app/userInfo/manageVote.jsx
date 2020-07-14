@@ -116,6 +116,6 @@ class VoterVoteList extends Component {
     }
 }
 
-
+export default VoteTable
 ReactDOM.render(<VoteTable />,document.getElementById('manageVote'));
 
