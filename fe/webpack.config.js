@@ -87,7 +87,7 @@ module.exports = {
     // contentBase: './tmp',
     // webpack외부접속
     disableHostCheck:true,
-    // host:"0.0.0.0",
+     host:"0.0.0.0",
     proxy: {
       "**": "http://localhost:8000"
     }
