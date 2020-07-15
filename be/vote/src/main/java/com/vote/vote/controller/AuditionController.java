@@ -267,7 +267,7 @@ public class AuditionController {
 
 
 	@PostMapping("/audition/update/{auditionid}")
-	public String update(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
+	public String update_post(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
 			@RequestParam(name = "filename") MultipartFile filename	,
 			@Nullable @RequestParam("preAddOption") String[] preAddOptions,
