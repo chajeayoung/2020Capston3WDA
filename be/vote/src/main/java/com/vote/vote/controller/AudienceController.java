@@ -1,6 +1,8 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -87,12 +89,12 @@ public class AudienceController {
     private ApplyResultJpaRepository applyResultRepository;
 
     @Autowired
-    
-
     public AudienceController(AudienceService audienceService) {
         this.audienceService = audienceService;
 
     }
+
+    SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
 
     // -----------------------------------------사용자
     // 모든프로그램 게시글 리스트
@@ -105,6 +107,31 @@ public class AudienceController {
         return "audience/uList";
     }
 
+    @GetMapping(value = { "/audience2/", "/audience/list2" })
+    public String audienceAllList2() {
+        return "audience/uList2";
+    }
+
+    @GetMapping(value = { "/audience/axios", "/audience/list/axios" })
+    @ResponseBody
+    public JSONArray audienceAllListJson() {
+        JSONArray result = new JSONArray();
+        List<Audience> audienceList = audienceJpaRepository.findAll();
+
+        for (Audience audience : audienceList) {
+            JSONObject json = new JSONObject();
+            json.put("applyId", audience.getApplyId());
+            json.put("aDate", format.format(audience.getADate()));
+            json.put("aRecruits", audience.getARecruits());
+            json.put("aTitle", audience.getATitle());
+            json.put("aViewCount", audience.getAViewCount());
+            json.put("img", audience.getImg());
+            json.put("aContent", audience.getAContent());
+            result.add(json);
+        }
+        return result;
+    }
+
     // 게시글 보기
     @RequestMapping("/audience/read/{applyId}")
     public String read(Model model, @PathVariable int applyId) {
@@ -112,10 +139,7 @@ public class AudienceController {
         Audience audience = audienceJpaRepository.findById(applyId);
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
-
         model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
-
-
 
         return "audience/uRead";
     }
@@ -127,7 +151,7 @@ public class AudienceController {
         Member member = memberRepository.findByUserid(principal.getName());
 
         Audience audi = audienceJpaRepository.findById(audience.getApplyId());
-        if(audi.getResult() ==1 )
+        if (audi.getResult() == 1)
             return "이미 추첨이 완료된 응모입니다.";
         aDetail.setApplyId(audience.getApplyId());
         aDetail.setRId(member.getNo());
@@ -260,7 +284,6 @@ public class AudienceController {
         List<Member> list = new ArrayList<>();
         list = mr.getInfo(audience.getApplyId());
 
-      
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
         for (Member list2 : list) {
@@ -278,14 +301,12 @@ public class AudienceController {
         Audience audi = audienceJpaRepository.findById(audience.getApplyId());
 
         JSONObject json = new JSONObject();
-        
 
-        if(audi.getResult() == 1 ){
+        if (audi.getResult() == 1) {
             json.put("message", "이미 추첨한 방청권 응모입니다.");
             json.put("state", 1);
             return json;
         }
-            
 
         int people = audi.getARecruits(); // 추첨 인원
         List<Member> list = new ArrayList<>();
@@ -321,10 +342,10 @@ public class AudienceController {
                 double randomValue = Math.random();
                 int ran = (int) (randomValue * list.size());
                 result.add(list.remove(ran));
-                for(int i=0; i<result.size(); i++) {
-                    if(!result2.contains(result.get(i))){
+                for (int i = 0; i < result.size(); i++) {
+                    if (!result2.contains(result.get(i))) {
                         result2.add(result.get(i));
-                    }      
+                    }
                 }
             }
             System.out.println(result2);
@@ -348,5 +369,4 @@ public class AudienceController {
         return json;
     }
 
-    
 }

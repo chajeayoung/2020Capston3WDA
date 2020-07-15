@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-secutiry"
-th:fragment="layout(content,js,title,link)">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-secutiry"
+    th:fragment="layout(content,js,title,link)">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="/css/ani.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/layout.css">
     <script type="text/javascript" th:replace="${js}"></script>
-<link rel="stylesheet" th:replace="${link}">
-  
-        <!-- <link rel="stylesheet" href="/css/notUseSide.css"> -->
-    
+    <link rel="stylesheet" th:replace="${link}">
+
+    <!-- <link rel="stylesheet" href="/css/notUseSide.css"> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-     <script  src="/js/jquery-3.5.1.min.js"></script>
- 	<script  src="/js/script.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/script.js"></script>
 
-     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 
-     <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- 모바일 사이드바 -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="/js/mobileSidBar.js"></script>
 
     <!-- 게시판, 채팅박스 -->
 
-    
+
     <!-- <link rel="stylesheet" href="/shop/css/bootstrap.min.css"> -->
 
     <!-- <script src="http://125.190.146.207:4000/socket.io/socket.io.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
@@ -45,6 +47,7 @@ th:fragment="layout(content,js,title,link)">
 	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 	
+
     <title>RIRO</title>
 
 </head>
@@ -52,9 +55,10 @@ th:fragment="layout(content,js,title,link)">
 <body>
     <top>
         <div class="top_div">
-            <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
+            <th:block sec:authorize="isAuthenticated()">
+                <!-- 로그인 되어 있는가 -->
                 <div class="img_div">
-                    <img  th:if="${#authentication.principal.img}" th:src="${#authentication.principal.img}" width="25" height="25">
+                    <img th:if="${#authentication.principal.img}" th:src="${#authentication.principal.img}" width="25" height="25">
                     <img th:unless="${#authentication.principal.img}" src="/img/defaultProfile.png" width="25" height="25">
                 </div>
                 <span id="username" sec:authentication="principal.name"></span><span> 님</span> 
