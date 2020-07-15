@@ -9,13 +9,12 @@ import './riroIndex.css';
 class ManagerIndex extends React.Component {
     render() {
         return (
-            <div>
+            <div id="riroindex">
 
-                {/* <h2>오디션 모집현황</h2>
-                <AuditionTable id="vote"></AuditionTable>  */}
+
 
                 <h2>투표현황</h2>
-                <VoteTable id="vote"></VoteTable> 
+                <VoteTable></VoteTable> 
             </div>
         );
       }

@@ -1,4 +1,4 @@
-import React, {Component}from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom';
 const regeneratorRuntime = require("regenerator-runtime");
 import Paper from '@material-ui/core/Paper';
@@ -8,12 +8,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
+import Pagination from '@material-ui/lab/Pagination';
+
 import '../smart.css';
 
-import Pagination from '@material-ui/lab/Pagination';
 import jQuery from "jquery";
-// import './../userInfo/voteTableCss.css';
-// import './riroIndex.css';
 
 window.$ = window.jQuery = jQuery;
 
@@ -21,14 +20,14 @@ window.$ = window.jQuery = jQuery;
 
 const axios = require('axios');
 
-class VoteTable extends Component{
+class VoteTable extends React.Component{
     constructor(props){
         super(props);
         this.state = { vote: [], pageNum: 1 , count: 0};
-        this.url = '/userInfo/manage/vote/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
+        this.url = '/userInfo/voter/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
     }
     setUrl(){
-        this.url = '/userInfo/manage/vote/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
+        this.url = '/userInfo/voter/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
     }
     async componentDidMount(){
         let {data} = await axios.get(this.url)
@@ -44,26 +43,24 @@ class VoteTable extends Component{
         this.setUrl()   
         this.componentDidMount()
     }
-    
     render() {
         console.log(this.state.vote)
         return(
-                <div id="tablebox"  id="last">
+                <div id="tablebox">
  
                          <Paper >
                             <Table size="small" id="myTable">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell  className="smart">번호</TableCell>
-                                    <TableCell id="bord" >투표명</TableCell>
+                                    <TableCell className="smart">번호</TableCell>
+                                    <TableCell>투표명</TableCell>
                                     <TableCell className="smart">시작시간</TableCell>
                                     <TableCell className="smart">종료시간</TableCell>
-                                    <TableCell className="smart">결과 발표시간</TableCell>
-                                    <TableCell id="bord" >삭제</TableCell>
+                                    <TableCell>결과 발표시간</TableCell>
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <VoterVoteList   data={this.state.vote}/>    
+                                    <VoterVoteList  data={this.state.vote}/>    
                                 </TableBody>
                             </Table>
                         </Paper>
@@ -75,19 +72,11 @@ class VoteTable extends Component{
     }
 }
 
-class VoterVoteList extends Component {
+class VoterVoteList extends React.Component {
     constructor(props){
         super(props);
     }
-    async remove(voteId){
-        
-        if(!confirm("정말로 해당 투표를 삭제하시겠습니까?"))
-            return;
-        axios.delete('/vote/'+voteId)
-        
-        location.reload()
 
-    }
 
     render() {
         return  this.props.data.map((vote,index)=>{
@@ -102,14 +91,13 @@ class VoterVoteList extends Component {
             return (
                 <TableRow key={'div'+index}>
                              
-                    <TableCell className="smart" key={index}>{vote.no}</TableCell>
-                    <TableCell><a href={'/vote/'+vote.no}>{vote.title}</a></TableCell>
-                    <TableCell className="smart">{stTime}</TableCell>
-                    <TableCell className="smart">{edTime}</TableCell>
-                    <TableCell className="smart">{rsTime}</TableCell>
-                    <TableCell><button onClick={this.remove.bind(this,vote.no)}>삭제</button></TableCell>
+                <TableCell  className="smart">{vote.no}</TableCell>
+                <TableCell><a href={'/vote/'+vote.no}>{vote.title}</a></TableCell>
+                <TableCell className="smart">{stTime}</TableCell>
+                <TableCell className="smart">{edTime}</TableCell>
+                <TableCell>{rsTime}</TableCell>
                
-                </TableRow>
+             </TableRow>
                
                )
             
@@ -118,4 +106,8 @@ class VoterVoteList extends Component {
     }
 }
 
+
 export default VoteTable
+
+
+

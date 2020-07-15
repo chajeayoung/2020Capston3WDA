@@ -51,7 +51,7 @@ class AuditionTable extends React.Component{
                             <TableHead>
                                 <TableRow>
                                     <TableCell className="smart">번호</TableCell>
-                                    <TableCell>Title</TableCell>
+                                    <TableCell>오디션명</TableCell>
                                     <TableCell className="smart">오디션 ID</TableCell>
                                     <TableCell className="smart">신청일</TableCell>
                                 </TableRow>

@@ -1,5 +1,16 @@
 #vote {
 height: 100% !important;
-    
+
+}
+#riroindex{
+
+    font-size: 15px !important;
 }
 
+#bord{
+ font-weight: 700;
+}
+
+#last{
+    margin-bottom: 100px;
+}
