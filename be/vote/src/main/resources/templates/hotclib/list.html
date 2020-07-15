@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-th:replace="~{main_layout::layout(~{::content},_,'주간 핫클립',_)}">
+th:replace="~{main_layout::layout(~{::content},~{::script},'주간 핫클립',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/side/userInfoSide.js"></script>
 </head>
 <body>
  
@@ -26,12 +27,15 @@ th:replace="~{main_layout::layout(~{::content},_,'주간 핫클립',_)}">
         
        }
        .gi{
-         border: 1px solid #ccc;
-         padding: 5px;
-    width: 250px;
-    margin: 10px ;
-    display: inline-block;
-    text-align:left;
+          border: 1px solid #ccc;
+          padding: 5px;
+          width: 250px;
+          margin: 10px ;
+          display: inline-block;
+          text-align:left;
+       }
+       #page-content-wrapper{
+          padding: 0px !important;
        }
      </style> 
 
