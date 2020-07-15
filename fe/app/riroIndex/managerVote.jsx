@@ -12,7 +12,9 @@ import '../smart.css';
 
 import Pagination from '@material-ui/lab/Pagination';
 import jQuery from "jquery";
-import './../userInfo/voteTableCss.css';
+// import './../userInfo/voteTableCss.css';
+// import './riroIndex.css';
+
 window.$ = window.jQuery = jQuery;
 
 

@@ -1,0 +1,17 @@
+#vote {
+height: 100% !important;
+    
+}
+
+@media(max-width:950px){
+    .modalContentBox{
+        width: 100%;
+    }
+    .usrAdd{
+        overflow: scroll;
+    }
+    .smartImg{
+        max-width: 180px;
+        max-height: 180px;
+    }
+}
