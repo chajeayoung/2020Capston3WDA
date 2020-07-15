@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'상품 수정',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <content>
+            <input type="hidden" id="prdId"th:value="${prdId}">
+            <div id="shopItemEdit"></div>
+            <script src="/assets/shopItemEdit.js"></script>
+        
+    </content>
+</body>
+</html>

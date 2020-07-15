@@ -1,18 +1,25 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
+
+import com.vote.vote.db.dto.Audition;
+import com.vote.vote.db.dto.AuditionOption;
+import com.vote.vote.db.dto.Member;
+import com.vote.vote.repository.AuditionJpaRepository;
+import com.vote.vote.repository.AuditionOptionJpaRepository;
+import com.vote.vote.repository.MemberJpaRepository;
+import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.service.StorageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -25,16 +32,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.vote.vote.config.CustomUserDetails;
-import com.vote.vote.db.dto.Audition;
-import com.vote.vote.db.dto.AuditionCon;
-import com.vote.vote.db.dto.Member;
-import com.vote.vote.repository.AuditionConJpaRepository;
-import com.vote.vote.repository.AuditionJpaRepository;
-import com.vote.vote.repository.MemberJpaRepository;
-import com.vote.vote.repository.ProgramManagerJpaRepository;
-import com.vote.vote.service.StorageService;
 
 @Controller
 public class AuditionController {
@@ -51,6 +48,9 @@ public class AuditionController {
 
 	@Autowired
 	private ProgramManagerJpaRepository pmRepository;
+
+	@Autowired
+	private AuditionOptionJpaRepository auditionOptionReopository;
 	
 //	@RequestMapping("/audition/list")
 //	public String list(Model model) {
@@ -108,6 +108,7 @@ public class AuditionController {
 	@GetMapping("/audition/read/{auditionid}")
 	public String read(Model model, @PathVariable int auditionid){
 		model.addAttribute("audition", auditionRepository.findByAuditionid(auditionid));
+		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		auditionRepository.save(audition);
 
@@ -117,6 +118,7 @@ public class AuditionController {
 	@GetMapping("/audition/readuser/{auditionid}")
 	public String readuser(Model model, @PathVariable int auditionid){
 		model.addAttribute("audition", auditionRepository.findByAuditionid(auditionid));
+
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		auditionRepository.save(audition);
 
@@ -134,6 +136,7 @@ public class AuditionController {
 	@PostMapping("/audition/write")
 	public String write(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
+			@Nullable @RequestParam("option") String[] option,
             @RequestParam(name = "filename") MultipartFile filename	) {
 		
 		
@@ -168,7 +171,20 @@ public class AuditionController {
             // rfile.setApplyid(audience.getApplyId());
             // rfile.setFilename(filenamePath);
             // rfileRepository.saveAndFlush(rfile);
-            sessionStatus.setComplete();
+			sessionStatus.setComplete();
+			
+			
+			if(option!=null && !option[0].isEmpty()){// 데이터가 있으면,	
+				for(int i=0; i<option.length; i++){
+					AuditionOption auditionOption = new AuditionOption();
+					auditionOption.setAuditionId(audition.getAuditionid());
+					auditionOption.setName(option[i]);
+					
+					auditionOptionReopository.saveAndFlush(auditionOption);
+				}
+			}
+
+
             System.out.println("게시글업로드완료");
             return "redirect:/audition/list";
             
@@ -245,27 +261,62 @@ public class AuditionController {
 	public String update(Model model, @PathVariable int auditionid){
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		model.addAttribute("audition", audition);		
+		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
 		return "audition/update";
 	}
 
-	// @PostMapping("/audition/update/{auditionid}")
-	// public String update(Audition audition, BindingResult bindingResult){
-	// 	if (bindingResult.hasErrors()) {
-	// 		return "/audition/update";
-	// 	} else {
-			// auditionRepository.save(audition).getAuditionid();
-		// return "redirect:/audition/list";
-	// 	}
-	// }	
 
 	@PostMapping("/audition/update/{auditionid}")
-	public String update(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
+	public String update_post(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
-            @RequestParam(name = "filename") MultipartFile filename	) {
+			@RequestParam(name = "filename") MultipartFile filename	,
+			@Nullable @RequestParam("preAddOption") String[] preAddOptions,
+			@Nullable @RequestParam("option") String[] options ) {
 
 		if(bindingResult.hasErrors()) {
 			return "/audition/update";
-		} else if(filename.isEmpty()) {
+		}
+		
+		List<AuditionOption> auditionOption = auditionOptionReopository.findByAuditionIdOrderByNo(audition.getAuditionid());
+
+		// 기존에 추가된 커스텀 옵션 체크
+		if(preAddOptions != null && !preAddOptions[0].isEmpty()){
+			if( auditionOption.size() != preAddOptions.length ){ // 기존의 추가옵션이  제거된 경우.
+				for(AuditionOption audi_option : auditionOption){
+					boolean state = true;
+
+					for(int i=0; i<preAddOptions.length; i++){
+						System.out.println(preAddOptions[i]);
+						System.out.println(audi_option.getName());
+						if(preAddOptions[i].equals(audi_option.getName())){//if(preAddOptions[i].equals(audi_option.getName())){
+							state = false;
+							System.out.println("존재하는 옵션");
+							break;
+						}						
+					}
+
+					if(state){
+						System.out.println("옵션 삭제");
+						auditionOptionReopository.delete(audi_option);
+					}
+						
+				}
+			}
+		}
+		// 새롭게 추가된 커스텀 옵셥 
+
+		if(options != null && !options[0].isEmpty()){
+			for(int i=0; i<options.length; i++){
+				AuditionOption newOption = new AuditionOption();
+				newOption.setAuditionId(audition.getAuditionid());
+				newOption.setName(options[i]);
+				auditionOptionReopository.saveAndFlush(newOption);
+			}
+			
+
+		}
+
+		if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
 			audition.setRid(member.getNo());
 			audition.setAusername(member.getName());

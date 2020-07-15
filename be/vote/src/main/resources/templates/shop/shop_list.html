@@ -9,8 +9,7 @@
 	<title>RIRO Goods Shop</title>
 	<!-- <script src="http://localhost:4000/socket.io/socket.io.js"></script> -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<link href="/css/chat.css" rel="stylesheet">
-	<script src="/js/chat.js"></script>
+	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
@@ -23,7 +22,13 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
+
+	<th:block sec:authorize="isAuthenticated()">
+		<link href="/css/chat.css" rel="stylesheet">
+		<script src="/js/chat.js"></script>
+	</th:block>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
 
 	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/layout.css">
@@ -35,6 +40,13 @@
 <body>
 	<top>
         <div class="top_div">
+			<th:block sec:authorize="isAuthenticated()">
+				<input type="hidden"  id="principal" th:value="${#authentication.principal.R_ID}">
+			</th:block>
+			<th:block sec:authorize="isAnonymous()">
+				<input type="hidden"  id="principal" value="0">
+			</th:block>
+			
 			<input id="rirochat" type="hidden" th:value="${@environment.getProperty('rirochat')}">
             <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
                 <div class="img_div">
