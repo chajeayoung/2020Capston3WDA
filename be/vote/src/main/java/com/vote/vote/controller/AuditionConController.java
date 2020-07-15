@@ -255,14 +255,14 @@ public class AuditionConController {
 
 	// 오디션 관리자가 합격/불합격 판단 관련 
 	@GetMapping("/audition_con/update/{formid}")
-	public String update(Model model, @PathVariable int formid){
+	public String con_update_view(Model model, @PathVariable int formid){
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
 		model.addAttribute("auditionCon", auditioncon);		
 		return "audition_con/list";
 	}
 
 	@PostMapping("/audition_con/update/{formid}")
-	public String update(AuditionCon auditioncon, BindingResult bindingResult,
+	public String con_update_ok(AuditionCon auditioncon, BindingResult bindingResult,
 	@PathVariable int formid
 	){
 		if (bindingResult.hasErrors()) {
@@ -275,7 +275,7 @@ public class AuditionConController {
 		}
 	}
 	// 오디션 신청서 수정 부분	
-	@RequestMapping(value={"/audition/update/{conId}","/audition/update/{conId}/"}, method=RequestMethod.GET)
+	@GetMapping(value={"/myAudition/update/{conId}","/myAudition/update/{conId}/"})
 	public String edit(@PathVariable int conId, Model model) {
 		
 		AuditionCon auditioncon = auditionConRepository.findByFormid(conId);
@@ -286,7 +286,7 @@ public class AuditionConController {
 		return "/audition_con/edit";
 		
 	}
-	@RequestMapping(value={"/audition/update/{conId}","/audition/update/{conId}/"}, method=RequestMethod.POST)
+	@PostMapping(value={"/myAudition/update/{conId}","/myAudition/update/{conId}/"})
 	public String update(@PathVariable int conId, Model model, AuditionCon auditionCon,@Nullable @RequestParam("option") String[] options,
 	@RequestParam(name = "profile") MultipartFile[] file) {
 
@@ -314,8 +314,7 @@ public class AuditionConController {
 
 		}
 		if(options != null && !options[0].isEmpty()){
-
-			List<AuditionOption> audiOptions = auditionOptionReopository.findByAuditionIdOrderByNo(auditionCon.getAuditionid());
+			List<AuditionOption> audiOptions = auditionOptionReopository.findByAuditionIdOrderByNo(con.getAuditionid());
 			List<AuditionOptionValue> optionValues = auditionOptionValueRepository.findByAuditionConOrderByNo(conId);
 			
 			int count = audiOptions.size() - optionValues.size();
@@ -333,8 +332,8 @@ public class AuditionConController {
 
 			for(int i=0; i<count; i++){ // 추가적인 옵션이 생겼을 때 
 				AuditionOptionValue value = new AuditionOptionValue();
-				value.setAuditionCon(auditionCon.getFormid());
-				value.setAuditionId(auditionCon.getAuditionid());
+				value.setAuditionCon(con.getFormid());
+				value.setAuditionId(con.getAuditionid());
 				value.setOptionNo(audiOptions.get(i+optionValues.size()).getNo());
 				value.setValue(options[i+optionValues.size()]);
 

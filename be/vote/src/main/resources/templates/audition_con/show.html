@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'신청 폼',_)}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'신청서 수정',_)}">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,6 @@
                 }
         </style>
 
-        <form th:action="@{'/audition_con/update/' + ${auditionCon.formid}}" method="post">
             <table class="table table-bordered">
 
                 <tbody>
@@ -89,7 +88,7 @@
 
             <div>
                 <a href="/userInfo/myAudition">나의 오디션 목록</a>
-                <a th:href="@{'/audition/upadte/'+${auditionCon.formid}}">수정</a>
+                <a th:href="@{'/myAudition/update/'+${auditionCon.formid}}">수정</a>
             </div>
                 <!-- <center> -->
                     
@@ -146,7 +145,7 @@
                     <input type="submit" value="저장" />
                 </span> -->
             </div>
-        </form>
+
         <script>
             var check = document.querySelector(".test").value
 
