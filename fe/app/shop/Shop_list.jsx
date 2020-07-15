@@ -13,6 +13,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import List_Section from './List_Section.js'
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
 // import Section from './shop/section'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import './css/animate.css';
@@ -28,6 +30,7 @@ class Shop_list extends React.Component {
         this.url;
         this.text = " ";
         this.program=0;
+        this.chat = $("#principal").val();
     }
 
     async componentDidMount() {
@@ -82,7 +85,7 @@ class Shop_list extends React.Component {
         this.setState({categoryD:data})
     }
     async initItem(){
-        let {data} = await axios.get("/shop/list/axios");
+        let {data} = await axios.get("/shop/list/axios?&page=0&size=8&sort=0");
         console.log(data);
         this.state.count = Math.ceil((data.count*1.0)/8)
         this.setState({data})
@@ -132,7 +135,9 @@ class Shop_list extends React.Component {
                     <List_Section data={this.state} event={this.categoryEvent} that={this} paging={this.pagenation} search={this.itemSearch} proEvent={this.programEvent}> </List_Section>
                     <Footer></Footer>
                     <Footer2></Footer2>
-                    <Chat></Chat>
+                    {
+                        this.chat != 0 ? <Chat></Chat> : <div></div>
+                    }
                 </Fragment>
             )
         

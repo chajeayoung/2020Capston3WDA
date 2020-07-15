@@ -51,7 +51,7 @@
                     <ul th:each="list:${boardList}">
                         <li class="">
                             <a href="#" class="list_img"><img src="#" th:src="@{'/uploads/' + ${list.img}}" alt=""></a>
-                            <a href="#" th:href="@{'/audience/mread/' + ${list.applyId}}" class="bo_tit">
+                            <a href="#" th:href="@{'/userInfo/audience/mread/' + ${list.applyId}}" class="bo_tit">
                                 <span class="sound_only">50</span> <strong th:text="${list.aTitle}"></strong>
                                 <i class="fa fa-download" aria-hidden="true"></i>
                                 <span class="content" th:text="${list.aContent}">

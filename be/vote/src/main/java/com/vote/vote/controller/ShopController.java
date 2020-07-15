@@ -870,7 +870,10 @@ public class ShopController {
 					sum += (prd.getPrice()+option.getoPrice())*quantitys[i];
 					count += quantitys[i];
 				}
-				title += " 외"+(count-1)+"개 상품";
+				if(productIds.length > 1){
+					title += " 외"+(count-1)+"개 상품";
+				}
+				
 
 				
 				

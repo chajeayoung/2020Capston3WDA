@@ -1,89 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시글',_)}">
+th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 신청 게시글',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="/js/audition/readuser.js"></script>
 
 </head>
 <content>
-<body>
-<!--     <table border="1">
-		<tr>
-			<th>제목</th>
-			<td th:text="${audition.a_title}">제목입니다.</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td th:text="${audition.a_category}">분야입니다.</td>
-		</tr>
-	</table> -->
-	<table class="table table-bordered; margin:auto; text-align:center;">
+    <body>
+        <input type="hidden" id="auditionId" th:value="${audition.auditionid}">
+        <!--     <table border="1">
+                <tr>
+                    <th>제목</th>
+                    <td th:text="${audition.a_title}">제목입니다.</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td th:text="${audition.a_category}">분야입니다.</td>
+                </tr>
+            </table> -->
+	    <table class="table table-bordered; margin:auto; text-align:center;">
    
-    <tbody>
-            <tr>
-                <th>제목</th>
-                 <td th:text="${audition.atitle}"></td>
+            <tbody>
+                <tr>
+                    <th>제목</th>
+                    <td th:text="${audition.atitle}"></td>
+                </tr>
+                <tr>
+                    <th>기간</th>
+                    <td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
+                    <th>  ~  </th>
+                    <td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
+                </tr>
+            </tbody>
+        </table>
 
-            </tr>
-            
-            <tr>
-                <th>기간</th>
-                 <td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
-				<th>  ~  </th>
-				<td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
-            </tr>
-           
-          
-         
-    </tbody>
-</table>
-	<span style="float:right;">
-            
-             	 <a href="" th:href="@{'/uploads/' + ${audition.afile}}">
-                  [[${audition.afile}]]</a>
+	    <span style="float:right;">
+            <a href="" th:href="@{'/uploads/' + ${audition.afile}}">[[${audition.afile}]]</a>
+        </span>
+        <br><br>
 
-					
-					</span>
-                    <br><br>
-<table><br>
- <tr>
+        <table>
+            <br>
+            <tr>
                 <th>내용</th>
-                
-                  <td th:text="${audition.acontent}"></td>
-            <!--    <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="a_content"></textarea></td> -->
-           
-                
+                <td th:text="${audition.acontent}"></td>                
             </tr>
-            
-           
-</table>
-<br><br>
+        </table>
+        <br><br>
 
-	
-	
-	<div>
-	
-	
-			<tr><center>
-                <td colspan="2">
-             <input type="button" value="신청서" onclick="location.href='/audition_con/form'"/>  
-         
-                                    </td></center>
-                                    
-            </tr>
-        
-
-	
+	    <div>
+			<tr>
+                <center>
+                    <td colspan="2">
+                        <input type="button"  id="apply" value="신청서" />  
+                    </td>
+                </center>         
+            </tr>        
 	</div>
 	
     <div>
     
 		<button><a href="" th:href="@{/audition/listuser}">게시글 목록</a></button>
     </div>
-
-
+    
 </body>
 </content>
 </html>

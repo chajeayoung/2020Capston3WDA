@@ -19,12 +19,13 @@ class Header_bottom extends React.Component {
                                 <ul className="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="/" className="active">RIRO 홈</a></li>
                                     <li><a href="/shop/index" className="active">홈</a></li>
-                                    <li className="dropdown"><a href="#">굿즈샵<i className="fa fa-angle-down"></i></a>
+                                    <li><a href="/shop/list" className="active">전체상품</a></li>
+                                    {/* <li className="dropdown"><a href="#">굿즈샵<i className="fa fa-angle-down"></i></a>
                                         <ul role="menu" className="sub-menu">
                                             <li><a href="/shop/list">전체상품</a></li>
 
                                         </ul>
-                                    </li>
+                                    </li> */}
                                     {/* <li className="dropdown"><a href="#">QnA<i className="fa fa-angle-down"></i></a>
                                         <ul role="menu" className="sub-menu">
                                             <li><a href="">자주 묻는 질문</a></li>

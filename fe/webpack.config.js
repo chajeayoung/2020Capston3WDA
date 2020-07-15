@@ -45,7 +45,7 @@ module.exports = {
     modal: path.join(__dirname,'./app/programRegister/modal.jsx'),
     votePreShow: path.join(__dirname,'./app/vote/votePreShow.jsx'),
     voteEndShow: path.join(__dirname,'./app/vote/voteEndShow.jsx'),
-    Shop_index: path.join(__dirname,'./app/Shop_index.js'),
+    Shop_index: path.join(__dirname,'./app/Shop_index.jsx'),
     communityIndex: path.join(__dirname,'./app/community/index.js'),
     detailIndex: path.join(__dirname,'./app/community/detailIndex.js'),
     voterVoteList : path.join(__dirname, './app/userInfo/voterVoteList.jsx'),
@@ -69,6 +69,7 @@ module.exports = {
     manageOrderState : path.join(__dirname,"./app/userInfo/manageOrderState.jsx"), 
     Shop_list : path.join(__dirname,"./app/shop/Shop_list.jsx"), 
     buyError : path.join(__dirname,"./app/shop/buyError.jsx"),
+    myAudition : path.join(__dirname,"./app/userInfo/myAudition.jsx"),
   },
   output: {
     path: PATHS.build,
@@ -87,7 +88,7 @@ module.exports = {
     // contentBase: './tmp',
     // webpack외부접속
     disableHostCheck:true,
-    host:"0.0.0.0",
+    // host:"0.0.0.0",
     proxy: {
       "**": "http://localhost:8000"
     }

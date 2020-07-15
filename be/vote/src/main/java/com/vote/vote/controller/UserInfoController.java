@@ -1,18 +1,15 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.customSelect.CustomAuditionCon;
 import com.vote.vote.db.customSelect.CustomOrderListSelect;
 import com.vote.vote.db.customSelect.CustomOrderState;
 import com.vote.vote.db.customSelect.CustomPrd;
 import com.vote.vote.db.customSelect.CustomVote;
+import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.Company;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Popular;
@@ -20,6 +17,7 @@ import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Vote;
 import com.vote.vote.repository.CompanyJpaRepository;
+import com.vote.vote.repository.CustomAuditionConRepository;
 import com.vote.vote.repository.CustomCompanyRepository;
 import com.vote.vote.repository.CustomMemberRepository;
 import com.vote.vote.repository.CustomOrderListRepository;
@@ -46,6 +44,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,6 +103,9 @@ public class UserInfoController {
 
 	@Autowired
 	private CustomOrderReopsitoy customOrderReopsitoy;
+
+	@Autowired
+	private CustomAuditionConRepository customAuditionConRepository;
 
 	//개인정보
 	@RequestMapping(value={"","/"})
@@ -689,5 +691,24 @@ public class UserInfoController {
 
 			return result;
 		}
+
+		@RequestMapping(value={"/myAudition","/myAudition"}, method = RequestMethod.GET)
+		public String myAudition(){
+			return "/userInfo/myAudition";
+		}
+		@RequestMapping(value={"/myAudition/axios","/myAudition/axios/"}, method = RequestMethod.GET)
+		@ResponseBody
+		public CustomAuditionCon myAuditionAxios(@Nullable Authentication authentication,  @PageableDefault Pageable page){
+
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+			CustomAuditionCon auditionCon = customAuditionConRepository.getMyAuditionCon(userDetails.getR_ID(), page);
+
+			return auditionCon;
+		}
+
+
+		
+		
 		
 }

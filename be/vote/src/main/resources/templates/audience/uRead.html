@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},~{::script},~{::title}, ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},~{::script},'게시글', ~{::link})}" >
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글</title>
+    <!-- <title>게시글</title> -->
     <link rel="stylesheet" href="/css/boardstyle.css">
     <link rel="stylesheet" href="/css/contents.css">
     <link rel="stylesheet" href="/css/default.css">
@@ -80,7 +80,13 @@
                     <input type="button" value="응모하기" id="apply" class="btn_submit btn">
                 </form>
                 
-              
+                <div id="result">
+                    <th:block th:if="${result.size() >=1}">
+                        
+                        <h4>당첨자</h4>
+                        <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
+                    </th:block>
+                </div>
             </section>
 
             <div id="bo_v_share">
@@ -127,6 +133,7 @@
                             <b>웹진형 게시판 공지사항입니다. </b></a> </li>
                 </ul>
             </div>
+
             <!-- } 게시물 상단 버튼 끝 -->
 
 
