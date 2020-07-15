@@ -6,62 +6,76 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'게시글 수정',_)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 사이드바 -->
     <script src="/js/side/userInfoSide.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="/js/audition/write.js"></script>
 </head>
 <content>
     <link rel="stylesheet" href="/css/formcss.css" />
-<body>  	   
-	<form th:action="@{'/audition/update/' + ${audition.auditionid}}" method="post"  enctype="multipart/form-data">     
-	
-	<colgroup>
-		<col width="20%">
-		<col width="80%">
-	</colgroup>
+    <body>  	   
+        <form th:action="@{'/audition/update/' + ${audition.auditionid}}" method="post"  enctype="multipart/form-data">     
+        
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
 
-    <table class="table table-bordered" >
-    <tbody>
-            <tr>
-                <th><label for="atitle">분야 : </label></th>
-				<td><input type="text" name="acategory" th:value="${audition.acategory}" /></td>
-        	     <th><label for="astartdate">모집기간 : </label></th>
-				<td><input type="date" name="astartdate" th:value="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}" /></td>
-                <th>    ~     </th>
-                <td><input type="date" name="aenddate" th:value="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}" /></td>
+        <table class="table table-bordered" >
+            <tbody>
+                <tr>
+                    <th><label for="atitle">분야 : </label></th>
+                    <td><input type="text" name="acategory" th:value="${audition.acategory}" required/></td>
+                        <th><label for="astartdate">모집기간 : </label></th>
+                    <td><input type="date" name="astartdate" th:value="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}" required/></td>
+                    <th>    ~     </th>
+                    <td><input type="date" name="aenddate" th:value="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}" required/></td>
                 
-                <th><label for="arecruits">인원 : </label></th>
-				<td><input type="text" name="arecruits" th:value="${audition.arecruits}" /></td>
-				
-                <th><label for="aissue">발표일 : </label></th>
-				<td><input type="date" name="aissue" th:value="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
-            </tr>
-            <tr>
-                <th><label for="atitle">제목 : </label></th>
-				<td><input type="text" name="atitle" th:value="${audition.atitle}" /></td>
-            </tr>
-            <tr>
-                <th>첨부파일</th>
-                 <td>    
-                    <input type="file" name="filename" th:value="@{'/uploads/' + ${audition.afile}}"/>
+                    <th><label for="arecruits">인원 : </label></th>
+                    <td><input type="text" name="arecruits" th:value="${audition.arecruits}" required/></td>
+                </tr>
+                <tr>    
+                    <th><label for="aissue">발표일 : </label></th>
+                    <td><input type="date" name="aissue" th:value="${#dates.format(audition.aissue, 'yyyy-MM-dd')}" required/></td>
+                </tr>
+                <tr>
+                    <th><label for="atitle">제목 : </label></th>
+                    <td><input type="text" name="atitle" th:value="${audition.atitle}" required/></td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td>    
+                    <input type="file" name="filename" th:value="@{'/uploads/' + ${audition.afile}}" />
                     [[${audition.afile}]]
-                 </td>
-    
-              </tr>
-            <input type="hidden" name="ausername" th:value="${audition.ausername}" />
-          
-         
-    </tbody>
-</table>
-<table>
-    <tr>
-        <th>내용 : </th>
-        <!-- <td ><input type="text" name="acontent" th:value="${audition.acontent}" /></td> -->
-        <td><textarea cols="150" rows="20" name="acontent">[[${audition.acontent}]]</textarea></td>
-    </tr>
-   </table>
-		<div>
+                    </td>
+
+                </tr>
+                    <div>aaa</div>
+                    <th:block th:each="option : ${options}">
+                        
+                        <tr>
+                            <th th:text="${option.name}"></th>
+                            <td><input type="checkbox" th:value="${option.name}" name="preAddOption" checked></td>
+                        </tr>
+                    </th:block>
+                    <input type="hidden" name="ausername" th:value="${audition.ausername}" />
+                
+                
+            </tbody>
+        </table>
+        <button type="button" id="addOption">옵션추가</button>
+            <div id="optionDiv"></div>
+        <table>
+            <tr>
+                <th>내용 : </th>
+                <!-- <td ><input type="text" name="acontent" th:value="${audition.acontent}" /></td> -->
+                <td><textarea cols="150" rows="20" name="acontent" required>[[${audition.acontent}]]</textarea></td>
+            </tr>
+        </table>
+        <div>
             <input type="submit" value="수정하기" /> 
-            <input type="reset" value="이전으로" onclick="history.back();"> 
-		</div>
-	</form>
-</body>
+            <input type="reset" value="이전으로" onclick="history.back();" /> 
+        </div>
+        </form>
+    </body>
 </content>
 </html>

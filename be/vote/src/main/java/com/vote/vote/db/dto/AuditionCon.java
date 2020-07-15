@@ -308,9 +308,7 @@ public class AuditionCon {
 				this.fusermail = fusermail;
 			}
 		    
-			public String toString() {
-				return ""+rid;
-			}
+			
 
 			public String getUsername() {
 				return username;
@@ -318,6 +316,18 @@ public class AuditionCon {
 
 			public void setUsername(String username) {
 				this.username = username;
+			}
+
+			@Override
+			public String toString() {
+				return "AuditionCon [auditionid=" + auditionid + ", confirm=" + confirm + ", fability=" + fability
+						+ ", faddr=" + faddr + ", fblood=" + fblood + ", fcarrer=" + fcarrer + ", fcategory="
+						+ fcategory + ", fdate=" + fdate + ", feducation=" + feducation + ", ffamily=" + ffamily
+						+ ", fgender=" + fgender + ", fheight=" + fheight + ", fhobby=" + fhobby + ", fintroduction="
+						+ fintroduction + ", fjob=" + fjob + ", fmotive=" + fmotive + ", fname=" + fname + ", formid="
+						+ formid + ", fprofile=" + fprofile + ", ftitle=" + ftitle + ", fusermail=" + fusermail
+						+ ", fusername=" + fusername + ", fuserphone=" + fuserphone + ", fweight=" + fweight + ", rid="
+						+ rid + ", username=" + username + "]";
 			}
 		    
 		    

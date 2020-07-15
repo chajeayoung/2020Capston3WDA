@@ -50,6 +50,7 @@ function w3_open() {
 		//채팅관리
 		$("#mobileMenus").append("<div class='sideMenu'><a href='#'>채팅방관리</a></div>");	}	
 			
+		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/myAudition'>나의오디션신청</a></div>");
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/userInfo/voter'>나의투표</a></div>");
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/shop/orderList'>나의주문</a></div>");
 		$("#mobileMenus").append("<div class='sideMenu'><a href='/shop/mybag'>장바구니</a></div>");

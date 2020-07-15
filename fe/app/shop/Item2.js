@@ -13,7 +13,7 @@ export default class Item2 extends React.Component {
             if(this.props.data.length != 0){
                 return this.props.data.map((prd, index) => {
                     return (
-                        <div className="col-sm-3">
+                        <div className="col-sm-3" key={index}>
                             <div className="product-image-wrapper">
                                 <div className="single-products">
                                     <div className="productinfo text-center">

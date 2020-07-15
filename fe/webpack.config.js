@@ -71,6 +71,8 @@ module.exports = {
     buyError : path.join(__dirname,"./app/shop/buyError.jsx"),
     managerIndex : path.join(__dirname,"./app/riroIndex/managerIndex.jsx"),
     userIndex : path.join(__dirname,"./app/riroIndex/userIndex.jsx"),
+    myAudition : path.join(__dirname,"./app/userInfo/myAudition.jsx"),
+
   },
   output: {
     path: PATHS.build,
@@ -89,7 +91,7 @@ module.exports = {
     // contentBase: './tmp',
     // webpack외부접속
     disableHostCheck:true,
-    host:"0.0.0.0",
+    // host:"0.0.0.0",
     proxy: {
       "**": "http://localhost:8000"
     }

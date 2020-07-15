@@ -4,10 +4,10 @@
 }
 .search{
     margin-bottom: 20px;
- 
+    text-align: -webkit-center;
 }
 .searchBox{
-    float: right;
+    /* float: right; */
 }
 .searchButton{
     background: #FE980F;
