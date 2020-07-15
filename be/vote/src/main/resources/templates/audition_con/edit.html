@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},~{::script},'신청 폼',_)}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+<content>
+    <link rel="stylesheet" href="/css/formcss.css" />
+
+    <body>
+
+
+        <style>
+            .im{
+                    weidht:100px;
+                    height:100px;
+                }
+        </style>
+
+        <form th:action="@{'/audition/update/' + ${auditionCon.formid}}" method="post" enctype="multipart/form-data">
+            <table class="table table-bordered">
+
+                <tbody>
+
+                    <tr>
+                        <th>성명</th>
+
+                        <td> <input type="text" name="fusername"  th:value="${auditionCon.fusername}" /></td>
+                        <th>휴대전화번호</th>
+                        <td> <input type="text" name="fuserphone" th:value="${auditionCon.fuserphone}" /></td>
+                        <th>이메일</th>
+                        <td> <input type="text" name="fusermail" th:value="${auditionCon.fusermail}" /></td>
+
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td> <input type="text" name="ftitle"  th:value="${auditionCon.ftitle}" /></td>
+                    </tr>
+                    <tr>
+
+                        <th>사진 </th>
+                        <td> <a><img class="im" th:src="@{'/uploads/' + ${auditionCon.fprofile}}"></a>
+
+                            <input type="file" name="profile"  /></td>
+                        <th>주소</th>
+                        <td> <input type="text" name="faddr"  th:value="${auditionCon.faddr}" /></td>
+                    </tr>
+                    <tr>
+                        <th>학력</th>
+                        <td> <input type="text" name="feducation" th:value="${auditionCon.feducation}" /></td>
+                    </tr>
+                    <tr>
+                        <th>성별</th>
+                        <td class="tgender"> 
+                            남성<input id="fgenderM" type="radio" name="fgender" value="m" required/>
+                            <br>
+                            여성<input id="fgenderG" type="radio" name="fgender" value="g" required/>
+                        </td>
+                        <input type="hidden"  id="default_gender" th:value="${auditionCon.fgender}" />
+                        <th>키</th>
+                        <td> <input type="text" name="fheight" th:value="${auditionCon.fheight}" /></td>
+                        <th>몸무게</th>
+                        <td> <input type="text" name="fweight" th:value="${auditionCon.fweight}" /></td>
+                        <th>혈액형</th>
+                        <td> <input type="text" name="fblood" th:value="${auditionCon.fblood}" /></td>
+                    </tr>
+                    <tr>
+                        <th>가족관계</th>
+                        <td> <input type="text" name="ffamily"  th:value="${auditionCon.ffamily}" /></td>
+                        <th>취미</th>
+                        <td> <input type="text" name="fhobby" th:value="${auditionCon.fhobby}" /></td>
+                        <th>특기</th>
+                        <td> <input type="text" name="fability"  th:value="${auditionCon.fability}" /></td>
+                    </tr>
+                    <th:block th:each="option : ${options}">
+                        <tr>
+                            <th th:text="${option.name}"></th>
+                            <td><input type="text" name="option" th:value="${option.value}"/></td>
+                        </tr>
+                    </th:block>
+
+                </tbody>
+            </table>
+
+            <div>
+
+            <div>
+                <a href="/userInfo/myAudition">나의 오디션 목록</a>
+                <button type="submit">수정완료</button>
+            </div>
+
+        <script>
+
+            $(window).on('load', function () {
+
+                var gender = $("#default_gender").val();
+
+                if (gender == "m") {
+                    $("#fgenderM").attr("checked",true);
+                } else if (gender == "g") {
+                    $("#fgenderG").attr("checked",true);
+                }
+
+            });
+
+        </script>
+               
+            </div>
+        </form>
+
+    </body>
+</content>
+
+</html>

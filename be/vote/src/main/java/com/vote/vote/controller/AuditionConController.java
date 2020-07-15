@@ -5,35 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import org.springframework.lang.Nullable;
 
 import com.vote.vote.config.CustomUserDetails;
-import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.AuditionOptionValue;
-import com.vote.vote.db.dto.AuditionResult;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.repository.AuditionJpaRepository;
@@ -43,6 +19,30 @@ import com.vote.vote.repository.CustomAuditionOptionRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.service.StorageService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import groovyjarjarcommonscli.OptionBuilder;
 
 
 @Controller
@@ -195,6 +195,7 @@ public class AuditionConController {
          	auditioncon.setFdate(new Date());
 			auditioncon.setAuditionid(auditionId);
 			auditioncon.setRid(Integer.valueOf(userDetails.getR_ID()));
+			
 			auditionConRepository.save(auditioncon);
 
             
@@ -226,97 +227,17 @@ public class AuditionConController {
 		}
 	}
 	
+	@GetMapping("/audition_con/show/{formid}")
+	public String show(@PathVariable int formid, Model model){
+
+		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
+		System.out.println("auditioncon.getAuditionid(): "+auditioncon.getAuditionid());
+		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
+		model.addAttribute("options", customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(),formid));
+		
+		return "audition_con/show";
+	}
 	
-	
-	
-	
-//	@PostMapping("/audition_con/form")
-//			  public String form(
-//					  
-//					  SessionStatus sessionStatus,
-//			            Principal principal,			       
-//			            RedirectAttributes redirAttrs,
-//			            @RequestParam(name = "fprofile") MultipartFile fprofile,
-//			            @RequestParam(name= "fusername") String fusername,
-//			            @RequestParam(name= "fuserphone") String fuserphone,
-//			            @RequestParam(name= "fusermail") String fusermail,
-//			            @RequestParam(name= "ftitle") String ftitle,
-//			            @RequestParam(name= "faddr") String faddr,
-//			            @RequestParam(name= "feducation") String feducation,
-//			            @RequestParam(name= "fgender") String fgender,
-//			            @RequestParam(name= "fheight") String fheight,
-//			            @RequestParam(name= "fweight") String fweight,
-//			            @RequestParam(name= "fblood") String fblood,
-//			            @RequestParam(name= "ffamily") String ffamily,
-//			            @RequestParam(name= "fhobby") String fhobby,
-//			            @RequestParam(name= "fability") String fability) {
-//						
-//						String fprofilePath = storageService.store2(fprofile); 
-//			            Member member = memberRepository.findByUserid(principal.getName());
-////			            ProgramManager pm = pmRepository.findById(member.getNo());
-//			           // Audition audition = auditionRepository.findByAuditionid(member.getNo());
-//			           
-//			            			         
-//			            AuditionCon auditionCon = new AuditionCon();
-//			            Audition audition = new Audition(); 
-//			          
-////			            auditionCon.setAuditionid(audition.getAuditionid());
-//			            auditionCon.setRid(member.getNo());
-//			            auditionCon.setFprofile(fprofilePath);
-//			            auditionCon.setFusername(fusername);
-//			            auditionCon.setFuserphone(fuserphone);
-//			            auditionCon.setFusermail(fusermail);
-//			            auditionCon.setFtitle(ftitle);
-//			            auditionCon.setFaddr(faddr);
-//			            auditionCon.setFeducation(feducation);
-//			            auditionCon.setFgender(fgender);
-//			            auditionCon.setFheight(fheight);
-//			            auditionCon.setFweight(fweight);
-//			            auditionCon.setFblood(fblood);
-//			            auditionCon.setFfamily(ffamily); 
-//			            auditionCon.setFhobby(fhobby);
-//			            auditionCon.setFability(fability);
-//			                 
-//			            auditionConRepository.saveAndFlush(auditionCon);
-//
-//			            // 파일 저장	       
-//			            sessionStatus.setComplete();
-//			            System.out.println("게시글업로드완료");
-//			            return "redirect:/audition_con/list";
-//			           
-//	}
-	
-//			@RequestParam(name="fprofile") MultipartFile fprofile,
-//			@RequestParam(name="formid", required = false) Integer formid,
-//			Model model,
-//			RedirectAttributes redirAttrs,
-//			AuditionCon auditioncon,
-//			BindingResult bindingResult, 
-//			SessionStatus sessionStatus,
-//			Principal principal){
-//				
-//			
-//			if (bindingResult.hasErrors()) {
-//				return "audition_con/form";
-//			} else {
-//		
-//				
-//				
-//			AuditionCon fprofile = new AuditionCon();
-//			storageService.store(fprofile);
-//			String filenamePath = StringUtils.cleanPath(fprofile.getOriginalFilename());
-//			
-//			
-//			
-//			auditionConRepository.saveAndFlush(auditioncon);  // 저장하고 커밋까지 Flush
-//					
-//			fprofile.setFormid(fprofile.getFormid());
-//			fprofile.setFprofile(filenamePath); 
-//			
-//			auditionConRepository.saveAndFlush(fprofile);
-//			sessionStatus.setComplete();
-//			return "redirect:/audition_con";
-//			}
 		
 		
 //	public String form(@Valid AuditionCon auditionCon, BindingResult bindingResult, SessionStatus sessionStatus) {
@@ -330,7 +251,9 @@ public class AuditionConController {
 //			return "redirect:/audition/complete";
 //		}
 //	}
-	
+
+
+	// 오디션 관리자가 합격/불합격 판단 관련 
 	@GetMapping("/audition_con/update/{formid}")
 	public String update(Model model, @PathVariable int formid){
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
@@ -339,24 +262,102 @@ public class AuditionConController {
 	}
 
 	@PostMapping("/audition_con/update/{formid}")
-	public String update(AuditionCon auditioncon, BindingResult bindingResult
+	public String update(AuditionCon auditioncon, BindingResult bindingResult,
+	@PathVariable int formid
 	){
 		if (bindingResult.hasErrors()) {
 			return "/audition_con/list";
 		} else {
-			
-			auditionConRepository.save(auditioncon).getFormid();
+			AuditionCon con = auditionConRepository.findByFormid(formid);
+			con.setConfirm(auditioncon.getConfirm());
+			auditionConRepository.save(con);
 		return "redirect:/audition_con/list";
 		}
-	}	
+	}
+	// 오디션 신청서 수정 부분	
+	@RequestMapping(value={"/audition/update/{conId}","/audition/update/{conId}/"}, method=RequestMethod.GET)
+	public String edit(@PathVariable int conId, Model model) {
+		
+		AuditionCon auditioncon = auditionConRepository.findByFormid(conId);
+		System.out.println("auditioncon.getAuditionid(): "+auditioncon.getAuditionid());
+		model.addAttribute("auditionCon", auditionConRepository.findByFormid(conId));
+		model.addAttribute("options", customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(),conId));
+
+		return "/audition_con/edit";
+		
+	}
+	@RequestMapping(value={"/audition/update/{conId}","/audition/update/{conId}/"}, method=RequestMethod.POST)
+	public String update(@PathVariable int conId, Model model, AuditionCon auditionCon,@Nullable @RequestParam("option") String[] options,
+	@RequestParam(name = "profile") MultipartFile[] file) {
+
+		
+		AuditionCon con = auditionConRepository.findByFormid(conId);
+		con.setFtitle(auditionCon.getFtitle());
+		// con.setFprofile(fprofile);
+		con.setFuserphone(auditionCon.getFuserphone());
+		con.setFusermail(auditionCon.getFusermail());
+		con.setFusername(auditionCon.getFusername());
+		con.setFaddr(auditionCon.getFaddr());
+		con.setFeducation(auditionCon.getFeducation());
+		con.setFgender(auditionCon.getFgender());
+		con.setFheight(auditionCon.getFheight());
+		con.setFweight(auditionCon.getFweight());
+		con.setFblood(auditionCon.getFblood());
+		con.setFfamily(auditionCon.getFfamily());
+		con.setFhobby(auditionCon.getFhobby());
+		con.setFability(auditionCon.getFability());
+
+		if(!file[0].isEmpty()){
+			String filenamePath = StringUtils.cleanPath(file[0].getOriginalFilename());
+			storageService.store2(file[0]);
+			con.setFprofile(filenamePath);
+
+		}
+		if(options != null && !options[0].isEmpty()){
+
+			List<AuditionOption> audiOptions = auditionOptionReopository.findByAuditionIdOrderByNo(auditionCon.getAuditionid());
+			List<AuditionOptionValue> optionValues = auditionOptionValueRepository.findByAuditionConOrderByNo(conId);
+			
+			int count = audiOptions.size() - optionValues.size();
+
+			for(int i =0 ; i < optionValues.size(); i++){ // 기존의 옵션에 수정
+
+				AuditionOptionValue value = optionValues.get(i);
+				AuditionOption audiOption = audiOptions.get(i);
+
+				value.setOptionNo( audiOption.getNo() );
+				value.setValue( options[i] );
+
+				auditionOptionValueRepository.saveAndFlush(value);
+			}
+
+			for(int i=0; i<count; i++){ // 추가적인 옵션이 생겼을 때 
+				AuditionOptionValue value = new AuditionOptionValue();
+				value.setAuditionCon(auditionCon.getFormid());
+				value.setAuditionId(auditionCon.getAuditionid());
+				value.setOptionNo(audiOptions.get(i+optionValues.size()).getNo());
+				value.setValue(options[i+optionValues.size()]);
+
+				auditionOptionValueRepository.saveAndFlush(value);
+			}
+
+		}
+		
+		
+		
+
+
+		return "redirect:/userInfo/myAudition";
+		
+	}
 	
 	@GetMapping("/audition_con/serch")
 	public String serch(@RequestParam(value="keyword") String keyword, Model model) {
 		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm(keyword);
 		
-				model.addAttribute("auditionconlist", auditioncon);
-				
-				return "audition_con/list";
+			model.addAttribute("auditionconlist", auditioncon);
+			
+			return "audition_con/list";
 	}
 
 	

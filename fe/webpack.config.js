@@ -69,6 +69,7 @@ module.exports = {
     manageOrderState : path.join(__dirname,"./app/userInfo/manageOrderState.jsx"), 
     Shop_list : path.join(__dirname,"./app/shop/Shop_list.jsx"), 
     buyError : path.join(__dirname,"./app/shop/buyError.jsx"),
+    myAudition : path.join(__dirname,"./app/userInfo/myAudition.jsx"),
   },
   output: {
     path: PATHS.build,
