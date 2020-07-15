@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<content>
+<body>  	   
+	<form th:action="@{'/hotclib/replyupdate/' + ${reply.replyid}}" method="post">     
+		<table border="1">
+			
+			<tr>
+				<th><label for="r_content">내용</label></th>
+				<td><input name="r_content" th:value="${reply.r_content}" /></td>
+			</tr>			
+		</table>
+	</form>
+</body>
+</content>
+</html>

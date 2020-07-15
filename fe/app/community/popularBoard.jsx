@@ -188,7 +188,7 @@ class Modal extends Component{
                             required
                             />
                         
-                        <input type="file" name="filename" accept="image/*" onChange={this.checkImage.bind(this)} required/>       
+                        <input type="file" name="filename" accept="image/*" onChange={this.checkImage.bind(this)}/>       
                         <input type="hidden" name="popularid" value={param}/> 
                         <input type="hidden" name="rid" value={this.props.sessionUser}/> 
 
