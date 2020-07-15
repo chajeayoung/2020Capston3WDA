@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},~{::script},'수정하기',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/side/userInfoSide.js"></script>
+</head>
+<content>
+    <link rel="stylesheet" href="/css/formcss.css" />
+<body>  	   
+	<form th:action="@{'/auditionresult/update/' + ${auditionResult.resultid}}" method="post" enctype="multipart/form-data">     
+	
+	<colgroup>
+		<col width="20%">
+		<col width="80%">
+	</colgroup>
+
+    <table class="table table-bordered" >
+    <tbody>
+            <tr>
+                <th><label for="rtitle">제목</label></th>
+				<td><input type="text" name="rtitle" th:value="${auditionResult.rtitle}" /></td>
+               
+            </tr>
+            <tr>
+                <th>첨부파일</th>
+                 <td>    
+                    <input type="file" name="filename" th:value="@{'/uploads/' + ${auditionResult.rfile}}"/>
+                    [[${auditionResult.rfile}]]
+                 </td>
+    
+              </tr>
+           
+         
+    </tbody>
+    </table>
+    <table>
+ <!-- <tr>
+                <th>내용</th>
+                <td><textarea cols="150" rows="20" name="rcontent">[[${auditionResult.rcontent}]]</textarea></td>
+            </tr> -->
+            <tr>
+                <th>내용</th>
+                <td><textarea cols="150" rows="20" name="rcontent">[[${auditionResult.rcontent}]]</textarea></td>
+            </tr>
+            
+</table>
+
+		<!-- <div>
+            <input type="submit" value="수정하기" /> 
+            <a href="" th:href="@{/auditionresult/list}">목록</a>
+        </div> -->
+        <div>
+            <input type="submit" value="수정하기" /> 
+            <input type="reset" value="이전으로" onclick="history.back();"> 
+        </div>
+        <input type="hidden" name="rusername" th:value="${auditionresult.rusername}" />
+	</form>
+</body>
+</content>
+</html>
+

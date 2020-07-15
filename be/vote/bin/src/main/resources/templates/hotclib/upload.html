@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <content>   
+      <link rel="stylesheet" href="/css/hotclibupload.css"/>
+        <form th:action="@{/hotclib/upload}" method="post" enctype="multipart/form-data">                
+          <div>
+            <tr>
+				<th><label for="htitle">제목</label></th>
+				<td><input name="htitle" /></td>
+            </tr>
+            </div>
+            <div>
+			<tr>
+				<th><label for="h_content">내용</label></th>
+                <td><textarea class="contentarea" rows="8" cols="50" name="h_content" ></textarea></td>
+            </tr>     
+        </div>
+            <tr>
+          </tr>
+
+         <fieldset>
+                댓글공개
+                허용 <input type="radio" name="h_reply" value="0" checked />
+                비허용 <input type="radio" name="h_reply" value="1" />
+            </fieldset>
+
+         
+            썸네일선택<input class="gg" type="file" id="filename2" name="filename2" onchange="setFilename2(event);"/>
+            <div id ='preview'> 
+              <!--미리보는공간-->
+            </div>
+              영상선택<input type="file" name="filename" id="filename" onchange="setFilename(event);"/>
+             <div id ='preview2'></div>
+               <div class="form">  
+                  <input type="submit" value="등록">
+                  <input type="reset" value="취소" onclick="history.back();">                    
+         </div>
+        </form>
+        <script>
+
+function setFilename2(event) {
+   var reader = new FileReader();
+   
+    reader.onload = function(event) { 
+      var img = document.createElement("img");
+       img.setAttribute("src", event.target.result);
+        document.querySelector("div#preview").appendChild(img);
+         };
+
+         reader.readAsDataURL(event.target.files[0]); 
+         }
+
+         
+  //        function setFilename(event) {
+  //  var reader = new FileReader();
+   
+  //   reader.onload = function(event) { 
+  //     var video = document.createElement("video");
+  //      video.setAttribute("src", event.target.result);
+  //       document.querySelector("div#preview2").appendChild(video);
+  //        };
+
+  //        reader.readAsDataURL(event.target.files[0]); 
+  //        }
+
+
+        </script>
+            </content>
+</body>
+</html>

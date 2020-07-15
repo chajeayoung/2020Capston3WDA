@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'서비스 신청',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+
+<body>
+ 	<script>
+	window.onload = function()  
+	{   //사이드바 필요할시 스타일활성해주는 것
+		 $(".sideon").attr('class','glyphicon glyphicon-menu-hamburger');
+		 $(".btn2").attr('class','btn'); 
+	
+		//사이드바메뉴 추가
+	    $("#side").append("<li><a href='/'>Home</a></li>");
+	    $("#side").append("<li><a href='https://www.naver.com'>차</a></li>");
+	    $("#side").append("<li><a href='/'>재</a></li>");
+	    $("#side").append("<li><a href='/'>영</a></li>");
+	    $("#side").append("<li><a href='/'>짱</a></li>");
+	    
+	   
+	}  
+	</script>
+    <content>
+       
+            
+       <div id="proRegIndex"></div> 
+       <div class="flash_message" th:text="${message}"></div> 
+       
+       <span  th:if="${haveProgram}==1">
+			<div class="haveProgram" id="haveProgram" >서비스 승인대기중 이거나 이용중인 서비스입니다.</div>
+       </span>
+       <span th:if="${haveProgram}==0">
+       <form method="post" action="/proRegIndex/register" id="register_form">
+	        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+	        <div id="modal"></div> 
+	        <script src="../assets/modal.js"></script>
+       </form>
+       
+       
+       </span>
+       
+     	 	 
+       		 <script src="../assets/proRegIndex.js"></script>
+         
+       
+    
+   </content>
+ 
+</body>
+ 
+</html>

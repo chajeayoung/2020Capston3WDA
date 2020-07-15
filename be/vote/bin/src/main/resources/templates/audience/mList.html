@@ -1,0 +1,168 @@
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'내가 쓴 게시글', ~{::link})}" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/boardstyle.css">
+    <link rel="stylesheet" href="/css/contents.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/board.common.css">
+    <link rel="stylesheet" href="/css/featherlight.css">
+    <link rel="stylesheet" href="/css/moblie.css">
+    <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
+</head>
+
+<body>
+  <content>
+    <div id="container">
+        <!-- 게시판 목록 시작 { -->
+        <div id="bo_list" style="width:100%">
+            <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+            <div id="bo_btn_top">
+                <div id="bo_list_total">
+                    <span th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
+                </div>
+
+                <ul class="btn_bo_user">
+                    <li><a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
+                                aria-hidden="true"></i> 글쓰기</a></li>
+                </ul>
+            </div>
+            <!-- } 게시판 페이지 정보 및 버튼 끝 -->
+
+<!--            <form name="fboardlist" id="fboardlist" action="#"
+                onsubmit="return fboardlist_submit(this);" method="post">
+                <input type="hidden" name="bo_table" value="webzine">
+                <input type="hidden" name="sfl" value="">
+                <input type="hidden" name="stx" value="">
+                <input type="hidden" name="spt" value="">
+                <input type="hidden" name="sca" value="">
+                <input type="hidden" name="sst" value="wr_num, wr_reply">
+                <input type="hidden" name="sod" value="">
+                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="sw" value=""> -->
+
+
+                <div class="webzineList">
+                    <ul th:each="list:${boardList}">
+                        <li class="">
+                            <a href="#" class="list_img"><img src="#" th:src="@{'/uploads/' + ${list.img}}" alt=""></a>
+                            <a href="#" th:href="@{'/userInfo/audience/mread/' + ${list.applyId}}" class="bo_tit">
+                                <span class="sound_only">50</span> <strong th:text="${list.aTitle}"></strong>
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                                <span class="content" th:text="${list.aContent}">
+
+                                </span>
+                            </a>
+
+                            <u>
+                                <span><span class="sv_member" th:text="${list.rId}"></span></span>
+                                <span th:text="${list.aViewCount}"><i class="fa fa-eye"></i> </span>
+                                <span th:text="${list.aDate}"><i class="fa fa-clock-o"></i> </span>
+                            </u>
+                        </li>
+                    
+                    </ul>
+                </div>
+
+                <div class="bo_fx">
+                    <ul class="btn_bo_user">
+                        <li><a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
+                                    aria-hidden="true"></i> 글쓰기</a></li>
+                    </ul>
+                </div>
+
+            </form>
+
+            <!-- 게시판 검색 시작 { -->
+            <fieldset id="bo_sch">
+                <legend>게시물 검색</legend>
+                <form name="fsearch" method="get">
+                    <input type="hidden" name="bo_table" value="webzine">
+                    <input type="hidden" name="sca" value="">
+                    <input type="hidden" name="sop" value="and">
+                    <label for="sfl" class="sound_only">검색대상</label>
+                    <select name="sfl" id="sfl">
+                        <option value="wr_subject||wr_content">제목+내용</option>
+                        <option value="wr_subject">제목</option>
+                        <option value="wr_content">내용</option>
+                        <option value="mb_id,1">회원아이디</option>
+                        <!-- <option value="mb_id,0">회원아이디(코)</option> -->
+                        <option value="wr_name,1">작성자</option>
+                        <!-- <option value="wr_name,0">작성자(코)</option> -->
+                    </select>
+                    <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+                    <input type="text" name="stx" value="" required="" id="stx" class="sch_input" size="25"
+                        maxlength="20" placeholder="검색어를 입력해주세요">
+                    <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search"
+                            aria-hidden="true"></i><span class="sound_only">검색</span></button>
+                </form>
+            </fieldset>
+            <!-- } 게시판 검색 끝 -->
+        </div>
+
+
+
+
+        <!-- 페이지 -->
+        <!-- <nav class="pg_wrap" th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
+        last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})"><span class="pg"><span class="sound_only">열린</span><strong
+                    class="pg_current">1</strong><span class="sound_only">페이지</span>
+                <a href="" class="pg_page">2<span
+                        class="sound_only">페이지</span></a>
+                <a href="" class="pg_page">3<span
+                        class="sound_only">페이지</span></a>
+                <a href="" class="pg_page">4<span
+                        class="sound_only">페이지</span></a>
+                <a href="" class="pg_page pg_end">맨끝</a>
+            </span>
+        </nav> -->
+
+
+        <nav style="text-align: center; place-content: center;">
+            <ul class="pagination"
+                th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
+                            last=(${start + 9 < boardList.totalPages ? start + 4 : boardList.totalPages})">
+                <li>
+                    <a th:href="@{/audience/list(page=1)}" aria-label="First">
+                        <span aria-hidden="true">First</span>
+                    </a>
+                </li>
+        
+                <li th:class="${boardList.first} ? 'disabled'">
+                    <a th:href="${boardList.first} ? '#' :@{/audience/list(page=${boardList.number})}" aria-label="Previous">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+        
+                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == boardList.number + 1} ? 'active'">
+                    <a th:text="${page}" th:href="@{/audience/list(page=${page})}"></a>
+                </li>
+        
+                <li th:class="${boardList.last} ? 'disabled'">
+                    <a th:href="${boardList.last} ? '#' : @{/boards(page=${boardList.number + 2})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+        
+                <li>
+                    <a th:href="@{/boards(page=${boardList.totalPages})}" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- } 게시판 목록 끝 -->
+
+
+    </div>
+
+</body>
+</content>
+
+</html>

@@ -193,8 +193,44 @@
                 </div>
 
                 <div th:case="2">
-                         2
-                    <div id="managerIndex"></div>
+                    
+                  <table class="table table-striped table-sm">
+      <thead>
+		<tr>
+
+			<th>글 번호</th>
+			<th>제목</th>
+			<th class="t23">분야</th>
+			<th class="t23">모집시작일</th>
+			<th class="t23">모집종료일</th>
+			<th class="t23">모집인원</th>
+			<th class="t23">발표일</th>
+			<th>작성자</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr th:each="audition:${auditionlist}">
+			<td th:text="${audition.auditionid}"></td>
+			<!--  <td th:text="${audition.a_title}"></td> -->
+			<td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
+			<td class="t23" th:text="${audition.acategory}"></td>
+			<td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
+			<td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
+			<td class="t23" th:text="${audition.arecruits}+ 명"></td>
+			<td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
+            <!-- <td sec:authentication="principal.name"></span><span> 님</span></td> -->
+            <td><span th:text="${audition.ausername}"></span><span>님</span></td>
+			
+
+		</tr>
+	
+
+		</tbody>
+		</div>
+		
+		</table>     
+
+                <div id="managerIndex"></div>
                     <script src="/assets/managerIndex.js"></script>
                 </div>
         </div>           

@@ -54,11 +54,11 @@ class VoteTable extends Component{
                             <Table size="small" id="myTable">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>번호</TableCell>
+                                    <TableCell className="smart">번호</TableCell>
                                     <TableCell>Title</TableCell>
-                                    <TableCell>시작시간</TableCell>
-                                    <TableCell>종료시간</TableCell>
-                                    <TableCell>결과 발표시간</TableCell>
+                                    <TableCell className="smart">시작시간</TableCell>
+                                    <TableCell className="smart">종료시간</TableCell>
+                                    <TableCell className="smart">결과 발표시간</TableCell>
                                     <TableCell>삭제</TableCell>
                                 </TableRow>
                                 </TableHead>
@@ -102,11 +102,11 @@ class VoterVoteList extends Component {
             return (
                 <TableRow key={'div'+index}>
                              
-                    <TableCell key={index}>{vote.no}</TableCell>
+                    <TableCell className="smart" key={index}>{vote.no}</TableCell>
                     <TableCell><a href={'/vote/'+vote.no}>{vote.title}</a></TableCell>
-                    <TableCell>{stTime}</TableCell>
-                    <TableCell>{edTime}</TableCell>
-                    <TableCell>{rsTime}</TableCell>
+                    <TableCell className="smart">{stTime}</TableCell>
+                    <TableCell className="smart">{edTime}</TableCell>
+                    <TableCell className="smart">{rsTime}</TableCell>
                     <TableCell><button onClick={this.remove.bind(this,vote.no)}>삭제</button></TableCell>
                
                 </TableRow>
