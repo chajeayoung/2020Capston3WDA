@@ -2,10 +2,10 @@
 //  import io from "/soket.io-client"
 $(document).ready(function() {
 var socket = io($("#rirochat").val());
-    if($('#username').text()==''){
-        $("#chatinput").attr("disabled",true);
-        $("#chatinput").attr('placeholder', '로그인이 필요합니다.' );
-    } else {
+    // if($('#username').text()==''){
+    //     $("#chatinput").attr("disabled",true);
+    //     $("#chatinput").attr('placeholder', '로그인이 필요합니다.' );
+    // } else {
         $(function() {
             $("#chatinput").attr("disabled",false);
             $("#chatinput").attr('placeholder', '내용을 입력하세요.' );
@@ -30,19 +30,21 @@ var socket = io($("#rirochat").val());
             });
 
         });
-    }   
+    // }   
     
-    $(function() {
+    // $(function() {
         $(".c_h").click(function(e) {
             if ($(".chat_container").is(":visible")) {
                 $(".c_h .right_c .mini").text("+")
                 $(".l_c_h").css('width', 'auto') 
+                console.log("+")
             } else {
                 $(".c_h .right_c .mini").text("-")
                 $(".l_c_h").css('width', '300px')          
+                console.log("-")
             }
             $(".chat_container").slideToggle("slow");
             return false
         });
-    });
+    // });
 });
