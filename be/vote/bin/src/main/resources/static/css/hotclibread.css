@@ -1,0 +1,19 @@
+@media(max-width:940px){
+    .video1{
+        width: 100%;
+    }
+    .gi{
+        border: 1px solid #ccc;
+        padding: 5px;
+      width: 100%;
+      margin: 10px ;
+      display:block;
+      text-align:left;
+    }
+    .rcontent{
+        width: 100%;
+    }
+}
+#modal{
+    display: none;
+}

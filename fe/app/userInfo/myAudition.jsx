@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Pagination from '@material-ui/lab/Pagination';
 
 import '../smart.css';
-import './voteTableCss.css';
+// import './voteTableCss.css';
 
 import jQuery from "jquery";
 

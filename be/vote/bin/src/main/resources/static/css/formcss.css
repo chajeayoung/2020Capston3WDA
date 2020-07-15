@@ -1,0 +1,14 @@
+@media(max-width:940px){
+
+    tr{
+        display: grid;
+        grid-template-columns: 35% 65%;
+    }
+    tr input{
+       width: 80%; 
+    }
+    tr textarea{
+        width: 80%;
+    }
+
+}

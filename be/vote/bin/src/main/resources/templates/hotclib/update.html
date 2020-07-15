@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
+<head>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<content>
+<body>  	   
+	<form th:action="@{'/hotclib/update/' + ${hotclib.hotclibid}}" method="post">     
+		<table border="1">
+			<tr>
+				<th><label for="title">제목</label></th>
+				<td><input name="htitle" th:value="${hotclib.htitle}" /></td> 
+			</tr>
+			<tr>
+				<th><label for="h_content">내용</label></th>
+				<td><input name="h_content" th:value="${hotclib.h_content}" /></td>
+			</tr>			
+				
+		</table>
+		<label for="hthumbnail">썸네일</label>
+				<input class="gg" type="file" id="filename2" name="filename2" onchange="setFilename2(event);"/>
+			</div>
+			영상선택<input type="file" name="filename" id="filename" onchange="setFilename(event);"/>
+		   <div id ='preview2'></div>
+		<div>
+            <input type="submit" value="수정하기" /> 
+            <a href="" th:href="@{/hotclib}">목록</a>
+		</div>
+	</form>
+
+</body>
+<script>
+
+	function setFilename2(event) {
+	   var reader = new FileReader();
+	   
+		reader.onload = function(event) { 
+		  var img = document.createElement("img");
+		   img.setAttribute("src", event.target.result);
+			document.querySelector("div#preview").appendChild(img);
+			 };
+	
+			 reader.readAsDataURL(event.target.files[0]); 
+			 }
+	
+			 
+			 function setFilename(event) {
+	   var reader = new FileReader();
+	   
+		reader.onload = function(event) { 
+		  var video = document.createElement("video");
+		   video.setAttribute("src", event.target.result);
+			document.querySelector("div#preview2").appendChild(video);
+			 };
+	
+			 reader.readAsDataURL(event.target.files[0]); 
+			 }
+	
+	
+			</script>
+</content>
+</html>
