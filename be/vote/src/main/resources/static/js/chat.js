@@ -1,7 +1,7 @@
 
 //  import io from "/soket.io-client"
 $(document).ready(function() {
-var socket = io($("#rirochat").val());
+const socket = io($("#rirochat").val());
     if($('#username').text()==''){
         $("#chatinput").attr("disabled",true);
         $("#chatinput").attr('placeholder', '로그인이 필요합니다.' );

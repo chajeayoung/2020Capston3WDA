@@ -1,111 +1,113 @@
-#item{
-    width: 100% !important;
-    border-right: 2px solid gray;
+#item {
+  width: 100% !important;
+  border-right: 2px solid gray;
 }
-.left_right_box{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    column-gap:15px;
+.left_right_box {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 15px;
 }
-#voteDate{
-    margin: 15px;
+#voteDate {
+  margin: 15px;
 }
-.show_result{
-    text-align: center;
-    color:rgba(221, 44, 192, 1)
-}
-
-.right_div_box{
-    margin-top: 50px;
+.show_result {
+  text-align: center;
+  color: rgba(221, 44, 192, 1);
 }
 
-.vote_result{
-    /* top: 15%; */
-    top:10px;
-    position: relative;
-    text-align: -webkit-center;
-}
-.progress{
-    text-align: left;
-}
-.progress-meter-text{
-    /* text-align: center !important; */
-    /* margin-left: 100% !important; */
-    left : 50px !important;
+.right_div_box {
+  margin-top: 50px;
 }
 
-.list_a_tag a:focus, .list_a_tag a:hover{
-    color: white !important;
+.vote_result {
+  /* top: 15%; */
+  top: 10px;
+  position: relative;
+  text-align: -webkit-center;
 }
-*, ::after, ::before{
-    webkit-box-sizing: unset !important;
-    box-sizing: unset !important;
+.progress {
+  text-align: left;
 }
-.top_div a:focus,.top_div a:hover{
-    color : white !important;
+.progress-meter-text {
+  /* text-align: center !important; */
+  /* margin-left: 100% !important; */
+  left: 50px !important;
 }
-.menu > a{
-    display: inline !important;
+
+.list_a_tag a:focus,
+.list_a_tag a:hover {
+  color: white !important;
 }
-.dropMenu a{
-    display: block !important;
+*,
+::after,
+::before {
+  webkit-box-sizing: unset !important;
+  box-sizing: unset !important;
+}
+.top_div a:focus,
+.top_div a:hover {
+  color: white !important;
+}
+.menu > a {
+  display: inline !important;
+}
+.dropMenu a {
+  display: block !important;
 }
 
 div.winner .sc-AxjAm {
-    background-color: #A9A9F5;
+  background-color: #a9a9f5;
 }
-.selectVoteShowType{
-    margin-top: 15px;
+.selectVoteShowType {
+  margin-top: 15px;
 }
-.selectVoteShowType button{
-    border-radius: 8px;
-    border: 1px solid #CEE3F6;
-    color: black;
-    background-color: #E0ECF8;
-    padding:5px;
-    margin: 5px 0px;;
+.selectVoteShowType button {
+  border-radius: 8px;
+  border: 1px solid #cee3f6;
+  color: black;
+  background-color: #e0ecf8;
+  padding: 5px;
+  margin: 5px 0px;
 }
-.progress-meter-text{
-    color: black;
+.progress-meter-text {
+  color: black;
 }
-#showChart{
-    overflow: scroll;
-    text-align: -webkit-center;
+#showChart {
+  overflow: scroll;
+  text-align: -webkit-center;
 }
 
-
-@media(max-width:950px){
-    .left_right_box{
-        grid-template-columns: none;
-    }
-    #item{
-        border-right: none;
-    }
-    .vote_result{
-        padding-bottom: 60px;
-        text-align: center;
-    }
-    .card_div  div{
-        margin: auto !important;
-    }
-    .left_right_box{
-        display: inline;;
-    }
-    #itemTopDiv{
-        /* width: 100%; */
-    }
-    .cards{
-        width: 100%;
-        margin: auto;
-    }
-    /* .vote_result{
+@media (max-width: 950px) {
+  .left_right_box {
+    grid-template-columns: none;
+  }
+  #item {
+    border-right: none;
+  }
+  .vote_result {
+    padding-bottom: 60px;
+    text-align: center;
+  }
+  .card_div div {
+    margin: auto !important;
+  }
+  .left_right_box {
+    display: inline;
+  }
+  #itemTopDiv {
+    /* width: 100%; */
+  }
+  .cards {
+    width: 100%;
+    margin: auto;
+  }
+  /* .vote_result{
         overflow: scroll;
     } */
-    #showChart{
-        overflow: scroll;
-    }
-    canvas{
-        width:30%;
-    }
-
+  #showChart {
+    overflow: scroll;
+  }
+  canvas {
+    width: 30%;
+  }
 }
