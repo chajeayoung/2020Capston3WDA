@@ -118,7 +118,8 @@ class VoteCreate extends React.Component {
       pName.innerHTML = data[0].name;
 
       if(data[1].length == 0){
-        return alert("인기인이 없는 프로그램입니다.");
+        alert("인기인이 없는 프로그램입니다.");
+        return window.location.href  = "/userInfo"
       }
       this.candidates = data[1];
       console.log(this.candidates)
