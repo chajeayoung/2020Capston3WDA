@@ -68,7 +68,7 @@ function w3_open() {
     
       $("#mobileMenus").
       append("<div class='dropMenu'>"+
-      "<a href='#'><div class='sideMenu'>오디션</div></a><div class='drop'><a href='#'>참가신청</a><a href='#'>예선결과안내</a></div></div>");
+      "<a href='#'><div class='sideMenu'>오디션</div></a><div class='drop'><a href='/audition/listuser'>참가신청</a><a href='/auditionresult/listuser'>예선결과안내</a></div></div>");
 
 
 
