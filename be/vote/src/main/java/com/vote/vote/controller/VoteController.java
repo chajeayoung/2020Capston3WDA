@@ -458,6 +458,9 @@ public class VoteController {
 							age = nowAge.getYears()/10;
 						// }
 						System.out.println("계산한 나이: "+age);
+						if(age == 0){
+							age = 1;
+						}
 					}
 					
 					
@@ -472,7 +475,7 @@ public class VoteController {
 						vote.getAddress(), 
 						Long.parseLong(nowTime),
 						age,
-						Integer.parseInt(userDetails.getGENDER()),
+						Integer.parseInt(member.getGender()),
 						Integer.parseInt(axiosData.get("select").toString())
 					);							
 

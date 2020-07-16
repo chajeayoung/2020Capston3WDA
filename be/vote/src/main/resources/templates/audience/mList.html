@@ -2,7 +2,7 @@
 </body>
 </html>
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'내가 쓴 게시글', ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{userInfo_layout::layout(~{::content},_,'내가 쓴 게시글', ~{::link})}" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,13 @@
 
 <body>
   <content>
+      <style>
+          .bo_fx{
+            display: block;
+            width: 100%;
+            text-align: center;
+          }
+      </style>
     <div id="container">
         <!-- 게시판 목록 시작 { -->
         <div id="bo_list" style="width:100%">
@@ -27,10 +34,10 @@
                     <span th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
                 </div>
 
-                <ul class="btn_bo_user">
+                <!-- <ul class="btn_bo_user">
                     <li><a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
                                 aria-hidden="true"></i> 글쓰기</a></li>
-                </ul>
+                </ul> -->
             </div>
             <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
@@ -66,13 +73,6 @@
                             </u>
                         </li>
                     
-                    </ul>
-                </div>
-
-                <div class="bo_fx">
-                    <ul class="btn_bo_user">
-                        <li><a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
-                                    aria-hidden="true"></i> 글쓰기</a></li>
                     </ul>
                 </div>
 
@@ -156,7 +156,10 @@
                 </li>
             </ul>
         </nav>
-
+        <div class="bo_fx">
+            <a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
+                            aria-hidden="true"></i> 글쓰기</a>
+        </div>
         <!-- } 게시판 목록 끝 -->
 
 

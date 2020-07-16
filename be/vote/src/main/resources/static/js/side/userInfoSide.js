@@ -41,7 +41,7 @@
 
 
 		$("#side").append("<li><a href='/hotclib'>핫클립관리</a></li>");	 
-		$("#side").append("<li><a href='userInfo/audience/mlist'>방청권추첨</a></li>");	 
+		$("#side").append("<li><a href='/userInfo/audience/mlist'>방청권추첨</a></li>");	 
 
 
 			    

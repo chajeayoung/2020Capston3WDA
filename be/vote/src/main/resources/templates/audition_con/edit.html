@@ -43,7 +43,7 @@
                         <th>사진 </th>
                         <td> <a><img class="im" th:src="@{'/uploads/' + ${auditionCon.fprofile}}"></a>
 
-                            <input type="file" name="profile"  /></td>
+                            <input type="file" name="profile" capture="camera" /></td>
                         <th>주소</th>
                         <td> <input type="text" name="faddr"  th:value="${auditionCon.faddr}" /></td>
                     </tr>
