@@ -7,7 +7,8 @@ import "./css/addressModal.css";
 window.$ = window.jQuery = jQuery;
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
-
+const cors = require('cors'); // 브라우저 보안 정책
+// app.use(cors());
 var url = document.location.href;
 const num = url.split('/');
 var param = num[num.length-1];
@@ -182,7 +183,29 @@ class VoteResult extends Component {
     modalOff(){
         this.setState({modal:1})
     }
+    async verification(hash){// 블록체인 검증 관련 
+        console.log(hash);
+        var html = await axios.get("https://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx", { 
+            // crossDomain: true,
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Max-Age": 3600,
+                "Access-Control-Allow-Headers": "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                'Content-Type': 'text/plain',
+                
+                // "jsonp":"callback",
+                // "dataType":"jsonp"
+            },
+            proxy: "baobab.scope.klaytn.com"
+        })
+        .then( response => {
+            console.log(response);
+        })
+        .catch( err => {console.log(err)});
 
+        console.log(html);
+    }
     render() {
         const {data} = this.state;
         
@@ -230,7 +253,7 @@ class VoteResult extends Component {
                                             <div className="addText">내가 투표한 정보</div>
                                             <div className="usrAdd">
                                                 {this.state.userAdd.map((add, index) => {
-                                                    return <div key={index}>{add}</div>
+                                                    return <div key={index}>{add}<button type="button" onClick={this.verification.bind(this,add)}>확인</button></div>
                                                 })}
                                             </div>
                                             
