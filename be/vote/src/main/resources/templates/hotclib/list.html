@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-th:replace="~{main_layout::layout(~{::content},~{::script},'주간 핫클립',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'주간 핫클립',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/side/userInfoSide.js"></script>
 </head>
 <body>
  
@@ -34,9 +33,12 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'주간 핫클립',_)
           display: inline-block;
           text-align:left;
        }
-       #page-content-wrapper{
-          padding: 0px !important;
+       @media(max-width: 950px){
+          #page-content-wrapper{
+            padding: 0px !important;
+        }
        }
+       
      </style> 
 
 <button id="btnCreatDtOrder" class="w20p order color-red" data-datanm="creatdt">최신순</button>

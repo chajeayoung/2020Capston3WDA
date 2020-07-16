@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'나의 오디션 신청',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'나의 오디션 신청',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,6 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'나의 오디션 신
 		
   			<div id="myAudition"></div>
      		<script src="/assets/myAudition.js"></script>
-            <script src="/js/side/userInfoSide.js"></script>
     </content>
 
 </body>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'주문 추이',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'주문 추이',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,15 +15,21 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'주문 추이',_)}">
     <content>
         <style>
             .row{
-                width: 70%;
-                margin: auto;
+                margin: 0px;
+            }
+            .page-content-wrapper{
+                padding-left: 250px !important;
+            }
+            @media(max-width: 950px) {
+                .page-content-wrapper{
+                    padding-left: 0px !important;
+                }
             }
                 
         </style>
 		
   			<div id="manageOrderState"></div>
      		<script src="/assets/manageOrderState.js"></script>
-            <script src="/js/side/userInfoSide.js"></script>
     </content>
 
 </body>

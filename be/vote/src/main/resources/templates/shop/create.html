@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'새 상품 등록',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'새 상품 등록',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/side/userInfoSide.js"></script>
+    <!-- <script src="/js/side/userInfoSide.js"></script> -->
 </head>
 <body>
     <content>
         <style>
-            #page-content-wrapper{
-                padding: 0px !important;
+            @media(max-width: 950px){
+                #page-content-wrapper{
+                    padding: 0px !important;
+                }
             }
+            
             
         </style>
             <div id="shopItemCreate"></div>
