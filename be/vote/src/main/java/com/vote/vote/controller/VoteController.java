@@ -344,16 +344,19 @@ public class VoteController {
 		// Vote_name name = vote_nameRepository.findById(vote.getName());
 		List<Candidate> candidateList = candidateRepository.findByVoteId(voteId);
 		
-		System.out.println("시작전투표 접속");
+		
+
         
 		JSONArray array = new JSONArray();
         
 
 		for(int i=0; i<candidateList.size();i++){
 			JSONObject item = new JSONObject();
+			
 			item.put("name", candidateList.get(i).getName());
 			item.put("img",candidateList.get(i).getImg());
 			item.put("info",candidateList.get(i).getInfo());
+			item.put("popularid", candidateList.get(i).getPopId());
 			array.add(item);
 		}
 		JSONObject voteInfo = new JSONObject();

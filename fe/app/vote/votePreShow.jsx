@@ -19,16 +19,17 @@ class VoteShow extends React.Component {
         super(props);
     }
     
-    viewItem(){
-        console.log("ㅎㅇ");
+    viewItem(vote){       
+        console.log(vote.popularid);
     }
     render() {
         // {this.sendSelect.bind(this,index)}
         return this.props.votes.map((vote,index)=>{
             if (vote.name != 0){
                 return (
-                    <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,index)} > 
+                    <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,vote)} > 
                         <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+                        <span text={vote.popularid}></span>
                     </div>
                 )
             }
@@ -48,6 +49,7 @@ class Show extends React.Component{
 
     async componentDidMount(){
         let {data} = await axios.get('/vote/axios/'+param);
+        console.log("----test----");
         console.log(data);
         this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5]});
         console.log(data[2]);
@@ -105,7 +107,8 @@ class Show extends React.Component{
                         <VoteShow votes={this.state.votes} />   
                     </div>
                     
-                </div>             
+
+                   </div>             
             </div>
         )
     }
