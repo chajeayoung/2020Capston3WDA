@@ -19,12 +19,15 @@ class VoteShow extends React.Component {
         super(props);
     }
     
+    viewItem(){
+        console.log("ㅎㅇ");
+    }
     render() {
         // {this.sendSelect.bind(this,index)}
         return this.props.votes.map((vote,index)=>{
             if (vote.name != 0){
                 return (
-                    <div key={vote.name+index} className="card_div"> 
+                    <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,index)} > 
                         <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
                     </div>
                 )

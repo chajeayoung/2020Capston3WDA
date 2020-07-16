@@ -64,7 +64,7 @@ class VoteTable extends React.Component{
                                 </TableBody>
                             </Table>
                         </Paper>
-                    <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
+                    {/* <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination> */}
 
 
                 </div>

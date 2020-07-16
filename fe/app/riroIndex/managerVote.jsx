@@ -48,17 +48,17 @@ class VoteTable extends Component{
     render() {
         console.log(this.state.vote)
         return(
-                <div id="tablebox"  id="last">
+                <div id="tablebox" >
  
                          <Paper >
                             <Table size="small" id="myTable">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell  className="smart">번호</TableCell>
+                                    <TableCell id="bord" >번호</TableCell>
                                     <TableCell id="bord" >투표명</TableCell>
-                                    <TableCell className="smart">시작시간</TableCell>
-                                    <TableCell className="smart">종료시간</TableCell>
-                                    <TableCell className="smart">결과 발표시간</TableCell>
+                                    <TableCell id="bord" className="smart">시작시간</TableCell>
+                                    <TableCell id="bord" className="smart">종료시간</TableCell>
+                                    <TableCell id="bord" className="smart">결과 발표시간</TableCell>
                                     <TableCell id="bord" >삭제</TableCell>
                                 </TableRow>
                                 </TableHead>
@@ -67,7 +67,9 @@ class VoteTable extends Component{
                                 </TableBody>
                             </Table>
                         </Paper>
-                    <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
+                 
+							
+                    {/* <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination> */}
 
 
                 </div>
@@ -102,7 +104,7 @@ class VoterVoteList extends Component {
             return (
                 <TableRow key={'div'+index}>
                              
-                    <TableCell className="smart" key={index}>{vote.no}</TableCell>
+                    <TableCell key={index}>{vote.no}</TableCell>
                     <TableCell><a href={'/vote/'+vote.no}>{vote.title}</a></TableCell>
                     <TableCell className="smart">{stTime}</TableCell>
                     <TableCell className="smart">{edTime}</TableCell>

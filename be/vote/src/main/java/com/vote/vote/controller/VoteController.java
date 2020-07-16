@@ -344,6 +344,7 @@ public class VoteController {
 		// Vote_name name = vote_nameRepository.findById(vote.getName());
 		List<Candidate> candidateList = candidateRepository.findByVoteId(voteId);
 		
+		System.out.println("시작전투표 접속");
         
 		JSONArray array = new JSONArray();
         
