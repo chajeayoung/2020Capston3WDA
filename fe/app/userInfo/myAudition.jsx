@@ -10,8 +10,13 @@ import TableCell from '@material-ui/core/TableCell';
 
 import Pagination from '@material-ui/lab/Pagination';
 
+
 import '../smart.css';
 // import './voteTableCss.css';
+
+import './index.css';
+import App from './App.js';
+
 
 import jQuery from "jquery";
 
@@ -66,6 +71,9 @@ class Index extends React.Component{
                         </Paper>
                     <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
 
+
+
+                    {/* <App /> */}
 
                 </div>
         )

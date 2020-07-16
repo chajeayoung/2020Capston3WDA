@@ -370,6 +370,7 @@ public class CommunityController {
    									@PathVariable("popular") int popularNum,
    									 PopularBoard board,
    									@Nullable @RequestParam(name="filename") MultipartFile file,
+   									@Nullable @RequestParam("hash") String hash,
    								Model model) {
      	
      	Program program = programRepository.findById(programNum);
@@ -377,7 +378,18 @@ public class CommunityController {
      	PopularBoard board2 = popularBoardRepository.findById(popularNum);
      	Rfile rfile = new Rfile();    	
     	
-     
+     	if(hash != null && !hash.isEmpty()) {
+     		System.out.println(hash);
+     	
+     		String [] hashArray = hash.split(",");
+     	
+	     	for (int i = 0; i < hashArray.length; i++) {
+	     		
+	     		String hashWord = hashArray[i].trim();
+	     		
+	     			
+			}
+     	}
      	
      	System.out.println(board.toString());
     

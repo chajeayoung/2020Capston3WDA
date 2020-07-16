@@ -175,6 +175,7 @@ class Modal extends Component{
                       <div className="content">
 
                       <TextField id="standard-secondary" fullWidth label="제목" name="title" color="primary" required />
+                      <TextField id="standard-secondary" fullWidth label="해쉬태그" name="hash" color="primary" required />
                       {profile_preview}
                       <TextField
                             id="outlined-multiline-static"
