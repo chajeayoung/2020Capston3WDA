@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'신청 폼',_)}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <!-- JS 호출 -->
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+        <!-- CSS 호출 -->
+        <!-- <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+
+    </head>
+    <body>
+        <content>
+            <link rel="stylesheet" href="/css/formcss.css" />
+            
+            <form th:action="@{'/audition_con/form/'+${auditionId}} " method="post" name = "fname" enctype="multipart/form-data"> 
+                <div class="container">
+                    <table class="table table-bordered">
+                        <tbody class='table_body'>
+                            <tr >
+                                <th>성명</th>
+                                <td>
+                                    <input type="text" name="fusername" required/>
+                                </td>
+                                
+                                <th>휴대전화번호</th>
+                                <td>
+                                    <input type="text" name="fuserphone" required/>
+                                </td>
+                                
+                                <th>이메일</th>
+                                <td>
+                                    <input type="text" name="fusermail" required/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>제목</th>
+                                <td>
+                                    <input type="text" name="ftitle" required/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>사진 </th>
+                                <td>
+                                    <input type="file" name="filename" required/>
+                                </td>
+                                <th>주소</th>
+                                <td>
+                                    <input type="text" name="faddr" required/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>학력</th>
+                                <td>
+                                    <input type="text" name="feducation" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>성별</th>
+                                <td>
+                                    남성<input type="radio" name="fgender" value="m" required/>
+                                    <br>
+                                    여성<input type="radio" name="fgender" value="g" required/>
+                                   
+                              </td>
+                                <!-- <td>
+                                    <input type="text" name="fgender">
+                                </td> -->
+                                
+                                <th>키</th>
+                                <td>
+                                    <input type="text" name="fheight" required/>
+                                </td>
+                                
+                                <th>몸무게</th>
+                                <td>
+                                    <input type="text" name="fweight" required/>
+                                </td>
+                                
+                                <th>혈액형</th>
+                                <td>
+                                    <input type="text" name="fblood" required/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>가족관계</th>
+                                <td>
+                                    <input type="text" name="ffamily" required/>
+                                </td>
+                                
+                                <th>취미</th>
+                                <td>
+                                    <input type="text" name="fhobby" required/>
+                                </td>
+                                
+                                <th>특기</th>
+                                <td>
+                                    <input type="text" name="fability" required/>
+                                </td>
+                            </tr>
+                            
+                            <th:block th:each="option : ${options}" >
+                                <tr>
+                                    <th th:text="${option.name}"></th>
+                                    <td>
+                                        <input type="text" name="option" required/>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            
+                                
+                        </tbody>
+                    </table>
+                    <!-- <input type="hidden" name="confirm" value="n"> -->
+                    <input type="hidden" name="confirm" value="심사대기">
+                </div>
+                <tr>
+                    <td colspan="3">
+                        
+                        <input type="submit" value="등록">
+                        <input type="reset" value="취소" onclick="history.back();"> 
+                        <!-- <input type="button" value="경력 추가" onclick="career_add();">
+                        <input type="button" value="지원동기 추가" onclick="motive_add();">
+                        <input type="button" value="지원부문 추가" onclick="category_add();">
+                        <input type="button" value="자기소개 추가" onclick="introduction_add();">
+                        <input type="button" value="직업 추가" onclick="job_add();"> -->
+                    </td>
+                </tr>  
+                
+            </form>
+            <script>
+            
+                // function career_add() {
+                //     console.log("aa");
+                //     var career = '<tr>' +
+                //                     '<th>경력</th>' +
+                //                     '<td>' +
+                //                         '<input type="text" name="fcarrer">' +
+                //                     '</td>' +
+                //                 '</tr>';
+                //     $('.table_body').append(career)
+                // }
+                // function motive_add() {
+                //     console.log("aa");
+                //     var career = '<tr>' +
+                //                     '<th>지원동기</th>' +
+                //                     '<td>' +
+                //                         '<input type="text" name="fmotive">' +
+                //                     '</td>' +
+                //                 '</tr>';
+                //     $('.table_body').append(career)
+                // }
+                // function category_add() {
+                //     console.log("aa");
+                //     var career = '<tr>' +
+                //                     '<th>지원부문</th>' +
+                //                     '<td>' +
+                //                         '<input type="text" name="fcategory">' +
+                //                     '</td>' +
+                //                 '</tr>';
+                //     $('.table_body').append(career)
+                // }
+                // function introduction_add() {
+                //     console.log("aa");
+                //     var career = '<tr>' +
+                //                     '<th>자기소개</th>' +
+                //                     '<td>' +
+                //                         '<input type="text" name="fintroduction">' +
+                //                     '</td>' +
+                //                 '</tr>';
+                //     $('.table_body').append(career)
+                // }
+                // function job_add() {
+                //     console.log("aa");
+                //     var career = '<tr>' +
+                //                     '<th>직업</th>' +
+                //                     '<td>' +
+                //                         '<input type="text" name="fjob">' +
+                //                     '</td>' +
+                //                 '</tr>';
+                //     $('.table_body').append(career)
+                // }
+            </script>
+        </content>
+    </body>
+</html>

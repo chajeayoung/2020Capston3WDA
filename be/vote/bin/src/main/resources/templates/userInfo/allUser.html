@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},~{::script},'마이페이지',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 사이드바 -->
+    <script src="/js/side/userInfoSide.js"></script>
+</head>
+
+<body>
+    <content>
+       <div id="userIndex"></div>
+        <script src="/assets/profileIndex.js"></script>
+    </content>
+    
+    
+</body>
+ 
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <form method="post" th:action="@{/auth}">
+        <div id="login"></div>
+    </form>
+    <script src="../assets/login.js"></script>
+    <a href="/auth/register">회원가입</a>
+    <br>
+    <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=e8669f9bcfca75260c3c64f470e04978&redirect_uri=http://localhost:3000/auth/oauth2/code/kakao&response_type=code"> -->
+
+        <a th:href="@{'https://kauth.kakao.com/oauth/authorize?client_id=e8669f9bcfca75260c3c64f470e04978&redirect_uri='+${@environment.getProperty('riroip')}+'/auth/oauth2/code/kakao&response_type=code'}">
+            <!-- th:href="@{' + ${audition.auditionid}}" -->
+        <img src="/img/kakao_account_login_btn_medium_narrow.png" alt="">
+    </a>
+
+</body>
+</html>

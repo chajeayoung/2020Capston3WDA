@@ -288,7 +288,7 @@ contents div.contents{
     width:100%;
     padding: 0;
     border: none;
-    background-color: #F5A9A9;
+    background-color: #924ef0;
     margin-bottom: 15px;
     height: 40px;
     font-size: 20;
@@ -298,7 +298,7 @@ contents div.contents{
     width: 80%;
     margin:auto;
 }
-@media(max-width:1770px){
+@media(max-width:950px){
      /* 모바일 사이드바 */
      #mobileSidBarButton{
         display: inline;
@@ -385,7 +385,8 @@ contents div.contents{
         width:100%;
         padding: 0;
         border: none;
-        background-color: #F5A9A9;
+        /* background-color: #F5A9A9; */
+        background-color: #924ef0;
         margin-bottom: 15px;
         height: 40px;
         font-size: 20;

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<content>
+<body>
+    <form th:action="@{/hotclib/replydelete}" method="post">
+        <input type="hidden" name="replyid" th:value="${replyid}" />
+        
+        <a href="" th:href="@{'/hotclib/read/' + ${hotclib} +${reply}}">취소</a>
+       </form>
+
+       
+</body>
+</content>
+</html>

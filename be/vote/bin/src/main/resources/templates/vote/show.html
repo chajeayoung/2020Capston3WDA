@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'실시간 투표',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <content>
+
+        <div id="voteShow"></div>
+        <div th:switch="${type}">
+            <div th:case="'0'">
+                <!-- 시작전 -->
+                <script src="../assets/votePreShow.js"></script>        
+            </div>
+            <div th:case="'1'">
+                <!-- 진행중 -->
+                <script src="../assets/voteShow.js"></script>        
+            </div>
+            <div th:case="'2'">
+                <!-- 끝 -->
+                <script src="../assets/voteEndShow.js"></script>      
+            </div>
+        </div>
+        
+        
+        
+        <!-- <div th:text="${vote.getTitle()}"></div>
+
+        <div th:each="item : ${items}">
+            <div th:if="${item.name}!='0' ">
+                <img th:src="@{'/uploads/'+${item.img}}"/>
+                <div th:text="${item.name}"></div>
+            </div>
+        </div> -->
+        
+
+    </content>
+</body>
+</html>

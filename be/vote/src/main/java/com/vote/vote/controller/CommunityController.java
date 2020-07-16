@@ -31,6 +31,7 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -367,7 +368,8 @@ public class CommunityController {
     @RequestMapping(value={"/{program}/{popular}/create"}) //프로그램>인기인>게시글작성
    	public String popularBoardCreate(@PathVariable("program") int programNum,
    									@PathVariable("popular") int popularNum,
-   									 PopularBoard board,@RequestParam(name="filename") MultipartFile file,
+   									 PopularBoard board,
+   									@Nullable @RequestParam(name="filename") MultipartFile file,
    								Model model) {
      	
      	Program program = programRepository.findById(programNum);
@@ -381,7 +383,7 @@ public class CommunityController {
     
      	popularBoardRepository.saveAndFlush(board);
      	
-     	if(file != null) {
+     	if(!file.isEmpty()) {
     	rfile.setFilename(storageService.store2(file)); 
      	rfile.setPid(board.getId());
      	rfileRepository.saveAndFlush(rfile);
@@ -417,6 +419,7 @@ public class CommunityController {
      	
 		
      	popularBoardRepository.saveAndFlush(board);
+     	
      	
      	//if(file != null) {
     	//rfile.setFilename(storageService.store2(file)); 

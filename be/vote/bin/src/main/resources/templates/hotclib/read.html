@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/extras/spring-security"
+th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<content>
+	<link rel="stylesheet" href="/css/hotclibread.css"/>
+<body>
+	<div>
+		<tr>		
+		<video class="video1" controls th:src="@{'/uploads/' + ${rfile.filename}}" width="800" height="500"></video>
+			
+		</tr>
+	</div>
+		<div class="gi">		
+	<tr> 
+		<li>제목: <span th:utext="${hotclib.htitle}"></span></li>
+	</tr>
+		<tr>
+			<li class="rcontent">내용: <span th:utext="${hotclib.h_content}"></span></li>
+		</tr>
+			<tr>
+				<li>조회수: <span th:utext="${hotclib.hviewcount}"></span></li>
+			</tr>
+			<li>작성자: <span th:utext="${hotclib.husername}"></span></li>
+		</div>
+	
+		<div>
+			<a href="" th:href="@{/hotclib}">목록</a><br>
+		</div>
+			<sec:authorize access ="hasRole('2')"> 
+			<span><a href="" th:href="@{'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a></span>
+			
+			<form id="delete-form" th:action="@{'/hotclib/' + ${hotclib.hotclibid}}" method="post">
+				<input type="hidden" name="_method" value="delete"/>
+				<button id="delete-btn">삭제</button>
+			</form>
+			</sec:authorize>
+		
+			 <form id="replyList" method="post" th:action="@{'/hotclib/read/' + ${hotclib.hotclibid}}">
+				<tr>댓글테스트
+				<td><input type="textarea" placeholder="내용을 입력하세요" name="r_content"></td>
+					<input type="submit" value="등록" ><hr>
+			</tr>
+			</form>  
+		    
+		
+	
+
+
+	<tr th:each="reply:${replyList}" varStatus="vs">
+		
+			<p>
+			 
+			    <li>작성자 : <td th:text="${reply.rusername}"></span></li>
+				<li>작성일자 : <td th:text="${reply.r_date}"></td></li>
+				<li>내용 : <td th:text="${reply.r_content}"></td></li>
+					<div>
+						<form id="replydelete-form"  method="post" th:action="@{'/hotclib/read/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">						
+							<input type="hidden" name="_method" value="replydelete"/>
+							<button class="btn btn-lg btn-danger" id="replydelete">댓글삭제</button>
+						</form>
+					<div id="root[vs.index]">
+						<button class="btn btn-lg btn-default" type="button" data-rno="${replyList.replyid}" id="1btn">댓글수정</button> 
+						</div>
+						<div id="modal[vs.index]">
+							<form id="replyupdate-form"  method="POST" th:action="@{'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
+							<div class="modal_content">
+								<h5>댓글수정하는곳</h5>
+								<input type="textarea" placeholder="내용을 입력하세요" name="r_content">
+								<input type="submit" value="등록" >
+								<button type="button" id="2btn">닫기</button>
+							</div>
+							</form>
+							
+						</div>
+						</div>
+						
+						<hr>
+					</p>
+				</tr>
+				
+<script>
+	
+	$("#1btn").click(function(){
+        $("#modal[vs.index]").fadeIn(500);
+    });
+   
+     $("#2btn").click(function(){
+        $("#modal[vs.index]").fadeOut(500);
+    });      
+    
+</script>
+
+</body>
+</content>
+</html>
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-@media(max-width:940px){
+@media(max-width:950px){
     .graphDiv{
         overflow: scroll;
     }
@@ -8,6 +8,7 @@
     }
     .page-content-wrapper{
         padding: 0px !important;
+        
     }
 }
 .stateItem{
@@ -21,9 +22,9 @@
 .itemDiv{
     text-align: -webkit-center;
 }
-#page-content-wrapper{
+/* #page-content-wrapper{
     padding: 0px !important;
-}
+} */
 .itemDiv{
     margin-top: 30px;
 }

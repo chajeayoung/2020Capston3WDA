@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 게시판',_)}">
+th:replace="~{main_layout::layout(~{::content},_,'오디션 결과안내',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,14 +46,14 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 게시판',_)
                                     </td>
             </tr>
             <center>
-		<form action="/auditionresult/serchuser" method="GET">
-		    <div>
-                <button>검색하기</button>
-		        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
-		    </div>
-		
-		   
-        </form>
+                <form action="/auditionresult/serchuser" method="GET">
+                    <div>
+                        <button>검색하기</button>
+                        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+                    </div>
+                
+                
+                </form>
         </center>
         </div>
 		

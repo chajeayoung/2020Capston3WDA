@@ -17,7 +17,7 @@ html{font-size: 15px !important ;}
 #page-content-wrapper{
   width: 100%;	
   position: absolute;
-  padding:15px;
+  /* padding:15px; */
 	transition:all .5s;
 }
 
@@ -68,9 +68,11 @@ contents div.contents{
 .html{font-size: 15px !important ;}
 
 
-@media(max-width:1770px){
+@media(max-width:950px){
   #sidebar-wrapper {display: none;}
   #menu-toggle {display:none;}
   #page-content-wrapper{padding-left:0px !important ;}
+    /* padding: 15px; */
+  
   .sideMenu:last-child{margin-bottom: 150px;}
 }

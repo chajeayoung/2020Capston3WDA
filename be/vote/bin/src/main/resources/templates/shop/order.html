@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'주문',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <content>
+        <input type="hidden" id="prdId" th:data="${productId}"/>
+        <!-- <input type="hidden" id="optionId" th:value="${optionId}"/> -->
+        <!-- <input type="hidden" id="quantity" th:value="${quantity}"/> -->
+        <div id="order"></div>
+        <script src="/assets/order.js"></script>
+    </content>
+</body>
+</html>

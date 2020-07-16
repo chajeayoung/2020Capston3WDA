@@ -1,5 +1,9 @@
 package com.vote.vote.db.dto;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -10,26 +14,28 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "b_apply")
 public class Audience {
-  
+
     @Id
-    @Column(nullable = false, name="apply_id")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="B_APPLY_SEQ_GENERATOR")
-    @SequenceGenerator(name="B_APPLY_SEQ_GENERATOR", sequenceName="B_APPLY_SEQ", allocationSize = 1)
+    @Column(nullable = false, name = "apply_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "B_APPLY_SEQ_GENERATOR")
+    @SequenceGenerator(name = "B_APPLY_SEQ_GENERATOR", sequenceName = "B_APPLY_SEQ", allocationSize = 1)
     private int applyId;
 
-    @Column(nullable = false, name="a_title")
+    @Column(nullable = false, name = "a_title")
     private String aTitle; // 제목
 
-    @Column(nullable = false, name="a_content")
+    @Column(nullable = false, name = "a_content")
     private String aContent; // 내용41
 
     @Column(name = "a_date")
-    @DateTimeFormat
+    // @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date aDate; // 등록일
 
     @Column(name = "a_mdate")
@@ -49,28 +55,27 @@ public class Audience {
     private int aLimit; // 신청횟수 제한
 
     @Column(name = "a_startdate")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date aStartdate; // 응모시작일
 
     @Column(name = "a_enddate")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date aEnddate; // 응모마감일
 
-    @Column(nullable = false, name="r_id")
+    @Column(nullable = false, name = "r_id")
     private int rId; // 작성자
 
     @Column(name = "a_price")
     private int aPrice; // 소모포인트
 
     @Column(name = "program_id")
-    private int programId; //프로그램
-    
+    private int programId; // 프로그램
+
     @Column(name = "img")
     private String img; // 이미지
 
     @Column
     private int result;
-   
 
     public int getApplyId() {
         return this.applyId;
@@ -199,8 +204,5 @@ public class Audience {
     public void setResult(int result) {
         this.result = result;
     }
-    
-    
 
-    
 }
