@@ -1,0 +1,46 @@
+.jVFVRr {
+
+    margin  : auto !important;
+    width : 100% !important;
+    
+}
+.itemCard5{
+    width : 20vmin !important;
+    min-height: 220px;
+
+}
+
+.itemCard5::before{
+    display: inline-block;
+    vertical-align: middle;
+    
+}
+
+.exleBw{
+    padding : 0px !important;
+}
+
+.card_div {
+    display: inline-block !important;
+    padding: 10px !important;
+}
+h2.sc-AxirZ.civJbW {
+    padding-bottom: 10px;
+}
+.sc-bdVaJa.hYTNcn{
+    padding : 0px !important;
+}
+.img{
+    width:100%;
+}
+    
+@media(max-width:500px){
+    /* .sc-AxjAm.exleBw{
+    width: 39vmax !important;
+    } */
+
+    .itemCard5{
+        width: 30vmax !important;
+        
+        } 
+}

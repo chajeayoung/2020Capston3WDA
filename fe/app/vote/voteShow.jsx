@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard2 from '../items/itemCard2.jsx';
+import ItemCard5 from '../items/itemCard5.jsx';
 import VoteResult from './voteResult.jsx'
 import './votePreShow.css'
 import './css/voteDoShow.css'
@@ -26,7 +26,7 @@ class VoteShow extends React.Component {
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.props.event.bind(this,index)}> 
                         {/* <ItemCard key={vote.img} img={vote.img} name={vote.name} event={this.sendSelect.bind(this,index)}/>   */}
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
                     </div>
                 )
             }
