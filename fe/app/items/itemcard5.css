@@ -44,6 +44,13 @@ h2.sc-AxirZ.civJbW {
 .chart{
     width:60%
 }
+
+.hot{
+    width: 5vmin;
+    right: 0;
+    top: 0;
+    position: absolute !important;
+}
 @media(max-width:500px){
     /* .sc-AxjAm.exleBw{
     width: 39vmax !important;
@@ -55,5 +62,8 @@ h2.sc-AxirZ.civJbW {
         } 
     .chart{
         width:100% !important;
+    }
+    .hot{
+        width: 8vmax;
     }
 }

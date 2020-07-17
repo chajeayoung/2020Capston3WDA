@@ -22,6 +22,7 @@ class ItemCard5 extends Component{
                     title={this.props.name}
                     // text={this.props.info}
                     centered={true}
+                    win={this.props.win}
                 />
             </div>
         )

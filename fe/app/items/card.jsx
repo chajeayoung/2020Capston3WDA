@@ -12,16 +12,19 @@ class Card extends React.Component{
     }
     
     render(){
+
         return (
             <Wrapper
              centered={this.props.centered}
             // onClick={props.onClick}
             >
+              
             <div className="itemCard5">
             <img className="img" src={this.props.image}></img>
+            {this.props.win?<img className="hot" src="/img/핫.png"></img>:<div></div>}            
             </div>
             <TextWrapper >
-                <Title>{this.props.title}</Title>
+             <Title>{this.props.title}</Title>
             </TextWrapper>
             </Wrapper>
         );
