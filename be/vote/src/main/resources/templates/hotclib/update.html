@@ -8,7 +8,7 @@ th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
 </head>
 <content>
 <body>  	   
-	<form th:action="@{'/hotclib/update/' + ${hotclib.hotclibid}}" method="post">     
+	<form th:action="@{'/community/'+${hotclib.programid} + '/hotclib/update/' + ${hotclib.hotclibid}}" method="post">     
 		<table border="1">
 			<tr>
 				<th><label for="title">제목</label></th>

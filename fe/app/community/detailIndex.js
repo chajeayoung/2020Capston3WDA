@@ -99,6 +99,11 @@ class Index extends Component {
         this.setUrl3();
         this.getAudience();
     }
+    plus(){
+        console.log("클릭")
+        location.href=document.location.href+"/hotclib";
+
+    }
     render() {
         
         return(
@@ -114,7 +119,10 @@ class Index extends Component {
                 <div><h3 >핫클립</h3></div><br/>
                 <HotclibItem data={this.state.hotclib}/><br/><br/><br/>
                 <Pagination count={this.state.count2} page={this.state.pageNum2} onChange={this.pagenation2.bind(this)}style={{placeContent : "center"}}> </Pagination>
+                <button type="button" onClick={this.plus.bind(this)}>더보기</button>
+
             </div>
+            
             <br/><br/>
             <div id="popular">
                 <div><h3>인기인</h3></div><br/>
@@ -127,7 +135,6 @@ class Index extends Component {
     }
 }
      
-  
-
-
 ReactDOM.render(<Index/>,document.getElementById('communityIndex'));
+
+
