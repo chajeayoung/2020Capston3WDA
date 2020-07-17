@@ -1,12 +1,13 @@
 import React from 'react';
 import Chart from '@bit/nexxtway.react-rainbow.chart';
 import Dataset from '@bit/nexxtway.react-rainbow.dataset';
+// import "./itemcard5.css"
 // import ButtonGroup from '@bit/nexxtway.react-rainbow.button-group';
 // import Button from '@bit/nexxtway.react-rainbow.button';
  
-const containerStyles = {
-  width: "100%",
-};
+// const containerStyles = {
+//   width: "100%",
+// };
 
 // const { FontAwesomeIcon } = require('@fortawesome/react-fontawesome');
 // const { faPlus, faMinus } = require('@fortawesome/free-solid-svg-icons');
@@ -63,7 +64,7 @@ export default class BarChart extends React.Component {
 
         return (
             <div>
-                <div style={containerStyles}>
+                <div className="chart">
                     <Chart labels={labels} type="bar">
                         {this.renderDatasets()}
                     </Chart>

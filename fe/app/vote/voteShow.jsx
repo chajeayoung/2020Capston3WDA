@@ -6,6 +6,7 @@ import './votePreShow.css'
 import './css/voteDoShow.css'
 const axios = require('axios');
 
+import './../items/itemcard5.css'
 var url = document.location.href;
 const num = url.split('/');
 var param = num[num.length-1];
@@ -26,7 +27,11 @@ class VoteShow extends React.Component {
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.props.event.bind(this,index)}> 
                         {/* <ItemCard key={vote.img} img={vote.img} name={vote.name} event={this.sendSelect.bind(this,index)}/>   */}
-                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
+                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show} info={vote.info}/>
+
+            
                     </div>
                 )
             }
@@ -47,6 +52,8 @@ class Show extends React.Component{
         this.divStTime;// 투표기간 표시 ( 시작날짜 )
         this.divEdTime;// 투표기간 표시 ( 마감 날짜 )
         this.divRsTime;// 투표 집계공개 시각
+
+        this.voteData = {data:[],count:0, win:[],winNum:0, show:1}
     }
 
     async componentDidMount(){
@@ -134,6 +141,34 @@ class Show extends React.Component{
         this.divEdTime = end.substr(0,4)+"-"+end.substr(4,2)+"-"+end.substr(6,2)+" "+end. substr(8,2)+":"+end.substr(10,2);
         this.divRsTime = rst.substr(0,4)+"-"+rst.substr(4,2)+"-"+rst.substr(6,2)+" "+rst. substr(8,2)+":"+rst.substr(10,2);
     }
+
+    onSubmitVoteResult(data){
+        
+        console.log("데이터 받음")
+        var data_list = [];
+        var winnerData = [];
+        
+        //object 형태여서, List 로 변환
+        for(var i=0; i<data.data.length; i++){
+            data_list.push(data.data[i]);
+        }
+        console.log("받은 데이터들을 출력합니다."+data_list)
+        for(var i=0; i<data.win; i++){
+            winnerData.push(Math.max.apply(Math, data_list));
+            var index = data_list.indexOf(Math.max.apply(Math, data_list));
+            if (index !== -1) data_list.splice(index, 1);
+            
+            console.log(index);
+        }
+        // https://stackoverflow.com/questions/32647149/why-is-math-max-returning-nan-on-an-array-of-integers
+        
+        this.voteData = {data : data.data, count : data.count, win : winnerData, winNum : data.win, show:0}
+        console.log("aaaaa", this.voteData)
+
+        this.forceUpdate()
+    }
+
+
     render(){
         const {title} = this.state.title
         this.setDate();
@@ -161,13 +196,13 @@ class Show extends React.Component{
                         {/* <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
                         <div className="candidate_op">★☆후보 클릭 시 투표가능☆★</div> */}
                         <div className="cards">
-                            <VoteShow votes={this.state.votes} event={this.sendSelect} />   
+                            <VoteShow votes={this.state.votes} event={this.sendSelect} data={this.voteData}/>   
                         </div>
                     </div>        
                     <div className="right_div_box">
                         <div className="show_result">★☆실시간 투표 결과☆★</div>
                         <div className="vote_result">
-                            <VoteResult/>
+                            <VoteResult event={this.onSubmitVoteResult.bind(this)}/>
                         </div>
                         
                     </div>

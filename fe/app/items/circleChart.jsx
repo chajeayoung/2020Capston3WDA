@@ -1,6 +1,7 @@
 import React ,{Component} from 'react';
 import { Chart } from '@bit/primefaces.primereact.chart';
 
+import "./itemcard5.css"
 var data = {
   labels: ['A', 'B', 'C','aa'],
   datasets: [
@@ -20,7 +21,7 @@ class CircleChart extends Component{
     render(){
       console.log("CircleChart : render")
         return(
-            <div style={{ width: "100%" }}>
+            <div className="chart">
                 <Chart type='pie' data={this.props.data}/>
             </div>
         )

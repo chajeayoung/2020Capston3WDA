@@ -26,8 +26,8 @@ var data = {
     datasets: [
       {
         data: [],
-        backgroundColor: ['#FA5858', '#FE9A2E', '#FFFF00','#80FF00','#00FFFF','#0080FF','#BF00FF','#848484'],
-        hoverBackgroundColor: ['#FA5858', '#FE9A2E', '#FFFF00','#80FF00','#00FFFF','#0080FF','#BF00FF','#848484']
+        backgroundColor: ['#FA5858', '#FE9A2E', '#FFFF00','#80FF00','#00FFFF','#0080FF','#BF00FF','#848484','#525132'],
+        hoverBackgroundColor: ['#FA5858', '#FE9A2E', '#FFFF00','#80FF00','#00FFFF','#0080FF','#BF00FF','#848484','#525132']
       }
     ]
   };
@@ -124,8 +124,8 @@ class VoteResult extends Component {
                 barChart.datasets[j].values.push(ageData[i][j]);
             }
         }
-        for(var i =0; i<json[5]; i++){ // 차트 더미데이터
-            barChart.datasets[i].values.push(0.1);
+        for(var j = 0; j<5;j++){ 
+            barChart.datasets[j].values.push(0.1);
         }
 
         for(var i =1; i<=json[5]; i++){
@@ -142,7 +142,7 @@ class VoteResult extends Component {
 
         // "#" + Math.round(Math.random() * 0xffffff).toString(16)  //무작위 색상
 
-        
+          // json[]  0: 투표결과 , 1: 후보이름, 2: 나이별, 3: 성별별, 4:count: 투표총 횟수 ,5: 후보수, 6: 선발인원 숫자 ,7: show, 8: vote address , 9: userAddress
         if(this.props.event){
             this.send = {data:json[0], count:json[4], win:json[6]}
             this.props.event(this.send);

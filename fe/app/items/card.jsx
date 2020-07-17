@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import './itemCard5.css'
+// import './itemCard5.css'
 /**
  * Card is a component that renders a card with a title and image
  * @param  {props} props
