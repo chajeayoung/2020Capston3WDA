@@ -140,26 +140,26 @@ class Show extends React.Component{
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div id="circleTimer"className="circle">투표 진행중</div>
                     {/* https://basketdeveloper.tistory.com/4 */}
                 </div>
                 
                 <div className="list_a_tag"><a href="/vote">목록</a></div>
                 <div className="div_center"><h3>{title}</h3></div>
-                <div id="voteDate">
+                {/* <div id="voteDate">
                     <div className="text_center br_div">투표기간</div>
                     <div className="text_center">시작: {this.divStTime}</div>
                     <div className="text_center">마감: {this.divEdTime}</div>
                     <div className="text_center">집계공개: {this.divRsTime}</div>
                     <div className="text_center">선발인원: {this.state.selectNum}&nbsp;명</div>
                     <div className="text_center vote_during">투표가능 횟수: {this.state.canNum}&nbsp;번</div>
-                </div>
-                <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div>
+                </div> */}
+                {/* <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div> */}
                 <div className="left_right_box">
                     <div id="item">
-                        <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
-                        <div className="candidate_op">★☆후보 클릭 시 투표가능☆★</div>
+                        {/* <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
+                        <div className="candidate_op">★☆후보 클릭 시 투표가능☆★</div> */}
                         <div className="cards">
                             <VoteShow votes={this.state.votes} event={this.sendSelect} />   
                         </div>
