@@ -146,7 +146,7 @@ class Show extends React.Component{
                 </div>
                 
                 <div className="list_a_tag"><a href="/vote">목록</a></div>
-                <div className="div_center"><h3>{title}</h3></div>
+                <div className="div_center" id="title">{title}</div>
                 {/* <div id="voteDate">
                     <div className="text_center br_div">투표기간</div>
                     <div className="text_center">시작: {this.divStTime}</div>

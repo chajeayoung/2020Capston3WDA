@@ -20,7 +20,7 @@ class CircleChart extends Component{
     render(){
       console.log("CircleChart : render")
         return(
-            <div style={{ width: 400 }}>
+            <div style={{ width: "100%" }}>
                 <Chart type='pie' data={this.props.data}/>
             </div>
         )

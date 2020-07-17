@@ -71,9 +71,13 @@ body{
 }
 
 .div_center{
-    font-size: 15vmin !important;
+   
     text-align: center;
     margin-bottom: 30px;
+}
+
+#title{
+    font-size: 15vmin !important;
 }
 .candidate{
     text-align: center;

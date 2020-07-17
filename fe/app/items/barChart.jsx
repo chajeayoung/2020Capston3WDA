@@ -5,7 +5,7 @@ import Dataset from '@bit/nexxtway.react-rainbow.dataset';
 // import Button from '@bit/nexxtway.react-rainbow.button';
  
 const containerStyles = {
-  width: 600,
+  width: "100%",
 };
 
 // const { FontAwesomeIcon } = require('@fortawesome/react-fontawesome');
