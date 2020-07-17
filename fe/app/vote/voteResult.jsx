@@ -4,10 +4,15 @@ import CircleChart from '../items/circleChart.jsx';
 import BarChart from '../items/barChart.jsx';
 import jQuery from "jquery";
 import "./css/addressModal.css";
+import "./js/jquery.ajax-cross-origin.min.js"
+
 window.$ = window.jQuery = jQuery;
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
-const cors = require('cors'); // 브라우저 보안 정책
+const jsonp = require("jsonp")
+// const cors = require('cors'); // 브라우저 보안 정책
+// const express = require('express');
+// const app = express();
 // app.use(cors());
 var url = document.location.href;
 const num = url.split('/');
@@ -183,28 +188,175 @@ class VoteResult extends Component {
     modalOff(){
         this.setState({modal:1})
     }
+    // "http://baobab.scope.klaytn.com/" : {
+    //     target: 'http://baobab.scope.klaytn.com/',
+    //     changeOrigin: true,
+    //     pathRewrite: { '^http://baobab.scope.klaytn.com': '' },
+
+    // { 
+    //     crossdomain : true,
+    //     mode: 'no-cors',
+    //     withCredentials: true,
+    //     credentials: 'same-origin',
+    //     headers:{
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Methods": "GET",
+    //         "Allow-Control-Allow-Credentials": true,
+    //         "Access-Control-Max-Age": 3600,
+    //         // "Access-Control-Allow-Headers": "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+    //         "Access-Control-Allow-Headers": "X-Requested-With",
+    //         'Content-Type': 'application/json',
+            
+    //         // "jsonp":"callback",
+    //         // "dataType":"jsonp"
+    //     },
+    //     // proxy: { host: "http://baobab.scope.klaytn.com"}
+    //     // proxy: {
+    //     //     host: '104.236.174.88',
+    //     //     port: 3128
+    //     //     }
+    // }
     async verification(hash){// 블록체인 검증 관련 
         console.log(hash);
-        var html = await axios.get("https://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx", { 
-            // crossDomain: true,
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET",
-                "Access-Control-Max-Age": 3600,
-                "Access-Control-Allow-Headers": "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                'Content-Type': 'text/plain',
-                
-                // "jsonp":"callback",
-                // "dataType":"jsonp"
-            },
-            proxy: "baobab.scope.klaytn.com"
-        })
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // var html = await axios.get("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx")
+        
+        await axios.get(proxyurl+"http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx",{
+            crossOrigin: true,
+            crossdomain : true,
+            dataType : "html",
+            headers :{
+                "Access-Control-Allow-Origin" : "*",
+                'Set-Cookie':"cross-site-cookie=name; SameSite=None; Secure",
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        } )
         .then( response => {
-            console.log(response);
+            // console.log(response);
+            // console.log(response.data);
+            var result = $(response.data);
+
+            console.log(result.find($("div#root")));
+            // console.log($(html).children("script").eval());
         })
         .catch( err => {console.log(err)});
 
-        console.log(html);
+        // console.log(html.find("body"));
+
+        // var html = await jsonp("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx",
+        // {
+        //     headers : {
+        //         "Access-Control-Allow-Origin" : "*",
+        //         'X-Requested-With': 'XMLHttpRequest'
+        //     }
+        // })
+        // var proxy = "https://cors-anywhere.herokuapp.com/"
+        // $.ajax({
+        //     crossOrigin : true,
+        //     crossdomain : true,
+        //     dataType : "text/html",
+        //     url : proxy+"http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx",
+        //     headers :{
+        //         'Set-Cookie':"cross-site-cookie=name; SameSite=None; Secure",
+        //         'Access-Control-Allow-Credentials' : true,
+        //         'Access-Control-Allow-Origin':'*',
+        //         'Access-Control-Allow-Methods':'GET',
+        //         'Access-Control-Allow-Headers':'text/html',
+        //     },
+        //     // beforeSend: function (xhr) {
+        //     //     // xhr.setRequestHeader("Content-type","application/json");
+        //     //     xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+        //     //     xhr.setRequestHeader("Set-Cookie","Secure; SameSite=None");
+        //     //     xhr.setRequestHeader("Content-Type","text/plain");
+        //     // },
+        //     success : function(data) {
+        //         console.log(data);
+        //     },error : function(error){
+        //         console.log(error);
+        //     }
+        // });
+
+        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // const url = "http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx"
+        // fetch(proxyurl + url).then((resp) => resp.json())
+        //     .then(function(data) {
+        //         console.log(data);
+        //     })
+        //     .catch(function(error) {
+        //         console.log(error);
+        //     }); 
+
+
+        // $.ajax({
+        //     crossOrigin: true,
+        //     crossdomain : true,
+        //     type: 'GET',
+        //     url: "http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx",
+        //     headers:{
+        //         'Set-Cookie':"cross-site-cookie=name; SameSite=None; Secure",
+        //         'Access-Control-Allow-Credentials' : true,
+        //         'Access-Control-Allow-Origin':'*',
+        //         'Access-Control-Allow-Methods':'GET',
+        //         'Access-Control-Allow-Headers':'jsonp',
+        //     },
+        //     dataType: 'jsonp',
+        //     success : function(callback){
+        //         console.log(callback);
+        //     },
+        //     error : function(error){
+        //         console.log(error);
+        //     }
+        // })
+        // $.getScript ("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx?callback=parseResponse",function(data){
+        //     console.log(data)
+        // },'jsonp');
+
+
+        // $.ajax({
+        //     crossOrigin: true,
+        //     crossdomain : true,
+        //     dataType: "jsonp",
+        //     jsonp : "callback",
+        //     contentType: 'text/html',
+        //     responseType:'text/html',
+        //     // xhrFields: {
+        //     //     withCredentials: false
+        //     //   },
+        //     headers:{
+        //         'Set-Cookie':"cross-site-cookie=name; SameSite=None; Secure",
+        //         'Access-Control-Allow-Credentials' : true,
+        //         'Access-Control-Allow-Origin':'*',
+        //         'Access-Control-Allow-Methods':'GET',
+        //         'Access-Control-Allow-Headers':'text/html',
+        //         'contentType' : 'text/html'
+        //     },
+        //     // beforeSend: function (xhr) {
+        //     //     xhr.setRequestHeader("Content-type","application/json");
+        //     //     xhr.setRequestHeader("Set-Cookie","Secure; SameSite=None");
+        //     // },
+        //     url: "http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx",
+        //     success:function(callback){
+        //         console.log(callback);
+        //     },
+        //     error: function(error){
+        //         console.log(error)
+        //     }
+        // })
+        // $.ajax({ 
+        //     url: url, 
+        //     dataType: 'jsonp', 
+        //     jsonpCallback: "myCallback", 
+        //     success: callback 
+        // });
+        // function myallback(){
+
+        // }
+        // $.getJSON("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx" + "?callback=?",function(result){
+        //     console.log(result);
+        // });
+
+
+        // console.log(html);
     }
     render() {
         const {data} = this.state;
