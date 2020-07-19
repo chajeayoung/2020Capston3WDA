@@ -346,10 +346,10 @@ public class VoteController {
 	method=RequestMethod.GET,
 	produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<String> getHashTagAxios(@PathVariable("popularId") int popularId){
+	public List<CustomHashTag> getHashTagAxios(@PathVariable("popularId") int popularId){
 
 		//List<HashTag> hash = hashRepository.getHashTag(popularId);
-		List<String> hash = customHashRepository.findByPopularId(popularId);
+		List<CustomHashTag> hash = customHashRepository.findByPopularId(popularId);
 
 
 		return hash;

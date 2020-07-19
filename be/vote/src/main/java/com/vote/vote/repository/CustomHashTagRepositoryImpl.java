@@ -44,20 +44,21 @@ public class CustomHashTagRepositoryImpl implements CustomHashTagRepository {
     }
 
     @Override
-    public List<String> findByPopularId(int popularid) {
+    public List<CustomHashTag> findByPopularId(int popularid) {
 
         String sql = 
-        "select distinct(TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000))) hashtag from hashtag  where popular_id="+popularid;
+        " select rownum, h.hashtag hashtag "
+        +" from (select distinct(TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000))) hashtag from hashtag where popular_id= "+popularid+" ) h";
 
         Query nativeQuery  = em.createNativeQuery(sql);
         // .setParameter("mId", managerId);
         // .getResultList();
         JpaResultMapper jpaResultMapper = new JpaResultMapper();
-        String  result = jpaResultMapper.toString();
+        List<CustomHashTag>  result = jpaResultMapper.list(nativeQuery, CustomHashTag.class);
 
         System.out.println(result);
 
-        return null;
+        return result;
 
     }
     

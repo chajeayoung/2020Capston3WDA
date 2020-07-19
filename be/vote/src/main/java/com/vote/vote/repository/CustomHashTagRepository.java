@@ -10,7 +10,7 @@ public interface CustomHashTagRepository {
 
     public List<HashTag> findAll();
 
-    public List<String> findByPopularId(int popularid);
+    public List<CustomHashTag> findByPopularId(int popularid);
 
     
     public long CountAll();
