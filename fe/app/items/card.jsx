@@ -21,7 +21,12 @@ class Card extends React.Component{
               
             <div className="itemCard5">
             <img className="img" src={this.props.image}></img>
-            {this.props.win?<img className="hot" src="/img/핫.png"></img>:<div></div>}            
+            {this.props.win?
+
+              (this.props.result ==0?<img className="hot" src="/img/핫.png"></img>:<img className="hot" src="/img/왕관.png"></img>
+              )
+            :
+            <div></div>}            
             </div>
             <TextWrapper >
              <Title>{this.props.title}</Title>
