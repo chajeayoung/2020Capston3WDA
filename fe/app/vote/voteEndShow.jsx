@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard2 from '../items/itemCard2AndProgress.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 // import ItemCard2 from '../items/itemCard2.jsx';
 import VoteResult from './voteResult.jsx'
 
@@ -27,8 +27,9 @@ class VoteShow extends React.Component {
             if (vote.name != 0){
                 return (
                     <div key={vote.name+index} className="card_div" > 
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
-                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show}/>
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
+                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show}
+                        result={1}/>
                     </div>
                 )
             }
