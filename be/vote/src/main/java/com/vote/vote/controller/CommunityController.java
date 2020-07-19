@@ -7,18 +7,19 @@ import java.util.List;
 
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.customSelect.CustomAudience;
+import com.vote.vote.db.customSelect.CustomHotclib;
+import com.vote.vote.db.dto.HashTag;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Popular;
 import com.vote.vote.db.dto.PopularBoard;
 import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Rfile;
-import com.vote.vote.db.customSelect.CustomHotclib;
-import com.vote.vote.db.customSelect.CustomAudience;
 import com.vote.vote.repository.CustomAudienceRepository;
 import com.vote.vote.repository.CustomHotClibRepository;
 import com.vote.vote.repository.CustomPopularBoardRepository;
 import com.vote.vote.repository.CustomPopularRepository;
+import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.PopularBoardJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
@@ -81,7 +82,9 @@ public class CommunityController {
 	@Autowired
 	CustomAudienceRepository customAudienceRepository;
 	
-	
+	@Autowired
+	HashTagRepository hashTagRepository;
+
     @RequestMapping(value={"","/"})
 	public String index() {
 		// System.out.println("/ --> index");
@@ -385,21 +388,24 @@ public class CommunityController {
      	
 	     	for (int i = 0; i < hashArray.length; i++) {
 	     		
-	     		String hashWord = hashArray[i].trim();
-	     		
-	     			
+				 String hashWord = hashArray[i].trim();
+				 
+				HashTag hash2 = new HashTag();				
+				hash2.setPopularid(popularNum);
+				hash2.setHashtag(hashWord);
+				hashTagRepository.saveAndFlush(hash2);
 			}
-     	}
+     		}
      	
      	System.out.println(board.toString());
     
      	popularBoardRepository.saveAndFlush(board);
      	
-     	if(!file.isEmpty()) {
-    	rfile.setFilename(storageService.store2(file)); 
-     	rfile.setPid(board.getId());
-     	rfileRepository.saveAndFlush(rfile);
-     	}
+     	 if(!file.isEmpty()) {
+    	 rfile.setFilename(storageService.store2(file)); 
+     	 rfile.setPid(board.getId());
+     	 rfileRepository.saveAndFlush(rfile);
+     	 }
      	
  		return "redirect:/community/{program}/{popular}";
  	}	

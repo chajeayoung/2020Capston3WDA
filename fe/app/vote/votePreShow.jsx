@@ -4,6 +4,8 @@ import ItemCard2 from '../items/itemCard2.jsx';
 import ItemCard3 from '../items/itemCard3_big.jsx';
 // import './voteShow.css'
 import './votePreShow.css'
+import "./css/addressModal.css";
+
 const axios = require('axios');
 
 var url = document.location.href;
@@ -19,9 +21,14 @@ class VoteShow extends React.Component {
         super(props);
     }
     
-    viewItem(vote){       
-        console.log(vote.popularid);
+    async viewItem(vote){       
+        let {data} = await axios.get("/vote/axios/hash/"+vote.popularid);
+
+        console.log(data)
+        this.props.that.setState({modal:0})
+  
     }
+    
     render() {
         // {this.sendSelect.bind(this,index)}
         return this.props.votes.map((vote,index)=>{
@@ -29,8 +36,9 @@ class VoteShow extends React.Component {
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,vote)} > 
                         <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
-                        <span text={vote.popularid}></span>
-                    </div>
+                   </div>
+
+                 
                 )
             }
         })
@@ -41,7 +49,8 @@ class Show extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}};
+        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}
+                        ,modal:1};
         this.stTime;
         this.edTime;
         this.rsTime; // 투표 집계공개 시간
@@ -70,6 +79,15 @@ class Show extends React.Component{
         
         
     }
+
+    modalOn(){
+        this.setState({modal : 0})
+    }
+    modalOff(){
+        this.setState({modal:1})
+    }
+
+
     render(){
         const {title} = this.state.title
         this.setDate();
@@ -104,9 +122,32 @@ class Show extends React.Component{
                     <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
                     <div className="candidate_op">★☆후보 클릭 시 관련 정보로 이동☆★</div>
                     <div className="cards">
-                        <VoteShow votes={this.state.votes} />   
+                        <VoteShow votes={this.state.votes} that={this}/>   
                     </div>
                     
+                            {
+                                    this.state.modal == 0?(
+                                        <div className="modal">
+                                            <div className="modalContentBox">
+                                                <div className="modalItem">
+                                                    <div className="addText">투표 블록체인 주소:</div>
+                                                    {/* <div>{this.state.voteAdd}</div> */}
+                                                    <div className="addText">내가 투표한 정보</div>
+                                                    <div className="usrAdd">
+                                                        {/* {this.state.userAdd.map((add, index) => {
+                                                            return <div key={index}>{add}<button type="button" onClick={this.verification.bind(this,add)}>확인</button></div>
+                                                        })} */}
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                                <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
+                                            </div>
+                                        </div>
+                                    ):(
+                                    <div></div>
+                                    )
+                                }
 
                    </div>             
             </div>

@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.customSelect.CustomHashTag;
 import com.vote.vote.db.customSelect.CustomVote;
 import com.vote.vote.db.dto.Candidate;
 import com.vote.vote.db.dto.Member;
@@ -20,8 +21,10 @@ import com.vote.vote.db.dto.Voter;
 import com.vote.vote.db.dto.VoterHash;
 import com.vote.vote.klaytn.Klaytn;
 import com.vote.vote.repository.CandidateJpaRepository;
+import com.vote.vote.repository.CustomHashTagRepository;
 import com.vote.vote.repository.CustomPopularRepository;
 import com.vote.vote.repository.CustomVoteRepository;
+import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.repository.ProgramJpaRepository;
@@ -90,6 +93,12 @@ public class VoteController {
 
 	@Autowired
 	private MemberJpaRepository memberRepository;
+
+	@Autowired
+	private CustomHashTagRepository customHashRepository;
+
+	@Autowired
+	private HashTagRepository hashRepository;
 	
 
 	public Klaytn klaytn = new Klaytn();
@@ -333,6 +342,19 @@ public class VoteController {
 		return "vote/show";
 	}
 
+	@RequestMapping(value={"/axios/hash/{popularId}","/axios/hash/{popularId}/"},
+	method=RequestMethod.GET,
+	produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<String> getHashTagAxios(@PathVariable("popularId") int popularId){
+
+		//List<HashTag> hash = hashRepository.getHashTag(popularId);
+		List<String> hash = customHashRepository.findByPopularId(popularId);
+
+
+		return hash;
+	}
+
 	@RequestMapping(value={"/axios/{voteId}","/axios/{voteId}/"},
 	method=RequestMethod.GET,
 	produces = MediaType.APPLICATION_JSON_VALUE)
@@ -344,9 +366,7 @@ public class VoteController {
 		// Vote_name name = vote_nameRepository.findById(vote.getName());
 		List<Candidate> candidateList = candidateRepository.findByVoteId(voteId);
 		
-		
-
-        
+	        
 		JSONArray array = new JSONArray();
         
 
