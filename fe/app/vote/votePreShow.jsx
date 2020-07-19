@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import ItemCard2 from '../items/itemCard2.jsx';
 import ItemCard3 from '../items/itemCard3_big.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 // import './voteShow.css'
 import './votePreShow.css'
 import "./css/addressModal.css";
@@ -35,7 +36,7 @@ class VoteShow extends React.Component {
             if (vote.name != 0){
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,vote)} > 
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
                    </div>
 
                  
