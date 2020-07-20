@@ -26,66 +26,75 @@ public class HashTag {
     @Column(name="POPULAR_ID") //인기인 이름
     private int popularid;
 
-    @Column(name="HOTCLIB_ID") //인기인 이미지
-    private int hotclibid;
+    @Column(name="P_ID") //인기인 이미지
+    private int pid;
 
     @Column(name="HASHTAG")
     private String hashtag;
 
-	@Override
-	public String toString() {
-		return "HashTag [hashtag=" + hashtag + ", hotclibid=" + hotclibid + ", no=" + no + ", popularid=" + popularid
-				+ "]";
-	}
+    public int getNo() {
+        return no;
+     }
+  
+     public void setNo(int no) {
+        this.no = no;
+     }
+  
+     public int getPopularid() {
+        return popularid;
+     }
+  
+     public void setPopularid(int popularid) {
+        this.popularid = popularid;
+     }
+  
+     public int getPid() {
+        return pid;
+     }
+  
+     public void setPid(int pid) {
+        this.pid = pid;
+     }
+  
+     public String getHashtag() {
+        return hashtag;
+     }
+  
+     public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+     }
+  
+     public HashTag(int no, int popularid, int pid, String hashtag) {
+        this.no = no;
+        this.popularid = popularid;
+        this.pid = pid;
+        this.hashtag = hashtag;
+     }
+  
+     public HashTag() {
+     
+     }
+     
+     
+     public HashTag(String hashtag) {
+        this.hashtag = hashtag;
+     }
+        
+	// public HashTag(int no, int popularid, int hotclibid, String hashtag) {
+	// 	this.no = no;
+	// 	this.popularid = popularid;
+	// 	this.hotclibid = hotclibid;
+	// 	this.hashtag = hashtag;
+	// }
 
+	// public HashTag() {
 	
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
-	}
-
-	public int getPopularid() {
-		return popularid;
-	}
-
-	public void setPopularid(int popularid) {
-		this.popularid = popularid;
-	}
-
-	public int getHotclibid() {
-		return hotclibid;
-	}
-
-	public void setHotclibid(int hotclibid) {
-		this.hotclibid = hotclibid;
-	}
-
-	public String getHashtag() {
-		return hashtag;
-	}
-
-	public void setHashtag(String hashtag) {
-		this.hashtag = hashtag;
-	}
-
-	public HashTag(int no, int popularid, int hotclibid, String hashtag) {
-		this.no = no;
-		this.popularid = popularid;
-		this.hotclibid = hotclibid;
-		this.hashtag = hashtag;
-	}
-
-	public HashTag() {
-	
-	}
+	// }
 	
 	
-	public HashTag(String hashtag) {
-		this.hashtag = hashtag;
-	}
+	// public HashTag(String hashtag) {
+	// 	this.hashtag = hashtag;
+	// }
 
 
     
