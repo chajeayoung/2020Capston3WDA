@@ -8,6 +8,9 @@ import './../items/itemcard5.css'
 import './votePreShow.css'
 import "./css/addressModal.css";
 
+// import './index.css';
+// import App from './App.js';
+
 const axios = require('axios');
 
 var url = document.location.href;
@@ -25,10 +28,16 @@ class VoteShow extends React.Component {
     
     async viewItem(vote){       
         let {data} = await axios.get("/vote/axios/hash/"+vote.popularid);
-
+        //this.props.setState({})
         console.log(data)
-        this.props.that.setState({modal:0})
-  
+        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data ,info:vote.info}})
+
+        // var modalItem = $("modalItem");
+        // modalItem.empty();
+        // modalItem.append(<App />);
+        //<App /> 
+        //modalItem.append()
+        
     }
     
     render() {
@@ -37,7 +46,7 @@ class VoteShow extends React.Component {
             if (vote.name != 0){
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,vote)} > 
-                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info} />
                    </div>
 
                  
@@ -62,7 +71,7 @@ class Show extends React.Component{
         let {data} = await axios.get('/vote/axios/'+param);
         console.log("----test----");
         console.log(data);
-        this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5]});
+        this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5], state:{popularid:0, option:1, data:[]}  } );
         console.log(data[2]);
 
         
@@ -124,7 +133,7 @@ class Show extends React.Component{
                     <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
                     <div className="candidate_op">★☆후보 클릭 시 관련 정보로 이동☆★</div>
                     <div className="cards">
-                        <VoteShow votes={this.state.votes} that={this}/>   
+                        <VoteShow votes={this.state.votes} that={this} program={this.state.program}/>   
                     </div>
                     
                             {
@@ -132,14 +141,25 @@ class Show extends React.Component{
                                         <div className="modal">
                                             <div className="modalContentBox">
                                                 <div className="modalItem">
-                                                    <div className="addText">투표 블록체인 주소:</div>
-                                                    {/* <div>{this.state.voteAdd}</div> */}
-                                                    <div className="addText">내가 투표한 정보</div>
-                                                    <div className="usrAdd">
-                                                        {/* {this.state.userAdd.map((add, index) => {
-                                                            return <div key={index}>{add}<button type="button" onClick={this.verification.bind(this,add)}>확인</button></div>
-                                                        })} */}
-                                                    </div>
+                                                     {this.state.state.option==0?(
+                                                     <div>
+                                            
+                                                         {this.state.state.data.map((hash,index)=>{
+                                                         
+                                                              return <a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}>
+                                                                  {hash.hashTag}</a>
+                                                            //return <div>{this.state.state.popularid+""+this.state.program.id+"------"+hash.hashtag}</div>
+                                                         }) 
+                                                        
+                                                                                                              
+                                                         }
+
+                                                        {this.state.state.data.length==0?<div>등록된 해시태그가 없습니다.</div>:<div></div>}
+                                                        <div>{this.state.state.info}</div>
+                                                     </div>):(
+                                                        
+                                                    <div></div>)}
+                                                  
                                                     
                                                     
                                                 </div>
