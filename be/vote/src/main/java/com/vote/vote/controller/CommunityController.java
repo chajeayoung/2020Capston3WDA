@@ -148,8 +148,8 @@ public class CommunityController {
     @RequestMapping(value={"/{program}/popular/axios","/{program}/popular/axios/"}) // 
   	@ResponseBody
   	public JSONArray  popularAxios(@PathVariable("program") int programNum, @PageableDefault Pageable pageable){// 프로그램 인기인 정보
-  	
-      	
+		
+
       	List<Popular> populares = customPopularRepository.findByPid(programNum, pageable);
       	long count = customPopularRepository.CountByPid(programNum);
 
@@ -204,16 +204,22 @@ public class CommunityController {
  		return "community/popularBoard";
  	}	
     
-    @RequestMapping(value={"/{program}/{popular}/axios","/{program}/{popular}/axios"}) //사용자정보
+    @RequestMapping(value={"/{program}/{popular}/axios","/{program}/{popular}/axios"}) 
 	@ResponseBody
 	public JSONArray popularBoardAxios(
 			    @PathVariable("program") int programNum,
-				@PathVariable("popular") int popularNum,
-				
-				@PageableDefault Pageable pageable, Model model){
+				@PathVariable("popular") int popularNum,				
+				@PageableDefault Pageable pageable, Model model
+				, @Nullable String hash){
 	
+
+					String nullCheck = "";
+					if(!hash.equals("") && hash!=null){
+					  nullCheck = hash;
+					}
+		  
     	
-		List<PopularBoard> popularboards = customPopularBoardRepository.findById(popularNum,pageable);
+		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable, nullCheck);
 	
 		long count = customPopularBoardRepository.CountById(popularNum);
 		
@@ -378,29 +384,33 @@ public class CommunityController {
      	
      	Program program = programRepository.findById(programNum);
      	Popular popular = popularRepository.findById(popularNum);
-     	PopularBoard board2 = popularBoardRepository.findById(popularNum);
+     	//PopularBoard board2 = popularBoardRepository.findById(popularNum);
      	Rfile rfile = new Rfile();    	
     	
-     	if(hash != null && !hash.isEmpty()) {
-     		System.out.println(hash);
-     	
-     		String [] hashArray = hash.split(",");
-     	
-	     	for (int i = 0; i < hashArray.length; i++) {
-	     		
-				 String hashWord = hashArray[i].trim();
-				 
-				HashTag hash2 = new HashTag();				
-				hash2.setPopularid(popularNum);
-				hash2.setHashtag(hashWord);
-				hashTagRepository.saveAndFlush(hash2);
-			}
-     		}
+   
      	
      	System.out.println(board.toString());
     
      	popularBoardRepository.saveAndFlush(board);
-     	
+		 
+		 System.out.println(board.getId());
+		 if(hash != null && !hash.isEmpty()) {
+			System.out.println(hash);
+		
+			String [] hashArray = hash.split(",");
+		
+			for (int i = 0; i < hashArray.length; i++) {
+				
+				String hashWord = hashArray[i].trim();
+				
+			   HashTag hash2 = new HashTag();				
+			   hash2.setPopularid(popularNum);
+			   hash2.setPid(board.getId());
+			   hash2.setHashtag(hashWord);
+			   hashTagRepository.saveAndFlush(hash2);
+		   }
+		}
+
      	 if(!file.isEmpty()) {
     	 rfile.setFilename(storageService.store2(file)); 
      	 rfile.setPid(board.getId());
