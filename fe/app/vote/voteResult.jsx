@@ -4,7 +4,7 @@ import CircleChart from '../items/circleChart.jsx';
 import BarChart from '../items/barChart.jsx';
 import jQuery from "jquery";
 import "./css/addressModal.css";
-import "./js/jquery.ajax-cross-origin.min.js"
+// import "./js/jquery.ajax-cross-origin.min.js"
 
 window.$ = window.jQuery = jQuery;
 const regeneratorRuntime = require("regenerator-runtime");
@@ -220,7 +220,8 @@ class VoteResult extends Component {
         var item =  $(".modalItem");
         item.empty();
         var loading = $(document.createElement("img"));
-        loading.attr("src","/img/loading.gif")
+        loading.attr("class","loadImg");
+        loading.attr("src","/img/블록체인로딩2.gif")
         item.append(loading);
         
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -250,7 +251,13 @@ class VoteResult extends Component {
        if(data.result.txStatus == 1 ){
         //    var item =  $(".modalItem");
             item.empty();
-            item.html("블록체인 검증 결과, 당신의 투표는 정상적으로 반영되어 있습니다.");
+            var loading = $(document.createElement("img"));
+            loading.attr("class","loadImg");
+            loading.attr("src","/img/로딩완료.gif")
+            item.append(loading);
+            var div = $(document.createElement("div"));
+            div.html("블록체인 검증 결과, 당신의 투표는 정상적으로 반영되어 있습니다.")
+            item.append(div);
        }
     }
     render() {

@@ -156,21 +156,22 @@ class VoteCreate extends React.Component {
 
     // }
 // console.log($('.fileImg')[i].val())
-
+console.log("선발",$('#selectedNum').val(),"후보자", $('#candidateCount').val() , "?" )
     if(!$("#program_id").val){
       e.preventDefault();
       return alert("프로그램 정보가 없습니다.")
     }
-    if($('#candidateCount').val()<2){
+    if(Number($('#candidateCount').val())<2){
       e.preventDefault();
       return alert("후보자 수는 2명 이상이어야 합니다.")
-    }else if($('#selectedNum').val()<=0){
+    }else if(Number($('#selectedNum').val())<=0){
       e.preventDefault();
       return alert("선발인원은 1명 이상이어야 합니다.")
-    }else if($('#selectedNum').val()>=$('#candidateCount').val()){
+    }else if(Number($('#selectedNum').val())>=Number($('#candidateCount').val())){
       e.preventDefault();
+      console.log("선발",$('#selectedNum').val(),"후보자", $('#candidateCount').val() , "ㅡㅡ" )
       return alert("선발인원은 후보자 수 보다 적어야 합니다.")
-    }else if($("#voteCanNum").val()<0){
+    }else if(Number($("#voteCanNum").val())<0){
       e.preventDefault();
       return alert("다중투표 횟수는 0보다 커야합니다.")
     } else if(this.check==1){

@@ -19,7 +19,7 @@ import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Vote;
 import com.vote.vote.db.dto.Voter;
 import com.vote.vote.db.dto.VoterHash;
-import com.vote.vote.klaytn.Klaytn;
+import com.vote.vote.klaytn.Klaytn2;
 import com.vote.vote.repository.CandidateJpaRepository;
 import com.vote.vote.repository.CustomHashTagRepository;
 import com.vote.vote.repository.CustomPopularRepository;
@@ -101,7 +101,7 @@ public class VoteController {
 	private HashTagRepository hashRepository;
 	
 
-	public Klaytn klaytn = new Klaytn();
+	public Klaytn2 klaytn = new Klaytn2();
 
 
 	//  투표 메인
