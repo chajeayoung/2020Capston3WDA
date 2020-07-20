@@ -217,7 +217,12 @@ class VoteResult extends Component {
     //     //     }
     // }
     async verification(hash){// 블록체인 검증 관련 
-        console.log(hash);
+        var item =  $(".modalItem");
+        item.empty();
+        var loading = $(document.createElement("img"));
+        loading.attr("src","/img/loading.gif")
+        item.append(loading);
+        
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         // var html = await axios.get("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx")
         // https://api-baobab.klaytn.com/v1/txs/0x2332863bbbab340567e403e3d4bfae9db2e42888286b28d9446311c229658226
@@ -231,6 +236,7 @@ class VoteResult extends Component {
                 'X-Requested-With': 'XMLHttpRequest'
             }
         } )
+        
         // .then( response => {
         //     // console.log(response);
         //     // console.log(response.data);
@@ -240,9 +246,9 @@ class VoteResult extends Component {
         //     // console.log($(html).children("script").eval());
         // })
         // .catch( err => {console.log(err)});
-
+        // PulseLoader
        if(data.result.txStatus == 1 ){
-           var item =  $(".modalItem");
+        //    var item =  $(".modalItem");
             item.empty();
             item.html("블록체인 검증 결과, 당신의 투표는 정상적으로 반영되어 있습니다.");
        }

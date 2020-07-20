@@ -53,6 +53,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "halogenium": "^2.3.0",
     "jquery": "^3.5.1",
     "jsonp": "^0.2.1",
     "minipass": "^3.1.3",

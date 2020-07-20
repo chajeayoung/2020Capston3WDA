@@ -96,7 +96,7 @@ class Show extends React.Component{
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div className="circle">투표 마감</div>
                     {/* https://basketdeveloper.tistory.com/4 */}
                 </div>

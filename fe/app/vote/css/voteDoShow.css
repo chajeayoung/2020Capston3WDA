@@ -1,3 +1,6 @@
+.contents{
+  height: 50px !important;
+}
 #item {
   width: 100% !important;
   /* border-right: 2px solid gray; */

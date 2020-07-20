@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ItemCard2 from '../items/itemCard2.jsx';
 import ItemCard3 from '../items/itemCard3_big.jsx';
 import ItemCard5 from '../items/ItemCard5.jsx';
+import './../items/itemcard5.css'
 // import './voteShow.css'
 import './votePreShow.css'
 import "./css/addressModal.css";
@@ -96,7 +97,7 @@ class Show extends React.Component{
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div className="circle">투표 시작전</div>
                 </div>
                 
