@@ -23,5 +23,6 @@ public class CustomPopularBoard {
     public void setCount(int count) {
         this.count = count;
     }
+
     
 }

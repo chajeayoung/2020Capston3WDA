@@ -18,7 +18,7 @@ public interface CustomPopularBoardRepository {
     
     public long CountById(int popularid);
     
-    public List<PopularBoard> getHashTag(int popularid, String hash);
+    // public List<PopularBoard> getHashTag(int popularid, String hash);
 
 
 

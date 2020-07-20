@@ -8,6 +8,7 @@ import java.util.List;
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.customSelect.CustomAudience;
 import com.vote.vote.db.customSelect.CustomHotclib;
+import com.vote.vote.db.customSelect.CustomPopularBoard;
 import com.vote.vote.db.dto.HashTag;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Popular;
@@ -252,7 +253,7 @@ public class CommunityController {
 		CustomUserDetails sessionUser = (CustomUserDetails)principal;
 		
 		
-		for( PopularBoard popularBoard : popularboards){
+		for( PopularBoard popularBoard : popularboards.getPopularBoard()){
 			JSONObject popularBoardData = new JSONObject();
 	
 			member = memberRepository.findByNo(popularBoard.getRid());
