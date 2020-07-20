@@ -219,11 +219,12 @@ public class CommunityController {
 					  nullCheck = hash;
 					}
 		  
-    	
+		System.out.println("1");
 		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable, nullCheck);
 	
-		long count = customPopularBoardRepository.CountById(popularNum);
+		//long count = customPopularBoardRepository.CountById(popularNum);
 		
+		System.out.println("2");
 		//System.out.println(popularNum);
 		//System.out.println(count);
 		
@@ -242,7 +243,7 @@ public class CommunityController {
 			 gob = 10;
 		}
 		int i = 0;
-		rownum = (int)count - (pageable.getPageNumber() * gob) ;
+		rownum = (int)popularboards.getCount() - (pageable.getPageNumber() * gob) ;
 		
 		//System.out.println(count-pageable.getPageNumber());
 		
@@ -278,14 +279,14 @@ public class CommunityController {
 			json.add(popularBoardData);
 		}
 		json.add(sessionUser.getR_ID());			
-		json.add(count);
+		json.add((int)popularboards.getCount());
 		
 		
 		
 		int countList= 10;
-		int totalPage= (int)(count) / countList;
+		int totalPage= (int)((int)popularboards.getCount()) / countList;
 		
-		if (count%countList>0) {
+		if ((int)popularboards.getCount()%countList>0) {
 			
 			totalPage++;
 			

@@ -15,7 +15,6 @@ import '../smart.css';
 // import './voteTableCss.css';
 
 import './index.css';
-import App from './App.js';
 
 
 import jQuery from "jquery";
@@ -73,7 +72,7 @@ class Index extends React.Component{
 
 
 
-                    {/* <App /> */}
+                    
 
                 </div>
         )
