@@ -215,7 +215,7 @@ public class CommunityController {
 	
 
 					String nullCheck = "";
-					if(!hash.equals("") && hash!=null){
+					if( hash!=null && !hash.equals("")){
 					  nullCheck = hash;
 					}
 		  
