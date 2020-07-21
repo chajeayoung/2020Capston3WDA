@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-
+import Hotcard from './hotCard.jsx'
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import ItemCard4 from '../items/itemCard4.jsx';
-import Pagination from '@material-ui/lab/Pagination';
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 
@@ -78,7 +76,9 @@ class Hotclib extends Component{
                             <div>작성일 : {hotclib.h_date}</div>
                             <div>조회수 : {hotclib.hviewcount}</div>
                             <div>작성자 : {hotclib.husername} </div>
+                          
                             </div>
+                     
                             </div>
                             </a>     
                               )

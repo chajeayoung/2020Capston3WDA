@@ -37,47 +37,42 @@ class Hotclibread extends Component{
         let {data} = await axios.get(this.url)
         console.log(data)
         // let {data : reply} = await axios.get(this.url)
-        this.setState({reply:data.reply})
-             
-        // this.getRfile()        
-       
+        this.setState({reply:data.reply});
+        this.setState({rfile:data.rfile});
+        this.setState({hotclib:data.hotclib});
+                        
     }
-    // async getRfile(){
-        
-    //     let {data} = await axios.get(this.url) // 동영상 정보 가져오기
-
-    //     this.setState({rfile: data.rfile})
-    // }
+    
 
     render(){
         console.log("안녕")
         console.log(this.state.reply)
         console.log(this.url);
         
+        
         return(
                     
-           <div>  
-                    
+           <div>
                     {this.state.reply.map((reply,index)=>{
-                       return (
-
-                         <div  key={'div'+index}>
+                       return (  
+                        
+                         <div key={'div'+index}>
                             <div>내용 : {reply.r_content}</div>
                             <div>작성일 : {reply.r_date}</div>
                             <div>작성자 : {reply.rusername}</div>  
                             <button>수정</button>
                             <button>삭제</button>
-                            <br/>              
+                            <br/>
+                                      
                             </div>
                             
                               )
- 
+                              
                             }
-                         )
-                     }  
-                        
-           </div> 
-            
+                            
+                         ) 
+                     }                            
+           </div>            
         )
     }
 }
