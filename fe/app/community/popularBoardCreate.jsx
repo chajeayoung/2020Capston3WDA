@@ -27,7 +27,7 @@ class PopularBoardCreate extends Component {
 
     async componentDidMount(){
   
-
+  
     }
   
 

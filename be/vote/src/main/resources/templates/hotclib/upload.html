@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
+th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <content>   
-      <link rel="stylesheet" href="/css/hotclibupload.css"/>
-        <form th:action="@{/hotclib/upload}" method="post" enctype="multipart/form-data">                
+      <div id="hotclibupload"></div>
+    <script src="/assets/hotclibupload.js"></script> 
+    
+    
+      <!-- <link rel="stylesheet" href="/css/hotclibupload.css"/>
+        <form th:action="@{ '/community/'+${hotclib.programid}+'/hotclib/upload' }" method="post" enctype="multipart/form-data">                
           <div>
             <tr>
 				<th><label for="htitle">제목</label></th>
 				<td><input name="htitle" /></td>
             </tr>
-            </div>
+            </div> 
             <div>
 			<tr>
 				<th><label for="h_content">내용</label></th>
@@ -33,7 +37,7 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
          
             썸네일선택<input class="gg" type="file" id="filename2" name="filename2" onchange="setFilename2(event);"/>
             <div id ='preview'> 
-              <!--미리보는공간-->
+              미리보는공간
             </div>
               영상선택<input type="file" name="filename" id="filename" onchange="setFilename(event);"/>
              <div id ='preview2'></div>
@@ -42,7 +46,7 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
                   <input type="reset" value="취소" onclick="history.back();">                    
          </div>
         </form>
-        <script>
+        <script> 
 
 function setFilename2(event) {
    var reader = new FileReader();
@@ -57,20 +61,20 @@ function setFilename2(event) {
          }
 
          
-  //        function setFilename(event) {
-  //  var reader = new FileReader();
+          function setFilename(event) {
+    var reader = new FileReader();
    
-  //   reader.onload = function(event) { 
-  //     var video = document.createElement("video");
-  //      video.setAttribute("src", event.target.result);
-  //       document.querySelector("div#preview2").appendChild(video);
-  //        };
+    reader.onload = function(event) { 
+       var video = document.createElement("video");
+        video.setAttribute("src", event.target.result);
+         document.querySelector("div#preview2").appendChild(video);
+          };
 
-  //        reader.readAsDataURL(event.target.files[0]); 
-  //        }
+         reader.readAsDataURL(event.target.files[0]); 
+          }
 
 
-        </script>
+        </script>  -->
             </content>
 </body>
 </html>
