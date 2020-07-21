@@ -6,7 +6,8 @@ import java.util.List;
 import com.vote.vote.db.dto.HashTag;
 
 public class CustomHashTag {
-	private int rownum;
+	private BigDecimal count;
+	// private int rownum;
     private String hashTag;
 
 	public String getHashTag() {
@@ -17,18 +18,32 @@ public class CustomHashTag {
 		this.hashTag = hashTag;
 	}
 
-	public int getRownum() {
-		return rownum;
+	public BigDecimal getCount() {
+		return count;
 	}
 
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
+	public void setCount(BigDecimal count) {
+		this.count = count;
 	}
 
-	public CustomHashTag(BigDecimal rownum, String hashTag) {
-		this.rownum = rownum.intValue();
+	public CustomHashTag(BigDecimal count, String hashTag) {
+		this.count = count;
 		this.hashTag = hashTag;
 	}
+
+
+	// public int getRownum() {
+	// 	return rownum;
+	// }
+
+	// public void setRownum(int rownum) {
+	// 	this.rownum = rownum;
+	// }
+
+	// public CustomHashTag(BigDecimal rownum, String hashTag) {
+	// 	this.rownum = rownum.intValue();
+	// 	this.hashTag = hashTag;
+	// }
 
 
 

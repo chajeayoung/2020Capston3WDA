@@ -46,9 +46,13 @@ public class CustomHashTagRepositoryImpl implements CustomHashTagRepository {
     @Override
     public List<CustomHashTag> findByPopularId(int popularid) {
 
+        // String sql = 
+        // " select rownum, h.hashtag hashtag "
+        // +" from (select distinct(TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000))) hashtag from hashtag where popular_id= "+popularid+" ) h";
+
         String sql = 
-        " select rownum, h.hashtag hashtag "
-        +" from (select distinct(TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000))) hashtag from hashtag where popular_id= "+popularid+" ) h";
+        "select h.hashtag, count(h.hashtag) as count"
+        +" from(select TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000)) hashtag from hashtag where popular_id= "+popularid+") h group by hashtag order by count desc";
 
         Query nativeQuery  = em.createNativeQuery(sql);
         // .setParameter("mId", managerId);
