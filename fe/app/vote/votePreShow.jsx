@@ -146,8 +146,10 @@ class Show extends React.Component{
                                             
                                                          {this.state.state.data.map((hash,index)=>{
                                                          
-                                                              return <a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}>
-                                                                  {hash.hashTag}</a>
+                                                              return (                                                          
+                                                              <div><a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}>
+                                                                  {hash.hashTag}</a></div>
+                                                                  )
                                                             //return <div>{this.state.state.popularid+""+this.state.program.id+"------"+hash.hashtag}</div>
                                                          }) 
                                                         
