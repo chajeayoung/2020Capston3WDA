@@ -61,6 +61,10 @@ img.profile_preview{
   width: 10vmax;
 }
 
+.MyModal .content img{
+  width: 10vmax;
+}
+
 @media(max-width:500px){
   .MyModal .content { height : 80vmax;}
     
