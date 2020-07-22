@@ -50,9 +50,16 @@ public class CustomHashTagRepositoryImpl implements CustomHashTagRepository {
         // " select rownum, h.hashtag hashtag "
         // +" from (select distinct(TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000))) hashtag from hashtag where popular_id= "+popularid+" ) h";
 
+        // String sql = 
+        // "select h.hashtag hashtag, count(h.hashtag) count"
+        // +" from(select TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000)) hashtag from hashtag where popular_id= "+popularid+") h group by hashtag order by count desc";
+
         String sql = 
-        "select h.hashtag, count(h.hashtag) as count"
-        +" from(select TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000)) hashtag from hashtag where popular_id= "+popularid+") h group by hashtag order by count desc";
+        "select hh.rank, hh.hashtag, hh.count from "
+        +" (select ROW_NUMBER() OVER(order by count(h.hashtag) desc) as rank, h.hashtag , count(h.hashtag) count"
+        +" from(select TO_CHAR(DBMS_LOB.SUBSTR(hashtag, 4000)) hashtag from hashtag where popular_id= "+popularid+" ) h "
+        +" group by hashtag  order by count desc) hh where rank <=5";
+
 
         Query nativeQuery  = em.createNativeQuery(sql);
         // .setParameter("mId", managerId);
@@ -60,7 +67,7 @@ public class CustomHashTagRepositoryImpl implements CustomHashTagRepository {
         JpaResultMapper jpaResultMapper = new JpaResultMapper();
         List<CustomHashTag>  result = jpaResultMapper.list(nativeQuery, CustomHashTag.class);
 
-        System.out.println(result);
+        System.out.println("test:"+result);
 
         return result;
 

@@ -1,50 +1,47 @@
 package com.vote.vote.db.customSelect;
 
 import java.math.BigDecimal;
-import java.util.List;
-
-import com.vote.vote.db.dto.HashTag;
 
 public class CustomHashTag {
-	private BigDecimal count;
-	// private int rownum;
-    private String hashTag;
+	private int rank;
+	private int count;
+    private String hashtag;
 
-	public String getHashTag() {
-		return hashTag;
-	}
-
-	public void setHashTag(String hashTag) {
-		this.hashTag = hashTag;
-	}
-
-	public BigDecimal getCount() {
+	public int getCount() {
 		return count;
 	}
 
-	public void setCount(BigDecimal count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
 
-	public CustomHashTag(BigDecimal count, String hashTag) {
-		this.count = count;
-		this.hashTag = hashTag;
+	public String getHashtag() {
+		return hashtag;
 	}
 
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
 
-	// public int getRownum() {
-	// 	return rownum;
-	// }
+	public CustomHashTag(String hashtag,BigDecimal count) {
+		
+		this.hashtag = hashtag;
+		this.count = count.intValue();
+	}
 
-	// public void setRownum(int rownum) {
-	// 	this.rownum = rownum;
-	// }
+	public CustomHashTag(BigDecimal rank, String hashtag,BigDecimal count) {
+		this.rank = rank.intValue();
+		this.count = count.intValue();
+		this.hashtag = hashtag;
+	}
 
-	// public CustomHashTag(BigDecimal rownum, String hashTag) {
-	// 	this.rownum = rownum.intValue();
-	// 	this.hashTag = hashTag;
-	// }
+	public int getRank() {
+		return rank;
+	}
 
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 
 
     
