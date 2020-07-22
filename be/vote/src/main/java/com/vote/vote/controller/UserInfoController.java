@@ -565,6 +565,13 @@ public class UserInfoController {
 						popularData.put("name", popular.getName());
 						popularData.put("img", popular.getImg());
 						popularData.put("logo", popular.getLogo());
+						popularData.put("birth", popular.getBirth());
+						popularData.put("height", popular.getHeight());	
+						popularData.put("weight", popular.getWeight());
+						popularData.put("blood", popular.getBlood());
+						popularData.put("hobby", popular.getHobby());
+						popularData.put("ability", popular.getAbility());
+						popularData.put("intro", popular.getIntro());
 						popularData.put("p_id", popular.getPid());
 
 						
@@ -617,23 +624,34 @@ public class UserInfoController {
 			
 			@RequestMapping(value="/updatePopular", method=RequestMethod.POST)
 		    public String updateOk(Popular pp, RedirectAttributes redirAttrs, Principal principal
-		    		,@RequestParam(name="img2") MultipartFile file
+		    		,@Nullable @RequestParam(name="img2") MultipartFile file,
+					 @Nullable @RequestParam(name="img3") MultipartFile file2
 		    		){
 		       	
 				System.out.println(pp.toString());
 		    	
 		    	
 		    	String thumbnailPath = pp.getImg();  // 프로필사진 변동안했을때 그대로 두기위해서
-		    	String url = "/uploads/";
+				String url = "/uploads/";
+				
+				String thumbnailPath2 = pp.getLogo();  // 프로필사진 변동안했을때 그대로 두기위해서
 
+
+		
 		    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 
 		    		    		thumbnailPath = storageService.store2(file);
 		    		
-		   	
-		    	}
-		    	
-		    	popularRepository.popularUpdate(pp.getName(), thumbnailPath, pp.getPid(), pp.getId());
+				   }
+				   
+				if(!file2.isEmpty()) { 
+
+					thumbnailPath2 = storageService.store2(file2);
+		
+				 }
+				 pp.setImg(thumbnailPath);
+				 pp.setLogo(thumbnailPath2);
+				popularRepository.saveAndFlush(pp);
 				
 		    	
 		    	

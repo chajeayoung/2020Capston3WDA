@@ -153,6 +153,13 @@ public class Popular {
 		this.logo = logo;
 	}
 
+	@Override
+	public String toString() {
+		return "Popular [ability=" + ability + ", birth=" + birth + ", blood=" + blood + ", height=" + height
+				+ ", hobby=" + hobby + ", id=" + id + ", img=" + img + ", intro=" + intro + ", logo=" + logo + ", name="
+				+ name + ", pid=" + pid + ", weight=" + weight + "]";
+	}
+
 	
 
 

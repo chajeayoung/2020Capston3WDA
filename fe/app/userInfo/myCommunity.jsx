@@ -44,6 +44,13 @@ class MyCommunity extends Component {
   handleOpenModal2(c) {
     console.log(c);
 
+      var birth = c.birth
+      var today = new Date();
+      birth = today.toISOString().substr(0, 10);
+      c.birth = birth
+
+      this.setState({blood:c.blood})
+
 
     this.setState({ UD: 1 })
     this.setState({ item: c })
@@ -175,6 +182,7 @@ class MyCommunity extends Component {
                   <FormControl variant="outlined">
                     <FormHelperText>키</FormHelperText>
                       <OutlinedInput
+                        pattern="[0-9]{3}"
                         weight="50"
                         name="height"
                         onChange={this.insertHeight.bind(this)}
@@ -186,6 +194,7 @@ class MyCommunity extends Component {
                   <FormControl variant="outlined">
                     <FormHelperText>몸무게</FormHelperText>
                       <OutlinedInput
+                        pattern="[0-9]{3}"
                         name="weight"
                         onChange={this.insertWeight.bind(this)}
                         endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
@@ -236,15 +245,15 @@ class MyCommunity extends Component {
               :              
               <div className="content">
               <h3>후보 수정</h3>
-              <FormHelperText>세로프로필</FormHelperText>
-                  {/* <div> {this.state.file !== '' ? <img src={'/uploads/'+"d"}></img> : {profile_preview} }</div>   */}
-
+                 <FormHelperText>세로프로필</FormHelperText>
+                   <div> {this.state.file == '' ? <img src={'/uploads/'+this.state.item.img}></img> : <div>{profile_preview}</div> }</div>  
+                  
                   <input type="file" name="img2" accept="image/*" onChange={this.checkImage.bind(this)} />
                   <br></br>
                   <hr></hr>
 
                   <FormHelperText>가로프로필</FormHelperText>
-                  <div>{profile_preview2}</div>  
+                  <div> {this.state.file2 == '' ? <img src={'/uploads/'+this.state.item.logo}></img> : <div>{profile_preview2}</div> }</div>
                   <input type="file" name="img3" accept="image/*" onChange={this.checkImage2.bind(this)} />
 
                   <br></br>
@@ -258,15 +267,18 @@ class MyCommunity extends Component {
                     label="생년월일"
                     InputLabelProps={{ shrink: true, required: true }}
                     type="date"  
+                    // defaultValue={this.state.item.birth}
+                    defaultValue={this.state.item.birth}
                     required    
                   />
-
+        
                   {/* <TextField id="standard-secondary" fullWidth label="혈액형" name="blood" color="primary" required /> */}
                   {/* <TextField id="standard-secondary" fullWidth label="키" name="height" color="primary" required /> */}
 
                   <FormControl variant="outlined">
                     <FormHelperText>키</FormHelperText>
                       <OutlinedInput
+                        pattern="[0-9]{3}"
                         weight="50"
                         name="height"
                         onChange={this.insertHeight.bind(this)}
@@ -279,10 +291,13 @@ class MyCommunity extends Component {
                   <FormControl variant="outlined">
                     <FormHelperText>몸무게</FormHelperText>
                       <OutlinedInput
+                        pattern="[0-9]{3}"
+                        
                         name="weight"
                         onChange={this.insertWeight.bind(this)}
                         endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
                         labelWidth={0}
+                        defaultValue={this.state.item.weight}
                       />
                   </FormControl>
 
@@ -308,13 +323,13 @@ class MyCommunity extends Component {
 
 
              {/* <TextField id="standard-secondary" fullWidth label="몸무게" name="weight" color="primary" required /> */}
-             <TextField id="standard-secondary" fullWidth label="취미" name="hobby" color="primary" required />
-             <TextField id="standard-secondary" fullWidth label="특기" name="ability" color="primary" required />
-             <TextField id="standard-secondary" fullWidth label="한마디" name="intro" color="primary" required />
-
-
-
-
+             <TextField id="standard-secondary" fullWidth label="취미" name="hobby" color="primary" defaultValue={this.state.item.hobby} required />
+             <TextField id="standard-secondary" fullWidth label="특기" name="ability" color="primary" defaultValue={this.state.item.ability} required />
+             <TextField id="standard-secondary" fullWidth label="한마디" name="intro" color="primary" defaultValue={this.state.item.intro} required />
+            
+             <input type="hidden" name="pid" value={this.state.programId}></input>
+             <input type="hidden" name="img" value={this.state.item.img}></input>
+             <input type="hidden" name="logo" value={this.state.item.logo}></input>
 
               {this.state.UD != 0 && <button formAction="/userInfo/updatePopular">수정</button>}
             {this.state.UD != 0 && <button formAction="/userInfo/deletePopular">삭제</button>}
