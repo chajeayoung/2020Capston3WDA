@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
+@DynamicInsert
 @Entity
 @Table(name="program")
 public class Program {
@@ -30,6 +33,8 @@ public class Program {
     private String info;
     
 
+    @Column(nullable=true)
+    private String logo;
     public int getId() {
         return id;
     }
@@ -72,6 +77,14 @@ public class Program {
 
         public void setInfo(String info) {
             this.info = info;
+        }
+
+        public String getLogo() {
+            return logo;
+        }
+
+        public void setLogo(String logo) {
+            this.logo = logo;
         }
 
     

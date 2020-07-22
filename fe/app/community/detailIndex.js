@@ -31,12 +31,17 @@ class Index extends Component {
 
     async componentDidMount(){
         
-        let {data: program} = await axios.get('/community/'+param+'/axios')
+        let {data} = await axios.get('/community/'+param+'/axios')
+
+        console.log(data);
         // 프로그램 정보
-        
+        if(data.logo != '0'){
+            $("header").css("background-image","url(/uploads/"+data.logo+")")
+        }
+        $("header")
         // this.setState({program})    
         
-        this.setState({program})                        
+        this.setState({program: data})                        
         
         this.getPopular();
         // let {data} = await axios.get(this.url2); // 핫클립 정보 가져오기

@@ -35,6 +35,7 @@ import com.vote.vote.repository.ProgramJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.service.StorageService;
 
+// import org.springframework.util.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -493,22 +495,30 @@ public class UserInfoController {
 		 @RequestMapping(value="/programUpdate", method=RequestMethod.POST)
 		    public String programUpdate(Program p, 
 		    		RedirectAttributes redirAttrs, Principal principal,
-		    		@RequestParam(name="file") MultipartFile file){
+					@RequestParam(name="file") MultipartFile file,
+					@Nullable @RequestParam(name="logoImg") MultipartFile[] logoImg){
 		       	
 			 
 			 
 		    	String thumbnailPath = p.getImg();
 
 
+
+				String logo = "0";
 		    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 		    		
 		    				    	
 			    	thumbnailPath = storageService.store2(file);
 		   	
-		    	}	
+				}	
+				if(!logoImg[0].isEmpty()){
+					logo = StringUtils.cleanPath(logoImg[0].getOriginalFilename());
+					p.setLogo(logo);
+					storageService.store2(logoImg[0]);
+				}
 
-		 
-			 programRepository.programUpdate(p.getId(), p.getName(), thumbnailPath, p.getCategory());
+				System.out.println("p : "+p);
+			 programRepository.programUpdate(p.getId(), p.getName(), thumbnailPath, p.getCategory(), logo);
 			
 			 
 		    	return "redirect:/userInfo/myProgram";   

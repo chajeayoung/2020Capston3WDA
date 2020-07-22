@@ -121,7 +121,8 @@ public class CommunityController {
   	public String detailIndex(@PathVariable("program") int programNum,Model model) {
     	
     	Program program = programRepository.findById(programNum);
-    	model.addAttribute("programName", program.getName());
+		model.addAttribute("programName", program.getName());
+		// model.addAttribute("logo", program.getLogo());
     	
 		return "community/detailIndex";
 	}
@@ -140,7 +141,8 @@ public class CommunityController {
   		programData.put("id", program.getId());
   		programData.put("name", program.getName());
   		programData.put("img", program.getImg());
-  		programData.put("category", program.getCategory());
+		programData.put("category", program.getCategory());
+		programData.put("logo", program.getLogo());
 	
   	    return programData; 
   	   
@@ -194,11 +196,13 @@ public class CommunityController {
     @RequestMapping(value={"/{program}/{popular}","/{program}/{popular}/"})
    	public String popularBoard(@PathVariable("program") int programNum,
    								@PathVariable("popular") int popularNum,Model model) {
-     	
+		 
+		
      	Program program = programRepository.findById(programNum);
      	Popular popular = popularRepository.findById(popularNum);
      	
-     	model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularImg", popular.getImg());
      	
    
      	

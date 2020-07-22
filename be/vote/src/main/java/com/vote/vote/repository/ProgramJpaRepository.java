@@ -15,11 +15,12 @@ public interface ProgramJpaRepository extends JpaRepository<Program, String> {
     
     @Modifying
     @Transactional
-    @Query("update Program set p_name =:name, p_image =:image, p_category =:category where program_id = :id ")
+    @Query("update Program set p_name =:name, p_image =:image, p_category =:category ,logo =:logo where program_id = :id ")
     void programUpdate(@Param("id") int program_id,
     					@Param("name") String name,
     					@Param("image") String image,
-    					@Param("category") String category
+                        @Param("category") String category,
+                        @Param("logo") String logo
     					);
     
 }
