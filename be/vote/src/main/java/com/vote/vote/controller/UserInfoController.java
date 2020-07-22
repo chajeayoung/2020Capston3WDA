@@ -7,9 +7,11 @@ import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.customSelect.CustomAuditionCon;
 import com.vote.vote.db.customSelect.CustomOrderListSelect;
 import com.vote.vote.db.customSelect.CustomOrderState;
+import com.vote.vote.db.customSelect.CustomOrderStatePop;
+import com.vote.vote.db.customSelect.CustomOrderStatePopAge;
+import com.vote.vote.db.customSelect.CustomOrderStatePopGender;
 import com.vote.vote.db.customSelect.CustomPrd;
 import com.vote.vote.db.customSelect.CustomVote;
-import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.Company;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Popular;
@@ -44,7 +46,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -682,14 +683,25 @@ public class UserInfoController {
 		}
 		@ResponseBody
 		@RequestMapping(value={"/manage/manageOrderState/axios","/manage/manageOrderState/axios/"}, method=RequestMethod.GET)
-		public List<CustomOrderState>  orderStateAxios(@Nullable Authentication authentication) {
+		public JSONObject  orderStateAxios(@Nullable Authentication authentication) {
 
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+
 			List<CustomOrderState> result = customOrderReopsitoy.getOrderStateByManagerId(userDetails.getR_ID());
+			List<CustomOrderStatePop> result2 = customOrderReopsitoy.getOrderStatePopByProgramId(pManager.getProgramId());
+			List<CustomOrderStatePopGender> result3 = customOrderReopsitoy.getOrderStatePopGenderByProgramId(pManager.getProgramId());
+			List<CustomOrderStatePopAge> result4 = customOrderReopsitoy.getOrderStatePopPopAgeByProgramId(pManager.getProgramId());
+			JSONObject json = new JSONObject();
+			json.put("state", result);
+			json.put("pop", result2);
+			json.put("gender", result3);
+			json.put("age", result4);
 
 
-			return result;
+
+			return json;
 		}
 
 		@RequestMapping(value={"/myAudition","/myAudition"}, method = RequestMethod.GET)

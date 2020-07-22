@@ -55,6 +55,8 @@ public class Prd {
 
 	@Column(name="IMAGE", nullable= false)
 	private String img;
+	@Column
+	private int popId;
 	
 	public int getProductId() {
 		return productId;
@@ -174,6 +176,14 @@ public class Prd {
 				+ detail + ", endDate=" + endDate + ", img=" + img + ", manager=" + manager + ", name=" + name
 				+ ", price=" + price + ", productId=" + productId + ", programId=" + programId + ", state=" + state
 				+ ", stock=" + stock + ", upload=" + upload + "]";
+	}
+
+	public int getPopId() {
+		return popId;
+	}
+
+	public void setPopId(int popId) {
+		this.popId = popId;
 	}
 
 

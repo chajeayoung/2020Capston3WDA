@@ -614,13 +614,13 @@ System.out.println("------------------테스트 1");
 			System.out.println("result: " +result);
 			// System.out.println(result.get("result"));
 
-			ArrayList userAdd = new ArrayList();
+			// ArrayList userAdd = new ArrayList();
 			
 			List<VoterHash> voterHash = voterHashRepository.findByMemberIdAndVoteId(userDetails.getR_ID(),vote.getId());
 
-			for(VoterHash voterH : voterHash){
-				userAdd.add(voterH.getHash());
-			}
+			// for(VoterHash voterH : voterHash){
+			// 	userAdd.add(voterH.getHash());
+			// }
 
 
 			json.add(0, result.get(0));// 투표 결과
@@ -632,7 +632,7 @@ System.out.println("------------------테스트 1");
 			json.add(6,vote.getSelectNum());// 선발인원 숫자
 			json.add(7,0);// 투표결과 보여주는가?
 			json.add(8,vote.getAddress());// 투표 address
-			json.add(9,userAdd); // 사용자 address
+			json.add(9,voterHash); // 사용자 address
 			
 			
 		} catch (Exception e) {

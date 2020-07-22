@@ -1,9 +1,10 @@
-import React, {Component}from 'react'
+import React, {Component, createElement}from 'react'
 import ReactDOM from 'react-dom';
 import CircleChart from '../items/circleChart.jsx';
 import BarChart from '../items/barChart.jsx';
 import jQuery from "jquery";
 import "./css/addressModal.css";
+import "./css/result.css";
 // import "./js/jquery.ajax-cross-origin.min.js"
 
 window.$ = window.jQuery = jQuery;
@@ -216,13 +217,55 @@ class VoteResult extends Component {
     //     //     port: 3128
     //     //     }
     // }
+    verificationAdd(){
+        var topDiv = $(".modalItem")
+        topDiv.empty();
+
+        var contentDiv = $(document.createElement("div"))
+        contentDiv.attr("class", "usrAdd")
+        var that = this
+        if(this.state.userAdd.length >0){
+            this.state.userAdd.map((info)=>{
+                var dateDiv = $(document.createElement("div"))
+                var date = info.createdAt.split(" ")[0]
+                dateDiv.html("투표일: "+date);
+                contentDiv.append(dateDiv);
+                var div = $(document.createElement("div"))
+                div.html("해시코드: "+info.hash);
+                contentDiv.append(div);
+                var button = $(document.createElement("button"))
+                button.html("검증하기")
+                button.on('click',this.verification.bind(this,info.hash))
+                contentDiv.append(button);
+            });
+        }else{
+            var div = $(document.createElement("div"))
+            div.html("회원님의 투표정보가 없습니다.");
+            contentDiv.append(div);
+        }
+        
+        topDiv.append(contentDiv);
+    }
+    test(hash){
+        console.log(hash)
+    }
     async verification(hash){// 블록체인 검증 관련 
         var item =  $(".modalItem");
         item.empty();
+
+        var boxDiv = $(document.createElement("div"))
+        boxDiv.attr("class","loadBox")
+
+        var loadingText = $(document.createElement("div"))
+        loadingText.attr("class","loadingText");
+        loadingText.html("검증중..")
         var loading = $(document.createElement("img"));
         loading.attr("class","loadImg");
-        loading.attr("src","/img/블록체인로딩2.gif")
-        item.append(loading);
+        loading.attr("src","/img/loading_mount.gif")
+
+        boxDiv.append(loadingText);
+        boxDiv.append(loading) 
+        item.append(boxDiv);
         
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         // var html = await axios.get("http://baobab.scope.klaytn.com/tx/"+hash+"?tabId=internalTx")
@@ -249,20 +292,42 @@ class VoteResult extends Component {
         // .catch( err => {console.log(err)});
         // PulseLoader
        if(data.result.txStatus == 1 ){
-        //    var item =  $(".modalItem");
+        
             item.empty();
             var loading = $(document.createElement("img"));
             loading.attr("class","loadImg");
-            loading.attr("src","/img/로딩완료.gif")
+            loading.attr("src","/img/success.gif")
             item.append(loading);
             var div = $(document.createElement("div"));
-            div.html("블록체인 검증 결과, 당신의 투표는 정상적으로 반영되어 있습니다.")
+            div.html("블록체인 검증 결과, \n 당신의 투표는 정상적으로 반영되어 있습니다.")
+            div.attr("class","infoResult")
+
+            var div2 = $(document.createElement("div"));
+            div2.html("자세한 내용은 ")
+            div2.css("display","inline")
+            div2.attr("class","infoResult")
+            var aTag = $(document.createElement("a"))
+            aTag.attr("href","http://baobab.scope.klaytn.com/tx/"+hash)
+            aTag.html("여기")
+            aTag.attr("target","_blank")
+            aTag.attr("class","linkAtag infoResult")
+            
+            var div3 = $(document.createElement("div"))
+            div3.html("를 눌러 확인하세요")
+            div3.css("display","inline")
+            div3.attr("class","infoResult")
             item.append(div);
+            item.append(div2);
+            item.append(aTag);
+            item.append(div3);
+
+
+            
        }
     }
     render() {
         const {data} = this.state;
-        
+        console.log(this.state.userAdd)
         if(this.show == 1){
             return(
                 <div>투표 결과가 공개되지 않았습니다.</div>
@@ -302,14 +367,20 @@ class VoteResult extends Component {
                                 <div className="modal">
                                     <div className="modalContentBox">
                                         <div className="modalItem">
-                                            <div className="addText">투표 블록체인 주소:</div>
+                                            <img class="loadImg" src="/img/block_chain.gif"></img>
+                                            <div class="infoDiv">RIRO는 여러분의 투표 정보를 블록체인으로 <br/>안전하게 관리하고있으며,<br/> 검증을 통해 손쉽게 확인하실 수 있습니다.</div>
+                                            <button onClick={this.verificationAdd.bind(this)}>검증하기</button>
+                                            {/* <div className="addText">투표 블록체인 주소:</div>
                                             <div>{this.state.voteAdd}</div>
                                             <div className="addText">내가 투표한 정보</div>
-                                            <div className="usrAdd">
-                                                {this.state.userAdd.map((add, index) => {
-                                                    return <div key={index}>{add}<button type="button" onClick={this.verification.bind(this,add)}>확인</button></div>
-                                                })}
-                                            </div>
+                                            <div className="usrAdd"> */}
+                                                {
+                                                    
+                                                }
+                                                {/* this.state.userAdd.map((add, index) => {
+                                                        return <div key={index}>{add.hash}<button type="button" onClick={this.verification.bind(this,add.hash)}>확인</button></div>
+                                                    }) */}
+                                            {/* </div> */}
                                             
                                             
                                         </div>

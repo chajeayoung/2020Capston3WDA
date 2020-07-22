@@ -1,0 +1,27 @@
+.loadBox{
+    position: relative;
+}
+.infoDiv{
+    font-size: 2vmax;
+}
+.loadingText{
+    position: absolute;
+    color: white;
+    right: 0;
+    left: 0;
+    bottom:0;
+    bottom: 15px;
+    font-size: 5vmin;
+    font-size: 3vmax;
+    /* background-color: ; */
+}
+.linkAtag{
+    color:rgba(221, 44, 192, 1)
+}
+.infoResult{
+    font-size: 2vmax;
+    white-space:pre-wrap;
+}
+/* @media(max-width:940px){
+    
+} */
