@@ -309,7 +309,8 @@ public class CommunityController {
      	PopularBoard board = popularBoardRepository.findById(BoardNum);
      	  
 //     	System.out.println(board.toString());
-     	model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularImg", popular.getImg());
 	
      	board.setViewcount(board.getViewcount()+1);
      	popularBoardRepository.save(board);

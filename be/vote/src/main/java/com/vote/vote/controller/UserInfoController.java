@@ -470,6 +470,7 @@ public class UserInfoController {
 				programData.put("name", program.getName());
 				programData.put("img", program.getImg());
 				programData.put("category", program.getCategory());
+				programData.put("logo", program.getLogo());
 
 				
 				

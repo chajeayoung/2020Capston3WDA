@@ -53,6 +53,8 @@ class Show extends React.Component{
 
         let {data} = await axios.get('/vote/axios/'+param);
         this.setState({votes : data[0], title : data[1], program:data[2], date: data[3],selectNum:data[4], canNum:data[5]});
+        $("header").css("background-image","url(/uploads/"+data[2].logo+")")
+        $("header").css("background-position","top")
         $("#showCandidate").css("background-color", "rgb(245, 169, 169)")
     }
     setDate(){
