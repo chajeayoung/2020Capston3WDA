@@ -13,6 +13,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 import javax.validation.Valid;
 
 import com.google.gson.JsonObject;
+import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.ADetaiId;
 import com.vote.vote.db.dto.ADetail;
 import com.vote.vote.db.dto.ApplyResult;
@@ -40,8 +41,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-
+import java.security.Principal;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,18 +98,14 @@ public class AudienceController {
 
     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
 
-    // -----------------------------------------사용자
-    // 모든프로그램 게시글 리스트
-    @GetMapping(value = { "/audience/", "/audience/list" })
-    public String audienceAllList(@PageableDefault Pageable pageable, Model model) {
-
-        Page<Audience> boardList = audienceService.getBoardList(pageable);
-        model.addAttribute("boardList", boardList);
-
-        return "audience/uList";
+    @RequestMapping(value = { "/main" })
+    public String test2(Principal user) {
+        return "audience/main";
     }
 
-    @GetMapping(value = { "/audience2/", "/audience/list2" })
+    // 리액트 -------------------------------------사용자
+    // 모든프로그램 게시글 리스트 보기 + ajax
+    @RequestMapping(value = { "/audience/ulist2" })
     public String audienceAllList2() {
         return "audience/uList2";
     }
@@ -130,6 +128,22 @@ public class AudienceController {
             result.add(json);
         }
         return result;
+    }
+
+    @RequestMapping(value = { "/audience/read2/{applyId}" })
+    public String test(Principal user) {
+        return "audience/uRead2";
+    }
+
+    // -----------------------------------------사용자
+    // 모든프로그램 게시글 리스트
+    @GetMapping(value = { "/audience/", "/audience/list" })
+    public String audienceAllList(@PageableDefault Pageable pageable, Model model) {
+
+        Page<Audience> boardList = audienceService.getBoardList(pageable);
+        model.addAttribute("boardList", boardList);
+
+        return "audience/uList";
     }
 
     // 게시글 보기
