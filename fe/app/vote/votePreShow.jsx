@@ -155,7 +155,7 @@ class Show extends React.Component{
                                                          {this.state.state.data.map((hash,index)=>{
                                                          
                                                               return <button type="button" className="btn-hash1" onClick={this.viewCandidate.bind(this,this.state.program.id,this.state.state.popularid,hash)}>
-                                                              {hash.hashTag}
+                                                              {hash.hashtag} <sup>{hash.count}</sup>
                                                               </button>
                                                           
                                                             //   <a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}
