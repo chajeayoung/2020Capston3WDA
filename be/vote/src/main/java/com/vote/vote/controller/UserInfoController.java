@@ -586,13 +586,17 @@ public class UserInfoController {
 
 	
 			    		
-			    		// String thumbnailPath = storageService.store2(file);
+			    		 String thumbnailPath = storageService.store2(file);
 
-			    		// pp.setImg(thumbnailPath);
+						 pp.setImg(thumbnailPath);
+						 
+						 String thumbnailPath2 = storageService.store2(file2);
+
+			    		 pp.setLogo(thumbnailPath2);
 			    		
-			    		// System.out.println("후보등록정보:"+pp.toString());
+			    		 System.out.println("후보등록정보:"+pp.toString());
 			    	
-			    		// popularRepository.saveAndFlush(pp);
+			    		 popularRepository.saveAndFlush(pp);
 				
 			            return "redirect:/userInfo/myCommunity";
 			        
