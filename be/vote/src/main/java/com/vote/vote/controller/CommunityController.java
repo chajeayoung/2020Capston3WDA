@@ -150,7 +150,7 @@ public class CommunityController {
     
     @RequestMapping(value={"/{program}/popular/axios","/{program}/popular/axios/"}) // 
   	@ResponseBody
-  	public JSONArray  popularAxios(@PathVariable("program") int programNum, @PageableDefault Pageable pageable){// 프로그램 인기인 정보
+  	public JSONArray  popularAxios(@PathVariable("program") int programNum, @PageableDefault Pageable pageable){// 프로그램 출연자 정보
 		
 
       	List<Popular> populares = customPopularRepository.findByPid(programNum, pageable);

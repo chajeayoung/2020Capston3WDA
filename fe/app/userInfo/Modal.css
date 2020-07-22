@@ -24,6 +24,8 @@
     padding: 1rem;
     width: 400px;
     height: auto;
+    text-align:center;
+    overflow: scroll;
     
   }
   .profile_preview{
@@ -45,3 +47,26 @@
 
   .modal{text-align: center}
   textarea{resize: none;}
+
+  .MuiSelect-outlined.MuiSelect-outlined{width:40px;}
+
+  input.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedEnd.MuiOutlinedInput-inputAdornedEnd {
+    width: 30px;
+}
+
+input[type="file"]{
+  float:right;
+}
+img.profile_preview{
+  width: 10vmax;
+}
+
+@media(max-width:500px){
+  .MyModal .content { height : 80vmax;}
+    
+}
+
+p.MuiFormHelperText-root {
+  text-align: center;
+}
+
