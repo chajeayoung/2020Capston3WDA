@@ -22,18 +22,23 @@
                         <tbody class='table_body'>
                             <tr >
                                 <th>성명</th>
-                                <td>
-                                    <input type="text" name="fusername" required/>
-                                </td>
+                                
+                                    <td sec:authentication="principal.name"></td>
+                                    <!-- <input type="text" name="fusername" required/> -->
+                                    <!-- <input type="hidden" name="fusername" th:value="${principal.name}" required/> -->
                                 
                                 <th>휴대전화번호</th>
+                                <!-- <td sec:authentication="principal.number"></td> -->
                                 <td>
                                     <input type="text" name="fuserphone" required/>
                                 </td>
                                 
                                 <th>이메일</th>
+                               
+
+                                </th:block>
                                 <td>
-                                    <input type="text" name="fusermail" required/>
+                                    <input type="text" name="fusermail"  required/>
                                 </td>
                             </tr>
                             <tr>
