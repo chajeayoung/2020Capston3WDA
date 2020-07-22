@@ -5,7 +5,14 @@
   width: 100% !important;
   /* border-right: 2px solid gray; */
 }
-
+.showButton{
+  border-radius: 8px;
+  border: 1px solid #cee3f6;
+  color: black;
+  background-color: #e0ecf8;
+  padding: 5px;
+  margin: 5px 0px;
+}
 .left_right_box {
   /* display: grid;
   grid-template-columns: 50% 50%;

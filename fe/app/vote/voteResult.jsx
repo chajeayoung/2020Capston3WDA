@@ -95,6 +95,7 @@ class VoteResult extends Component {
     }
     
     async componentDidMount(){
+        // $(".circle_result_show").css("background-color","rgb(245, 169, 169)")
         console.log("VoteResult : componentDidMount")
         const {data: json} =  await axios.get('/vote/result/axios/'+param);
         // json[]  0: 투표결과 , 1: 후보이름, 2: 나이별, 3: 성별별, 4:count: 투표총 횟수 ,5: 후보수, 6: 선발인원 숫자 ,7: show, 8: vote address , 9: userAddress
@@ -335,64 +336,80 @@ class VoteResult extends Component {
         }
         return(
             <div>   
-                { this.send.count == 0 ? (
-                    <div>투표 데이터가 없습니다.</div>
-                ):(
                     <div>
-                        <div id="showChart">
-                            {
-                                this.state.circle == 0 ? (
-                                    <div>
-                                        <CircleChart data={this.state.data} />
+                        { // 결과 창
+                            this.props.showCandidate == 1? (
+                                <div>
+                                    <div className="show_result">★☆실시간 투표 결과☆★</div>
+                                        { this.send.count == 0 ? (
+                                            <div>투표 데이터가 없습니다.</div>
+                                        ):(
+                                            <div>
+                                                <div id="showChart">
+                                        {
+                                            this.state.circle == 0 ? (
+                                                <div>
+                                                    <CircleChart data={this.state.data} />
+                                                </div>
+                                            ):(
+                                                this.state.age == 0 ?(
+                                                    <BarChart data={barChart}/>
+                                                ):(
+                                                    <BarChart data={barChart2}/>
+                                                )
+                                            )
+                                        }
                                     </div>
-                                ):(
-                                    this.state.age == 0 ?(
-                                        <BarChart data={barChart}/>
-                                    ):(
-                                        <BarChart data={barChart2}/>
-                                    )
-                                )
-                            }
-                        </div>
-                        <div className="selectVoteShowType">
-                            <div>
-                                <button className="circle_result_show" onClick={this.showChart.bind(this)}>득표수</button>
-                                <button className="age_result_show" onClick={this.showAge.bind(this)}>연령별</button>
-                                <button className="gender_result_show" onClick={this.showGender.bind(this)}>성별</button>
-                            </div>
-                        </div>
-                        <div onClick={this.modalOn.bind(this)}>블록체인 주소확인</div>
-                        {
-                            this.state.modal == 0?(
-                                <div className="modal">
-                                    <div className="modalContentBox">
-                                        <div className="modalItem">
-                                            <img class="loadImg" src="/img/block_chain.gif"></img>
-                                            <div class="infoDiv">RIRO는 여러분의 투표 정보를 블록체인으로 <br/>안전하게 관리하고있으며,<br/> 검증을 통해 손쉽게 확인하실 수 있습니다.</div>
-                                            <button onClick={this.verificationAdd.bind(this)}>검증하기</button>
-                                            {/* <div className="addText">투표 블록체인 주소:</div>
-                                            <div>{this.state.voteAdd}</div>
-                                            <div className="addText">내가 투표한 정보</div>
-                                            <div className="usrAdd"> */}
-                                                {
-                                                    
-                                                }
-                                                {/* this.state.userAdd.map((add, index) => {
-                                                        return <div key={index}>{add.hash}<button type="button" onClick={this.verification.bind(this,add.hash)}>확인</button></div>
-                                                    }) */}
-                                            {/* </div> */}
-                                            
-                                            
+                                    <div className="selectVoteShowType">
+                                        <div>
+                                            <button className="circle_result_show" onClick={this.showChart.bind(this)}>득표수</button>
+                                            <button className="age_result_show" onClick={this.showAge.bind(this)}>연령별</button>
+                                            <button className="gender_result_show" onClick={this.showGender.bind(this)}>성별</button>
                                         </div>
-                                        <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
                                     </div>
+                                    <div onClick={this.modalOn.bind(this)}>블록체인 주소확인</div>
+                                    {
+                                        this.state.modal == 0?(
+                                            <div className="modal">
+                                                <div className="modalContentBox">
+                                                    <div className="modalItem">
+                                                        <img class="loadImg" src="/img/block_chain.gif"></img>
+                                                        <div class="infoDiv">RIRO는 여러분의 투표 정보를 블록체인으로 <br/>안전하게 관리하고있으며,<br/> 검증을 통해 손쉽게 확인하실 수 있습니다.</div>
+                                                        <button onClick={this.verificationAdd.bind(this)}>검증하기</button>
+                                                        {/* <div className="addText">투표 블록체인 주소:</div>
+                                                        <div>{this.state.voteAdd}</div>
+                                                        <div className="addText">내가 투표한 정보</div>
+                                                        <div className="usrAdd"> */}
+                                                            {
+                                                                
+                                                            }
+                                                            {/* this.state.userAdd.map((add, index) => {
+                                                                    return <div key={index}>{add.hash}<button type="button" onClick={this.verification.bind(this,add.hash)}>확인</button></div>
+                                                                }) */}
+                                                        {/* </div> */}
+                                                        
+                                                        
+                                                    </div>
+                                                    <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
+                                                </div>
+                                            </div>
+                                        ):(
+                                        <div></div>
+                                        )
+                                    }
+                                    </div>
+                                    )}
                                 </div>
-                            ):(
+                                
+                                
+                            ):
                             <div></div>
-                            )
+                            
                         }
+                        
+
                     </div>
-                )}
+                
             </div>
         )
       }
