@@ -30,7 +30,7 @@ class VoteShow extends React.Component {
         let {data} = await axios.get("/vote/axios/hash/"+vote.popularid);
         //this.props.setState({})
         console.log(data)
-        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data ,info:vote.info}})
+        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data ,vote:vote}})
 
         // var modalItem = $("modalItem");
         // modalItem.empty();
@@ -99,11 +99,11 @@ class Show extends React.Component{
     }
 
     viewCandidate(programid,popularid,hash){
-        window.open("/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag, "Hi");
+        window.open("/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashtag, "Hi");
 
         console.log(programid)
         console.log(popularid)
-        console.log(hash.hashTag)
+        console.log(hash.hashtag)
     }
 
 
@@ -151,23 +151,46 @@ class Show extends React.Component{
                                                 <div className="modalItem">
                                                      {this.state.state.option==0?(
                                                      <div>
-                                            
+                                                         <div><img src={'/uploads/'+this.state.state.vote.img}></img>
+                                             
+                                                         <table>
+                                                            <thead>
+                                                                <tr>
+                                                                <th>{this.state.state.vote.name}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <td>생년월일</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>혈액형</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>키</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>몸무게</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>취미</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>특기</td><td>text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>한마디</td><td>{this.state.state.vote.info}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                          {this.state.state.data.map((hash,index)=>{
-                                                         
                                                               return <button type="button" className="btn-hash1" onClick={this.viewCandidate.bind(this,this.state.program.id,this.state.state.popularid,hash)}>
                                                               {hash.hashtag} <sup>{hash.count}</sup>
                                                               </button>
-                                                          
-                                                            //   <a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}
-                                                            //   target="_blank"></a>
-                                                                 
-                                                            //return <div>{this.state.state.popularid+""+this.state.program.id+"------"+hash.hashtag}</div>
-                                                         }) 
-                                                        
-                                                                                                              
-                                                         }
+                                                         })}
                                                         {this.state.state.data.length==0?<div>등록된 해시태그가 없습니다.</div>:<div></div>}
-                                                        <div>{this.state.state.info}</div>
+                                                        
                                                      </div>):(
                                                         
                                                     <div></div>)}

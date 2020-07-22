@@ -3,6 +3,8 @@ package com.vote.vote.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.validation.constraints.Null;
+
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.customSelect.CustomAuditionCon;
 import com.vote.vote.db.customSelect.CustomOrderListSelect;
@@ -550,6 +552,7 @@ public class UserInfoController {
 						popularData.put("id", popular.getId());
 						popularData.put("name", popular.getName());
 						popularData.put("img", popular.getImg());
+						popularData.put("logo", popular.getLogo());
 						popularData.put("p_id", popular.getPid());
 
 						
@@ -571,8 +574,10 @@ public class UserInfoController {
 			 
 			 
 			@RequestMapping(value="/insertPopular", method=RequestMethod.POST)
-			    public String insertOk(Popular pp, RedirectAttributes redirAttrs, Principal principal
-			    		,@RequestParam(name="img2") MultipartFile file
+				public String insertOk(Popular pp, RedirectAttributes redirAttrs, 
+				Principal principal
+				,@Nullable @RequestParam(name="img2") MultipartFile file,
+				@Nullable @RequestParam(name="img3") MultipartFile file2
 			    		){
 			       	
 					
@@ -581,13 +586,13 @@ public class UserInfoController {
 
 	
 			    		
-			    		String thumbnailPath = storageService.store2(file);
+			    		// String thumbnailPath = storageService.store2(file);
 
-			    		pp.setImg(thumbnailPath);
+			    		// pp.setImg(thumbnailPath);
 			    		
-			    		System.out.println("test:"+pp.toString());
+			    		// System.out.println("후보등록정보:"+pp.toString());
 			    	
-			    		popularRepository.saveAndFlush(pp);
+			    		// popularRepository.saveAndFlush(pp);
 				
 			            return "redirect:/userInfo/myCommunity";
 			        
