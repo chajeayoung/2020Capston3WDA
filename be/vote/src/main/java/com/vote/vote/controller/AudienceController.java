@@ -41,6 +41,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import java.security.Principal;
@@ -191,6 +193,18 @@ public class AudienceController {
         }
     }
 
+    // 당첨확인 ajax
+    @GetMapping("/audience/confirm")
+    @ResponseBody
+    public String confirm(Audience audience, Principal principal, @Nullable Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String name = principal.getName();
+        if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
+            return name +"님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
+        }
+        return name + "님 당첨을 축하 드립니다! 자세한 내용은 문자로 알려드립니다!";
+    }
+
     // --------------------------------------------------------관리자
     // 게시글 업로드(관리자)
     @GetMapping("/audience/create")
@@ -324,8 +338,8 @@ public class AudienceController {
 
         int people = audi.getARecruits(); // 추첨 인원
         List<Member> list = new ArrayList<>();
-        List<Member> result = new ArrayList<>();
-        List<Member> result2 = new ArrayList<>();
+        List<Member> result = new ArrayList<>(); // 중복확인용
+        List<Member> result2 = new ArrayList<>(); // 최종결과명단
         // list = mr.getInfoNoDistincList(audience.getApplyId()); // 응모 리스트
         list = mr.getInfo(audi.getApplyId());// 중복제거
         // JSONObject obj = new JSONObject();
@@ -341,6 +355,7 @@ public class AudienceController {
                 applyResult.setApplyId(audi.getApplyId());
                 applyResult.setName(list2.getName());
                 applyResult.setPhone(list2.getPhone());
+                applyResult.setRno(list2.getNo());
                 applyResultRepository.saveAndFlush(applyResult);
 
             }
@@ -373,6 +388,7 @@ public class AudienceController {
                 applyResult.setApplyId(audi.getApplyId());
                 applyResult.setName(list2.getName());
                 applyResult.setPhone(list2.getPhone());
+                applyResult.setRno(list2.getNo());
                 applyResultRepository.saveAndFlush(applyResult);
             }
         }

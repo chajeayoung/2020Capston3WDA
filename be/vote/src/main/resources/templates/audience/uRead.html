@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},~{::script},'게시글', ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{main_layout::layout(~{::content},~{::script},'게시글', ~{::link})}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>게시글</title> -->
     <link rel="stylesheet" href="/css/boardstyle.css">
     <link rel="stylesheet" href="/css/contents.css">
     <link rel="stylesheet" href="/css/default.css">
@@ -18,31 +18,30 @@
 
 <body>
     <content>
-    <div id="container">
+        <div id="container">
 
-        <script src="http://sample.paged.kr/purewhite/js/viewimageresize.js"></script>
+            <script src="http://sample.paged.kr/purewhite/js/viewimageresize.js"></script>
 
-        <!-- 게시물 읽기 시작 { -->
-
-        <article id="bo_v" style="width:100%">
-            
+            <!-- 게시물 읽기 시작  -->
+            <article id="bo_v" style="width:100%">
                 <h2 id="bo_v_title">
-                    <span class="bo_v_tit" th:text="${audience.aTitle}">
-                        웹진형 게시판입니다.</span>
+                    <span class="bo_v_tit" th:text="${audience.aTitle}">컨텐츠제목</span>
                 </h2>
-            
-
-            <section id="bo_v_info">
-                <h2>페이지 정보</h2>
-                <span class="sound_only">작성자</span> <strong><span class="sv_member"
-                        th:text="${audience.rId}">웹사이팅</span></strong>
-                <span class="sound_only">댓글</span><strong><a href="#bo_vc"> <i class="fa fa-commenting-o"
-                            aria-hidden="true"></i> 0건</a></strong>
-                <span class="sound_only">조회</span><strong th:text="${audience.aViewCount}"><i class="fa fa-eye"
-                        aria-hidden="true"></i> 393회</strong>
-                <strong class="if_date" th:text="${audience.aDate}"><span class="sound_only">작성일</span><i
+                <section id="bo_v_info">
+                    <h2>페이지 정보</h2>
+                    <span class="sound_only">작성자</span>
+                    <strong>
+                        <span class="sv_member" th:text="${audience.rId}">웹사이팅</span>
+                    </strong>
+                    <span class="sound_only">댓글</span>
+                    <strong>
+                        <a href="#bo_vc"><i class="fa fa-commenting-o" aria-hidden="true"></i> 0건</a>
+                    </strong>
+                    <span class="sound_only">조회</span><strong th:text="${audience.aViewCount}"><i class="fa fa-eye"
+                            aria-hidden="true"></i> 393회</strong>
+                    <strong class="if_date" th:text="${#dates.format(audience.aDate, 'yyyy-MM-dd HH:mm')}"><span class="sound_only">작성일</span><i
                         class="fa fa-clock-o" aria-hidden="true"></i> 18-02-07 09:23</strong>
-            </section>
+                </section>
 
             <section id="bo_v_atc">
                 <h2 id="bo_v_atc_title">본문</h2>
@@ -53,9 +52,9 @@
                 </div>
 
                 <!-- 본문 내용 시작 { -->
-
+                    
                 <label>응모기간&nbsp;&nbsp;</label><span
-                    th:text="@{${audience.aStartdate} + '  ~  ' + ${audience.aEnddate}}"></span><br>
+                th:text="${#dates.format(audience.aStartdate, 'yyyy-MM-dd HH:mm') + ' ~ ' + #dates.format(audience.aEnddate, 'yyyy-MM-dd HH:mm')}"></span><br>
                 <label>추첨인원&nbsp;&nbsp;</label><span th:text="@{${audience.aRecruits} + '  명  '}"></span><br>
                 <label>응모제한&nbsp;&nbsp;</label><span th:text="@{${audience.aLimit} + '  회  '}"></span><br>
                 <label>응모시 소모 포인트&nbsp;&nbsp;</label><span th:text="@{${audience.aPrice} + ' p  '}"></span><br>
@@ -64,12 +63,22 @@
                     <p th:text="${audience.aContent}"></p>
                 </div>
                 <!-- } 본문 내용 끝 -->
+                <!-- 타이머 시작 -->
+                <div class="timer">
+                    <h1 id="timer__title">응모까지 남은 시간</h1>
+                    <ul id="timer__ul">
+                      <li><span id="days"></span>일</li>
+                      <li><span id="hours"></span>시간</li>
+                      <li><span id="minutes"></span>분</li>
+                      <li><span id="seconds"></span>초</li>
+                    </ul>
+                  </div>
+                  <!-- 타이머 끝 -->
                 <form style="text-align: -webkit-center">
                     <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
                     <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
                     <input type="hidden" id="aPrice" name="bo_table" value="webzine" th:value="${audience.aPrice}">
-                    <input type="hidden" name="wr_id" value="0">
-                    <input type="hidden" name="sca" value="">
+                    <input type="hidden" id="aEnddate" name="wr_id" th:value="${audience.aEnddate}">
                     <input type="hidden" name="sfl" value="">
                     <input type="hidden" name="stx" value="">
                     <input type="hidden" name="spt" value="">
@@ -78,15 +87,23 @@
                     <input type="hidden" name="page" value="">
                     <input type="hidden" value="html1" name="html">
                     <input type="button" value="응모하기" id="apply" class="btn_submit btn">
+                    <input type="button" value="당첨확인" id="confirm" class="btn_submit btn">
                 </form>
-                
-                <div id="result">
+                <div id="modal-container">
+                    <div class="modal-background">
+                        <div class="modal">
+                            <img class="modal__img" src="/uploads/축하.gif" alt="HTML5 Icon" width="128" height="128">
+                            <p class="modal__message">축하드립니다. </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="result">
                     <th:block th:if="${result.size() >=1}">
                         
                         <h4>당첨자</h4>
                         <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
                     </th:block>
-                </div>
+                </div> -->
             </section>
 
             <div id="bo_v_share">

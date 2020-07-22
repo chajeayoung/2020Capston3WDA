@@ -1,8 +1,10 @@
-
 </body>
+
 </html>
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'방청권 응모', ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{main_layout::layout(~{::content},_,'방청권 응모', ~{::link})}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,24 +19,25 @@
 </head>
 
 <body>
-  <content>
-    <div id="container">
-        <!-- 게시판 목록 시작 { -->
-        <div id="bo_list" style="width:100%">
-            <!-- 게시판 페이지 정보 및 버튼 시작 { -->
-            <div id="bo_btn_top">
-                <div id="bo_list_total">
-                    <span th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
-                </div>
+    <content>
+        <div id="container">
+            <!-- 게시판 목록 시작 { -->
+            <div id="bo_list" style="width:100%">
+                <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+                <div id="bo_btn_top">
+                    <div id="bo_list_total">
+                        <span
+                            th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
+                    </div>
 
-                <!-- <ul class="btn_bo_user">
+                    <!-- <ul class="btn_bo_user">
                     <li><a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
                                 aria-hidden="true"></i> 글쓰기</a></li>
                 </ul> -->
-            </div>
-            <!-- } 게시판 페이지 정보 및 버튼 끝 -->
+                </div>
+                <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
-<!--            <form name="fboardlist" id="fboardlist" action="#"
+                <!--            <form name="fboardlist" id="fboardlist" action="#"
                 onsubmit="return fboardlist_submit(this);" method="post">
                 <input type="hidden" name="bo_table" value="webzine">
                 <input type="hidden" name="sfl" value="">
@@ -62,7 +65,7 @@
                             <u>
                                 <span><span class="sv_member" th:text="${list.rId}"></span></span>
                                 <span th:text="${list.aViewCount}"><i class="fa fa-eye"></i> </span>
-                                <span th:text="${list.aDate}"><i class="fa fa-clock-o"></i> </span>
+                                <span th:text="${#dates.format(list.aDate, 'yyyy-MM-dd HH:mm')}"><i class="fa fa-clock-o"></i> </span>
                             </u>
                         </li>
                     

@@ -13,11 +13,11 @@ import javax.persistence.Table;
 public class ApplyResult {
     @Id
     @Column
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="APPLY_RESULT_SEQ_GENERATOR")
-    @SequenceGenerator(name="APPLY_RESULT_SEQ_GENERATOR", sequenceName="APPLY_RESULT_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "APPLY_RESULT_SEQ_GENERATOR")
+    @SequenceGenerator(name = "APPLY_RESULT_SEQ_GENERATOR", sequenceName = "APPLY_RESULT_SEQ", allocationSize = 1)
     private int no;
 
-    @Column(name="apply_id")
+    @Column(name = "apply_id")
     private int applyId;
 
     @Column
@@ -25,6 +25,17 @@ public class ApplyResult {
 
     @Column
     private String name;
+
+    @Column(name = "r_id")
+    private int rno;
+
+    public int getRno() {
+        return this.rno;
+    }
+
+    public void setRno(int rno) {
+        this.rno = rno;
+    }
 
     public int getNo() {
         return no;
