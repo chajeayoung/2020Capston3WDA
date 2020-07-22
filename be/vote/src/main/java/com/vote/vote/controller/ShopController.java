@@ -14,6 +14,7 @@ import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Mybag;
 import com.vote.vote.db.dto.Order;
 import com.vote.vote.db.dto.OrderList;
+import com.vote.vote.db.dto.Popular;
 import com.vote.vote.db.dto.Prd;
 import com.vote.vote.db.dto.PrdCategory;
 import com.vote.vote.db.dto.PrdCategoryD;
@@ -31,6 +32,7 @@ import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.MybagJpaRepository;
 import com.vote.vote.repository.OrderJpaRepository;
 import com.vote.vote.repository.OrderListJpaRepository;
+import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.repository.PrdCateDJpaRepository;
 import com.vote.vote.repository.PrdCategoryDJpaRepository;
 import com.vote.vote.repository.PrdCategoryJpaRepository;
@@ -129,6 +131,13 @@ public class ShopController {
 
 	@Autowired
 	private KakaoPayService kakaoPay;
+
+
+	@Autowired
+	private ProgramManagerJpaRepository pmRepository;	
+
+	@Autowired
+	private PopularJpaRepository popularRepository;
 
 	@RequestMapping("/shop/index")
 	public String index(Model model,Principal user) {
@@ -254,6 +263,7 @@ public class ShopController {
 		@Nullable @RequestParam("optionTitle") String[] optionTitle,
 		@Nullable @RequestParam("optionPrice") int[] optionPrice,
 		@Nullable @RequestParam("optionStock") int[] optionStock,
+		@RequestParam("pop") int pop,
 		Principal user,
 		Authentication authentication
 
@@ -279,6 +289,7 @@ public class ShopController {
 		product.setEndDate(endTime); // 상품 판매 종료 날짜
 		product.setStock(stock);	
 		product.setImg(file1Name);
+		product.setPopId(pop);
 		System.out.println(product.toString());
 		prdRepository.saveAndFlush(product);
 
@@ -375,7 +386,10 @@ public class ShopController {
 
 	@RequestMapping(value={"/shop/store/axios","/shop/store/axios/"})// 상품저장 관련 정보 가져오기
 	@ResponseBody
-	public JSONArray categoryAxios(){// 상품 생성 뷰
+	public JSONArray categoryAxios(@Nullable Authentication authentication){// 상품 생성 뷰
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
 		JSONArray categorys = new JSONArray();
 
 		// 카테고리 가져옴.
@@ -392,7 +406,31 @@ public class ShopController {
 
 		categorys.add(2,color);
 		categorys.add(3,size);
+
+		ProgramManager pm = pmRepository.findById(userDetails.getR_ID()); 
+		  
+		Program program = programRepository.findById(pm.getProgramId());
+
 		
+		List<Popular> populares = popularRepository.findByPid(program.getId());
+
+					
+		JSONArray json = new JSONArray();
+		
+		for( Popular popular : populares){
+			JSONObject popularData = new JSONObject();
+			
+			popularData.put("id", popular.getId());
+			popularData.put("name", popular.getName());
+			popularData.put("img", popular.getImg());
+			popularData.put("p_id", popular.getPid());
+
+			
+			json.add(popularData);
+		}
+
+		categorys.add(4,json);
+
 		return categorys;
 	}
 

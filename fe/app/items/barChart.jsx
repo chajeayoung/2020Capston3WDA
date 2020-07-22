@@ -15,6 +15,7 @@ import Dataset from '@bit/nexxtway.react-rainbow.dataset';
 export default class BarChart extends React.Component {
     constructor(props) {
         super(props);
+        
         // this.titles =  ['10','20','30','40','50','60'];// 후보
         // this.colors = ['#FA5858', '#FE9A2E', '#F7FE2E','#58ACFA', '#D358F7'];
         // this.months = ['July', 'August', 'September', 'October', 'November', 'December'];
@@ -54,6 +55,7 @@ export default class BarChart extends React.Component {
 
     renderDatasets() {
         const { datasets } = this.props.data;
+        console.log(datasets)
         return datasets.map(({ title, values, backgroundColor }) => (
             <Dataset key={title} title={title} values={values} backgroundColor={backgroundColor} />
         ));

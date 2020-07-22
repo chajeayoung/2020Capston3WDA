@@ -9,7 +9,7 @@ window.$ = window.jQuery = jQuery;
 class ItemCreate extends React.Component {
     constructor(props){
         super(props)
-        this.state = {category:[], categoryD:[], color:[],size:[]}
+        this.state = {category:[], categoryD:[], color:[],size:[], pop:[]}
         this.colorTag;
         this.sizeTag;
     }
@@ -18,10 +18,25 @@ class ItemCreate extends React.Component {
         console.log(data);
         
        
-        this.setState({category:data[0], categoryD:data[1], color:data[2], size:data[3]})
+        this.setState({category:data[0], categoryD:data[1], color:data[2], size:data[3], pop:data[4]})
         console.log(this.state);
         this.categorys();
+        this.setPop();
         // this.setOptionSelect();
+    }
+    setPop(){
+        var select = $("#pop_select")
+        
+        this.state.pop.map((popInfo,index)=>{
+            var option = $(document.createElement("option"));
+            option.val(popInfo.id)
+            option.text(popInfo.name)
+            select.append(option);
+        })
+        var option = $(document.createElement("option"));
+        option.val(0)
+        option.text("기타상품")
+        select.append(option);
     }
     categorys(){
         var categorySelect = $('#category_select');
@@ -157,6 +172,9 @@ class ItemCreate extends React.Component {
                             <select id="category_select"  name="category" onChange={this.categoryDSet.bind(this)} required>                
                             </select>
                             <select id="categoryD_select"  name="categoryD" required>                
+                            </select>
+                            <div>관련 출연자</div>
+                            <select id="pop_select"  name="pop" onChange={this.categoryDSet.bind(this)} required>                
                             </select>
                             <div>상품판매 종료날짜</div>
                             <input type="date" name="endTime" required/>

@@ -10,6 +10,36 @@
         padding: 0px !important;
         
     }
+    .chart{
+        width: auto !important;
+    }
+}
+.chart{
+    margin: auto;
+}
+.divAlignCenter{
+    text-align: center;
+}
+.stateDefaultButton{
+    border-radius: 8px;
+    border: 1px solid #cee3f6;
+    color: black;
+    background-color:  rgb(245, 169, 169);;
+    padding: 5px;
+    margin: 5px 0px;
+}
+.stateButton{
+    border-radius: 8px;
+    border: 1px solid #cee3f6;
+    color: black;
+    background-color: #e0ecf8;
+    padding: 5px;
+    margin: 5px 0px;
+    /* rgb(245, 169, 169); */
+}
+
+.chart{
+    width: 500px;
 }
 .stateItem{
     padding: 10px;
