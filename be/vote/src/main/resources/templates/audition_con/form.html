@@ -28,10 +28,11 @@
                                     <!-- <input type="hidden" name="fusername" th:value="${principal.name}" required/> -->
                                 
                                 <th>휴대전화번호</th>
+                                <td th:text="${member.phone}"></td>
                                 <!-- <td sec:authentication="principal.number"></td> -->
-                                <td>
-                                    <input type="text" name="fuserphone" required/>
-                                </td>
+                                
+                                    <!-- <input type="hidden" name="fuserphone" th:value="${member.phone}"required/> -->
+                                
                                 
                                 <th>이메일</th>
                                
@@ -121,6 +122,7 @@
                     </table>
                     <!-- <input type="hidden" name="confirm" value="n"> -->
                     <input type="hidden" name="confirm" value="심사대기">
+                    
                 </div>
                 <tr>
                     <td colspan="3">
@@ -134,7 +136,6 @@
                         <input type="button" value="직업 추가" onclick="job_add();"> -->
                     </td>
                 </tr>  
-                
             </form>
             <script>
             
