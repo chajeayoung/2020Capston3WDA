@@ -129,6 +129,8 @@ body{
 }
 #program_info{
     
+display: block;
+text-align-last: center;
     
 }
 .sc-htoDjs.fNoJej {

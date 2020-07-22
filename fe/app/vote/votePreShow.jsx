@@ -98,6 +98,14 @@ class Show extends React.Component{
         this.setState({modal:1})
     }
 
+    viewCandidate(programid,popularid,hash){
+        window.open("/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag, "Hi");
+
+        console.log(programid)
+        console.log(popularid)
+        console.log(hash.hashTag)
+    }
+
 
     render(){
         const {title} = this.state.title
@@ -146,16 +154,18 @@ class Show extends React.Component{
                                             
                                                          {this.state.state.data.map((hash,index)=>{
                                                          
-                                                              return (                                                          
-                                                              <div><a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}>
-                                                                  {hash.hashTag}</a></div>
-                                                                  )
+                                                              return <button type="button" className="btn-hash1" onClick={this.viewCandidate.bind(this,this.state.program.id,this.state.state.popularid,hash)}>
+                                                              {hash.hashTag}
+                                                              </button>
+                                                          
+                                                            //   <a href={"/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashTag}
+                                                            //   target="_blank"></a>
+                                                                 
                                                             //return <div>{this.state.state.popularid+""+this.state.program.id+"------"+hash.hashtag}</div>
                                                          }) 
                                                         
                                                                                                               
                                                          }
-
                                                         {this.state.state.data.length==0?<div>등록된 해시태그가 없습니다.</div>:<div></div>}
                                                         <div>{this.state.state.info}</div>
                                                      </div>):(

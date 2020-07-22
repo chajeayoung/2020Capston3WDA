@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import "./auth/register.css";
 const axios = require('axios');
 const regeneratorRuntime = require("regenerator-runtime");
-import DaumPostcode from 'react-daum-postcode';
+
 
 class Register extends React.Component {
     
@@ -191,17 +191,6 @@ class Register extends React.Component {
                     </tbody>
                 </table>
                 <button className="submit_button" type="submit">회원가입</button>
-{/* 
-                <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                <input type="text" id="sample4_postcode" placeholder="우편번호"/>
-                <input type="button" onClick={this.sample4_execDaumPostcode.bind(this)} value="우편번호 찾기"/>
-                <input type="text" id="sample4_roadAddress" placeholder="도로명주소"/>
-                <input type="text" id="sample4_jibunAddress" placeholder="지번주소"/>
-                <input type="text" id="sample4_detailAddress" placeholder="상세주소"/>
-                <input type="text" id="sample4_extraAddress" placeholder="참고항목"/>
-
-
-                <DaumPostcode     onComplete={handleComplete}   { ...props }   /> */}
             </div>
 
         );
