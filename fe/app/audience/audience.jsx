@@ -1,16 +1,30 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import Pagination from "./pagination.jsx";
 import { paginate } from "./paginate.jsx";
-
-// import "../css/boardstyle.css";
-// import '../css/contents.css';
-// import "../css/default.css";
-// import "../css/board.common.css";
-import Button from "@material-ui/core/Button"
-const axios = require("axios");;
+import BlogPosts from './src/views/BlogPosts';
+import SortButton from './SortButton.jsx';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardFooter,
+  Badge,
+  Button
+} from "shards-react";
+const axios = require("axios");
 const regeneratorRuntime = require("regenerator-runtime");
+
+
+
 class Audience extends React.Component {
+
+
   constructor(props) {
     super(props);
     this.state = { audiences: [], pageSize: 3, itemsCount: "", currentPage: 1 };
@@ -39,7 +53,8 @@ class Audience extends React.Component {
     const audiences = paginate(this.state.audiences, currentPage, pageSize);
     return (
       <React.Fragment>
-        <p>showing {count} data in the database.</p>
+        <SortButton></SortButton>
+        {/* <p>showing {count} data in the database.</p>
         <div className="webzineList">
           <ul>
             {audiences.map((audience) => (
@@ -62,7 +77,10 @@ class Audience extends React.Component {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
+
+
+        <BlogPosts></BlogPosts>
 
 
         <Button
