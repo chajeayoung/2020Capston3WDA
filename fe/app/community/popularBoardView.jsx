@@ -31,7 +31,8 @@ class PopularBoardView extends Component {
       }
 
     async componentDidMount(){
-        $("header").css("background-image","url(/uploads/"+$("#popLogoImg").val()+")")
+        console.log("dd: "+$("#popLogoImg").val())
+        $("header").css("background-image","url('/uploads/"+$("#popLogoImg").val()+"')")
         $("header").css("background-position","top")
 
         let {data: data} = await axios.get(`/community/${param3}/${param2}/${param}/axios`)  

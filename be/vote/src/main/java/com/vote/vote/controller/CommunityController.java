@@ -166,6 +166,7 @@ public class CommunityController {
 			popularData.put("name", popular.getName());
 			popularData.put("img", popular.getImg());
 			popularData.put("p_id", popular.getPid());
+			// popularData.put("logo", popular.getPid();
 
 			json.add(popularData);
 		}
@@ -202,7 +203,7 @@ public class CommunityController {
      	Popular popular = popularRepository.findById(popularNum);
      	
 		 model.addAttribute("popularName", popular.getName());
-		 model.addAttribute("popularImg", popular.getImg());
+		 model.addAttribute("popularImg", popular.getLogo());
      	
    
      	
@@ -310,7 +311,7 @@ public class CommunityController {
      	  
 //     	System.out.println(board.toString());
 		 model.addAttribute("popularName", popular.getName());
-		 model.addAttribute("popularImg", popular.getImg());
+		 model.addAttribute("popularImg", popular.getLogo());
 	
      	board.setViewcount(board.getViewcount()+1);
      	popularBoardRepository.save(board);
