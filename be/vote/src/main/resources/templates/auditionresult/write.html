@@ -16,39 +16,86 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글 작성',_)}">
 
 <form th:action="@{/auditionresult/write}" method="post" enctype="multipart/form-data">     
     <div class="container">
-<table class="table table-bordered">
-    <thead>
-        <caption><h1> 게시글 작성</h1> </caption>
-        
-    </thead> 
-    <tbody>
-            <tr>
-            	<th>제목</th>
-                <td><input type="text" placeholder="제목을 입력하세요. " name="rtitle"/></td>
-                
-            </tr>
-          <tr>
-            <th>첨부파일</th>
-             <td>    
-                <input type="file" name="filename">
-             </td>
 
-          </tr>
-         
-    </tbody>
-</table>
-<table>
- <tr>
-                <th>내용</th>
-                <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="rcontent"></textarea></td>
+   
+
+    <table class="table table-bordered">
+        <thead>
+            <caption><h1> 게시글 작성</h1> </caption>
+            
+        </thead> 
+        <tbody>
+        
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" placeholder="제목을 입력하세요. " name="rtitle"/></td>
+                    <!-- <td th:text="${auditionCon.ftitle}"></td> -->
+                    <!-- <!-- <td th:text="${member.phone}"></td> -->
+                    
+                    <!-- <td sec:authentication="principal.name"></td> -->
+                </tr>
+            <tr>
+                <th>첨부파일</th>
+                <td>    
+                    <input type="file" name="filename">
+                </td>
+                
+
             </tr>
-</table>
- <tr>
-                <td colspan="2">
-                     <input type="submit" value="등록">
-                    <input type="reset" value="취소" onclick="history.back();">                 </td>
-            </tr>  
-</div>
+            
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tr>
+            
+            <th>오디션</th>
+            <td>
+                <select name="auditionid">
+                    <option  value="0" > 없음</option>
+                    <th:block th:each="audition : ${auditionlist}">
+                        <option  th:value="${audition.auditionid}">[[${audition.atitle}]]</option>
+                    </th:block>
+                </select>
+            </td>
+            <!-- <td th:text="${audition.atitle}"> -->
+            
+            <!-- <td>
+                남성<input type="radio" name="fgender" value="m" required/>
+                　
+                여성<input type="radio" name="fgender" value="g" required/>
+            
+        </td> -->
+        </tr>
+        
+                    <th>내용</th>
+                    <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="rcontent"></textarea></td>
+                    <!-- <tr th:each="auditionresult:${auditionResultlist}"> -->
+                        
+                        
+                        
+                    
+                        
+                        <!-- th:if 조건문 o 가 맞을때, td 합격을 출력-->
+                        <!-- <th:block th:if="${auditionCon.confirm} == 'o'">
+                            <td th:text="합격"></td>
+                        </th:block> -->
+                        <!-- th:unless 위 if 조건문이 틀릴때, 아래 td 불합격을 출력 -->
+                        <!-- <th:block th:if="${auditionCon.confirm} == 'x'">
+                            <td th:text="불합격"></td>
+                        </th:block>
+                        <th:block th:if="${auditionCon.confirm} == 'n'">
+                            <td th:text="접수중"></td>
+                        </th:block> -->
+            
+                    </tr>
+                </tr>
+    </table>
+    <tr>
+                    <td colspan="2">
+                        <input type="submit" value="등록">
+                        <input type="reset" value="취소" onclick="history.back();">                 </td>
+                </tr>  
+    </div>
 			 </form>
 	
        </content>

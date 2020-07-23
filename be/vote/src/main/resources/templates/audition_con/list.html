@@ -48,7 +48,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="auditionCon:${auditionconlist}">
+		<tr th:each="auditionCon : ${auditionconlist}">
 			<td th:text="${auditionCon.formid}"></td>
 			<td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
 			<!-- <td th:text="${auditionCon.fname}"></td> -->
@@ -82,9 +82,9 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		    <select name="sim">
    			 <option value="">심사결과</option>
    	 	   
-	</select>
+			</select>
 		       
-		        <input name="keyword" type="text" placeholder="심사결과를 입력해주세요">
+		        <input name="합격" type="text" placeholder="심사결과를 입력해주세요">
 		        <button>검색하기</button></center>
 		        
 		    </div>

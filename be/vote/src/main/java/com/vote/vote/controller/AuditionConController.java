@@ -48,6 +48,8 @@ import groovyjarjarcommonscli.OptionBuilder;
 @Controller
 public class AuditionConController {
 
+	
+	
 	@Autowired
 	AuditionConJpaRepository auditionConRepository;
 
@@ -72,6 +74,8 @@ public class AuditionConController {
 	@Autowired
 	private CustomAuditionOptionRepository customAuditionOptionRepository;
 
+	
+	
 	@RequestMapping("/sendAddress")
 	public String serch1(@RequestParam(value = "confirm") String confirm, Model model) {
 		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm(confirm);
@@ -348,8 +352,8 @@ public class AuditionConController {
 	}
 	
 	@GetMapping("/audition_con/serch")
-	public String serch(@RequestParam(value="keyword") String keyword, Model model) {
-		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm(keyword);
+	public String serch(@RequestParam(value="합격") String 합격, Model model) {
+		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm("합격");
 		
 			model.addAttribute("auditionconlist", auditioncon);
 			
