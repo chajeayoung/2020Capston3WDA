@@ -131,10 +131,10 @@ class Shop_list extends React.Component {
                     {/* <Header_top></Header_top> */}
                     <Header_middle></Header_middle>
                     <Header_bottom></Header_bottom>
-                    <SliderFrame></SliderFrame>
+                    {/* <SliderFrame></SliderFrame> */}
                     <List_Section data={this.state} event={this.categoryEvent} that={this} paging={this.pagenation} search={this.itemSearch} proEvent={this.programEvent}> </List_Section>
-                    <Footer></Footer>
-                    <Footer2></Footer2>
+                    {/* <Footer></Footer>
+                    <Footer2></Footer2> */}
                     {
                         this.chat != 0 ? <Chat></Chat> : <div></div>
                     }

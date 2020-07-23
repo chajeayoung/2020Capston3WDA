@@ -38,10 +38,10 @@ class Shop_index extends React.Component {
                     {/* <Header_top></Header_top> */}
                     <Header_middle></Header_middle>
                     <Header_bottom></Header_bottom>
-                    <SliderFrame></SliderFrame>
+                    {/* <SliderFrame></SliderFrame> */}
                     <Section data={this.state.data}></Section>
-                    <Footer></Footer>
-                    <Footer2></Footer2>
+                    {/* <Footer></Footer>
+                    <Footer2></Footer2> */}
                     {
                         this.chat != 0 ? <Chat></Chat> : <div></div>
                     }
