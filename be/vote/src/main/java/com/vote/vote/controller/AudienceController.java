@@ -13,6 +13,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 import javax.validation.Valid;
 
 import com.google.gson.JsonObject;
+import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.ADetaiId;
 import com.vote.vote.db.dto.ADetail;
 import com.vote.vote.db.dto.ApplyResult;
@@ -40,8 +41,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-
+import java.security.Principal;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,18 +100,14 @@ public class AudienceController {
 
     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
 
-    // -----------------------------------------사용자
-    // 모든프로그램 게시글 리스트
-    @GetMapping(value = { "/audience/", "/audience/list" })
-    public String audienceAllList(@PageableDefault Pageable pageable, Model model) {
-
-        Page<Audience> boardList = audienceService.getBoardList(pageable);
-        model.addAttribute("boardList", boardList);
-
-        return "audience/uList";
+    @RequestMapping(value = { "/main" })
+    public String test2(Principal user) {
+        return "audience/main";
     }
 
-    @GetMapping(value = { "/audience2/", "/audience/list2" })
+    // 리액트 -------------------------------------사용자
+    // 모든프로그램 게시글 리스트 보기 + ajax
+    @RequestMapping(value = { "/audience/ulist2" })
     public String audienceAllList2() {
         return "audience/uList2";
     }
@@ -130,6 +130,22 @@ public class AudienceController {
             result.add(json);
         }
         return result;
+    }
+
+    @RequestMapping(value = { "/audience/read2/{applyId}" })
+    public String test(Principal user) {
+        return "audience/uRead2";
+    }
+
+    // -----------------------------------------사용자
+    // 모든프로그램 게시글 리스트
+    @GetMapping(value = { "/audience/", "/audience/list" })
+    public String audienceAllList(@PageableDefault Pageable pageable, Model model) {
+
+        Page<Audience> boardList = audienceService.getBoardList(pageable);
+        model.addAttribute("boardList", boardList);
+
+        return "audience/uList";
     }
 
     // 게시글 보기
@@ -175,6 +191,18 @@ public class AudienceController {
             aDetailRepository.saveAndFlush(aDetail);
             return "응모완료!";
         }
+    }
+
+    // 당첨확인 ajax
+    @GetMapping("/audience/confirm")
+    @ResponseBody
+    public String confirm(Principal principal, @Nullable Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String name = principal.getName();
+        if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
+            return name + "님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
+        }
+        return name + "님 당첨을 축하 드립니다! 자세한 내용은 문자로 알려드립니다!";
     }
 
     // --------------------------------------------------------관리자
@@ -310,8 +338,8 @@ public class AudienceController {
 
         int people = audi.getARecruits(); // 추첨 인원
         List<Member> list = new ArrayList<>();
-        List<Member> result = new ArrayList<>();
-        List<Member> result2 = new ArrayList<>();
+        List<Member> result = new ArrayList<>(); // 중복확인용
+        List<Member> result2 = new ArrayList<>(); // 최종결과명단
         // list = mr.getInfoNoDistincList(audience.getApplyId()); // 응모 리스트
         list = mr.getInfo(audi.getApplyId());// 중복제거
         // JSONObject obj = new JSONObject();
@@ -327,6 +355,7 @@ public class AudienceController {
                 applyResult.setApplyId(audi.getApplyId());
                 applyResult.setName(list2.getName());
                 applyResult.setPhone(list2.getPhone());
+                applyResult.setRno(list2.getNo());
                 applyResultRepository.saveAndFlush(applyResult);
 
             }
@@ -359,6 +388,7 @@ public class AudienceController {
                 applyResult.setApplyId(audi.getApplyId());
                 applyResult.setName(list2.getName());
                 applyResult.setPhone(list2.getPhone());
+                applyResult.setRno(list2.getNo());
                 applyResultRepository.saveAndFlush(applyResult);
             }
         }

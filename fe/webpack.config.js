@@ -35,6 +35,7 @@ const PATHS = {
 
 module.exports = {
   entry: {
+
     home: path.join(__dirname, "./app/home.js"),
     tt: path.join(__dirname, "./app/tt.js"),
     register: path.join(__dirname, "./app/register.js"),
@@ -91,6 +92,7 @@ module.exports = {
     managerIndex: path.join(__dirname, "./app/riroIndex/managerIndex.jsx"),
     userIndex: path.join(__dirname, "./app/riroIndex/userIndex.jsx"),
     myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
+
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
   },
   output: {
@@ -109,12 +111,14 @@ module.exports = {
     publicPath: "/assets/",
     // contentBase: './tmp',
     // webpack외부접속
-    disableHostCheck:true,
-    host:"0.0.0.0",
+
+    disableHostCheck: true,
+    host: "0.0.0.0",
+
     proxy: {
       "**": "http://localhost:8000",
     },
-    
+
   },
   module: {
     rules: [
@@ -153,6 +157,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: ["file-loader"],
       },
+
     ],
   },
   devtool: "inline-source-map",
@@ -165,5 +170,6 @@ module.exports = {
     //     "regenerator": true
     //   }
     // ]
+
   ],
 };

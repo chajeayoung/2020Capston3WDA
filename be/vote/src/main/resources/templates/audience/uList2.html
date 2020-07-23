@@ -1,28 +1,31 @@
+</body>
+
+</html>
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},_,${popularName},_)}">
+    th:replace="~{main_layout::layout(~{::content},_,'방청권 응모', ~{::link})}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 사이드바 -->
-    <!-- <script src="/js/side/popularBoard.js"></script> -->
+    <title>방청권 응모</title>
+    <link rel="stylesheet" href="/css/boardstyle.css">
+    <link rel="stylesheet" href="/css/contents.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/board.common.css">
+    <link rel="stylesheet" href="/css/featherlight.css">
+    <!-- <link rel="stylesheet" href="/css/moblie.css"> -->
+    <!-- <link rel="stylesheet" href="/shop/css/bootstrap.min.css"> -->
 </head>
+
 <body>
-
     <content>
-		
-
-       		
-        <form method="post" id="register_form" enctype="multipart/form-data" >	  
-              
-	        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-	        <div id="audienceBoard"></div>
-       		<script src="/assets/audience.js"></script>       	
-       	
-       	</form>
-       
-       		
+        <content>
+            <div id="audienceBoard"></div>
+            <script src="/assets/audience.js"></script>
+        </content>
     </content>
-
 </body>
+
+
 </html>

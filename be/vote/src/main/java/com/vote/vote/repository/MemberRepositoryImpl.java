@@ -26,43 +26,28 @@ public class MemberRepositoryImpl implements MemberRepository {
     private QMember member = QMember.member;
     private QADetail aDetail = QADetail.aDetail;
 
-    //응모인원 출력
+    // 응모인원 출력
     @Override
     public List<Member> getInfo(int applyId) {
         // TODO Auto-generated method stub
         JPAQueryFactory query = new JPAQueryFactory(em);
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(aDetail.applyId.eq(applyId));
-        List<Member> list = query
-        .select(Projections.fields(Member.class,
-        member.name,
-        member.phone
-        ))
-        .distinct()
-        .from(member)
-        .join(aDetail).on(member.no.eq(aDetail.rId))
-        .where(booleanBuilder)
-        .fetch();
+        List<Member> list = query.select(Projections.fields(Member.class, member.name, member.phone, member.no))
+                .distinct().from(member).join(aDetail).on(member.no.eq(aDetail.rId)).where(booleanBuilder).fetch();
 
         return list;
     }
 
-    //추첨로직용 쿼리
+    // 추첨로직용 쿼리
     @Override
     public List<Member> getInfoNoDistincList(int applyId) {
         // TODO Auto-generated method stub
         JPAQueryFactory query = new JPAQueryFactory(em);
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(aDetail.applyId.eq(applyId));
-        List<Member> list = query
-        .select(Projections.fields(Member.class,
-        member.name,
-        member.phone
-        ))
-        .from(member)
-        .join(aDetail).on(member.no.eq(aDetail.rId))
-        .where(booleanBuilder)
-        .fetch();
+        List<Member> list = query.select(Projections.fields(Member.class, member.name, member.phone)).from(member)
+                .join(aDetail).on(member.no.eq(aDetail.rId)).where(booleanBuilder).fetch();
 
         return list;
     }
