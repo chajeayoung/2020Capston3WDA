@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Pagination from "./pagination.jsx";
 import { paginate } from "./paginate.jsx";
+
 // import "../css/boardstyle.css";
 // import '../css/contents.css';
 // import "../css/default.css";
@@ -18,7 +19,7 @@ class Audience extends React.Component {
   //클래스 생성 시 최초에 한번만.. 이후 state 수정되면 바꾼 state 값으로 render만 호출
   async componentDidMount() {
     console.log("마운트");
-    let { data } = await axios.get("/audience/axios");
+    let { data } = await axios.get("/audience/list/axios");
     this.setState({
       audiences: data,
       itemsCount: data.length,
@@ -62,6 +63,7 @@ class Audience extends React.Component {
             ))}
           </ul>
         </div>
+
 
         <Button
           className="createBtn"

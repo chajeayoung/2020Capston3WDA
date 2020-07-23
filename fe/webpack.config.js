@@ -31,13 +31,13 @@ module.exports = {
     // home: path.join(__dirname, './app/home.js'),
     // tt: path.join(__dirname, './app/tt.js'),
     // register: path.join(__dirname,'./app/register.js'),
-    login: path.join(__dirname,'./app/login.js'),
-    // voteIndex: path.join(__dirname,'./app/vote/voteIndex.jsx'),
-    // voteCreate: path.join(__dirname,'./app/vote/voteCreate.jsx'),
+    login: path.join(__dirname, './app/login.js'),
+    voteIndex: path.join(__dirname, './app/vote/voteIndex.jsx'),
+    voteCreate: path.join(__dirname, './app/vote/voteCreate.jsx'),
     // voteShow: path.join(__dirname,'./app/vote/voteShow.jsx'),
     // voteResult: path.join(__dirname,'./app/vote/voteResult.jsx'),
     // layout: path.join(__dirname,'./app/layout/layout.jsx'),
-    userInfo: path.join(__dirname,'./app/userInfo/userInfo.jsx'),
+    userInfo: path.join(__dirname, './app/userInfo/userInfo.jsx'),
     // myProgram: path.join(__dirname,'./app/userInfo/myProgram.jsx'),
     // profileIndex: path.join(__dirname,'./app/userInfo/profileIndex.jsx'),
     // allCompany: path.join(__dirname,'./app/userInfo/allCompany.jsx'),
@@ -69,7 +69,7 @@ module.exports = {
     // manageOrderState : path.join(__dirname,"./app/userInfo/manageOrderState.jsx"), 
     // Shop_list : path.join(__dirname,"./app/shop/Shop_list.jsx"), 
     // buyError : path.join(__dirname,"./app/shop/buyError.jsx"),
-    audience : path.join(__dirname,"./app/audience/audience.jsx"),
+    audience: path.join(__dirname, "./app/audience/audience.jsx"),
   },
   output: {
     path: PATHS.build,
@@ -87,7 +87,7 @@ module.exports = {
     publicPath: "/assets/",
     // contentBase: './tmp',
     // webpack외부접속
-    disableHostCheck:true,
+    disableHostCheck: true,
     // host:"0.0.0.0",
     proxy: {
       "**": "http://localhost:8000"
@@ -95,47 +95,47 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        // exclude: /(node_modules|bower_components)/,
-        exclude:  /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            presets: ['env', 'react','babel-polyfill'],
-          }
+      test: /\.js$/,
+      // exclude: /(node_modules|bower_components)/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          presets: ['env', 'react', 'babel-polyfill'],
         }
-      },
-      {
-        test: /.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: ['env', 'react','babel-polyfill']
-          }
-        } 
-      //   
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
       }
+    },
+    {
+      test: /.jsx$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        query: {
+          presets: ['env', 'react', 'babel-polyfill']
+        }
+      }
+      //   
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    },
+    {
+      test: /\.(png|svg|jpg|gif)$/,
+      use: [
+        'file-loader'
+      ]
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      use: [
+        'file-loader'
+      ]
+    }
     ],
   },
   devtool: 'inline-source-map',
@@ -148,6 +148,6 @@ module.exports = {
     //     "regenerator": true
     //   }
     // ]
-    
+
   ]
 };

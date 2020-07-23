@@ -196,11 +196,11 @@ public class AudienceController {
     // 당첨확인 ajax
     @GetMapping("/audience/confirm")
     @ResponseBody
-    public String confirm(Audience audience, Principal principal, @Nullable Authentication authentication) {
+    public String confirm(Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String name = principal.getName();
         if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
-            return name +"님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
+            return name + "님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
         }
         return name + "님 당첨을 축하 드립니다! 자세한 내용은 문자로 알려드립니다!";
     }
