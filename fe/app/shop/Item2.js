@@ -20,7 +20,7 @@ export default class Item2 extends React.Component {
                                         <a href={"/shop/product/"+prd.productId}>
                                             <div className="product_Top_div">
                                                 <div className="imgDiv">
-                                                    <img src={"/uploads/"+prd.img} alt="" />
+                                                    <img className="prdImgTag"src={"/uploads/"+prd.img} alt="" />
                                                 </div>
                                                 <h2></h2>
                                                 <p className="productName">{prd.name}</p>

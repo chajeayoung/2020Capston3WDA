@@ -2,6 +2,16 @@
     max-width: 150px !important;
     overflow: hidden !important;
     height: 150px !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.prdImgTag{
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .productinfo {
