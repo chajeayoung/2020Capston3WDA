@@ -1,6 +1,7 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,13 +45,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import groovyjarjarcommonscli.OptionBuilder;
 
-
 @Controller
 public class AuditionConController {
+
+	
 	
 	@Autowired
 	AuditionConJpaRepository auditionConRepository;
-	
+
 	@Autowired
 	private StorageService storageService;
 
@@ -59,7 +61,7 @@ public class AuditionConController {
 
 	@Autowired
 	private ProgramManagerJpaRepository pmRepository;
-	
+
 	@Autowired
 	private AuditionJpaRepository auditionRepository;
 
@@ -71,85 +73,78 @@ public class AuditionConController {
 
 	@Autowired
 	private CustomAuditionOptionRepository customAuditionOptionRepository;
+
+	
 	
 	@RequestMapping("/sendAddress")
-	public String serch1(@RequestParam(value="confirm") String confirm, Model model) {
+	public String serch1(@RequestParam(value = "confirm") String confirm, Model model) {
 		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm(confirm);
-				System.out.println(confirm);
-				model.addAttribute("auditionconlist", auditioncon);
-				
-				return "audition_con/list";
+		System.out.println(confirm);
+		model.addAttribute("auditionconlist", auditioncon);
+
+		return "audition_con/list";
 	}
 
 	// @RequestMapping(value={"/sendAddress"},method = RequestMethod.POST)
-	// public String messageCenterHome(Model model,HttpSession session,HttpServletRequest request) {
+	// public String messageCenterHome(Model model,HttpSession
+	// session,HttpServletRequest request) {
 
-	// 	String selectedCity= request.getParameter("confirm");
-	// 	return "/audition_con/list";
+	// String selectedCity= request.getParameter("confirm");
+	// return "/audition_con/list";
 	// }
 
-	
 	@GetMapping("/audition_con/list")
-	public String audition(Model model, @PageableDefault Pageable pageable){
-		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); 
-        pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "formid"));
+	public String audition(Model model, @PageableDefault Pageable pageable) {
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "formid"));
 		model.addAttribute("auditionconlist", auditionConRepository.findAll(pageable));
 		return "/audition_con/list";
 	}
-	
+
 	// @RequestMapping("/audition_con/list")
 	// public String list(Model model) { // 2~ n
-	// 	model.addAttribute("auditionconlist",auditionConRepository.findAll());
-	// 	return "/audition_con/list";
+	// model.addAttribute("auditionconlist",auditionConRepository.findAll());
+	// return "/audition_con/list";
 	// }
-	
-	
-	
-	
 
 	@RequestMapping("/audition_con/listm")
 	public String listmm(@Valid AuditionCon auditionCon, Integer rid, Model model) { // only 1
-		
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        CustomUserDetails sessionUser = (CustomUserDetails)principal;
-        
-        System.out.println(sessionUser.getR_ID());
-        AuditionCon auditioncon = auditionConRepository.findByRid(sessionUser.getR_ID());
-        
-        
+		CustomUserDetails sessionUser = (CustomUserDetails) principal;
+
+		System.out.println(sessionUser.getR_ID());
+		AuditionCon auditioncon = auditionConRepository.findByRid(sessionUser.getR_ID());
+
 		System.out.println(auditioncon.toString());
-		model.addAttribute("auditionconlistm",auditioncon);
-		
-//		System.out.println(sessionUser.getR_ID()+"의 오디션 폼의 오디션 fk는"+auditioncon.getAuditionid());
+		model.addAttribute("auditionconlistm", auditioncon);
 
-				
-		
+		// System.out.println(sessionUser.getR_ID()+"의 오디션 폼의 오디션
+		// fk는"+auditioncon.getAuditionid());
+
 		return "/audition_con/listm";
-	
-	}
-	
 
-	
+	}
+
 	@GetMapping("/audition_con/read/{formid}")
-	public String read(Model model, @PathVariable int formid){
+	public String read(Model model, @PathVariable int formid) {
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
-		System.out.println("auditioncon.getAuditionid(): "+auditioncon.getAuditionid());
+		System.out.println("auditioncon.getAuditionid(): " + auditioncon.getAuditionid());
 		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
-		model.addAttribute("options", customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(),formid));
-		
+		model.addAttribute("options",
+				customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(), formid));
+
 		return "audition_con/read";
 	}
-	
 
 	@GetMapping("/audition_con/form/{auditionId}")
-	public String form(Model model
-			, @PathVariable int auditionId
-			) {
-		
-		AuditionCon auditionCon = new AuditionCon();
+	public String form(Model model, @PathVariable int auditionId, Principal principal) {
 
+		AuditionCon auditionCon = new AuditionCon();
+		Member member = memberRepository.findByUserid(principal.getName());
 		model.addAttribute("auditionCon",new AuditionCon());
 		model.addAttribute("auditionId", auditionId);
+		model.addAttribute("member", member);
 		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionId));
 
 		return "audition_con/form";
@@ -174,6 +169,8 @@ public class AuditionConController {
 			auditioncon.setRid(member.getNo());
 			auditioncon.setUsername(member.getName());
 			auditioncon.setFdate(new Date());
+			auditioncon.setFusername(member.getName());
+			auditioncon.setFuserphone(member.getPhone());
 			System.out.println(auditioncon.toString());
 			auditionConRepository.save(auditioncon);
 			sessionStatus.setComplete();
@@ -195,6 +192,8 @@ public class AuditionConController {
          	auditioncon.setFdate(new Date());
 			auditioncon.setAuditionid(auditionId);
 			auditioncon.setRid(Integer.valueOf(userDetails.getR_ID()));
+			auditioncon.setFusername(member.getName());
+			auditioncon.setFuserphone(member.getPhone());
 			
 			auditionConRepository.save(auditioncon);
 
@@ -214,6 +213,8 @@ public class AuditionConController {
 					result.setAuditionId(auditionId);
 					result.setOptionNo(a_ops.get(i).getNo());
 					result.setValue(options[i]);
+					auditioncon.setFusername(member.getName());
+			auditioncon.setFuserphone(member.getPhone());
 					result.setAuditionCon(auditioncon.getFormid());
 					auditionOptionValueRepository.saveAndFlush(result);
 				}			
@@ -351,8 +352,8 @@ public class AuditionConController {
 	}
 	
 	@GetMapping("/audition_con/serch")
-	public String serch(@RequestParam(value="keyword") String keyword, Model model) {
-		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm(keyword);
+	public String serch(@RequestParam(value="합격") String 합격, Model model) {
+		List<AuditionCon> auditioncon = auditionConRepository.findByConfirm("합격");
 		
 			model.addAttribute("auditionconlist", auditioncon);
 			

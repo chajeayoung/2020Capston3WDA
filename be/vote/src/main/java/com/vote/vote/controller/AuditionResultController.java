@@ -1,6 +1,7 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.util.StringUtils;
 
+import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionResult;
+import com.vote.vote.repository.AuditionConJpaRepository;
+import com.vote.vote.repository.AuditionJpaRepository;
 import com.vote.vote.repository.AuditionResultJpaRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.db.dto.Member;
@@ -36,7 +40,7 @@ import com.vote.vote.service.StorageService;
 
 @Controller
 public class AuditionResultController {
-	
+
 	@Autowired
 	AuditionResultJpaRepository auditionResultRepository;
 
@@ -48,82 +52,104 @@ public class AuditionResultController {
 
 	@Autowired
 	private ProgramManagerJpaRepository pmRepository;
-	
-//	@RequestMapping("/auditionresult/list")
-//	public String list(Model model) {
-//		model.addAttribute("auditionresultlist",auditionResultRepository.findAll());
-//		return "auditionresult/list";
-//	}
-	
+
+	@Autowired
+	private AuditionConJpaRepository auditionConRepository;
+
+	@Autowired
+	private AuditionJpaRepository auditionRepository;
+
+	// @RequestMapping("/auditionresult/list")
+	// public String list(Model model) {
+	// model.addAttribute("auditionresultlist",auditionResultRepository.findAll());
+	// return "auditionresult/list";
+	// }
+
 	@GetMapping("/auditionresult/list")
-	public String result(Model model, @PageableDefault Pageable pageable){
-		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber()-1); 
-        pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
+	public String result(Model model, @PageableDefault Pageable pageable) {
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
 		model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
 		return "auditionresult/list";
 	}
 
 	@GetMapping("/auditionresult/listuser")
-	public String resultuser(Model model, @PageableDefault Pageable pageable){
-		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber()-1); 
-        pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
+	public String resultuser(Model model, @PageableDefault Pageable pageable) {
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
 		model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
 		return "auditionresult/listuser";
 	}
-	
-	
-	
+
 	@GetMapping("/auditionresult/serch")
-	public String serch(@RequestParam(value="keyword") String keyword, Model model) {
+	public String serch(@RequestParam(value = "keyword") String keyword, Model model) {
 		List<AuditionResult> auditionresult = auditionResultRepository.findByRtitle(keyword);
-		
-				model.addAttribute("auditionresultlist", auditionresult);
-				
-				return "auditionresult/list";
+
+		model.addAttribute("auditionresultlist", auditionresult);
+
+		return "auditionresult/list";
 	}
 
 	@GetMapping("/auditionresult/serchuser")
-	public String serchuser(@RequestParam(value="keyword") String keyword, Model model) {
+	public String serchuser(@RequestParam(value = "keyword") String keyword, Model model) {
 		List<AuditionResult> auditionresult = auditionResultRepository.findByRtitle(keyword);
-		
-				model.addAttribute("auditionresultlist", auditionresult);
-				
-				return "auditionresult/listuser";
+
+		model.addAttribute("auditionresultlist", auditionresult);
+
+		return "auditionresult/listuser";
 	}
-	
 
 	@GetMapping("/auditionresult/read/{resultid}")
-	public String read(Model model, @PathVariable int resultid){
-		model.addAttribute("auditionResult", auditionResultRepository.findByResultid(resultid));
+	public String read(Model model, @PathVariable int resultid, String 합격) {
+
 		AuditionResult auditionResult = auditionResultRepository.findByResultid(resultid);
+
+		List<AuditionCon> auditioncon = auditionConRepository.findByConfirmAndAuditionid("합격",auditionResult.getAuditionid());
+		
+		// model.addAttribute("auditionconlist", auditionConRepository.findByConfirm("합격"));
+		model.addAttribute("auditionconlist", auditioncon);
+		model.addAttribute("auditionResult", auditionResultRepository.findByResultid(resultid));
+		
 		auditionResultRepository.save(auditionResult);
 		return "auditionresult/read";
 	}
 
 	@GetMapping("/auditionresult/readuser/{resultid}")
-	public String readuser(Model model, @PathVariable int resultid){
-		model.addAttribute("auditionResult", auditionResultRepository.findByResultid(resultid));
+	public String readuser(Model model, @PathVariable int resultid, String 합격) {
+
 		AuditionResult auditionResult = auditionResultRepository.findByResultid(resultid);
+		List<AuditionCon> auditioncon = auditionConRepository.findByConfirmAndAuditionid("합격",auditionResult.getAuditionid());
+		model.addAttribute("auditionconlist", auditioncon);
+		model.addAttribute("auditionResult", auditionResultRepository.findByResultid(resultid));
+		
 		auditionResultRepository.save(auditionResult);
 		return "auditionresult/readuser";
 	}
-	
-	
-	@GetMapping("auditionresult/write")
-	public String register(Model model) {
+
+	@GetMapping("/auditionresult/write")
+	public String register(Model model, Principal principal) {
+		// AuditionCon auditioncon = auditionConRepository.findByFormid(161);
+		// List<AuditionCon> auditioncon = auditionConRepository.findByConfirm("합격");
+		// System.out.println(auditioncon);
+		Member member = memberRepository.findByUserid(principal.getName());
+		List<Audition> audition = auditionRepository.findByRid(member.getNo());
+		// model.addAttribute("auditionconlist", auditionConRepository.findByConfirm("합격"));
+		model.addAttribute("member", member);
+		model.addAttribute("auditionlist", audition);
+		// model.addAttribute("auditionconlist", auditioncon);
 		model.addAttribute("auditionResult",new AuditionResult());
 		return "auditionresult/write";
 	}
 	
 	@PostMapping("/auditionresult/write")
-	public String write(@Valid AuditionResult auditionResult, BindingResult bindingResult, SessionStatus sessionStatus,
+	public String write(AuditionResult auditionResult, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
-            @RequestParam(name = "filename") MultipartFile filename	) {
+			// @RequestParam("auditionid") String auditionid,
+            @RequestParam(name = "filename") MultipartFile filename) {
+		System.out.println(auditionResult);
+		// System.out.println(auditionid);
 		
-		
-		if(bindingResult.hasErrors()) {
-			return "/auditionresult/write";
-		} else if(filename.isEmpty()) {
+		if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
 			auditionResult.setRid(member.getNo());
 			auditionResult.setRusername(member.getName());
@@ -187,36 +213,43 @@ public class AuditionResultController {
 	// }	
 
 	@PostMapping("/auditionresult/update/{resultid}")
-	public String update1(@Valid AuditionResult auditionResult, BindingResult bindingResult, SessionStatus sessionStatus,
-			Principal principal, Model model, RedirectAttributes redirAttrs,
-            @RequestParam(name = "filename") MultipartFile filename	) {
-		
-		
-		if(bindingResult.hasErrors()) {
-			return "/auditionresult/update";
-		} else if(filename.isEmpty()) {
-			// AuditionResult auditionresult = auditionResultRepository.findByRfile(rfile);
+	public String update1(@PathVariable("resultid") int resultid, 
+			Principal principal, Model model,
+			AuditionResult auditionResult2,
+            @RequestParam("filename") MultipartFile filename	) {
+				System.out.println("1");
+		AuditionResult auditionResult = auditionResultRepository.findByResultid(resultid);
+		System.out.println(auditionResult);
+		 if(filename.isEmpty()) {
+			 System.out.println("ss");
 			Member member = memberRepository.findByUserid(principal.getName());
-			auditionResult.setRid(member.getNo());
 			auditionResult.setRusername(member.getName());
 			auditionResult.setRdate(new Date());
 			auditionResult.setRmdate(new Date());
-			// auditionResult.setRfile(Rfile);
-			sessionStatus.setComplete();
+			
+			auditionResult.setRtitle(auditionResult2.getRtitle());
+			auditionResult.setRcontent(auditionResult2.getRcontent());
+			
+			System.out.println("2");
+			// sessionStatus.setComplete();
 			auditionResultRepository.save(auditionResult).getResultid();
+			System.out.println("4");
 		return "redirect:/auditionresult/list";
-		} else {
+		} else {	
+			System.out.println("3");
 			
 		    String filenamePath = StringUtils.cleanPath(filename.getOriginalFilename());
             Member member = memberRepository.findByUserid(principal.getName());
 			auditionResult.setRusername(member.getName());
             // 게시글저장
-            auditionResult.setRid(member.getNo());
+            // auditionResult.setRid(member.getNo());
 //            audience.setADate(new Date());
             auditionResult.setRfile(filenamePath);
  
 			auditionResult.setRdate(new Date());
-			auditionResultRepository.saveAndFlush(auditionResult).getResultid();
+			auditionResult.setRtitle(auditionResult2.getRtitle());
+			auditionResult.setRcontent(auditionResult2.getRcontent());
+			auditionResultRepository.saveAndFlush(auditionResult);
 
 
             // 파일 저장
@@ -224,7 +257,7 @@ public class AuditionResultController {
             // rfile.setApplyid(audience.getApplyId());
             // rfile.setFilename(filenamePath);
             // rfileRepository.saveAndFlush(rfile);
-            sessionStatus.setComplete();
+            // sessionStatus.setComplete();
             System.out.println("게시글업로드완료");
             return "redirect:/auditionresult/list";
             

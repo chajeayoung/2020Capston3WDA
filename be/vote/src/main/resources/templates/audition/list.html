@@ -41,15 +41,15 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'오디션 개설',_)}">
 		</thead>
 		<tbody>
 			<tr th:each="audition:${auditionlist}">
-			<td th:text="${audition.auditionid}"></td>
-			<!--  <td th:text="${audition.a_title}"></td> -->
-			<td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
-			<td class="t23" th:text="${audition.acategory}"></td>
-			<td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
-			<td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
-			<td class="t23" th:text="${audition.arecruits}+ 명"></td>
-			<td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
-            <!-- <td sec:authentication="principal.name"></span><span> 님</span></td> -->
+				<td th:text="${audition.auditionid}"></td>
+				<!--  <td th:text="${audition.a_title}"></td> -->
+				<td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
+				<td class="t23" th:text="${audition.acategory}"></td>
+				<td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
+				<td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
+				<td class="t23" th:text="${audition.arecruits}+ 명"></td>
+				<td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
+	            <!-- <td sec:authentication="principal.name"></span><span> 님</span></td> -->
             <td><span th:text="${audition.ausername}"></span><span>님</span></td>
 			
 			

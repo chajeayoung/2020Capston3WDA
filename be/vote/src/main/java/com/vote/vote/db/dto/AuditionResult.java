@@ -48,7 +48,10 @@ public class AuditionResult {
 	    private String rfile;
 
 		@Column(nullable=true, name="r_username")
-	    private String rusername;
+		private String rusername;
+		
+		@Column(nullable=true, name="audition_id")
+		private int auditionid;
 
 		public int getResultid() {
 			return resultid;
@@ -135,7 +138,26 @@ public class AuditionResult {
 			this.rusername = rusername;
 		}
 
-	
+		public int getAuditionid() {
+			return auditionid;
+		}
+
+		public void setAuditionid(int auditionid) {
+			this.auditionid = auditionid;
+		}
+
+		
+
+		
+		public AuditionResult(){}
+
+
+		@Override
+		public String toString() {
+			return "AuditionResult [auditionid=" + auditionid + ", programid=" + programid + ", rcontent=" + rcontent
+					+ ", rdate=" + rdate + ", resultid=" + resultid + ", rfile=" + rfile + ", rid=" + rid + ", rmdate="
+					+ rmdate + ", rtitle=" + rtitle + ", rusername=" + rusername + "]";
+		}
 	    
 	    
 	    

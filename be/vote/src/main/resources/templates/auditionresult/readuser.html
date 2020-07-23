@@ -40,14 +40,33 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 안내',_)}">
       
       </span>
       <br><br>
-<table>
- <tr>
-                <th>내용 : </th>
-                
-                  <td th:text="${auditionResult.rcontent}"></td>
-            <!--    <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="a_content"></textarea></td> -->
-            </tr>
-</table>
+      <table>
+        <td th:text="${auditionResult.rcontent}"></td>
+        
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td><h3>이름　　</h3></td>
+            <td><h3>이메일　　　　　</h3></td>
+            <td><h3>결과</h3></td>
+        </tr>
+        <tr th:each="auditionCon : ${auditionconlist}">
+            <td th:text="${auditionCon.fusername}"></td>
+            <td th:text="${auditionCon.fusermail}"></td>
+            <!-- <td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td> -->
+            <!-- <td><span th:text="${auditionCon.username}"></span><span>님</span></td> -->
+            <!-- <td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td> -->
+            <td th:text="${auditionCon.confirm}"></td>
+        </tr>
+     <!-- <tr>
+                    <th>내용 : </th>
+                    
+                      <td th:text="${auditionResult.rcontent}"></td>
+                      
+                  // <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="a_content"></textarea></td>
+                </tr> -->
+    </table>
 <br><br>
 	
 	

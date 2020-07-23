@@ -1,7 +1,7 @@
 package com.vote.vote.repository;
 
 import java.util.ArrayList;
-import java.io.Serializable;
+import java.util.List;
 
 
 
@@ -15,5 +15,7 @@ public interface AuditionJpaRepository  extends JpaRepository<Audition, String>{
 	public ArrayList<Audition> findAll();
 	public Audition findByAuditionid(int auditionid);
 	public ArrayList<Audition> findByAtitle(String keyword);
+	public List<Audition> findByRid(int rid);
+	
 
 }
