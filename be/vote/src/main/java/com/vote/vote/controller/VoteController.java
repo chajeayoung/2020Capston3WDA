@@ -100,6 +100,8 @@ public class VoteController {
 	@Autowired
 	private HashTagRepository hashRepository;
 	
+	@Autowired
+	private PopularJpaRepository popularRepository;
 
 	public Klaytn2 klaytn = new Klaytn2();
 
@@ -346,13 +348,17 @@ public class VoteController {
 	method=RequestMethod.GET,
 	produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<CustomHashTag> getHashTagAxios(@PathVariable("popularId") int popularId){
+	public JSONObject getHashTagAxios(@PathVariable("popularId") int popularId){
 
 		//List<HashTag> hash = hashRepository.getHashTag(popularId);
 		List<CustomHashTag> hash = customHashRepository.findByPopularId(popularId);
+		Popular pop = popularRepository.findById(popularId);
 
+		JSONObject json = new JSONObject();
+		json.put("hash", hash);
+		json.put("pop",pop);
 
-		return hash;
+		return json;
 	}
 
 	@RequestMapping(value={"/axios/{voteId}","/axios/{voteId}/"},

@@ -30,7 +30,7 @@ class VoteShow extends React.Component {
         let {data} = await axios.get("/vote/axios/hash/"+vote.popularid);
         //this.props.setState({})
         console.log(data)
-        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data ,vote:vote}})
+        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data.hash ,vote:vote, pop:data.pop}})
 
         // var modalItem = $("modalItem");
         // modalItem.empty();
@@ -112,6 +112,7 @@ class Show extends React.Component{
 
 
     render(){
+        console.log(this.state.state)
         const {title} = this.state.title
         this.setDate();
         console.log("render")
@@ -154,10 +155,10 @@ class Show extends React.Component{
                                             <div className="modalContentBox">
                                                 <div className="modalItem">
                                                      {this.state.state.option==0?(
-                                                     <div>
-                                                         <div><img src={'/uploads/'+this.state.state.vote.img}></img>
+                                                     <div className="votePreShowDiv">
+                                                         <div><img className="votePreShowInfoImg" src={'/uploads/'+this.state.state.vote.img}></img>
                                              
-                                                         <table>
+                                                         <table className="votePreShowInfoTable">
                                                             <thead>
                                                                 <tr>
                                                                 <th>{this.state.state.vote.name}</th>
@@ -165,22 +166,22 @@ class Show extends React.Component{
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                <td>생년월일</td><td>text</td>
+                                                                <td>생년월일</td><td>{this.state.state.pop.birth.split("T")[0]}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td>혈액형</td><td>text</td>
+                                                                <td>혈액형</td><td>{this.state.state.pop.blood}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td>키</td><td>text</td>
+                                                                <td>키</td><td>{this.state.state.pop.height}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td>몸무게</td><td>text</td>
+                                                                <td>몸무게</td><td>{this.state.state.pop.weight}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td>취미</td><td>text</td>
+                                                                <td>취미</td><td>{this.state.state.pop.hobby}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td>특기</td><td>text</td>
+                                                                <td>특기</td><td>{this.state.state.pop.ability}</td>
                                                                 </tr>
                                                                 <tr>
                                                                 <td>한마디</td><td>{this.state.state.vote.info}</td>

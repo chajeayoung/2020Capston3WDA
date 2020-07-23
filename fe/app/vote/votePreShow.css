@@ -8,10 +8,20 @@ body{
     /* margin-left: 50px; */
 }
 
-/* .topDiv{
-    display: grid;
+.votePreShowDiv{
+    overflow: scroll;
+    max-height: 800px;
+}
+.votePreShowInfoImg{
+    margin: auto;
+    display: block;
+    width: 300px;
+}
+.votePreShowInfoTable{
+    margin: auto;
+}
 
-} */
+
 .topDiv h2{
     display: inline;
     padding:10px;
@@ -161,6 +171,9 @@ text-align-last: center;
     }
     .sc-AxjAm{
         width: 80%;
+    }
+    .votePreShowDiv{
+        max-height: 500px !important;
     }
 }
 @media(max-width:400px){
