@@ -12,12 +12,12 @@
     <body>
 
 
-        <style>
+        <!-- <style>
             .im{
                     weidht:100px;
                     height:100px;
                 }
-        </style>
+        </style> -->
 
         <form th:action="@{'/myAudition/update/' + ${auditionCon.formid}}" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
@@ -37,6 +37,10 @@
                     <tr>
                         <th>제목</th>
                         <td> <input type="text" name="ftitle"  th:value="${auditionCon.ftitle}" /></td>
+                     
+                        <th>생년월일</th>
+                        <td> <input type="date" name="birth"  th:value="${auditionCon.birth}" /></td>
+                  
                     </tr>
                     <tr>
 
@@ -73,6 +77,10 @@
                         <td> <input type="text" name="fhobby" th:value="${auditionCon.fhobby}" /></td>
                         <th>특기</th>
                         <td> <input type="text" name="fability"  th:value="${auditionCon.fability}" /></td>
+                    </tr>
+                    <tr>
+                        <th>한마디</th>
+                        <td> <input type="text" name="introduce" th:value="${auditionCon.introduce}" /></td>
                     </tr>
                     <th:block th:each="option : ${options}">
                         <tr>
