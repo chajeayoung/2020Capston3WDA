@@ -20,6 +20,8 @@ import com.vote.vote.db.dto.Popular;
 import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Vote;
+import com.vote.vote.db.dto.AuditionCon;
+import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.repository.CompanyJpaRepository;
 import com.vote.vote.repository.CustomAuditionConRepository;
 import com.vote.vote.repository.CustomCompanyRepository;
@@ -82,6 +84,9 @@ public class UserInfoController {
 	private ProgramJpaRepository programRepository;
 	
 	@Autowired
+	private AuditionConJpaRepository AuditionConRepository;
+
+	@Autowired
 	private CustomProgramRepository customProgramRepository;
 	
 	@Autowired
@@ -111,6 +116,8 @@ public class UserInfoController {
 
 	@Autowired
 	private CustomAuditionConRepository customAuditionConRepository;
+
+
 
 	//개인정보
 	@RequestMapping(value={"","/"})
@@ -591,6 +598,34 @@ public class UserInfoController {
 			return null;	 	
 				}
 			 
+				
+			@RequestMapping(value={"/hoo"}, method=RequestMethod.POST)
+			public String hoo(@RequestParam("formid") int formid, Authentication authentication){ //후보
+				
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				AuditionCon auditionCon = AuditionConRepository.findByFormid(formid);
+
+				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+				Popular pop = new Popular();
+
+				pop.setName(auditionCon.getFusername());
+				pop.setImg(auditionCon.getFprofile());
+				pop.setLogo(auditionCon.getFprofile());
+				pop.setPid(pManager.getProgramId());
+				pop.setBirth(auditionCon.getBirth2());
+				pop.setWeight(auditionCon.getFweight());
+				pop.setHeight(auditionCon.getFheight());
+				pop.setBlood(auditionCon.getFblood());
+				pop.setHobby(auditionCon.getFhobby());
+				pop.setAbility(auditionCon.getFability());
+				pop.setIntro(auditionCon.getIntroduce());
+				
+				popularRepository.saveAndFlush(pop);
+				
+					
+				return "redirect:/audition_con/list";
+			}
+			
 			 
 			@RequestMapping(value="/insertPopular", method=RequestMethod.POST)
 				public String insertOk(Popular pp, RedirectAttributes redirAttrs, 
@@ -753,7 +788,7 @@ public class UserInfoController {
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
 			CustomAuditionCon auditionCon = customAuditionConRepository.getMyAuditionCon(userDetails.getR_ID(), page);
-
+			System.out.println(auditionCon.getCount());
 			return auditionCon;
 		}
 
