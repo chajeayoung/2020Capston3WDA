@@ -87,7 +87,20 @@ div.winner .sc-AxjAm {
   overflow: scroll;
   text-align: -webkit-center;
 }
-
+.timeBox{
+  padding: 6px;
+  background-color: rgba(221, 44, 192, 1);
+  color: white;
+  border-radius: 5px;
+}
+.timeTopDiv{
+  text-align: center;
+  font-size: 2vmax;
+  margin-bottom: 5px;
+}
+.timeSubDiv{
+  margin-bottom: 10px;
+}
 @media (max-width: 950px) {
   .left_right_box {
     grid-template-columns: none;

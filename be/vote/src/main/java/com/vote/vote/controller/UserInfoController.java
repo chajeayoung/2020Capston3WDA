@@ -746,6 +746,8 @@ public class UserInfoController {
 		public String myAudition(){
 			return "/userInfo/myAudition";
 		}
+
+		
 		@RequestMapping(value={"/myAudition/axios","/myAudition/axios/"}, method = RequestMethod.GET)
 		@ResponseBody
 		public CustomAuditionCon myAuditionAxios(@Nullable Authentication authentication,  @PageableDefault Pageable page){
