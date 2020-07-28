@@ -7,19 +7,19 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <content>
-	<div id="hotclibread"></div>
-    <script src="/assets/hotclibread.js"></script> 
-	<!-- <link rel="stylesheet" href="/css/hotclibread.css"/>
+	<!-- <div id="hotclibread"></div>
+    <script src="/assets/hotclibread.js"></script> --> 
+	 <link rel="stylesheet" href="/css/hotclibread.css"/>
 <body>
-	<div>
+	<h1> <span th:utext="${hotclib.htitle}"></span></h1>
 		<tr>		
 		<video class="video1" controls th:src="@{'/uploads/' + ${rfile.filename}}" width="800" height="500"></video>
 			
 		</tr>
-	</div>
+	
 		<div class="gi">		
 	<tr> 
-		<li>제목: <span th:utext="${hotclib.htitle}"></span></li>
+		
 	</tr>
 		<tr>
 			<li class="rcontent">내용: <span th:utext="${hotclib.h_content}"></span></li>
@@ -30,20 +30,34 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 			<li>작성자: <span th:utext="${hotclib.husername}"></span></li>
 		</div>
 	
+	 <!--  <div  th:each="hotclib:${hotclibList}">
+			<a href=""
+				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
+				<img class="hi" width="150" height="150"
+				th:src="@{'/uploads/' + ${hotclib.filename2}}">
+				
+					제목: <span th:utext="${hotclib.htitle}"> 
+					작성자
+						
+					
+			</a>
+		</div> --> 
+	
+	
 		<div>
-			<a href="" th:href="@{/hotclib}">목록</a><br>
+			<a class="btn btn-lg btn-primary" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib'}">목록</a><br>
 		</div>
-			<sec:authorize access ="hasRole('2')"> 
-			<span><a href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a></span>
+			
+		<!-- 	<span><a sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a></span>
 			
 			<form id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
 				<input type="hidden" name="_method" value="delete"/>
-				<button id="delete-btn">삭제</button>
+				<button sec:authorize="hasAnyAuthority('2')" id="delete-btn">삭제</button>
 			</form>
-			</sec:authorize>
+			 -->
 		
 			 <form id="replyList" method="post" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
-				<tr>댓글테스트
+				<tr>댓글 
 				<td><input type="textarea" placeholder="내용을 입력하세요" name="r_content"></td>
 					<input type="submit" value="등록" ><hr>
 			</tr>
@@ -65,10 +79,10 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 							<input type="hidden" name="_method" value="replydelete"/>
 							<button id="replydelete">댓글삭제</button>
 						</form>
-					<div id="root[vs.index]">
-						<button type="button" data-rno="${replyList.replyid}" id="1btn">댓글수정</button> 
+					<div id="root"${vs.index}>
+						<button type="button" data-rno="${replyList.replyid}"  id="1btn">댓글수정</button> 
 						</div>
-						<div id="modal[vs.index]">
+						<div id="modal" ${vs.index}>
 							<form id="replyupdate-form"  method="POST" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
 							<div class="modal_content">									
 								<h5>댓글수정하는곳</h5>
@@ -87,17 +101,30 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 				
 <script>
 	
-	$("#1btn").click(function(){
-        $("#modal[vs.index]").fadeIn(500);
-    });
+	//$("#1btn").click(function(){
+ //       $("#modal[vs.index]").fadeIn(500);
+  //  });
    
-     $("#2btn").click(function(){
-        $("#modal[vs.index]").fadeOut(500);
-    });      
+ //    $("#2btn").click(function(){
+ //       $("#modal[vs.index]").fadeOut(500);
+ //   });      
+     
+     $("#1btn").click(function(){
+         $("#modal").attr("style", "display:block");
+     });
     
+      $("#2btn").click(function(){
+         $("#modal").attr("style", "display:none");
+     });   
+         
 </script>
- -->
+ 
+<style>
+.modal_content{
 
+z-index:1;
+}
+</style>
 </content>
 </body>
 </html>

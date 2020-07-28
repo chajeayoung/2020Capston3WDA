@@ -5,12 +5,15 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.stereotype.Controller;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;    
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +26,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.Hotclib;
 import com.vote.vote.db.dto.Member;
-import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Reply;
 import com.vote.vote.db.dto.Rfile;
@@ -63,49 +66,78 @@ public class HotclibController {
 	@Autowired
 	private ProgramJpaRepository programRepository;
 
-	// 게시글 리스트 보여주기
-	// @GetMapping("/community/{program}/hotclib")
-	// public String hotclib(Model model, @PageableDefault Pageable pageable) {
-	// 	int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-	// 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
-	// 	model.addAttribute("hotclibList", hotclibRepository.findAll(pageable));
-	// 	model.addAttribute("rfile", rfileRepository.findAll());
-	// 	return "hotclib/list";
-	// }
+	 //게시글 리스트 보여주기
+	 @GetMapping("/community/{programid}/hotclib")
+	 public String hotclib(Model model, @PageableDefault Pageable pageable, @PathVariable int programid,Principal principal) {
+		String userid = principal.getName(); 
+	 	Member member = memberRepository.findByUserid(userid); 
+	 	int r_id = member.getNo();
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+	 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
+	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programid, pageable));
+//	 	model.addAttribute("rfile", rfileRepository.findAll());
+	 	return "hotclib/list";
+	 }
+	 
+	 @GetMapping("/community/myhotclib")
+	 public String hotclib1(Model model, @PageableDefault Pageable pageable, Principal principal,@Nullable Authentication authentication) {
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager programmanager =pmRepository.findById(userDetails.getR_ID()); 
+		String userid = principal.getName(); 
+	 	Member member = memberRepository.findByUserid(userid); 
+	 	int r_id = member.getNo();
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+	 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
+	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programmanager.getProgramId(), pageable));
+	 	model.addAttribute("rfile", rfileRepository.findAll());
+	 	return "hotclib/list1";
+	 }
 
-	@GetMapping("/community/{program}/hotclib")
-	public String hotclib(Model model, @PageableDefault Pageable pageable,@PathVariable int program) {
+	 @GetMapping("/community/{programid}/hotclib/sorthviewcount")
+	 public String sortHviewcount(Model model,@PathVariable int programid) {
+		 model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHviewcountDesc(programid));
+		 return "hotclib/list";
+	 }
+	 @GetMapping("/community/{programid}/hotclib/sorthdate")
+	 public String sortHdate(Model model,@PathVariable int programid) {
+		 model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHdateDesc(programid));
+		 return "hotclib/list";
+	 }
+//	@GetMapping("/community/{program}/hotclib")
+//	public String hotclib(Model model, @PageableDefault Pageable pageable,@PathVariable int program) {
 		// int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		// pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
 //		model.addAttribute("hotclibList", hotclibRepository.findAll(pageable));
 //		model.addAttribute("rfile", rfileRepository.findAll());
-		System.out.println(program);
-		return "hotclib/list";
-	}
+		//List<Hotclib> hotclibList = hotclibRepository.findByProgramid(program);
+//		System.out.println(program);
+//		return "hotclib/list";
+//	}
 	
-	@ResponseBody
-	@RequestMapping(value={"/community/{program}/hotclib/axios"})
-	public JSONArray hotclibAxios(@PathVariable("program") int program) {
-	
-		System.out.println("sd");
-		JSONArray result = new JSONArray();
-		
-		List<Hotclib> hotclibList = hotclibRepository.findByProgramid(program);
-
-		for(Hotclib hotclib : hotclibList){
-			JSONObject json = new JSONObject();
-			json.put("program", hotclib.getProgramid());
-			json.put("hotclibid", hotclib.getHotclibid());
-			json.put("filename2", hotclib.getFilename2());
-			json.put("htitle", hotclib.getHtitle());
-			json.put("h_date", hotclib.getH_date());
-			json.put("hviewcount", hotclib.getHviewcount());
-			json.put("husername", hotclib.getHusername());
-			
-			result.add(json);
-		}
-		return result;
-	}
+//	@ResponseBody
+//	@RequestMapping(value={"/community/{program}/hotclib/axios"})
+//	public JSONArray hotclibAxios(@PathVariable("program") int program) {
+//	
+//		System.out.println("sd");
+//		JSONArray result = new JSONArray();
+//		
+//		List<Hotclib> hotclibList = hotclibRepository.findByProgramid(program);
+//
+//		for(Hotclib hotclib : hotclibList){
+//			JSONObject json = new JSONObject();
+//			json.put("program", hotclib.getProgramid());
+//			json.put("hotclibid", hotclib.getHotclibid());
+//			json.put("filename2", hotclib.getFilename2());
+//			json.put("htitle", hotclib.getHtitle());
+//			json.put("h_date", hotclib.getH_date());
+//			json.put("hviewcount", hotclib.getHviewcount());
+//			json.put("husername", hotclib.getHusername());
+//			json.put("h_content", hotclib.getH_content());
+//			
+//			result.add(json);
+//		}
+//		return result;
+//	}
 
 	//관리자페이지 핫클립관리
 	// @GetMapping("/hotclib/manager")
@@ -124,10 +156,15 @@ public class HotclibController {
 	
 	// 댓글 리스트,게시글 상세보기
 	 @GetMapping("/community/{program}/hotclib/read/{hotclibid}")
-	 public String read(Model model, @PathVariable int hotclibid,@PathVariable("program") int program) {
+	 public String read(Model model, @PathVariable int hotclibid,@PathVariable("program") int program,
+			 Principal principal) {
+		String userid = principal.getName(); 
+	 	Member member = memberRepository.findByUserid(userid); 
+	 	int r_id = member.getNo();
+		 
 	 	Rfile rfile = rfileRepository.findByHotclibid(hotclibid);
 	 	model.addAttribute("rfile", rfile);
-
+	 	model.addAttribute("hotclibList", hotclibRepository.findAll());
 	 	model.addAttribute("hotclib", hotclibRepository.findById(hotclibid));	
 	 	List<Reply> reply = replyRepository.findByHotclibid(hotclibid);
 	 	model.addAttribute("replyList", reply);
@@ -138,7 +175,7 @@ public class HotclibController {
 	 	return "hotclib/read";
 	 }
 
-	 @ResponseBody
+	@ResponseBody
 	@RequestMapping(value={"/community/{program}/hotclib/read/{hotclibid}/axios"})
 	public JSONObject hotclibreadAxios(@PathVariable("program") int program,
 	@PathVariable int hotclibid) {
@@ -159,12 +196,7 @@ public class HotclibController {
 		return result;
 	}
 		
-	
 
-		
-
-
-	 
 
 //	댓글등록
 	 @PostMapping("/community/{programid}/hotclib/read/{hotclibid}")
@@ -199,22 +231,29 @@ public class HotclibController {
 	 }
 
 	//게시글업로드
-	 @GetMapping("/community/{programid}/hotclib/upload")
-	 public String upload(Model model, @PathVariable int programid){
+	 @GetMapping("/community/hotclib/upload")
+	 public String upload(Model model,@Nullable Authentication authentication){
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager programmanager =pmRepository.findById(userDetails.getR_ID());
 	 	model.addAttribute("hotclib", new Hotclib());
-//	 	System.out.println(program);
-	 	return "/hotclib/upload";
+//	 	System.out.println(programid);
+	 	
+	 	if(programmanager.getId()==userDetails.getR_ID());{
+	 	 	
+		return "/hotclib/upload";	
+	 	}	
 	 } 
 
 	//게시글업로드
-	 @PostMapping("/community/{programid}/hotclib/upload")
+	 @PostMapping("/community/hotclib/upload")
 	 public String upload(
+		
+		@Nullable Authentication authentication,
 	 	@RequestParam(name="filename2") MultipartFile filename2,
 	 	@RequestParam(name="filename") MultipartFile filename,
 	 	@RequestParam(name="htitle") String htitle,
 	 	@RequestParam(name="h_content") String h_content,
 	 	@RequestParam(name="h_reply") String h_reply,
-	 	@PathVariable int programid,
 	 	RedirectAttributes redirAttrs,
 	 	SessionStatus sessionStatus,
 	 	Principal principal){
@@ -230,7 +269,7 @@ public class HotclibController {
 		 hotclib.setHtitle(htitle);
 		 hotclib.setH_content(h_content);
 		 hotclib.setH_reply(h_reply);
-		 hotclib.setH_date(new Date());		
+		 hotclib.setHdate(new Date());		
 		 hotclib.setFilename2(filename2Path);
 		 hotclibRepository.saveAndFlush(hotclib);  // 저장하고 커밋까지 Flush
  
@@ -242,7 +281,7 @@ public class HotclibController {
 		
 		 rfileRepository.saveAndFlush(rfile);
 		 sessionStatus.setComplete();
-		 return "redirect:/community/{programid}/hotclib";
+		 return "redirect:/community/myhotclib";
 		 }
 		
 	//게시글삭제
@@ -259,7 +298,7 @@ public class HotclibController {
 			 Integer fileid, 
 			 Integer replyid){
 	 	hotclibRepository.deleteById(hotclibid);
-	 	return "redirect:/community/{programid}/hotclib";
+	 	return "redirect:/community/myhotclib";
 	
 	 }
 
@@ -287,10 +326,11 @@ public class HotclibController {
 	 	if (bindingResult.hasErrors()) {
 	 		return "hotclib/update";
 	 	} else {
-	 		hotclib.setH_date(new Date());
+	 		hotclib.setHdate(new Date());
+	 		
 			
 	 	hotclibRepository.save(hotclib).getHotclibid(); 
-	 	return "redirect:/community/{programid}/hotclib";
+	 	return "redirect:/community/myhotclib";
 	 	}
 	 }	
 

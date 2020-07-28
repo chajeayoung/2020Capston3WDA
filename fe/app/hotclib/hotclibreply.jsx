@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
-import Hotclibdetail from '../hotclib/hotdetail.jsx';
-import Hotclibreply from '../hotclib/hotclibreply.jsx';
-// import Hotclibfile from '../hotclib/hotclibfile.jsx';
-
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import ItemCard4 from '../items/itemCard4.jsx';
+import Pagination from '@material-ui/lab/Pagination';
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 
@@ -14,7 +18,7 @@ const num = url.split('/');
 var param = num[num.length-4];
 var param1 = num[num.length-1];
 
-class Hotclibread extends Component{
+class Hotclibreply extends Component{
 
     constructor(props){
         super(props);
@@ -48,14 +52,26 @@ class Hotclibread extends Component{
         
         return(
                     
-        <div>
-           
-            <Hotclibdetail></Hotclibdetail> 
-            <Hotclibreply></Hotclibreply>
-            
-        </div>       
+           <div>
+                    {this.state.reply.map((reply,index)=>{
+                       return (  
+                        
+                         <div key={'div'+index}>
+                            <div>내용 : {reply.r_content}</div>
+                            <div>작성일 : {reply.r_date}</div>
+                            <div>작성자 : {reply.rusername}</div>  
+                            <button>수정</button>
+                            <button>삭제</button>                
+                            </div>
+                            
+                              )
+                              
+                            }
+                            
+                         ) 
+                     }                            
+           </div>            
         )
     }
 }
-
-ReactDOM.render(<Hotclibread/>,document.getElementById('hotclibread'));
+export default Hotclibreply;

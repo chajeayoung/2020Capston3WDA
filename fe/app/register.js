@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import "./auth/register.css";
 const axios = require('axios');
 const regeneratorRuntime = require("regenerator-runtime");
-import DaumPostcode from 'react-daum-postcode';
+// import DaumPostcode from 'react-daum-postcode';
 
 class Register extends React.Component {
     

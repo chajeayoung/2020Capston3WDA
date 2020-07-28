@@ -35,8 +35,8 @@ public class Hotclib {
     private String filename2;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable=true)
-    private Date h_date;
+    @Column(nullable=true, name="h_date")
+    private Date hdate;
     
     @Column(nullable=true)
     private Date h_mdate;
@@ -75,13 +75,6 @@ public class Hotclib {
         this.h_content = h_content;
     }
 
-    public Date getH_date() {
-        return h_date;
-    }
-
-    public void setH_date(Date h_date) {
-        this.h_date = h_date;
-    }
 
     public String getFilename2() {
 		return filename2;
@@ -95,7 +88,15 @@ public class Hotclib {
         return h_mdate;
     }
 
-    public void setH_mdate(Date h_mdate) {
+    public Date getHdate() {
+		return hdate;
+	}
+
+	public void setHdate(Date hdate) {
+		this.hdate = hdate;
+	}
+
+	public void setH_mdate(Date h_mdate) {
         this.h_mdate = h_mdate;
     }
 

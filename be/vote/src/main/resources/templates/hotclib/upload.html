@@ -7,12 +7,12 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
 </head>
 <body>
     <content>   
-      <div id="hotclibupload"></div>
-    <script src="/assets/hotclibupload.js"></script> 
+   <!--    <div id="hotclibupload"></div>
+    <script src="/assets/hotclibupload.js"></script> --> 
     
     
-      <!-- <link rel="stylesheet" href="/css/hotclibupload.css"/>
-        <form th:action="@{ '/community/'+${hotclib.programid}+'/hotclib/upload' }" method="post" enctype="multipart/form-data">                
+       <link rel="stylesheet" href="/css/hotclibupload.css"/>
+        <form th:action="@{'/community/hotclib/upload' }" method="post" enctype="multipart/form-data">                
           <div>
             <tr>
 				<th><label for="htitle">제목</label></th>
@@ -61,20 +61,20 @@ function setFilename2(event) {
          }
 
          
-          function setFilename(event) {
-    var reader = new FileReader();
+      //    function setFilename(event) {
+    //var reader = new FileReader();
    
-    reader.onload = function(event) { 
-       var video = document.createElement("video");
-        video.setAttribute("src", event.target.result);
-         document.querySelector("div#preview2").appendChild(video);
-          };
+  //  reader.onload = function(event) { 
+    //  var video = document.createElement("video");
+     //  video.setAttribute("src", event.target.result);
+     //    document.querySelector("div#preview2").appendChild(video);
+       //   };
 
-         reader.readAsDataURL(event.target.files[0]); 
-          }
+         //reader.readAsDataURL(event.target.files[0]); 
+          //}
 
 
-        </script>  -->
+        </script>  
             </content>
 </body>
 </html>
