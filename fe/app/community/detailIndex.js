@@ -31,12 +31,17 @@ class Index extends Component {
 
     async componentDidMount(){
         
-        let {data: program} = await axios.get('/community/'+param+'/axios')
+        let {data} = await axios.get('/community/'+param+'/axios')
+
+        console.log(data);
         // 프로그램 정보
-        
+        if(data.logo != '0'){
+            $("header").css("background-image","url(/uploads/"+data.logo+")")
+        }
+        $("header")
         // this.setState({program})    
         
-        this.setState({program})                        
+        this.setState({program: data})                        
         
         this.getPopular();
         // let {data} = await axios.get(this.url2); // 핫클립 정보 가져오기
@@ -99,6 +104,11 @@ class Index extends Component {
         this.setUrl3();
         this.getAudience();
     }
+    plus(){
+        console.log("클릭")
+        location.href=document.location.href+"/hotclib";
+
+    }
     render() {
         
         return(
@@ -114,7 +124,10 @@ class Index extends Component {
                 <div><h3 >핫클립</h3></div><br/>
                 <HotclibItem data={this.state.hotclib}/><br/><br/><br/>
                 <Pagination count={this.state.count2} page={this.state.pageNum2} onChange={this.pagenation2.bind(this)}style={{placeContent : "center"}}> </Pagination>
+                <button type="button" onClick={this.plus.bind(this)}>더보기</button>
+
             </div>
+            
             <br/><br/>
             <div id="popular">
                 <div><h3>인기인</h3></div><br/>
@@ -127,7 +140,6 @@ class Index extends Component {
     }
 }
      
-  
-
-
 ReactDOM.render(<Index/>,document.getElementById('communityIndex'));
+
+

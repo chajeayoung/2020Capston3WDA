@@ -51,7 +51,9 @@ class MyProgram extends Component {
                             <ItemCard3 img={this.state.program.img}/> 
                             <input type="file" name="file"></input>
                             
-
+                            <span>로고 이미지</span>
+                            <ItemCard3 img={this.state.program.logo}/> 
+                            <input type="file" name="logoImg"></input>
                             
                             <span> 프로그램명 </span> 
                             <input type="text" name="name" defaultValue={this.state.program.name}></input>

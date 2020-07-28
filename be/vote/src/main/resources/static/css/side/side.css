@@ -1,0 +1,27 @@
+.webSideMenuTitle{
+    background-color:  #924ef0;
+    color: white;
+    font-size: 18px;
+}
+.webSideMenuTitle:hover{
+    background-color:  #924ef0 !important;
+}
+.webSideMenuSubTitle{
+    background-color:  #B7AEFC;
+    color: black;
+    /* font-size: 18px; */
+}
+.webSideMenuSubTitle:hover{
+    background-color:  #B7AEFC !important;
+}
+
+.mobileSideMenuTitle{
+    background-color:  #924ef0;
+    color: white;
+    font-size: 15px;
+}
+.mobileSideMenuSubTitle{
+    background-color:  #B7AEFC;
+    color: black;
+    /* font-size: 15px; */
+}

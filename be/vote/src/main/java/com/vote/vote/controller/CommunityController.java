@@ -7,18 +7,20 @@ import java.util.List;
 
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.customSelect.CustomAudience;
+import com.vote.vote.db.customSelect.CustomHotclib;
+import com.vote.vote.db.customSelect.CustomPopularBoard;
+import com.vote.vote.db.dto.HashTag;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Popular;
 import com.vote.vote.db.dto.PopularBoard;
 import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Rfile;
-import com.vote.vote.db.customSelect.CustomHotclib;
-import com.vote.vote.db.customSelect.CustomAudience;
 import com.vote.vote.repository.CustomAudienceRepository;
 import com.vote.vote.repository.CustomHotClibRepository;
 import com.vote.vote.repository.CustomPopularBoardRepository;
 import com.vote.vote.repository.CustomPopularRepository;
+import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.PopularBoardJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
@@ -31,6 +33,7 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +83,9 @@ public class CommunityController {
 	@Autowired
 	CustomAudienceRepository customAudienceRepository;
 	
-	
+	@Autowired
+	HashTagRepository hashTagRepository;
+
     @RequestMapping(value={"","/"})
 	public String index() {
 		// System.out.println("/ --> index");
@@ -116,7 +121,8 @@ public class CommunityController {
   	public String detailIndex(@PathVariable("program") int programNum,Model model) {
     	
     	Program program = programRepository.findById(programNum);
-    	model.addAttribute("programName", program.getName());
+		model.addAttribute("programName", program.getName());
+		// model.addAttribute("logo", program.getLogo());
     	
 		return "community/detailIndex";
 	}
@@ -135,7 +141,8 @@ public class CommunityController {
   		programData.put("id", program.getId());
   		programData.put("name", program.getName());
   		programData.put("img", program.getImg());
-  		programData.put("category", program.getCategory());
+		programData.put("category", program.getCategory());
+		programData.put("logo", program.getLogo());
 	
   	    return programData; 
   	   
@@ -143,9 +150,9 @@ public class CommunityController {
     
     @RequestMapping(value={"/{program}/popular/axios","/{program}/popular/axios/"}) // 
   	@ResponseBody
-  	public JSONArray  popularAxios(@PathVariable("program") int programNum, @PageableDefault Pageable pageable){// 프로그램 인기인 정보
-  	
-      	
+  	public JSONArray  popularAxios(@PathVariable("program") int programNum, @PageableDefault Pageable pageable){// 프로그램 출연자 정보
+		
+
       	List<Popular> populares = customPopularRepository.findByPid(programNum, pageable);
       	long count = customPopularRepository.CountByPid(programNum);
 
@@ -159,6 +166,7 @@ public class CommunityController {
 			popularData.put("name", popular.getName());
 			popularData.put("img", popular.getImg());
 			popularData.put("p_id", popular.getPid());
+			// popularData.put("logo", popular.getPid();
 
 			json.add(popularData);
 		}
@@ -189,30 +197,39 @@ public class CommunityController {
     @RequestMapping(value={"/{program}/{popular}","/{program}/{popular}/"})
    	public String popularBoard(@PathVariable("program") int programNum,
    								@PathVariable("popular") int popularNum,Model model) {
-     	
+		 
+		
      	Program program = programRepository.findById(programNum);
      	Popular popular = popularRepository.findById(popularNum);
      	
-     	model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularImg", popular.getLogo());
      	
    
      	
  		return "community/popularBoard";
  	}	
     
-    @RequestMapping(value={"/{program}/{popular}/axios","/{program}/{popular}/axios"}) //사용자정보
+    @RequestMapping(value={"/{program}/{popular}/axios","/{program}/{popular}/axios"}) 
 	@ResponseBody
 	public JSONArray popularBoardAxios(
 			    @PathVariable("program") int programNum,
-				@PathVariable("popular") int popularNum,
-				
-				@PageableDefault Pageable pageable, Model model){
+				@PathVariable("popular") int popularNum,				
+				@PageableDefault Pageable pageable, Model model
+				, @Nullable String hash){
 	
-    	
-		List<PopularBoard> popularboards = customPopularBoardRepository.findById(popularNum,pageable);
+
+					String nullCheck = "";
+					if( hash!=null && !hash.equals("")){
+					  nullCheck = hash;
+					}
+		  
+		System.out.println("1");
+		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable, nullCheck);
 	
-		long count = customPopularBoardRepository.CountById(popularNum);
+		//long count = customPopularBoardRepository.CountById(popularNum);
 		
+		System.out.println("2");
 		//System.out.println(popularNum);
 		//System.out.println(count);
 		
@@ -231,7 +248,7 @@ public class CommunityController {
 			 gob = 10;
 		}
 		int i = 0;
-		rownum = (int)count - (pageable.getPageNumber() * gob) ;
+		rownum = (int)popularboards.getCount() - (pageable.getPageNumber() * gob) ;
 		
 		//System.out.println(count-pageable.getPageNumber());
 		
@@ -242,7 +259,7 @@ public class CommunityController {
 		CustomUserDetails sessionUser = (CustomUserDetails)principal;
 		
 		
-		for( PopularBoard popularBoard : popularboards){
+		for( PopularBoard popularBoard : popularboards.getPopularBoard()){
 			JSONObject popularBoardData = new JSONObject();
 	
 			member = memberRepository.findByNo(popularBoard.getRid());
@@ -267,14 +284,14 @@ public class CommunityController {
 			json.add(popularBoardData);
 		}
 		json.add(sessionUser.getR_ID());			
-		json.add(count);
+		json.add((int)popularboards.getCount());
 		
 		
 		
 		int countList= 10;
-		int totalPage= (int)(count) / countList;
+		int totalPage= (int)((int)popularboards.getCount()) / countList;
 		
-		if (count%countList>0) {
+		if ((int)popularboards.getCount()%countList>0) {
 			
 			totalPage++;
 			
@@ -293,7 +310,8 @@ public class CommunityController {
      	PopularBoard board = popularBoardRepository.findById(BoardNum);
      	  
 //     	System.out.println(board.toString());
-     	model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularName", popular.getName());
+		 model.addAttribute("popularImg", popular.getLogo());
 	
      	board.setViewcount(board.getViewcount()+1);
      	popularBoardRepository.save(board);
@@ -367,25 +385,45 @@ public class CommunityController {
     @RequestMapping(value={"/{program}/{popular}/create"}) //프로그램>인기인>게시글작성
    	public String popularBoardCreate(@PathVariable("program") int programNum,
    									@PathVariable("popular") int popularNum,
-   									 PopularBoard board,@RequestParam(name="filename") MultipartFile file,
+   									 PopularBoard board,
+   									@Nullable @RequestParam(name="filename") MultipartFile file,
+   									@Nullable @RequestParam("hash") String hash,
    								Model model) {
      	
      	Program program = programRepository.findById(programNum);
      	Popular popular = popularRepository.findById(popularNum);
-     	PopularBoard board2 = popularBoardRepository.findById(popularNum);
+     	//PopularBoard board2 = popularBoardRepository.findById(popularNum);
      	Rfile rfile = new Rfile();    	
     	
-     
+   
      	
      	System.out.println(board.toString());
     
      	popularBoardRepository.saveAndFlush(board);
-     	
-     	if(file != null) {
-    	rfile.setFilename(storageService.store2(file)); 
-     	rfile.setPid(board.getId());
-     	rfileRepository.saveAndFlush(rfile);
-     	}
+		 
+		 System.out.println(board.getId());
+		 if(hash != null && !hash.isEmpty()) {
+			System.out.println(hash);
+		
+			String [] hashArray = hash.split(",");
+		
+			for (int i = 0; i < hashArray.length; i++) {
+				
+				String hashWord = hashArray[i].trim();
+				
+			   HashTag hash2 = new HashTag();				
+			   hash2.setPopularid(popularNum);
+			   hash2.setPid(board.getId());
+			   hash2.setHashtag(hashWord);
+			   hashTagRepository.saveAndFlush(hash2);
+		   }
+		}
+
+     	 if(!file.isEmpty()) {
+    	 rfile.setFilename(storageService.store2(file)); 
+     	 rfile.setPid(board.getId());
+     	 rfileRepository.saveAndFlush(rfile);
+     	 }
      	
  		return "redirect:/community/{program}/{popular}";
  	}	
@@ -417,6 +455,7 @@ public class CommunityController {
      	
 		
      	popularBoardRepository.saveAndFlush(board);
+     	
      	
      	//if(file != null) {
     	//rfile.setFilename(storageService.store2(file)); 

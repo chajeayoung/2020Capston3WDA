@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'실시간 투표',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'실시간 투표',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<script src="/js/side/userInfoSide.js"></script>
 <body>
     <content>
         <form method="post" enctype="multipart/form-data" action="/vote">

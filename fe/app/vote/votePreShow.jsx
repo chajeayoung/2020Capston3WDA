@@ -2,8 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import ItemCard2 from '../items/itemCard2.jsx';
 import ItemCard3 from '../items/itemCard3_big.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
+import './../items/itemcard5.css'
 // import './voteShow.css'
 import './votePreShow.css'
+import "./css/addressModal.css";
+
+// import './index.css';
+// import App from './App.js';
+
 const axios = require('axios');
 
 var url = document.location.href;
@@ -19,14 +26,30 @@ class VoteShow extends React.Component {
         super(props);
     }
     
+    async viewItem(vote){       
+        let {data} = await axios.get("/vote/axios/hash/"+vote.popularid);
+        //this.props.setState({})
+        console.log(data)
+        this.props.that.setState({modal:0,state:{popularid:vote.popularid, option:0, data:data.hash ,vote:vote, pop:data.pop}})
+
+        // var modalItem = $("modalItem");
+        // modalItem.empty();
+        // modalItem.append(<App />);
+        //<App /> 
+        //modalItem.append()
+        
+    }
+    
     render() {
         // {this.sendSelect.bind(this,index)}
         return this.props.votes.map((vote,index)=>{
             if (vote.name != 0){
                 return (
-                    <div key={vote.name+index} className="card_div"> 
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
-                    </div>
+                    <div key={vote.name+index} className="card_div" onClick={this.viewItem.bind(this,vote)} > 
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} info={vote.info} />
+                   </div>
+
+                 
                 )
             }
         })
@@ -37,7 +60,8 @@ class Show extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}};
+        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}
+                        ,modal:1};
         this.stTime;
         this.edTime;
         this.rsTime; // 투표 집계공개 시간
@@ -45,8 +69,13 @@ class Show extends React.Component{
 
     async componentDidMount(){
         let {data} = await axios.get('/vote/axios/'+param);
+        console.log("----test----");
+
+        $("header").css("background-image","url(/uploads/"+data[2].logo+")")
+        $("header").css("background-position","top")
+
         console.log(data);
-        this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5]});
+        this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5], state:{popularid:0, option:1, data:[]}  } );
         console.log(data[2]);
 
         
@@ -65,14 +94,32 @@ class Show extends React.Component{
         
         
     }
+
+    modalOn(){
+        this.setState({modal : 0})
+    }
+    modalOff(){
+        this.setState({modal:1})
+    }
+
+    viewCandidate(programid,popularid,hash){
+        window.open("/community/"+this.state.program.id+"/"+this.state.state.popularid+"?page=0&size=10&sort=date&hash="+hash.hashtag, "Hi");
+
+        console.log(programid)
+        console.log(popularid)
+        console.log(hash.hashtag)
+    }
+
+
     render(){
+        console.log(this.state.state)
         const {title} = this.state.title
         this.setDate();
         console.log("render")
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div className="circle">투표 시작전</div>
                 </div>
                 
@@ -99,10 +146,72 @@ class Show extends React.Component{
                     <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
                     <div className="candidate_op">★☆후보 클릭 시 관련 정보로 이동☆★</div>
                     <div className="cards">
-                        <VoteShow votes={this.state.votes} />   
+                        <VoteShow votes={this.state.votes} that={this} program={this.state.program}/>   
                     </div>
                     
-                </div>             
+                            {
+                                    this.state.modal == 0?(
+                                        <div className="modal">
+                                            <div className="modalContentBox">
+                                                <div className="modalItem">
+                                                     {this.state.state.option==0?(
+                                                     <div className="votePreShowDiv">
+                                                         <div><img className="votePreShowInfoImg" src={'/uploads/'+this.state.state.vote.img}></img>
+                                             
+                                                         <table className="votePreShowInfoTable">
+                                                            <thead>
+                                                                <tr>
+                                                                <th>{this.state.state.vote.name}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <td>생년월일</td><td>{this.state.state.pop.birth.split("T")[0]}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>혈액형</td><td>{this.state.state.pop.blood}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>키</td><td>{this.state.state.pop.height}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>몸무게</td><td>{this.state.state.pop.weight}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>취미</td><td>{this.state.state.pop.hobby}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>특기</td><td>{this.state.state.pop.ability}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td>한마디</td><td>{this.state.state.vote.info}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                         {this.state.state.data.map((hash,index)=>{
+                                                              return <button type="button" className="btn-hash1" onClick={this.viewCandidate.bind(this,this.state.program.id,this.state.state.popularid,hash)}>
+                                                              {hash.hashtag} <sup>{hash.count}</sup>
+                                                              </button>
+                                                         })}
+                                                        {this.state.state.data.length==0?<div>등록된 해시태그가 없습니다.</div>:<div></div>}
+                                                        
+                                                     </div>):(
+                                                        
+                                                    <div></div>)}
+                                                  
+                                                    
+                                                    
+                                                </div>
+                                                <div className="closeBtn" onClick={this.modalOff.bind(this)}>닫기</div>
+                                            </div>
+                                        </div>
+                                    ):(
+                                    <div></div>
+                                    )
+                                }
+
+                   </div>             
             </div>
         )
     }

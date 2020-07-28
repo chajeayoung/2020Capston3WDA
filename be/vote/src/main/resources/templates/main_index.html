@@ -12,7 +12,11 @@
     <!-- 모바일 메뉴 사이드 바 -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="/js/mobileSidBar.js"></script>
-
+    
+    <!-- 부트스트랩 -->
+   <link rel="stylesheet" href="/shop/css/main-bootstrap.min.css"> 
+    
+    <link rel="stylesheet" href="/css/auditioncss.css" />
 
     <title>RIRO</title>
 </head>
@@ -171,6 +175,101 @@
     </header>
     <contents>
         <div class="contents">
+
+        <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
+
+        <!-- <a th:href="@{${#authentication.principal.username}}">마이페이지</a>
+        <a th:href="@{${#authentication.principal.R_ID}}">R_ID</a>-->
+        <a th:href="@{${#authentication.principal.ROLE}}"></a> 
+
+        <!-- 사용자별 메인뷰 -->
+        <div th:switch="@{${#authentication.principal.ROLE}}">
+                <div th:case="0" id="rirodiv">
+                    <div id="userIndex"></div>
+                    <script src="/assets/userIndex.js"></script>
+                </div>
+
+                <div th:case="1">
+						관리자
+                </div>
+
+                <div th:case="2" id="rirodiv">
+                <div>
+                <hr>
+                <h2>오디션 모집현황</h2>
+          					
+          		<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+						
+									<th>글 번호</th>
+									<th>제목</th>
+									<th class="t23">분야</th>
+									<th class="t23">모집시작일</th>
+									<th class="t23">모집종료일</th>
+									<th class="t23">모집인원</th>
+									<th class="t23">발표일</th>
+
+						</tr>
+					</thead>
+					<tbody>
+									<tr th:each="audition:${auditionlist}">
+									<td th:text="${audition.auditionid}"></td>
+									<!--  <td th:text="${audition.a_title}"></td> -->
+									<td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
+									<td class="t23" th:text="${audition.acategory}"></td>
+									<td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
+									<td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
+									<td class="t23" th:text="${audition.arecruits}+ 명"></td>
+									<td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
+			
+								</tr>						
+					</tbody>
+								
+					</table> 
+					
+					<input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition/list'"/>	
+							
+					<hr>
+				<h2>오디션 심사현황</h2>		
+				
+				<table class="table table-striped table-sm">
+					<thead>
+								<tr>														
+									<th>글번호</th>
+									<th>제목</th>
+									<th>신청자</th>
+									<th class="t23">접수일</th>
+									<th>심사상태</th>
+								</tr>
+					</thead>
+					<tbody>
+							<tr th:each="auditionCon:${auditionconlist}">
+								<td th:text="${auditionCon.formid}"></td>
+								<td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
+								<!-- <td th:text="${auditionCon.fname}"></td> -->
+								<td><span th:text="${auditionCon.username}"></span><span>님</span></td>
+								<td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td>
+								<td th:text="${auditionCon.confirm}"></td>
+							</tr>
+					</tbody>	
+				</table>
+				</div>    
+				<input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition_con/list'"/>	
+				<hr>			
+
+                <div id="managerIndex"></div> 
+                <input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition/list'"/>	
+                <hr>
+                    <script src="/assets/managerIndex.js"></script>
+                 </div>
+                      
+        </div>           
+
+
+
+        </th:block>
+
 
         </div>
     </contents>

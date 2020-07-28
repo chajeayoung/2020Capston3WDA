@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.customSelect.CustomHashTag;
 import com.vote.vote.db.customSelect.CustomVote;
 import com.vote.vote.db.dto.Candidate;
 import com.vote.vote.db.dto.Member;
@@ -18,10 +19,12 @@ import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Vote;
 import com.vote.vote.db.dto.Voter;
 import com.vote.vote.db.dto.VoterHash;
-import com.vote.vote.klaytn.Klaytn;
+import com.vote.vote.klaytn.Klaytn2;
 import com.vote.vote.repository.CandidateJpaRepository;
+import com.vote.vote.repository.CustomHashTagRepository;
 import com.vote.vote.repository.CustomPopularRepository;
 import com.vote.vote.repository.CustomVoteRepository;
+import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.repository.ProgramJpaRepository;
@@ -90,9 +93,17 @@ public class VoteController {
 
 	@Autowired
 	private MemberJpaRepository memberRepository;
-	
 
-	public Klaytn klaytn = new Klaytn();
+	@Autowired
+	private CustomHashTagRepository customHashRepository;
+
+	@Autowired
+	private HashTagRepository hashRepository;
+	
+	@Autowired
+	private PopularJpaRepository popularRepository;
+
+	public Klaytn2 klaytn = new Klaytn2();
 
 
 	//  투표 메인
@@ -333,6 +344,23 @@ public class VoteController {
 		return "vote/show";
 	}
 
+	@RequestMapping(value={"/axios/hash/{popularId}","/axios/hash/{popularId}/"},
+	method=RequestMethod.GET,
+	produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JSONObject getHashTagAxios(@PathVariable("popularId") int popularId){
+
+		//List<HashTag> hash = hashRepository.getHashTag(popularId);
+		List<CustomHashTag> hash = customHashRepository.findByPopularId(popularId);
+		Popular pop = popularRepository.findById(popularId);
+
+		JSONObject json = new JSONObject();
+		json.put("hash", hash);
+		json.put("pop",pop);
+
+		return json;
+	}
+
 	@RequestMapping(value={"/axios/{voteId}","/axios/{voteId}/"},
 	method=RequestMethod.GET,
 	produces = MediaType.APPLICATION_JSON_VALUE)
@@ -344,15 +372,17 @@ public class VoteController {
 		// Vote_name name = vote_nameRepository.findById(vote.getName());
 		List<Candidate> candidateList = candidateRepository.findByVoteId(voteId);
 		
-        
+	        
 		JSONArray array = new JSONArray();
         
 
 		for(int i=0; i<candidateList.size();i++){
 			JSONObject item = new JSONObject();
+			
 			item.put("name", candidateList.get(i).getName());
 			item.put("img",candidateList.get(i).getImg());
 			item.put("info",candidateList.get(i).getInfo());
+			item.put("popularid", candidateList.get(i).getPopId());
 			array.add(item);
 		}
 		JSONObject voteInfo = new JSONObject();
@@ -454,6 +484,9 @@ public class VoteController {
 							age = nowAge.getYears()/10;
 						// }
 						System.out.println("계산한 나이: "+age);
+						if(age == 0){
+							age = 1;
+						}
 					}
 					
 					
@@ -468,7 +501,7 @@ public class VoteController {
 						vote.getAddress(), 
 						Long.parseLong(nowTime),
 						age,
-						Integer.parseInt(userDetails.getGENDER()),
+						Integer.parseInt(member.getGender()),
 						Integer.parseInt(axiosData.get("select").toString())
 					);							
 
@@ -587,13 +620,13 @@ System.out.println("------------------테스트 1");
 			System.out.println("result: " +result);
 			// System.out.println(result.get("result"));
 
-			ArrayList userAdd = new ArrayList();
+			// ArrayList userAdd = new ArrayList();
 			
 			List<VoterHash> voterHash = voterHashRepository.findByMemberIdAndVoteId(userDetails.getR_ID(),vote.getId());
 
-			for(VoterHash voterH : voterHash){
-				userAdd.add(voterH.getHash());
-			}
+			// for(VoterHash voterH : voterHash){
+			// 	userAdd.add(voterH.getHash());
+			// }
 
 
 			json.add(0, result.get(0));// 투표 결과
@@ -605,7 +638,7 @@ System.out.println("------------------테스트 1");
 			json.add(6,vote.getSelectNum());// 선발인원 숫자
 			json.add(7,0);// 투표결과 보여주는가?
 			json.add(8,vote.getAddress());// 투표 address
-			json.add(9,userAdd); // 사용자 address
+			json.add(9,voterHash); // 사용자 address
 			
 			
 		} catch (Exception e) {

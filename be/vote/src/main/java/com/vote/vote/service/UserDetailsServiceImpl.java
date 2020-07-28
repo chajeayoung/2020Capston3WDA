@@ -52,6 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         user2.setBIRTH(entityUser.getBirth());
         user2.setGENDER(entityUser.getGender());
         user2.setNICKNAME(entityUser.getNickname());
+        
 
 
         user2.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(entityUser.getRole()))); 

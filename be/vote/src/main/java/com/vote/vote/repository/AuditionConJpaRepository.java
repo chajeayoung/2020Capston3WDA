@@ -12,6 +12,7 @@ import com.vote.vote.db.dto.AuditionCon;
 public interface AuditionConJpaRepository  extends JpaRepository<AuditionCon, String>{
 	public ArrayList<AuditionCon> findAll();
 	public AuditionCon findByFormid(int formid);
+	public ArrayList<AuditionCon> findByConfirmAndAuditionid(String confirm,int auditionid);
 	public ArrayList<AuditionCon> findByConfirm(String confirm);
 	public AuditionCon findByAuditionid(Integer auditionid);
 	public AuditionCon findByRid(int rid);

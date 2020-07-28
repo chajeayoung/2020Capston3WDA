@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'신청 폼',_)}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<content>
+    <link rel="stylesheet" href="/css/formcss.css" />
+
+    <body>
+
+
+        <style>
+            .im{
+                    weidht:100px;
+                    height:100px;
+                }
+        </style>
+
+        <form th:action="@{'/audition_con/update/' + ${auditionCon.formid}}" method="post">
+            <table class="table table-bordered">
+
+                <tbody>
+
+                    <tr>
+                        <th>성명</th>
+
+                        <td> <input type="hidden" name="fusername" th:text="${auditionCon.fusername}" th:value="${auditionCon.fusername}" /></td>
+                        <th>휴대전화번호</th>
+                        <td> <input type="hidden" name="fuserphone" th:text="${auditionCon.fuserphone}" th:value="${auditionCon.fuserphone}" /></td>
+                        <th>이메일</th>
+                        <td> <input type="hidden" name="fusermail" th:text="${auditionCon.fusermail}" th:value="${auditionCon.fusermail}" /></td>
+
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td> <input type="hidden" name="ftitle" th:text="${auditionCon.ftitle}" th:value="${auditionCon.ftitle}" /></td>
+                    </tr>
+                    <tr>
+
+                        <!--  <div id="bo_v_img">
+                    <img src="#" th:src="@{'/uploads/' + ${audience.img}}" alt="">
+                </div>-->
+
+                        <th>사진 </th>
+                        <td> <a><img class="im" th:src="@{'/uploads/' + ${auditionCon.fprofile}}"></a>
+
+                            <input type="hidden" name="fprofile" th:value="${auditionCon.fprofile}" /></td>
+                        <th>주소</th>
+                        <td> <input type="hidden" name="faddr" th:text="${auditionCon.faddr}" th:value="${auditionCon.faddr}" /></td>
+                    </tr>
+                    <tr>
+                        <th>학력</th>
+                        <td> <input type="hidden" name="feducation" th:text="${auditionCon.feducation}" th:value="${auditionCon.feducation}" /></td>
+                    </tr>
+                    <tr>
+                        <th>성별</th>
+                        <td class="tgender"> </td>
+                        <input type="hidden" class="fgender" name="fgender" th:value="${auditionCon.fgender}" />
+                        <th>키</th>
+                        <td> <input type="hidden" name="fheight" th:text="${auditionCon.fheight}" th:value="${auditionCon.fheight}" /></td>
+                        <th>몸무게</th>
+                        <td> <input type="hidden" name="fweight" th:text="${auditionCon.fweight}" th:value="${auditionCon.fweight}" /></td>
+                        <th>혈액형</th>
+                        <td> <input type="hidden" name="fblood" th:text="${auditionCon.fblood}" th:value="${auditionCon.fblood}" /></td>
+                    </tr>
+                    <tr>
+                        <th>가족관계</th>
+                        <td> <input type="hidden" name="ffamily" th:text="${auditionCon.ffamily}" th:value="${auditionCon.ffamily}" /></td>
+                        <th>취미</th>
+                        <td> <input type="hidden" name="fhobby" th:text="${auditionCon.fhobby}" th:value="${auditionCon.fhobby}" /></td>
+                        <th>특기</th>
+                        <td> <input type="hidden" name="fability" th:text="${auditionCon.fability}" th:value="${auditionCon.fability}" /></td>
+                    </tr>
+                    <th:block th:each="option : ${options}">
+                        <tr>
+                            <th th:text="${option.name}"></th>
+                            <td th:text="${option.value}"></td>
+                        </tr>
+                    </th:block>
+                    <input type="hidden" class="test" th:value="${auditionCon.confirm}" />
+                </tbody>
+            </table>
+            <td><input type="hidden" name="username" th:value="${auditionCon.username}" /></td>
+            <td><input type="hidden" name="fdate" th:value="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}" /></td>
+            <div>
+
+            <div>
+                <a href="/userInfo/myAudition">나의 오디션 목록</a>
+                <a th:href="@{'/audition/upadte/'+${auditionCon.formid}}">수정</a>
+            </div>
+                <!-- <center> -->
+                    
+                    <!-- <h4>
+                        합격<input type="radio" id="o" class="o" name="confirm" value="합격">
+                        불합격<input type="radio" id="x" class="x" name="confirm" value="불합격">
+                    </h4> -->
+                    <script>
+
+                        // DOM Standard Event
+            // 이 read.html 이 로드 될때, 무조건 1회 실행되는 함수.
+            window.onload = function () {
+
+                // 합격/불합격 체크
+                // 클래스명이 test 인 태그의 value 값을 불러온다.
+                // 클래스명일땐 태그명 앞에 . 
+                // ID명일땐 태그명 앞에 #
+                var check = document.querySelector(".test").value
+
+                // check가 o 일때,
+                if (check == "합격") {
+                    document.querySelector(".o").checked = true;
+                } else if (check == "불합격") {
+                    // check 가 x 일때,
+                    document.querySelector(".x").checked = true;
+                }
+
+                //======================================================
+
+                // 해당 input value 값을 가져온다. 
+                // 남자는 m , 여자는 g
+                var gender = document.querySelector(".fgender").value
+
+                // 그 부분을 체크하고
+                if (gender == "m") {
+                    // 그러나 현재 input 에 남자가 출력되면 안되고, td 에 출력되어야 하기에
+                    // 테이블 줄임말 T + gender 
+                    document.querySelector(".tgender").innerText = "남자";
+                } else if (gender == "g") {
+                    document.querySelector(".tgender").innerText = "여자";
+                }
+                
+            }
+        </script>
+                <!-- </center> -->
+
+
+
+
+                <!-- <input type="reset" value="이전으로" onclick="history.back();">
+                
+
+                <span style="float:right;">
+                    <input type="submit" value="저장" />
+                </span> -->
+            </div>
+        </form>
+        <script>
+            var check = document.querySelector(".test").value
+
+            if (check = "o") {
+                document.querySelector(".o").checked = true;
+            } else if (check = "x") {
+                document.querySelector(".x").checked = true;
+            }
+
+        </script>
+    </body>
+</content>
+
+</html>

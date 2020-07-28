@@ -13,12 +13,12 @@ export default class OrderStateItem extends React.Component {
                         <tr>
                             <td rowSpan="2" className="item">
                                 <div className="imgName">
-                                    <a href={"/shop/"}>
+                                    <a href={"/shop/product/"+item.product_id}>
                                         <img src={"/uploads/"+item.image}/>
                                     </a>
                                 </div>
                             </td>
-                            <td><a href="">상품명: {item.name}</a></td>
+                            <td><a href={"/shop/product/"+item.product_id}>상품명: {item.name}</a></td>
                         </tr>
                         <tr>
                             <td>전체 판매개수: {item.sum}</td>

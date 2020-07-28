@@ -1,74 +1,167 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'게시글 등록',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},~{::script},'게시글 등록',_)}">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 사이드바 -->
-    <script src="/js/side/userInfoSide.js"></script>
+    <!-- <script src="/js/side/userInfoSide.js"></script> -->
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="/js/audition/write.js"></script>
 </head>
 <content>
     <link rel="stylesheet" href="/css/formcss.css" />
-<body>
-
-
-<form th:action="@{/audition/write}" method="post" enctype="multipart/form-data">  
-
-  <!--  <th:block sec:authorize="isAuthenticated()">
-            <input type="text" value=""name="rid"  id="userRid" sec:authentication="principal.R_ID"></input>
-        </th:block>   -->
+    <body>
+        <form th:action="@{/audition/write}" method="post" enctype="multipart/form-data">  
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         
-    <div class="container">
-<table class="table table-bordered" >
-    <thead>
-        <caption><h1> 게시글 작성</h1> </caption>
-        
-    </thead> 
-    <tbody>
-            <tr>
-            	<th>분야</th>
-                <td><input type="text" placeholder="분야을 입력하세요. " name="acategory"/></td>
-                <th>모집기간</th>
-                <td><input type="date" name="astartdate" /></td>
-                <th>    ~     </th>
-                <td><input type="date" name="aenddate" /></td>
-                <th>인원</th>
-                <td><input type="text" placeholder="모집인원을 입력하세요" name="arecruits" /></td>
-                <th>발표일</th>
-                <td><input type="date" placeholder="발표일을 입력하세요" name="aissue" /></td>
-                
-            </tr>
-            <tr>
-                <th>제목</th>
-                <td><input type="text" placeholder="제목을 입력하세요. " name="atitle" /></td>
-           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                
-             <th>첨부파일</th>
-                                <td>
-                                    
-                  <input type="file" name="filename">
-                                </td>
-         
-         
-    </tbody>
-</table>
-<table>
- <tr>
-                <th>내용 : </th>
-                <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="acontent"></textarea></td>
-            </tr>
-</table>
- <tr>
-                <td colspan="2">
-                     <input type="submit" value="등록">
-                    <input type="reset" value="취소" onclick="history.back();">                 </td>
-            </tr>  
+            <div class="container">
+                <table class="table table-bordered" >
+                    <thead>
+                        <caption><h1> 게시글 작성</h1> </caption>
+                    </thead> 
+                    <tbody>
+                        <tr>
+                            <th>분야</th>
+                            <td><input type="text" placeholder="분야을 입력하세요. " name="acategory"/></td>
+                            <th>모집기간</th>
+                            <td><input type="date" name="astartdate" /></td>
+                            <th>    ~     </th>
+                            <td><input type="date" name="aenddate" /></td>
+                            <th>인원</th>
+                            <td><input type="text" placeholder="모집인원을 입력하세요" name="arecruits" /></td>
+                            <th>발표일</th>
+                            <td><input type="date" placeholder="발표일을 입력하세요" name="aissue" /></td>
+                            
+                        </tr>
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" placeholder="제목을 입력하세요. " name="atitle" />
+                            </td>
+                            <th>첨부파일</th>
+                            <td>       
+                                <input type="file" name="filename">
+                            </td>
+                        </tr>
             
-        </div>
-			 </form>
-	 
+                    </tbody>
+                </table>
+                <div>신청폼 커스터마이징</div>
+                <table class="table table-bordered"> 
+                    <tbody>
+                        <tr>
+                            <th><div>성명</div></th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
        
+                            <th>전화번호</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
 
-</body>
+                            <th>이메일</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+       
+                            <th>제목</th>
+                            <td>
+                                <input type="checkbox"  checked disabled />
+                            </td>
+          
+                            <th>사진</th>
+                            <td>
+                                <input type="checkbox"  checked disabled />
+                            </td>
+                  
+                            <th>주소</th>
+                            <td>
+                                <input type="checkbox"  checked disabled />
+                            </td>
+                       
+                            <th>학력</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>성별</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                      
+                            <th>키</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                       
+                            <th>몸무게</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                       
+                            <th>혈액형</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                        
+                            <th>가족관계</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                        
+                            <th>취미</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                        
+                            <th>특기</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                            <th>자기소개</th>
+                            <td>
+                                <input type="checkbox" checked disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>경력</th>
+                            <td>
+                                <input type="checkbox" name="option" value="경력"/>
+                            </td>
+                        
+                            <th>지원동기</th>
+                            <td>
+                                <input type="checkbox" name="option" value="지원동기"/>
+                            </td>
+                        
+                            <th>직업</th>
+                            <td>
+                                <input type="checkbox" name="option" value="직업"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="addOption">옵션추가</button>
+                <div id="optionDiv"></div>
+                <table>
+                    <tr>
+                        <th>내용 : </th>
+                        <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="acontent"></textarea></td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="등록">
+                <input type="reset" value="취소" onclick="history.back();">                 
+
+            </div>
+        </form>
+    </body>
 </content>
 </html>
+<!--  <th:block sec:authorize="isAuthenticated()">
+                    <input type="text" value=""name="rid"  id="userRid" sec:authentication="principal.R_ID"></input>
+                </th:block>   -->

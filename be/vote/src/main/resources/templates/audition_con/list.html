@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'예선심사',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 사이드바 -->
-    <script src="/js/side/userInfoSide.js"></script>
+    <!-- <script src="/js/side/userInfoSide.js"></script> -->
 </head>
   
 <body>
@@ -48,7 +48,7 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'예선심사',_)}">
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="auditionCon:${auditionconlist}">
+		<tr th:each="auditionCon : ${auditionconlist}">
 			<td th:text="${auditionCon.formid}"></td>
 			<td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
 			<!-- <td th:text="${auditionCon.fname}"></td> -->
@@ -82,9 +82,9 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'예선심사',_)}">
 		    <select name="sim">
    			 <option value="">심사결과</option>
    	 	   
-	</select>
+			</select>
 		       
-		        <input name="keyword" type="text" placeholder="심사결과를 입력해주세요">
+		        <input name="합격" type="text" placeholder="심사결과를 입력해주세요">
 		        <button>검색하기</button></center>
 		        
 		    </div>
@@ -92,7 +92,7 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'예선심사',_)}">
 		 
 		</form>
 		
-		<nav style=text-align: center; >
+		<nav style=text-align:center; >
 
 			<ul class="pagination"
 				th:with="start=${T(Math).floor(auditionconlist.number/10)*10 + 1},

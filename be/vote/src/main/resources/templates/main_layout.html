@@ -22,6 +22,8 @@
 
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 
+    <link rel="stylesheet" href="/css/backgroundImg.css">
+
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- 모바일 사이드바 -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -35,11 +37,18 @@
     <!-- <script src="http://125.190.146.207:4000/socket.io/socket.io.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link href="/css/chat.css" rel="stylesheet">
-    <script type="module" src="/js/chat.js"></script>
-    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
-    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+    
+    <!-- <th:block sec:authorize="isAuthenticated()">
+        <link href="/css/chat.css" rel="stylesheet">
+        <script type="module" src="/js/chat.js"></script>
+    </th:block>
+	 -->
+	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+	
 
     <title>RIRO</title>
 
@@ -238,24 +247,28 @@
         <!-- <div class="min-address">
             <div>2020 RIRO.com</div>
         </div> -->
-
-        <div class="l_c_h">
-            <div class="c_h">
-                <div class="left_c">
-                    <div class="left right_c left_icons">
-                        <a href="#" class="mini">+</a>
+        <th:block sec:authorize="isAuthenticated()">
+            <link href="/css/chat.css" rel="stylesheet">
+            <script type="module" src="/js/chat.js"></script>
+            <div class="l_c_h">
+                <div class="c_h">
+                    <div class="left_c">
+                        <div class="left right_c left_icons">
+                            <a href="#" class="mini">+</a>
+                        </div>
+                        <div class="left center_icons">RIRO CHAT !</div>
                     </div>
-                    <div class="left center_icons">RIRO CHAT !</div>
                 </div>
-            </div>
-            <div class="chat_container">
-                <ul id="messages"></ul>
-                <form id="chatform" action="">
-                    <input id="chatinput" autoComplete="nope" ></input>
-                    <button id="chatbutton">Send</button>
-                </form>
-            </div>
-        </div >
+                <div class="chat_container">
+                    <ul id="messages"></ul>
+                    <form id="chatform" action="">
+                        <input id="chatinput" autoComplete="nope" ></input>
+                        <button id="chatbutton">Send</button>
+                    </form>
+                </div>
+            </div >
+        </th:block>
+        
     </footer>
 </body>
 </html>

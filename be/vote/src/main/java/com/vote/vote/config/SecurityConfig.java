@@ -56,7 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/soket.io-client").permitAll()
 
 			
-			
+			//오디션
+			.antMatchers("/userInfo/**").permitAll()
+			// .antMatchers("/userInfo/hoo").hasAnyAuthority("1","2")
+			// .antMatchers("/userInfo/hoo/**").hasAnyAuthority("1","2")
 
 			// 소개 
 			.antMatchers("/introduce/**").permitAll()

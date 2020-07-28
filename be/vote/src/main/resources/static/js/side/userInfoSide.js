@@ -40,8 +40,8 @@
 		$("#side").append("<li><a href='/userInfo/myCommunity/'>팬클럽관리</a></li>");	 
 
 
-		$("#side").append("<li><a href='/hotclib'>핫클립관리</a></li>");	 
-		$("#side").append("<li><a href='userInfo/audience/mlist'>방청권추첨</a></li>");	 
+// 		$("#side").append("<li><a href='/community/hotclib'>핫클립관리</a></li>");	 
+		$("#side").append("<li><a href='/userInfo/audience/mlist'>방청권추첨</a></li>");	 
 
 
 			    
@@ -53,7 +53,8 @@
 		    
 		//채팅관리
 		$("#side").append("<li><a href='#'>채팅방관리</a></li>");	}	
-			
+		
+		$("#side").append("<li><a href='/userInfo/myAudition'>나의오디션신청</a></li>");
 		$("#side").append("<li><a href='/userInfo/voter'>나의투표</a></li>");
 		$("#side").append("<li><a href='/shop/orderList'>나의주문</a></li>");
 		$("#side").append("<li><a href='/shop/mybag'>장바구니</a></li>");

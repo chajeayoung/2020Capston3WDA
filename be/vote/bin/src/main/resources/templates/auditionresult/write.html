@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'게시글 작성',_)}">
+<head>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+   
+
+</head>
+  
+<body>
+
+
+    <content>
+
+<form th:action="@{/auditionresult/write}" method="post" enctype="multipart/form-data">     
+    <div class="container">
+<table class="table table-bordered">
+    <thead>
+        <caption><h1> 게시글 작성</h1> </caption>
+        
+    </thead> 
+    <tbody>
+            <tr>
+            	<th>제목</th>
+                <td><input type="text" placeholder="제목을 입력하세요. " name="rtitle"/></td>
+                
+            </tr>
+          <tr>
+            <th>첨부파일</th>
+             <td>    
+                <input type="file" name="filename">
+             </td>
+
+          </tr>
+         
+    </tbody>
+</table>
+<table>
+ <tr>
+                <th>내용</th>
+                <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="rcontent"></textarea></td>
+            </tr>
+</table>
+ <tr>
+                <td colspan="2">
+                     <input type="submit" value="등록">
+                    <input type="reset" value="취소" onclick="history.back();">                 </td>
+            </tr>  
+</div>
+			 </form>
+	
+       </content>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard2 from '../items/itemCard2AndProgress.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 // import ItemCard2 from '../items/itemCard2.jsx';
 import VoteResult from './voteResult.jsx'
 
@@ -27,8 +27,9 @@ class VoteShow extends React.Component {
             if (vote.name != 0){
                 return (
                     <div key={vote.name+index} className="card_div" > 
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
-                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show}/>
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
+                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show}
+                        result={1}/>
                     </div>
                 )
             }
@@ -40,7 +41,8 @@ class Show extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000"}};
+        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000"},
+        showCandidate:0};
         this.stTime;
         this.edTime;
         this.rsTime;
@@ -51,7 +53,9 @@ class Show extends React.Component{
 
         let {data} = await axios.get('/vote/axios/'+param);
         this.setState({votes : data[0], title : data[1], program:data[2], date: data[3],selectNum:data[4], canNum:data[5]});
-        
+        $("header").css("background-image","url(/uploads/"+data[2].logo+")")
+        $("header").css("background-position","top")
+        $("#showCandidate").css("background-color", "rgb(245, 169, 169)")
     }
     setDate(){
         var start = String(this.state.date.startTime);
@@ -88,6 +92,16 @@ class Show extends React.Component{
 
         this.forceUpdate()
     }
+    showCandidate(){
+        this.setState({showCandidate:0})
+        $("#showCandidate").css("background-color","rgb(245, 169, 169)")
+        $("#showResult").css("background-color","#e0ecf8")
+    }
+    showResult(){
+        this.setState({showCandidate:1})
+        $("#showCandidate").css("background-color","#e0ecf8")
+        $("#showResult").css("background-color","rgb(245, 169, 169)")
+    }
     render(){
         console.log("render")
         const {title} = this.state.title
@@ -95,13 +109,17 @@ class Show extends React.Component{
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div className="circle">투표 마감</div>
                     {/* https://basketdeveloper.tistory.com/4 */}
                 </div>
                 
                 <div className="list_a_tag"><a href="/vote">목록</a></div>
                 <div className="div_center"><h3>{title}</h3></div>
+                <div>
+                    <button onClick={this.showCandidate.bind(this)} id="showCandidate" className="showButton">후보</button>
+                    <button onClick={this.showResult.bind(this)} id="showResult" className="showButton">결과</button>
+                </div>
                 <div id="voteDate">
                     <div className="text_center br_div">투표기간</div>
                     <div className="text_center">시작: {this.stTime}</div>
@@ -111,19 +129,28 @@ class Show extends React.Component{
                     <div className="text_center vote_during">투표가능 횟수: {this.state.canNum}&nbsp;번</div>
                 </div>
                 
-                <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div>
+                {/* <div>
+                    <button onClick={this.showCandidate.bind(this)} id="showCandidate" className="showButton">후보</button>
+                    <button onClick={this.showResult.bind(this)} id="showResult" className="showButton">결과</button>
+                </div>
+                <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div> */}
+                
                 <div className="left_right_box">
-                    <div id="item">
-                        <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
-                        <div className="candidate_op">★☆마감된 투표입니다.☆★</div>
-                        <div className="cards">
-                            <VoteShow votes={this.state.votes} data={this.voteData}/>   
-                        </div>
-                    </div>        
+                    {
+                        this.state.showCandidate ==0? (
+                            <div id="item">
+                            <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
+                            <div className="candidate_op">★☆마감된 투표입니다.☆★</div>
+                            <div className="cards">
+                                <VoteShow votes={this.state.votes} data={this.voteData}/>   
+                            </div>
+                        </div> 
+                        ):<div></div>
+                    }     
                     <div className="right_div_box">
-                    <div className="show_result">★☆마감 결과☆★</div>
+                    {/* <div className="show_result">★☆마감 결과☆★</div> */}
                         <div className="vote_result">
-                            <VoteResult event={this.onSubmitVoteResult.bind(this)}/>
+                            <VoteResult event={this.onSubmitVoteResult.bind(this) } showCandidate={this.state.showCandidate}/>
                         </div>
                     </div>
                 </div>

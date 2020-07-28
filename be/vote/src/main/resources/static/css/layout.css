@@ -46,7 +46,7 @@ main {
 .top_div{
     padding-left: 0px !important;
 }
-@media(max-width:1770px){
+@media(max-width:950px){
 
     #mobileSidBarButton{
        

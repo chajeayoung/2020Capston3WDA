@@ -7,7 +7,7 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 하는곳',_)}">
 </head>
 <content>
 <body>
-    <form th:action="@{/hotclib/delete}" method="post">
+    <form th:action="@{'hotclib/delete}" method="post">
         <input type="hidden" name="hotclibid" th:value="${hotclibid}" />
         
         <a href="" th:href="@{'/hotclib/read/' + ${hotclib}}">취소</a>

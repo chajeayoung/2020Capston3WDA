@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
+@DynamicInsert
 @Entity
 @Table(name="voter_hash")
 public class VoterHash {
@@ -29,6 +32,8 @@ public class VoterHash {
     @Column(nullable=true)
     private String hash;
 
+    @Column(name="created_at", nullable=true)
+    private String createdAt;
     public int getId() {
         return id;
     }
@@ -71,6 +76,14 @@ public class VoterHash {
 
     public void setMemberId(int memberId) {
         this.memberId = memberId;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
 

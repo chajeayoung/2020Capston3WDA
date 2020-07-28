@@ -20,8 +20,8 @@ export default class List_Item extends React.Component {
                                 <div className="productinfo text-center">
                                     <a href={"/shop/product/"+prd.productId}>
                                         <div className="product_Top_div">
-                                            <div className="imgDiv">
-                                                <img src={"/uploads/"+prd.img} alt="" />
+                                            <div  className="imgDiv">
+                                                <img  className="prdImgTag"  src={"/uploads/"+prd.img} alt="" />
                                             </div>
                                             <h2></h2>
                                             <p>{prd.name}</p>

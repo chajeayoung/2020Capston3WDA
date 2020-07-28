@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard2 from '../items/itemCard2.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 import VoteResult from './voteResult.jsx'
 import './votePreShow.css'
 import './css/voteDoShow.css'
 const axios = require('axios');
 
+import './../items/itemcard5.css'
 var url = document.location.href;
 const num = url.split('/');
 var param = num[num.length-1];
@@ -26,7 +27,12 @@ class VoteShow extends React.Component {
                 return (
                     <div key={vote.name+index} className="card_div" onClick={this.props.event.bind(this,index)}> 
                         {/* <ItemCard key={vote.img} img={vote.img} name={vote.name} event={this.sendSelect.bind(this,index)}/>   */}
-                        <ItemCard2 key={vote.img} img={vote.img} name={vote.name} info={vote.info}/>
+
+                        <ItemCard5 key={vote.img} img={vote.img} name={vote.name} result={this.props.data.data[index]} count={this.props.data.count}
+                        win={this.props.data.win.includes(this.props.data.data[index])} show={this.props.data.show} info={vote.info}
+                        result={0}/>
+
+            
                     </div>
                 )
             }
@@ -38,7 +44,8 @@ class Show extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신"},date:{startTime:"000",endTime:"0000", resultShowTime:"0000",selectNum:0}};
+        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신"},date:{startTime:"000",endTime:"0000", resultShowTime:"0000",selectNum:0}
+                        , showCandidate:0};
         this.aa = "aaa";
         this.edTime;//종료 시간
         this.stTime;//현재시간, 타이머 시작 시간
@@ -47,10 +54,14 @@ class Show extends React.Component{
         this.divStTime;// 투표기간 표시 ( 시작날짜 )
         this.divEdTime;// 투표기간 표시 ( 마감 날짜 )
         this.divRsTime;// 투표 집계공개 시각
+
+        this.voteData = {data:[],count:0, win:[],winNum:0, show:1}
     }
 
     async componentDidMount(){
         let {data} = await axios.get('/vote/axios/'+param);
+        $("header").css("background-image","url(/uploads/"+data[2].logo+")")
+        $("header").css("background-position","top")
         // console.log(data[0]);
         this.setState({votes : data[0], title : data[1], program:data[2], date : data[3], selectNum:data[4], canNum:data[5]});
         console.log(data);
@@ -65,7 +76,7 @@ class Show extends React.Component{
             that.timer(interval);
         },1000)
         
-        
+        $("#showCandidate").css("background-color", "rgb(245, 169, 169)")
     }
     parseTime(){
         var time = String(this.state.date.endTime);
@@ -81,16 +92,22 @@ class Show extends React.Component{
     }
     timer(interval){
         
-        var hours = Math.floor(this.rmTime/(1000*60*60))
+        var day_hours = Math.floor(this.rmTime/(1000*60*60))
+        var days = Math.floor(day_hours/24)
+        var hours = Math.floor(this.rmTime/(1000*60*60)) % 24
         // Math.floor((this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60));
         // console.log("(this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60): "+(this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60))
         var miniutes = Math.floor((this.rmTime % (1000 * 60 * 60)) / (1000*60));
         var seconds = Math.floor((this.rmTime % (1000 * 60)) / 1000);
         
-        var m = hours + " : " +  miniutes + " : " + seconds ; // 남은 시간 text형태로 변경
+        // var m = "투표 종료까지 \n"+days+" 일 " + hours +" 시 " +  miniutes + " 분 " + seconds +" 초 남았습니다."; // 남은 시간 text형태로 변경
         // console.log(m);
         // document.all.timer.innerHTML = m;   // div 영역에 보여줌 
-        document.getElementById("circleTimer").innerHTML = m
+        // document.getElementById("circleTimer").innerHTML = m
+        $("#timeDays").html(days);
+        $("#timeHours").html(hours);
+        $("#timeMiniutes").html(miniutes);
+        $("#timeSeconds").html(seconds);
         
         if (this.rmTime <= 0) {      
             // 시간이 종료 되었으면..
@@ -134,40 +151,95 @@ class Show extends React.Component{
         this.divEdTime = end.substr(0,4)+"-"+end.substr(4,2)+"-"+end.substr(6,2)+" "+end. substr(8,2)+":"+end.substr(10,2);
         this.divRsTime = rst.substr(0,4)+"-"+rst.substr(4,2)+"-"+rst.substr(6,2)+" "+rst. substr(8,2)+":"+rst.substr(10,2);
     }
+
+    onSubmitVoteResult(data){
+        
+        console.log("데이터 받음")
+        var data_list = [];
+        var winnerData = [];
+        
+        //object 형태여서, List 로 변환
+        for(var i=0; i<data.data.length; i++){
+            data_list.push(data.data[i]);
+        }
+        console.log("받은 데이터들을 출력합니다."+data_list)
+        for(var i=0; i<data.win; i++){
+            winnerData.push(Math.max.apply(Math, data_list));
+            var index = data_list.indexOf(Math.max.apply(Math, data_list));
+            if (index !== -1) data_list.splice(index, 1);
+            
+            console.log(index);
+        }
+        // https://stackoverflow.com/questions/32647149/why-is-math-max-returning-nan-on-an-array-of-integers
+        
+        this.voteData = {data : data.data, count : data.count, win : winnerData, winNum : data.win, show:0}
+        console.log("aaaaa", this.voteData)
+
+        this.forceUpdate()
+    }
+    showCandidate(){
+        this.setState({showCandidate:0})
+        $("#showCandidate").css("background-color","rgb(245, 169, 169)")
+        $("#showResult").css("background-color","#e0ecf8")
+    }
+    showResult(){
+        this.setState({showCandidate:1})
+        $("#showCandidate").css("background-color","#e0ecf8")
+        $("#showResult").css("background-color","rgb(245, 169, 169)")
+    }
+
     render(){
         const {title} = this.state.title
         this.setDate();
         return(
             <div id="itemTopDiv">
                 <div className="topDiv">
-                    <h2>투표</h2>
+                    {/* <h2>투표</h2> */}
                     <div id="circleTimer"className="circle">투표 진행중</div>
                     {/* https://basketdeveloper.tistory.com/4 */}
                 </div>
                 
                 <div className="list_a_tag"><a href="/vote">목록</a></div>
-                <div className="div_center"><h3>{title}</h3></div>
-                <div id="voteDate">
+                <div className="div_center" id="title">{title}</div>
+                {/* <div id="voteDate">
                     <div className="text_center br_div">투표기간</div>
                     <div className="text_center">시작: {this.divStTime}</div>
                     <div className="text_center">마감: {this.divEdTime}</div>
                     <div className="text_center">집계공개: {this.divRsTime}</div>
                     <div className="text_center">선발인원: {this.state.selectNum}&nbsp;명</div>
                     <div className="text_center vote_during">투표가능 횟수: {this.state.canNum}&nbsp;번</div>
+                </div> */}
+                {/* <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div> */}
+                <div>
+                    <button onClick={this.showCandidate.bind(this)} id="showCandidate" className="showButton">후보</button>
+                    <button onClick={this.showResult.bind(this)} id="showResult" className="showButton">결과</button>
                 </div>
-                <div className="text_center show_result">★☆공동 우승자가 있을 경우 우승인원이 선발인원보다 많아 질 수 있습니다.☆★</div>
+                <div className="timeTopDiv">
+                    <div className="timeSubDiv">투표종료까지</div>
+                    <div>
+                        <span className="timeBox" id="timeDays">00</span><span>일</span>
+                        <span className="timeBox" id="timeHours">00</span><span>시</span>
+                        <span className="timeBox" id="timeMiniutes">00</span><span>분</span>
+                        <span className="timeBox" id="timeSeconds">00</span><span>초</span>
+                    </div>
+                </div>
                 <div className="left_right_box">
-                    <div id="item">
-                        <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
-                        <div className="candidate_op">★☆후보 클릭 시 투표가능☆★</div>
-                        <div className="cards">
-                            <VoteShow votes={this.state.votes} event={this.sendSelect} />   
-                        </div>
-                    </div>        
+                    {
+                        this.state.showCandidate ==0?(
+                            <div id="item">
+                                {/* <div className="candidate">&lt;&lt; 후보 정보 &gt;&gt;</div>
+                                <div className="candidate_op">★☆후보 클릭 시 투표가능☆★</div> */}
+                                <div className="cards">
+                                    <VoteShow votes={this.state.votes} event={this.sendSelect} data={this.voteData}/>   
+                                </div>
+                            </div>   
+                        ):<div></div>
+                    }
+                         
                     <div className="right_div_box">
-                        <div className="show_result">★☆실시간 투표 결과☆★</div>
+                        {/* <div className="show_result">★☆실시간 투표 결과☆★</div> */}
                         <div className="vote_result">
-                            <VoteResult/>
+                            <VoteResult event={this.onSubmitVoteResult.bind(this)} showCandidate={this.state.showCandidate}/>
                         </div>
                         
                     </div>

@@ -1,11 +1,22 @@
+.contents{
+  height: 50px !important;
+}
 #item {
   width: 100% !important;
-  border-right: 2px solid gray;
+  /* border-right: 2px solid gray; */
+}
+.showButton{
+  border-radius: 8px;
+  border: 1px solid #cee3f6;
+  color: black;
+  background-color: #e0ecf8;
+  padding: 5px;
+  margin: 5px 0px;
 }
 .left_right_box {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 50% 50%;
-  column-gap: 15px;
+  column-gap: 15px; */
 }
 #voteDate {
   margin: 15px;
@@ -76,7 +87,20 @@ div.winner .sc-AxjAm {
   overflow: scroll;
   text-align: -webkit-center;
 }
-
+.timeBox{
+  padding: 6px;
+  background-color: rgba(221, 44, 192, 1);
+  color: white;
+  border-radius: 5px;
+}
+.timeTopDiv{
+  text-align: center;
+  font-size: 2vmax;
+  margin-bottom: 5px;
+}
+.timeSubDiv{
+  margin-bottom: 10px;
+}
 @media (max-width: 950px) {
   .left_right_box {
     grid-template-columns: none;

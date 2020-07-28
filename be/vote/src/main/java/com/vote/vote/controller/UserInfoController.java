@@ -1,16 +1,17 @@
 package com.vote.vote.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import javax.validation.constraints.Null;
+
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.customSelect.CustomAuditionCon;
 import com.vote.vote.db.customSelect.CustomOrderListSelect;
 import com.vote.vote.db.customSelect.CustomOrderState;
+import com.vote.vote.db.customSelect.CustomOrderStatePop;
+import com.vote.vote.db.customSelect.CustomOrderStatePopAge;
+import com.vote.vote.db.customSelect.CustomOrderStatePopGender;
 import com.vote.vote.db.customSelect.CustomPrd;
 import com.vote.vote.db.customSelect.CustomVote;
 import com.vote.vote.db.dto.Company;
@@ -19,7 +20,10 @@ import com.vote.vote.db.dto.Popular;
 import com.vote.vote.db.dto.Program;
 import com.vote.vote.db.dto.ProgramManager;
 import com.vote.vote.db.dto.Vote;
+import com.vote.vote.db.dto.AuditionCon;
+import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.repository.CompanyJpaRepository;
+import com.vote.vote.repository.CustomAuditionConRepository;
 import com.vote.vote.repository.CustomCompanyRepository;
 import com.vote.vote.repository.CustomMemberRepository;
 import com.vote.vote.repository.CustomOrderListRepository;
@@ -35,6 +39,7 @@ import com.vote.vote.repository.ProgramJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.service.StorageService;
 
+// import org.springframework.util.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +51,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,6 +84,9 @@ public class UserInfoController {
 	private ProgramJpaRepository programRepository;
 	
 	@Autowired
+	private AuditionConJpaRepository AuditionConRepository;
+
+	@Autowired
 	private CustomProgramRepository customProgramRepository;
 	
 	@Autowired
@@ -104,6 +113,11 @@ public class UserInfoController {
 
 	@Autowired
 	private CustomOrderReopsitoy customOrderReopsitoy;
+
+	@Autowired
+	private CustomAuditionConRepository customAuditionConRepository;
+
+
 
 	//개인정보
 	@RequestMapping(value={"","/"})
@@ -465,6 +479,7 @@ public class UserInfoController {
 				programData.put("name", program.getName());
 				programData.put("img", program.getImg());
 				programData.put("category", program.getCategory());
+				programData.put("logo", program.getLogo());
 
 				
 				
@@ -490,22 +505,30 @@ public class UserInfoController {
 		 @RequestMapping(value="/programUpdate", method=RequestMethod.POST)
 		    public String programUpdate(Program p, 
 		    		RedirectAttributes redirAttrs, Principal principal,
-		    		@RequestParam(name="file") MultipartFile file){
+					@RequestParam(name="file") MultipartFile file,
+					@Nullable @RequestParam(name="logoImg") MultipartFile[] logoImg){
 		       	
 			 
 			 
 		    	String thumbnailPath = p.getImg();
 
 
+
+				String logo = "0";
 		    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 		    		
 		    				    	
 			    	thumbnailPath = storageService.store2(file);
 		   	
-		    	}	
+				}	
+				if(!logoImg[0].isEmpty()){
+					logo = StringUtils.cleanPath(logoImg[0].getOriginalFilename());
+					p.setLogo(logo);
+					storageService.store2(logoImg[0]);
+				}
 
-		 
-			 programRepository.programUpdate(p.getId(), p.getName(), thumbnailPath, p.getCategory());
+				System.out.println("p : "+p);
+			 programRepository.programUpdate(p.getId(), p.getName(), thumbnailPath, p.getCategory(), logo);
 			
 			 
 		    	return "redirect:/userInfo/myProgram";   
@@ -548,6 +571,14 @@ public class UserInfoController {
 						popularData.put("id", popular.getId());
 						popularData.put("name", popular.getName());
 						popularData.put("img", popular.getImg());
+						popularData.put("logo", popular.getLogo());
+						popularData.put("birth", popular.getBirth());
+						popularData.put("height", popular.getHeight());	
+						popularData.put("weight", popular.getWeight());
+						popularData.put("blood", popular.getBlood());
+						popularData.put("hobby", popular.getHobby());
+						popularData.put("ability", popular.getAbility());
+						popularData.put("intro", popular.getIntro());
 						popularData.put("p_id", popular.getPid());
 
 						
@@ -567,10 +598,40 @@ public class UserInfoController {
 			return null;	 	
 				}
 			 
+				
+			@RequestMapping(value={"/hoo"}, method=RequestMethod.POST)
+			public String hoo(@RequestParam("formid") int formid, Authentication authentication){ //후보
+				
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				AuditionCon auditionCon = AuditionConRepository.findByFormid(formid);
+
+				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+				Popular pop = new Popular();
+
+				pop.setName(auditionCon.getFusername());
+				pop.setImg(auditionCon.getFprofile());
+				pop.setLogo(auditionCon.getFprofile());
+				pop.setPid(pManager.getProgramId());
+				pop.setBirth(auditionCon.getBirth2());
+				pop.setWeight(auditionCon.getFweight());
+				pop.setHeight(auditionCon.getFheight());
+				pop.setBlood(auditionCon.getFblood());
+				pop.setHobby(auditionCon.getFhobby());
+				pop.setAbility(auditionCon.getFability());
+				pop.setIntro(auditionCon.getIntroduce());
+				
+				popularRepository.saveAndFlush(pop);
+				
+					
+				return "redirect:/audition_con/list";
+			}
+			
 			 
 			@RequestMapping(value="/insertPopular", method=RequestMethod.POST)
-			    public String insertOk(Popular pp, RedirectAttributes redirAttrs, Principal principal
-			    		,@RequestParam(name="img2") MultipartFile file
+				public String insertOk(Popular pp, RedirectAttributes redirAttrs, 
+				Principal principal
+				,@Nullable @RequestParam(name="img2") MultipartFile file,
+				@Nullable @RequestParam(name="img3") MultipartFile file2
 			    		){
 			       	
 					
@@ -579,13 +640,17 @@ public class UserInfoController {
 
 	
 			    		
-			    		String thumbnailPath = storageService.store2(file);
+			    		 String thumbnailPath = storageService.store2(file);
 
-			    		pp.setImg(thumbnailPath);
+						 pp.setImg(thumbnailPath);
+						 
+						 String thumbnailPath2 = storageService.store2(file2);
+
+			    		 pp.setLogo(thumbnailPath2);
 			    		
-			    		System.out.println("test:"+pp.toString());
+			    		 System.out.println("후보등록정보:"+pp.toString());
 			    	
-			    		popularRepository.saveAndFlush(pp);
+			    		 popularRepository.saveAndFlush(pp);
 				
 			            return "redirect:/userInfo/myCommunity";
 			        
@@ -594,23 +659,34 @@ public class UserInfoController {
 			
 			@RequestMapping(value="/updatePopular", method=RequestMethod.POST)
 		    public String updateOk(Popular pp, RedirectAttributes redirAttrs, Principal principal
-		    		,@RequestParam(name="img2") MultipartFile file
+		    		,@Nullable @RequestParam(name="img2") MultipartFile file,
+					 @Nullable @RequestParam(name="img3") MultipartFile file2
 		    		){
 		       	
 				System.out.println(pp.toString());
 		    	
 		    	
 		    	String thumbnailPath = pp.getImg();  // 프로필사진 변동안했을때 그대로 두기위해서
-		    	String url = "/uploads/";
+				String url = "/uploads/";
+				
+				String thumbnailPath2 = pp.getLogo();  // 프로필사진 변동안했을때 그대로 두기위해서
 
+
+		
 		    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 
 		    		    		thumbnailPath = storageService.store2(file);
 		    		
-		   	
-		    	}
-		    	
-		    	popularRepository.popularUpdate(pp.getName(), thumbnailPath, pp.getPid(), pp.getId());
+				   }
+				   
+				if(!file2.isEmpty()) { 
+
+					thumbnailPath2 = storageService.store2(file2);
+		
+				 }
+				 pp.setImg(thumbnailPath);
+				 pp.setLogo(thumbnailPath2);
+				popularRepository.saveAndFlush(pp);
 				
 		    	
 		    	
@@ -680,14 +756,46 @@ public class UserInfoController {
 		}
 		@ResponseBody
 		@RequestMapping(value={"/manage/manageOrderState/axios","/manage/manageOrderState/axios/"}, method=RequestMethod.GET)
-		public List<CustomOrderState>  orderStateAxios(@Nullable Authentication authentication) {
+		public JSONObject  orderStateAxios(@Nullable Authentication authentication) {
 
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+
 			List<CustomOrderState> result = customOrderReopsitoy.getOrderStateByManagerId(userDetails.getR_ID());
+			List<CustomOrderStatePop> result2 = customOrderReopsitoy.getOrderStatePopByProgramId(pManager.getProgramId());
+			List<CustomOrderStatePopGender> result3 = customOrderReopsitoy.getOrderStatePopGenderByProgramId(pManager.getProgramId());
+			List<CustomOrderStatePopAge> result4 = customOrderReopsitoy.getOrderStatePopPopAgeByProgramId(pManager.getProgramId());
+			JSONObject json = new JSONObject();
+			json.put("state", result);
+			json.put("pop", result2);
+			json.put("gender", result3);
+			json.put("age", result4);
 
 
-			return result;
+
+			return json;
 		}
+
+		@RequestMapping(value={"/myAudition","/myAudition"}, method = RequestMethod.GET)
+		public String myAudition(){
+			return "/userInfo/myAudition";
+		}
+
+		
+		@RequestMapping(value={"/myAudition/axios","/myAudition/axios/"}, method = RequestMethod.GET)
+		@ResponseBody
+		public CustomAuditionCon myAuditionAxios(@Nullable Authentication authentication,  @PageableDefault Pageable page){
+
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+			CustomAuditionCon auditionCon = customAuditionConRepository.getMyAuditionCon(userDetails.getR_ID(), page);
+			System.out.println(auditionCon.getCount());
+			return auditionCon;
+		}
+
+
+		
+		
 		
 }

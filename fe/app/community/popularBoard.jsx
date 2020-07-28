@@ -19,9 +19,12 @@ const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
   
 var url = document.location.href;
-const num = url.split('/');
+var jj = url.split("?");
+const num = jj[0].split('/');
+
 var param = num[num.length-1];
 var param2 = num[num.length-2];
+var param3 = "";
 
 
 
@@ -35,19 +38,33 @@ class PopularBoard extends Component {
 
     }
     setUrl(){
-        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"';
+
+        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
         
  
     }
     pagenation(e,page){
-        //console.log(page)
+      console.log(1)
         this.state.pageNum = page
         this.setUrl()   
         this.componentDidMount()
     }
 
     async componentDidMount(){
-       
+      console.log("dd: "+$("#popLogoImg").val())
+      $("header").css("background-image","url('/uploads/"+$("#popLogoImg").val()+"')")
+      $("header").css("background-position","top")
+
+        if(url.indexOf("hash")!=-1){
+      console.log(2)  
+                param3 = url.split("hash=")[1];
+      console.log(3)
+
+          var sliceUrl = url.split("?");
+          // this.url= sliceUrl[0]+"/axios?page="+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
+          this.setUrl()
+        }
+        
         let {data : popularBoard} = await axios.get(this.url)
         
         this.state.allCount = (popularBoard.pop())
@@ -175,6 +192,7 @@ class Modal extends Component{
                       <div className="content">
 
                       <TextField id="standard-secondary" fullWidth label="제목" name="title" color="primary" required />
+                      <TextField id="standard-secondary" fullWidth label="해쉬태그" name="hash" color="primary" required />
                       {profile_preview}
                       <TextField
                             id="outlined-multiline-static"
@@ -188,7 +206,7 @@ class Modal extends Component{
                             required
                             />
                         
-                        <input type="file" name="filename" accept="image/*" onChange={this.checkImage.bind(this)} required/>       
+                        <input type="file" name="filename" accept="image/*" onChange={this.checkImage.bind(this)}/>       
                         <input type="hidden" name="popularid" value={param}/> 
                         <input type="hidden" name="rid" value={this.props.sessionUser}/> 
 
