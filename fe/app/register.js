@@ -4,7 +4,6 @@ import "./auth/register.css";
 const axios = require('axios');
 const regeneratorRuntime = require("regenerator-runtime");
 
-
 class Register extends React.Component {
     
     constructor(props){

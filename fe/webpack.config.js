@@ -94,6 +94,10 @@ module.exports = {
     myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
 
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
+ 
+    hotclib: path.join(__dirname, "./app/hotclib/hotclib.jsx"),
+    hotclibread: path.join(__dirname, "./app/hotclib/hotclibread.jsx"),
+    hotclibupload: path.join(__dirname, "./app/hotclib/hotclibupload.jsx"),
   },
   output: {
     path: PATHS.build,
