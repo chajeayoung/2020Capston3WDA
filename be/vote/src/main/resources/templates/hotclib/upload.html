@@ -16,13 +16,13 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
           <div>
             <tr>
 				<th><label for="htitle">제목</label></th>
-				<td><input name="htitle" /></td>
+				<td><input name="htitle" required/></td>
             </tr>
             </div> 
             <div>
 			<tr>
 				<th><label for="h_content">내용</label></th>
-                <td><textarea class="contentarea" rows="8" cols="50" name="h_content" ></textarea></td>
+                <td><textarea class="contentarea" rows="8" cols="50" name="h_content" required></textarea></td>
             </tr>     
         </div>
             <tr>
@@ -35,11 +35,11 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
             </fieldset>
 
          
-            썸네일선택<input class="gg" type="file" id="filename2" name="filename2" onchange="setFilename2(event);"/>
+            썸네일선택<input class="gg" type="file" id="filename2" name="filename2" capture="camera" onchange="setFilename2(event);" required/>
             <div id ='preview'> 
               미리보는공간
             </div>
-              영상선택<input type="file" name="filename" id="filename" onchange="setFilename(event);"/>
+              영상선택<input type="file" name="filename" id="filename" capture="camera" onchange="setFilename(event);" required/>
              <div id ='preview2'></div>
                <div class="form">  
                   <input type="submit" value="등록">

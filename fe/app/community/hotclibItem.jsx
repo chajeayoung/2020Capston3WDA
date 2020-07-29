@@ -20,7 +20,7 @@ class Hotclib extends Component {
         return data.map((hotclib,index)=>{
             return (
                 <div key={'div'+index} className="community_index_item">
-                    <a href={"/hotclib/read/"+hotclib.hotclibid}>
+                    <a href={"/community/"+ hotclib.programid + "/hotclib/read/"+hotclib.hotclibid}>
                      <ItemCard4 key={hotclib.hotclibid} img={hotclib.filename2} name={hotclib.htitle} />
                     </a>
                  </div>

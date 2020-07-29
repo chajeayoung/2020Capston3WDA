@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	th:replace="~{userInfo_layout::layout(~{::content},~{::script},'주간 핫클립',_)}">
+	th:replace="~{userInfo_layout::layout(~{::content},_,'핫클립 관리',_)}">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
 
 <body>
 	<content>
-	<style>
+	<!--  --><style>
 .gi {
 	border: 1px solid #ccc;
 	padding: 5px;
@@ -21,12 +22,7 @@
 	display: inline-block;
 	text-align: left;
 }
-.hi{
-border-radius: 50%;
-  max-width: 250px;
-  margin: 0 auto;
-  display: block;
-}
+
 .qi{
 font-size: 1.3em;
   text-align: center;
@@ -39,9 +35,9 @@ font-size: 1.3em;
 	<section>
 	
 	<a href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/'+${programid}+'/hotclib/sorthviewcount'}">조회순</a>
+				th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
 			<a href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/'+${programid}+'/hotclib/sorthdate'}">최신순</a>
+				th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
 		
 		<form
 			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
@@ -92,35 +88,63 @@ font-size: 1.3em;
 		</div>
 	</section>
 
-
-	   <!-- <nav style="text-align: center;">
+<nav style="text-align: center;">
+    <ul class="pagination">
+        <li class="disabled">
+            <a href="#" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+	    <!--   <nav style="text-align: center;">
     <ul class="pagination"
      th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >
           <li>
-            <a th:href="@{'/community/'+${programid}+'/hotclib(page=1)'}" aria-label="First">
+            <a th:href="@{'/community/myhotclib(page=1)'}" aria-label="First">
                 <span aria-hidden="true">First</span>
               </a>
           </li>
 
           <li th:class="${hotclibList.first} ? 'disabled'">
-            <a th:href="${hotclibList.first} ? '#' :@{'/community/'+${programid}+'/hotclib(page=${hotclibList.number})'}" aria-label="Previous">
+            <a th:href="${hotclibList.first} ? '#' :@{'/community/myhotclib(page=${hotclibList.number})'}" aria-label="Previous">
                 <span aria-hidden="true">&lt;</span>
             </a>
           </li>       
             
           <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == hotclibList.number + 1} ? 'active'">
-            <a th:text="${page}" th:href="@{'/community/'+${programid}+'/hotclib(page=${page})'}"></a>
+            <a th:text="${page}" th:href="@{'/community/myhotclib(page=${page})'}"></a>
           </li>
 
           <li th:class="${hotclibList.last} ? 'disabled'">
-            <a th:href="${hotclibList.last} ? '#' : @{'/community/'+${programid}+'/hotclib(page=${hotclibList.number + 2})'}" aria-label="Next">
+            <a th:href="${hotclibList.last} ? '#' : @{'/community/myhotclib(page=${hotclibList.number + 2})'}" aria-label="Next">
                 <span aria-hidden="true">&gt;</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{'/community/'+${programid}+'/hotclib(page=${hotclibList.totalPages})'}" aria-label="Last">
+            <a th:href="@{'/community/myhotclib(page=${hotclibList.totalPages})'}" aria-label="Last">
               <span aria-hidden="true">Last</span>
             </a>
          </li>

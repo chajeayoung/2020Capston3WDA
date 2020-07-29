@@ -89,7 +89,7 @@ public class HotclibController {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 	 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
 	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programmanager.getProgramId(), pageable));
-	 	model.addAttribute("rfile", rfileRepository.findAll());
+//	 	model.addAttribute("rfile", rfileRepository.findAll());
 	 	return "hotclib/list1";
 	 }
 
@@ -98,10 +98,23 @@ public class HotclibController {
 		 model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHviewcountDesc(programid));
 		 return "hotclib/list";
 	 }
+	 
 	 @GetMapping("/community/{programid}/hotclib/sorthdate")
 	 public String sortHdate(Model model,@PathVariable int programid) {
 		 model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHdateDesc(programid));
 		 return "hotclib/list";
+	 }
+	 
+	 @GetMapping("/community/myhotclib/sorthviewcount")
+	 public String sortHviewcount1(Model model) {
+		 model.addAttribute("hotclibList",hotclibRepository.findAllByOrderByHviewcountDesc());
+		 return "hotclib/list1";
+	 }
+	 
+	 @GetMapping("/community/myhotclib/sorthdate")
+	 public String sortHdate1(Model model) {
+		 model.addAttribute("hotclibList",hotclibRepository.findAllByOrderByHdateDesc());
+		 return "hotclib/list1";
 	 }
 //	@GetMapping("/community/{program}/hotclib")
 //	public String hotclib(Model model, @PageableDefault Pageable pageable,@PathVariable int program) {
