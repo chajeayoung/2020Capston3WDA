@@ -1,6 +1,6 @@
 package com.vote.vote.repository;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.vote.vote.db.dto.Hotclib;
@@ -19,6 +19,8 @@ public interface HotclibRepository extends JpaRepository<Hotclib, Integer>{
   public List<Hotclib> findByProgramid(int programid, Pageable pageable);  
   public List<Hotclib> findByProgramidOrderByHviewcountDesc(int programid);
   public List<Hotclib> findByProgramidOrderByHdateDesc(int programid);
+  public List<Hotclib> findAllByOrderByHviewcountDesc();
+  public List<Hotclib> findAllByOrderByHdateDesc();
  // public Hotclib findByRid(int rid);
 
 } 
