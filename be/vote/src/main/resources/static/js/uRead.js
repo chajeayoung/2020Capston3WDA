@@ -49,13 +49,12 @@ $(document).ready(function () {
 
 
     $('#apply').click(function () {
-       
         $.ajax({
             url: "/audience/apply",
             type: "get",
             cache: "false",
             dataType: "text",
-            data: audience,
+            data: $('#userRid').text(),
             success: function (data) {
 
                 alert(data);

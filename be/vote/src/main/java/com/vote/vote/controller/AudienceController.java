@@ -175,13 +175,15 @@ public class AudienceController {
     @ResponseBody
     public String result(Audience audience, Principal principal, ADetail aDetail) {
         Member member = memberRepository.findByUserid(principal.getName());
-        System.out.println(audience.getApplyId());
         Audience audi = audienceJpaRepository.findById(audience.getApplyId());
+        
         if (audi.getResult() == 1)
             return "이미 추첨이 완료된 응모입니다.";
-
         aDetail.setApplyId(audience.getApplyId());
         aDetail.setRId(member.getNo());
+        // aDetaiId.setApplyId(audience.getApplyId());
+        // aDetaiId.setRId(member.getNo());
+        // aDetail.setADetaiId(aDetaiId); 
         if (member.getPoint() < audience.getAPrice()) {
             return "포인트가 부족합니다.";
         } else if (aDetailRepository.countByApplyIdAndRId(audience.getApplyId(), member.getNo()) == audience
@@ -199,8 +201,6 @@ public class AudienceController {
             aDetailRepository.saveAndFlush(aDetail);
             return "응모완료!";
         }
-    
-        
     }
 
     // 당첨확인 ajax
