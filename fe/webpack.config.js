@@ -35,9 +35,6 @@ const PATHS = {
 
 module.exports = {
   entry: {
-
-    home: path.join(__dirname, "./app/home.js"),
-    tt: path.join(__dirname, "./app/tt.js"),
     register: path.join(__dirname, "./app/register.js"),
     login: path.join(__dirname, "./app/login.js"),
     voteIndex: path.join(__dirname, "./app/vote/voteIndex.jsx"),
@@ -94,7 +91,7 @@ module.exports = {
     myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
 
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
- 
+
     hotclib: path.join(__dirname, "./app/hotclib/hotclib.jsx"),
     hotclibread: path.join(__dirname, "./app/hotclib/hotclibread.jsx"),
     hotclibupload: path.join(__dirname, "./app/hotclib/hotclibupload.jsx"),
