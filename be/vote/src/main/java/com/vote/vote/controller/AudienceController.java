@@ -98,7 +98,8 @@ public class AudienceController {
 
     }
 
-    SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
+    SimpleDateFormat format1 = new SimpleDateFormat("yy-MM-dd");
+    SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
     @RequestMapping(value = { "/main" })
     public String test2(Principal user) {
@@ -117,16 +118,25 @@ public class AudienceController {
     public JSONArray audienceAllListJson() {
         JSONArray result = new JSONArray();
         List<Audience> audienceList = audienceJpaRepository.findAll();
-
+        Date time = new Date();
         for (Audience audience : audienceList) {
             JSONObject json = new JSONObject();
             json.put("applyId", audience.getApplyId());
-            json.put("aDate", format.format(audience.getADate()));
+            json.put("aDate", format1.format(audience.getADate()));
             json.put("aRecruits", audience.getARecruits());
             json.put("aTitle", audience.getATitle());
             json.put("aViewCount", audience.getAViewCount());
             json.put("img", audience.getImg());
             json.put("aContent", audience.getAContent());
+
+            // if(format2.parse(audience.getAStartdate()).compareTo(time)<0){
+            //     json.put("badge", "응모전");
+            // } else if(format2.parse(audience.getAEnddate()).compareTo(time)<0){
+            //     json.put("badge", "응모중");
+            // } else {
+            //     json.put("badge", "마감");
+            // }
+            json.put("aStartDate", audience.getAStartdate());
             result.add(json);
         }
         return result;
@@ -165,15 +175,15 @@ public class AudienceController {
     @ResponseBody
     public String result(Audience audience, Principal principal, ADetail aDetail) {
         Member member = memberRepository.findByUserid(principal.getName());
-
         Audience audi = audienceJpaRepository.findById(audience.getApplyId());
+        
         if (audi.getResult() == 1)
             return "이미 추첨이 완료된 응모입니다.";
         aDetail.setApplyId(audience.getApplyId());
         aDetail.setRId(member.getNo());
         // aDetaiId.setApplyId(audience.getApplyId());
         // aDetaiId.setRId(member.getNo());
-        // aDetail.setADetaiId(aDetaiId);
+        // aDetail.setADetaiId(aDetaiId); 
         if (member.getPoint() < audience.getAPrice()) {
             return "포인트가 부족합니다.";
         } else if (aDetailRepository.countByApplyIdAndRId(audience.getApplyId(), member.getNo()) == audience
@@ -198,7 +208,8 @@ public class AudienceController {
     @ResponseBody
     public String confirm(Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        String name = principal.getName();
+        String name = userDetails.getName();
+        
         if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
             return name + "님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
         }
@@ -311,7 +322,7 @@ public class AudienceController {
 
         List<Member> list = new ArrayList<>();
         list = mr.getInfo(audience.getApplyId());
-
+        System.out.println("gds");
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
         for (Member list2 : list) {

@@ -291,7 +291,7 @@ public class AuditionConController {
 	public String update(@PathVariable int conId, Model model, AuditionCon auditionCon,@Nullable @RequestParam("option") String[] options,
 	@RequestParam(name = "profile") MultipartFile[] file) {
 
-		
+		System.out.println(auditionCon);
 		AuditionCon con = auditionConRepository.findByFormid(conId);
 		con.setFtitle(auditionCon.getFtitle());
 		// con.setFprofile(fprofile);
@@ -307,7 +307,10 @@ public class AuditionConController {
 		con.setFfamily(auditionCon.getFfamily());
 		con.setFhobby(auditionCon.getFhobby());
 		con.setFability(auditionCon.getFability());
+		con.setIntroduce(auditionCon.getIntroduce());
+		con.setBirth(auditionCon.getBirth2());
 
+		auditionConRepository.saveAndFlush(con);
 		if(!file[0].isEmpty()){
 			String filenamePath = StringUtils.cleanPath(file[0].getOriginalFilename());
 			storageService.store2(file[0]);

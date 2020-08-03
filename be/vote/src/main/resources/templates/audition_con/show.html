@@ -12,12 +12,12 @@
     <body>
 
 
-        <style>
+        <!-- <style>
             .im{
                     weidht:100px;
                     height:100px;
                 }
-        </style>
+        </style> -->
 
             <table class="table table-bordered">
 
@@ -36,6 +36,10 @@
                     <tr>
                         <th>제목</th>
                         <td> <input type="hidden" name="ftitle" th:text="${auditionCon.ftitle}" th:value="${auditionCon.ftitle}" /></td>
+
+                        <th>생년월일</th>
+                        <td> <input type="hidden" name="birth" th:text="${auditionCon.birth}" th:value="${auditionCon.birth}" /></td>
+                  
                     </tr>
                     <tr>
 
@@ -72,6 +76,10 @@
                         <td> <input type="hidden" name="fhobby" th:text="${auditionCon.fhobby}" th:value="${auditionCon.fhobby}" /></td>
                         <th>특기</th>
                         <td> <input type="hidden" name="fability" th:text="${auditionCon.fability}" th:value="${auditionCon.fability}" /></td>
+                    </tr>
+                    <tr>
+                        <th>한마디</th>
+                        <td> <input type="hidden" name="introduce" th:text="${auditionCon.introduce}" th:value="${auditionCon.introduce}" /></td>
                     </tr>
                     <th:block th:each="option : ${options}">
                         <tr>

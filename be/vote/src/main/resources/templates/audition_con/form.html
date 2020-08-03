@@ -47,6 +47,12 @@
                                 <td>
                                     <input type="text" name="ftitle" required/>
                                 </td>
+                                
+                                <th>생년월일</th>
+                                <td>
+                                    <input type="date" name="birth" required/>
+                                </td>
+
                             </tr>
                             <tr>
                                 <th>사진 </th>
@@ -106,6 +112,13 @@
                                 <td>
                                     <input type="text" name="fability" required/>
                                 </td>
+
+                                <th>한마디</th>
+                                <td>
+                                    <input type="text" name="introduce" required/>
+                                </td>
+
+                               
                             </tr>
                             
                             <th:block th:each="option : ${options}" >

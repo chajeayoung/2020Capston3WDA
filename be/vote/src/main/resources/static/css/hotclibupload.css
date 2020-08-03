@@ -1,5 +1,9 @@
 @media(max-width:940px){
     .contentarea{
         width: 100%;
+        
+    }
+    .form-control{
+    	width: 100%;
     }
 }

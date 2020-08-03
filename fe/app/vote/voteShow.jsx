@@ -92,16 +92,22 @@ class Show extends React.Component{
     }
     timer(interval){
         
-        var hours = Math.floor(this.rmTime/(1000*60*60))
+        var day_hours = Math.floor(this.rmTime/(1000*60*60))
+        var days = Math.floor(day_hours/24)
+        var hours = Math.floor(this.rmTime/(1000*60*60)) % 24
         // Math.floor((this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60));
         // console.log("(this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60): "+(this.rmTime % (1000 * 60 * 60 * 24)) / (1000*60*60))
         var miniutes = Math.floor((this.rmTime % (1000 * 60 * 60)) / (1000*60));
         var seconds = Math.floor((this.rmTime % (1000 * 60)) / 1000);
         
-        var m = hours + " : " +  miniutes + " : " + seconds ; // 남은 시간 text형태로 변경
+        // var m = "투표 종료까지 \n"+days+" 일 " + hours +" 시 " +  miniutes + " 분 " + seconds +" 초 남았습니다."; // 남은 시간 text형태로 변경
         // console.log(m);
         // document.all.timer.innerHTML = m;   // div 영역에 보여줌 
-        document.getElementById("circleTimer").innerHTML = m
+        // document.getElementById("circleTimer").innerHTML = m
+        $("#timeDays").html(days);
+        $("#timeHours").html(hours);
+        $("#timeMiniutes").html(miniutes);
+        $("#timeSeconds").html(seconds);
         
         if (this.rmTime <= 0) {      
             // 시간이 종료 되었으면..
@@ -207,6 +213,15 @@ class Show extends React.Component{
                 <div>
                     <button onClick={this.showCandidate.bind(this)} id="showCandidate" className="showButton">후보</button>
                     <button onClick={this.showResult.bind(this)} id="showResult" className="showButton">결과</button>
+                </div>
+                <div className="timeTopDiv">
+                    <div className="timeSubDiv">투표종료까지</div>
+                    <div>
+                        <span className="timeBox" id="timeDays">00</span><span>일</span>
+                        <span className="timeBox" id="timeHours">00</span><span>시</span>
+                        <span className="timeBox" id="timeMiniutes">00</span><span>분</span>
+                        <span className="timeBox" id="timeSeconds">00</span><span>초</span>
+                    </div>
                 </div>
                 <div className="left_right_box">
                     {

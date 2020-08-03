@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import Hotcard from './hotCard.jsx'
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 
@@ -35,7 +34,7 @@ class Hotclib extends Component{
     render(){
         return(
             // <form method="post" encType="multipart/form-data" action={"/shop/update/"+$("#prdId").val()}></form>
-            <form method="post" encType="multipart/form-data" action={"/community/hotclib/upload"}>
+            <form method="post" encType="multipart/form-data">
           <div>
             <label for="htitle">제목</label>
             <input  name="htitle"/><br/>
@@ -51,7 +50,7 @@ class Hotclib extends Component{
            <input type="submit" value="등록"/>
           </div>
           </form> 
-        //   <Hotcard/>
+        
         //   <button onclick={this.back.bind(this)}>취소</button>  
     
         )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import Hotcard from './hotCard.jsx'
+
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -61,7 +61,7 @@ class Hotclib extends Component{
             
            <div>
                <form action="/hotclib/search" method="get">
-            <input name="keyword" type="text" placeholder="제목을 입력해주세요"/>
+            <input name="keyword" type="text" placeholder="제목을 입력해주세요.."/>
             <button>검색</button>
             </form>
             <br></br>

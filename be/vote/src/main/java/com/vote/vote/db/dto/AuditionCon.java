@@ -100,7 +100,13 @@ public class AuditionCon {
 			
 			@Column(nullable=true,name="username")
 		    private String username;
-		    
+			
+			@Column(nullable=true)
+			private String introduce;
+			
+			@DateTimeFormat(pattern="yyyy-MM-dd")
+			@Column(nullable=true)
+		    private Date birth;
 		    
 		    
 		    
@@ -318,6 +324,35 @@ public class AuditionCon {
 				this.username = username;
 			}
 
+			public String getIntroduce() {
+				return introduce;
+			}
+
+			public void setIntroduce(String introduce) {
+				this.introduce = introduce;
+			}
+
+			public String getBirth() {
+
+				String a = birth.toString() .split(" ")[0];
+
+				// 2020-07-25 00000
+				// List[ 2020-07-25, 00000]
+
+				return a;
+			}
+
+			public Date getBirth2() {
+
+				return this.birth;
+			}
+
+			public void setBirth(Date birth) {
+				this.birth = birth;
+			}
+
+
+
 			@Override
 			public String toString() {
 				return "AuditionCon [auditionid=" + auditionid + ", confirm=" + confirm + ", fability=" + fability
@@ -327,7 +362,7 @@ public class AuditionCon {
 						+ fintroduction + ", fjob=" + fjob + ", fmotive=" + fmotive + ", fname=" + fname + ", formid="
 						+ formid + ", fprofile=" + fprofile + ", ftitle=" + ftitle + ", fusermail=" + fusermail
 						+ ", fusername=" + fusername + ", fuserphone=" + fuserphone + ", fweight=" + fweight + ", rid="
-						+ rid + ", username=" + username + "]";
+						+ rid + ", username=" + username +", introduce=" + introduce +", birth=" + birth + "]";
 			}
 		    
 		    

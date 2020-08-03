@@ -35,9 +35,6 @@ const PATHS = {
 
 module.exports = {
   entry: {
-
-    home: path.join(__dirname, "./app/home.js"),
-    tt: path.join(__dirname, "./app/tt.js"),
     register: path.join(__dirname, "./app/register.js"),
     login: path.join(__dirname, "./app/login.js"),
     voteIndex: path.join(__dirname, "./app/vote/voteIndex.jsx"),
@@ -94,6 +91,10 @@ module.exports = {
     myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
 
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
+
+    hotclib: path.join(__dirname, "./app/hotclib/hotclib.jsx"),
+    hotclibread: path.join(__dirname, "./app/hotclib/hotclibread.jsx"),
+    hotclibupload: path.join(__dirname, "./app/hotclib/hotclibupload.jsx"),
   },
   output: {
     path: PATHS.build,
@@ -121,42 +122,48 @@ module.exports = {
 
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        // exclude: /(node_modules|bower_components)/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
-            presets: ["env", "react", "babel-polyfill"],
-          },
-        },
-      },
-      {
-        test: /.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          query: {
-            presets: ["env", "react", "babel-polyfill"],
-          },
-        },
-        //
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ["file-loader"],
-      },
+    rules: [{
+      test: /\.js$/,
+      // exclude: /(node_modules|bower_components)/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          presets: ['env', 'react', 'babel-polyfill'],
+        }
+      }
+    },
+    {
+      test: /.jsx$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        query: {
+          presets: ['env', 'react', 'babel-polyfill']
+        }
+      }
+      //   
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    },
+    {
+      test: /\.(png|svg|jpg|gif|jpeg)$/,
+      use: [
+        'file-loader'
+      ]
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      use: [
+        'file-loader'
+      ]
+    }
 
     ],
   },
