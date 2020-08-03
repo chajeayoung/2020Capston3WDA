@@ -21,9 +21,9 @@ th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
 				
 		</table>
 		<label for="hthumbnail">썸네일</label>
-				<input class="gg" type="file" id="filename2" name="filename2" onchange="setFilename2(event);"/>
+				<input class="gg" type="file" id="filename2" capture="camera" name="filename2" onchange="setFilename2(event);" required/>
 			</div>
-			영상선택<input type="file" name="filename" id="filename" onchange="setFilename(event);"/>
+			영상선택<input type="file" name="filename" id="filename" capture="camera" onchange="setFilename(event);" required/>
 		   <div id ='preview2'></div>
 		<div>
             <input type="submit" value="수정하기" /> 

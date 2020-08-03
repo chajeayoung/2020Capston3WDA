@@ -13,7 +13,7 @@ class ItemCard5 extends Component{
     }
     //투표 후보자 카드
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return (
             
             <div>

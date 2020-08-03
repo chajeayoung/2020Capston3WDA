@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import Header_top from './shop/Header_top.js';
 import Header_middle from './shop/Header_middle.js';
 import Header_bottom from './shop/Header_bottom.js';
-import SliderFrame from './shop/SliderFrame'
-import Footer from './shop/Footer.js';
-import Footer2 from './shop/Footer2.js';
 import Chat from './shop/Chat.jsx';
 import Section from './shop/Section.js'
 const regeneratorRuntime = require("regenerator-runtime");

@@ -64,12 +64,12 @@ class Show extends React.Component{
         $("header").css("background-position","top")
         // console.log(data[0]);
         this.setState({votes : data[0], title : data[1], program:data[2], date : data[3], selectNum:data[4], canNum:data[5]});
-        console.log(data);
+        // console.log(data);
 
         this.edTime = this.parseTime();
         this.stTime = new Date().getTime();
         this.rmTime = this.edTime - this.stTime;
-        console.log("edTime:"+this.edTime+"\n"+"stTime: "+this.stTime+"\n"+"rmTime:"+this.rmTime)
+        // console.log("edTime:"+this.edTime+"\n"+"stTime: "+this.stTime+"\n"+"rmTime:"+this.rmTime)
         var that = this;
         
         var interval  = setInterval(function(){
@@ -121,7 +121,7 @@ class Show extends React.Component{
 
     sendSelect(index){
         const select  =  {"select" : index+1}
-        console.log(select);
+        // console.log(select);
         if(!confirm("해당 후보에 투표하시겠습니까?")) return;
         
 
@@ -154,7 +154,7 @@ class Show extends React.Component{
 
     onSubmitVoteResult(data){
         
-        console.log("데이터 받음")
+        // console.log("데이터 받음")
         var data_list = [];
         var winnerData = [];
         
@@ -162,18 +162,18 @@ class Show extends React.Component{
         for(var i=0; i<data.data.length; i++){
             data_list.push(data.data[i]);
         }
-        console.log("받은 데이터들을 출력합니다."+data_list)
+        // console.log("받은 데이터들을 출력합니다."+data_list)
         for(var i=0; i<data.win; i++){
             winnerData.push(Math.max.apply(Math, data_list));
             var index = data_list.indexOf(Math.max.apply(Math, data_list));
             if (index !== -1) data_list.splice(index, 1);
             
-            console.log(index);
+            // console.log(index);
         }
         // https://stackoverflow.com/questions/32647149/why-is-math-max-returning-nan-on-an-array-of-integers
         
         this.voteData = {data : data.data, count : data.count, win : winnerData, winNum : data.win, show:0}
-        console.log("aaaaa", this.voteData)
+        // console.log("aaaaa", this.voteData)
 
         this.forceUpdate()
     }

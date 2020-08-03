@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     $('#apply').click(function () {
         $.ajax({
-            url: "/audience/apply",
+            url: `/audience/apply/${audience.applyId}/${audience.aLimit}/${audience.aPrice}`,
             type: "get",
             cache: "false",
             dataType: "text",
@@ -78,12 +78,13 @@ $(document).ready(function () {
             dataType: "text",
             data: audience,
             success: function (data) {
-
+         
                 if (data.length < 35) {
                     $(".modal__message").text(data);
                     $(".modal__img").attr("src", "/uploads/불쌍.gif");
                 }
 
+                $(".modal__message").text(data);
                 $modalContainer
                     .removeAttr('class')
                     .addClass('one');
