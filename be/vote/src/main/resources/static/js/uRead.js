@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     $('#apply').click(function () {
         $.ajax({
-            url: "/audience/apply",
+            url: `/audience/apply/${audience.applyId}/${audience.aLimit}/${audience.aPrice}`,
             type: "get",
             cache: "false",
             dataType: "text",

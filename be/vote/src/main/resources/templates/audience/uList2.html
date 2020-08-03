@@ -3,19 +3,13 @@
 </html>
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{main_layout::layout(~{::content},_,'방청권 응모', ~{::link})}">
+    th:replace="~{board_layout::layout(~{::content},_,'방청권 응모', _)}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>방청권 응모</title>
-    <link rel="stylesheet" href="/css/boardstyle.css">
-    <link rel="stylesheet" href="/css/contents.css">
-    <link rel="stylesheet" href="/css/default.css">
-    <link rel="stylesheet" href="/css/board.common.css">
-    <link rel="stylesheet" href="/css/featherlight.css">
-    <!-- <link rel="stylesheet" href="/css/moblie.css"> -->
-    <!-- <link rel="stylesheet" href="/shop/css/bootstrap.min.css"> -->
+
 </head>
 
 <body>
