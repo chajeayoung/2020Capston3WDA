@@ -131,7 +131,7 @@ public class UserInfoController {
 	@RequestMapping(value={"/axios","/axios/"})
 	@ResponseBody
 	public JSONArray indexAxios(Principal user, Model model){
-			
+			System.out.println("개인정보확인");
 		Member member = memberRepository.findByUserid(user.getName());
 		
 		JSONArray json = new JSONArray();
