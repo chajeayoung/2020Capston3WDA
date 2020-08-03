@@ -18,27 +18,24 @@ class VoteCreate extends React.Component {
 
   }
     changeCandidateNum(num){
-      console.log(num)
-
-    var childTag1 =         
-    '<td rowSpan="2">'+
-        '<div class="imgDiv">'+
-          '<img class="candidateImg" src="/uploads/'+this.candidates[0].img+'"  alt=""/>'+
-        '</div>'+
-    '</td>';
       
-
-    var childTag2 =  
-    '<tr>'+
-      '<td>'+
-        '<textarea type="text" class="candidateInfo"placeholder="내용을 입력하세요"  name="info" required></textarea>'+
-      '</td>'+
-    '</tr>';
-
-
-
       $("#candidateInfoItem").empty();
       for(var i = 0 ; i<num; i ++){
+        var childTag1 =         
+        '<td rowSpan="2">'+
+            '<div class="imgDiv">'+
+              '<img class="candidateImg" src="/uploads/'+this.candidates[i].img+'"  alt=""/>'+
+            '</div>'+
+        '</td>';
+          
+
+        var childTag2 =  
+        '<tr>'+
+          '<td>'+
+            '<textarea type="text" class="candidateInfo"placeholder="내용을 입력하세요"  name="info" required></textarea>'+
+          '</td>'+
+        '</tr>';
+
         var topDiv = $(document.createElement("div"));
         topDiv.attr("class","grid");
         var topTable = $(document.createElement("table"));
@@ -63,6 +60,10 @@ class VoteCreate extends React.Component {
           option.val(candidate.id);
           option.text(candidate.name);
           option.attr("img",candidate.img);
+          if(index == i){
+              option.attr("selected","true")
+          }
+          
 
           selectCandidate.append(option)
           
@@ -74,6 +75,7 @@ class VoteCreate extends React.Component {
         topTable.append(topTbody);
         topDiv.append(topTable);
         $("#candidateInfoItem").append(topDiv);
+
       }
       
       $(".candidateSelect").bind("change",function(e){
@@ -104,7 +106,9 @@ class VoteCreate extends React.Component {
       console.log("this.check: ",this.check)
       
 
-
+      if(num > this.candidates.length){
+        return alert("현재 본 프로그램의 후보수는 "+this.candidates.length+"명 입니다.")
+      }
       this.changeCandidateNum(num)
       
     }
