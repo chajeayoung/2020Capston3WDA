@@ -603,7 +603,7 @@ public class UserInfoController {
 				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 				Popular pop = new Popular();
 
-				pop.setFid(auditionCon.getFormid());
+				//pop.setFid(auditionCon.getFormid());
 				pop.setName(auditionCon.getFusername());
 				pop.setImg(auditionCon.getFprofile());
 				pop.setLogo(auditionCon.getFprofile());
