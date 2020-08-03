@@ -131,7 +131,7 @@ public class UserInfoController {
 	@RequestMapping(value={"/axios","/axios/"})
 	@ResponseBody
 	public JSONArray indexAxios(Principal user, Model model){
-			
+			System.out.println("개인정보확인");
 		Member member = memberRepository.findByUserid(user.getName());
 		
 		JSONArray json = new JSONArray();
@@ -153,8 +153,7 @@ public class UserInfoController {
 			memberData.put("addr2", member.getAddr2());
 			memberData.put("point", member.getPoint());
 			memberData.put("role", member.getRole());
-			
-			System.out.println(member.getBirth());
+
 //			memberData.put("r_id", member.getNo());
 //			memberData.put("username", member.getName());
 //			memberData.put("joindate", member.getJoindate());
@@ -197,16 +196,12 @@ public class UserInfoController {
 	    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 	    		
 	    		System.out.println("넘어온 파일없다 마");
-//	    		storageService.store2(file);
-	    		//String thumbnailPath2 = StringUtils.cleanPath(file.getOriginalFilename());
 	    		thumbnailPath = url.concat(storageService.store2(file));
-	    		//thumbnailPath = url.concat(thumbnailPath2);
 	   	
 	    	}
 	    
-	    	
-	 	memberRepository.userUpdate(cc.getPassword(), cc.getName(), cc.getGender(), cc.getBirth(), 
-		 			cc.getNickname(), cc.getAddr(), cc.getAddr2(),thumbnailPath, cc.getNo());
+	    	 
+	 	memberRepository.saveAndFlush(cc);
 
 		
 	            return "redirect:/userInfo";
@@ -608,7 +603,6 @@ public class UserInfoController {
 				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 				Popular pop = new Popular();
 
-				
 				pop.setName(auditionCon.getFusername());
 				pop.setImg(auditionCon.getFprofile());
 				pop.setLogo(auditionCon.getFprofile());

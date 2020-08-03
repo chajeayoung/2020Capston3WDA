@@ -44,14 +44,15 @@
                             </tr>
                             <tr>
                                 <th>제목</th>
-                                <td>
-                                    <input type="text" name="ftitle" required/>
-                                </td>
+                                 <td name="ftitle" th:text="${audition.atitle}+지원"></td>
+                               
+                              <input type="hidden" name="ftitle" th:value="${audition.atitle}+지원" />
+                             
                                 
                                 <th>생년월일</th>
-                                <td>
-                                    <input type="date" name="birth" required/>
-                                </td>
+                              
+                                 <td th:text="${member.birth}"></td>
+                                  <input type="hidden" name="birth" th:value="${member.birth}" />
 
                             </tr>
                             <tr>
@@ -60,9 +61,8 @@
                                     <input type="file" name="filename" capture="camera" required/>
                                 </td>
                                 <th>주소</th>
-                                <td>
-                                    <input type="text" name="faddr" required/>
-                                </td>
+                                <td th:text="${member.addr}"></td>
+                                 <input type="hidden" name="faddr" th:value="${member.addr}" />
                             </tr>
                             <tr>
                                 <th>학력</th>
@@ -73,9 +73,10 @@
                             <tr>
                                 <th>성별</th>
                                 <td>
-                                    남성<input type="radio" name="fgender" value="m" required/>
-                                    <br>
-                                    여성<input type="radio" name="fgender" value="g" required/>
+                                	
+					                                    남성<input type="radio" name="fgender" value="m" checked required/>
+					                     <br>
+					                                    여성<input type="radio" name="fgender" value="g"  required/>
                                    
                               </td>
                                 <!-- <td>

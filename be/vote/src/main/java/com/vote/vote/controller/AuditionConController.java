@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.AuditionOptionValue;
@@ -149,10 +150,14 @@ public class AuditionConController {
 	public String form(Model model, @PathVariable int auditionId, Principal principal) {
 
 		AuditionCon auditionCon = new AuditionCon();
+		Audition audition = auditionRepository.findByAuditionid(auditionId);
 		Member member = memberRepository.findByUserid(principal.getName());
 		model.addAttribute("auditionCon",new AuditionCon());
+		model.addAttribute("audition",audition);
 		model.addAttribute("auditionId", auditionId);
 		model.addAttribute("member", member);
+//		model.addAttribute("addr", member.getAddr());
+//		model.addAttribute("gender", member.getGender());
 		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionId));
 
 		return "audition_con/form";

@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 const regeneratorRuntime = require("regenerator-runtime");
 import jQuery from "jquery";
-
 import '../smart.css';
-
 window.$ = window.jQuery = jQuery;
-
 import './profileIndex.css';
 
 const axios = require('axios');
@@ -25,7 +22,6 @@ class Index extends Component {
     none(e) {
         alert("카카오톡 유저입니다. 카톡에서 프로필사진을 바꿔주세요!!!");
         e.preventDefault();
-
 
     }
 
