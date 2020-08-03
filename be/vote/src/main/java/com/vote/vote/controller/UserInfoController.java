@@ -603,6 +603,7 @@ public class UserInfoController {
 				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 				Popular pop = new Popular();
 
+				pop.setFid(auditionCon.getFormid());
 				pop.setName(auditionCon.getFusername());
 				pop.setImg(auditionCon.getFprofile());
 				pop.setLogo(auditionCon.getFprofile());
@@ -772,7 +773,7 @@ public class UserInfoController {
 			return json;
 		}
 
-		@RequestMapping(value={"/myAudition","/myAudition"}, method = RequestMethod.GET)
+		@RequestMapping(value={"/myAudition","/myAudition/"}, method = RequestMethod.GET)
 		public String myAudition(){
 			return "/userInfo/myAudition";
 		}

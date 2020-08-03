@@ -2,6 +2,7 @@ package com.vote.vote.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 
 
@@ -16,6 +17,6 @@ public interface AuditionJpaRepository  extends JpaRepository<Audition, String>{
 	public Audition findByAuditionid(int auditionid);
 	public ArrayList<Audition> findByAtitle(String keyword);
 	public List<Audition> findByRid(int rid);
-	
+	public List<Audition> findByProgramid(int programid, Pageable pageable);
 
 }

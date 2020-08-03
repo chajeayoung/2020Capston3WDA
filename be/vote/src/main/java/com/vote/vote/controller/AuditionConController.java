@@ -13,6 +13,7 @@ import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.AuditionOptionValue;
 import com.vote.vote.db.dto.Member;
+import com.vote.vote.db.dto.Popular;
 import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.repository.AuditionJpaRepository;
 import com.vote.vote.repository.AuditionOptionJpaRepository;
@@ -20,6 +21,7 @@ import com.vote.vote.repository.AuditionOptionValueJpaRepository;
 import com.vote.vote.repository.CustomAuditionOptionRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.service.StorageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,8 @@ public class AuditionConController {
 	@Autowired
 	private CustomAuditionOptionRepository customAuditionOptionRepository;
 
+	@Autowired
+	private PopularJpaRepository popularRepository;
 	
 	
 	@RequestMapping("/sendAddress")
@@ -130,8 +134,12 @@ public class AuditionConController {
 	@GetMapping("/audition_con/read/{formid}")
 	public String read(Model model, @PathVariable int formid) {
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
+		// Popular popular = popularRepository.findByAll();
+		// System.out.println(popular.toString());
+		// Popular popular = popularRepository.findByFid(formid);
 		System.out.println("auditioncon.getAuditionid(): " + auditioncon.getAuditionid());
 		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
+		// model.addAttribute("popular", popular);
 		model.addAttribute("options",
 				customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(), formid));
 
