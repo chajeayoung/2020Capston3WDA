@@ -28,7 +28,7 @@ class Audience extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { audiences: [], pageSize: 4, itemsCount: "", currentPage: 1, postsListOne: [], role: "" };
+    this.state = { audiences: [], pageSize: 8, itemsCount: "", currentPage: 1, postsListOne: [], role: "" };
   }
 
   //클래스 생성 시 최초에 한번만.. 이후 state 수정되면 바꾼 state 값으로 render만 호출
@@ -72,25 +72,12 @@ class Audience extends React.Component {
                     className="card-post__image"
                     style={{ backgroundImage: `url(/uploads/${post.img})` }}
                   >
-
-
                     <Badge
                       pill
                       className={`card-post__category bg-${post.badgetheme}`}
                     >
                       {post.badge}
                     </Badge>
-
-
-                    <div className="card-post__author d-flex">
-                      <a
-                        href="#"
-                        className="card-post__author-avatar card-post__author-avatar--small"
-                      // style={{ backgroundImage: `url('${post.authorAvatar}')` }}
-                      >
-                        {/* Written by {post.author} */}
-                      </a>
-                    </div>
                   </div>
                   <CardBody>
                     <h5 className="card-title">
@@ -99,7 +86,7 @@ class Audience extends React.Component {
                       </a>
                     </h5>
                     <p className="card-text d-inline-block mb-3">{post.aContent}</p>
-                    <span className="text-muted">{post.aDate}</span>
+                    <p className="text-muted">{post.aDate}</p>
                   </CardBody>
                 </Card>
               </Col>
