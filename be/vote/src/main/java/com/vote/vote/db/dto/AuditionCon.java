@@ -109,8 +109,6 @@ public class AuditionCon {
 		    private Date birth;
 		    
 		    
-		    
-		    
 
 			public int getFormid() {
 				return formid;
@@ -351,6 +349,7 @@ public class AuditionCon {
 				this.birth = birth;
 			}
 
+	
 
 
 			@Override

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.vote.vote.config.CustomUserDetails;
+import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.AuditionOptionValue;
@@ -22,6 +23,8 @@ import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.service.StorageService;
+import com.vote.vote.db.dto.Program;
+import com.vote.vote.db.dto.ProgramManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -166,10 +169,13 @@ public class AuditionConController {
 			@PathVariable int auditionId,
 			@RequestParam(name = "filename") MultipartFile filename	,
 			@Nullable Authentication authentication ) {
-		
+
+			
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 			
 			System.out.println(" 신청인 정보 : "+auditioncon);
+
+
 		if(bindingResult.hasErrors()) {
 			return "/audition_con/form";
 		} else if(filename.isEmpty()) {

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.vote.vote.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.util.StringUtils;
+import org.springframework.security.core.Authentication;
+import com.vote.vote.db.dto.Program;
+import com.vote.vote.db.dto.ProgramManager;
 
 import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.Audition;
@@ -65,11 +69,18 @@ public class AuditionResultController {
 	// return "auditionresult/list";
 	// }
 
+
 	@GetMapping("/auditionresult/list")
-	public String result(Model model, @PageableDefault Pageable pageable) {
+	public String result(Model model, @PageableDefault Pageable pageable, Authentication authentication) {
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
-		model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
+		// model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
+		model.addAttribute("auditionresultlist", auditionResultRepository.findByProgramid(pManager.getProgramId(),pageable));
+
 		return "auditionresult/list";
 	}
 
