@@ -52,8 +52,11 @@ class PopularBoard extends Component {
 
     async componentDidMount(){
       console.log("dd: "+$("#popLogoImg").val())
+      $('header').toggleClass('changed');
       $("header").css("background-image","url('/uploads/"+$("#popLogoImg").val()+"')")
-      $("header").css("background-position","top")
+      $("header").css("background-position","center")
+      $("header").css("background-repeat","no-repeat")
+      $("header").css("background-size","contain")
 
         if(url.indexOf("hash")!=-1){
       console.log(2)  

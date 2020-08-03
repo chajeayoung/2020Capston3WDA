@@ -36,7 +36,13 @@ class Index extends Component {
         console.log(data);
         // 프로그램 정보
         if(data.logo != '0'){
+           
             $("header").css("background-image","url(/uploads/"+data.logo+")")
+            $("header").css("background-position","center")
+            $("header").css("background-repeat","no-repeat")
+            $("header").css("background-size","contain")
+        
+    
         }
         $("header")
         // this.setState({program})    
