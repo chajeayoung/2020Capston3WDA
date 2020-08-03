@@ -13,22 +13,18 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'마이페이지',_)}">
 </head>
 
 <body>
-    <div>
-        <script>
-        </script>
-    </div>
     <content>
 
         <form method="post" enctype="multipart/form-data" action="/userInfo/userUpdate" id="register_form">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div id="userIndex"></div>
-
+            <script src="/assets/userInfo.js"></script>
         </form>
 
 
 
     </content>
-    <script src="/assets/userInfo.js"></script>
+    
 </body>
 
 </html>
