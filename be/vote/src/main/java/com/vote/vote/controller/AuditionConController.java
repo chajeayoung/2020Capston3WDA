@@ -135,7 +135,7 @@ public class AuditionConController {
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
 		// Popular popular = popularRepository.findByAll();
 		// System.out.println(popular.toString());
-		Popular popular = popularRepository.findByFid(formid);
+		// Popular popular = popularRepository.findByFid(formid);
 		System.out.println("auditioncon.getAuditionid(): " + auditioncon.getAuditionid());
 		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
 		// model.addAttribute("popular", popular);

@@ -57,8 +57,8 @@ public class Popular {
 	@Column(name="INTRODUCE", nullable=false)
 	private String intro;
 
-	@Column(name="FID", nullable=false)
-    private int fid;
+	// @Column(name="FID", nullable=false)
+    // private int fid;
 
 	public int getId() {
 		return id;
@@ -156,13 +156,13 @@ public class Popular {
 		this.logo = logo;
 	}
 
-	public int getFid() {
-		return fid;
-	}
+	// public int getFid() {
+	// 	return fid;
+	// }
 
-	public void setFid(int fid) {
-		this.fid = fid;
-	}
+	// public void setFid(int fid) {
+	// 	this.fid = fid;
+	// }
 
 
 
