@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
-
+import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.Audition;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.Member;
@@ -13,6 +13,9 @@ import com.vote.vote.repository.AuditionOptionJpaRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.service.StorageService;
+import org.springframework.security.core.Authentication;
+import com.vote.vote.db.dto.Program;
+import com.vote.vote.db.dto.ProgramManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -60,10 +63,16 @@ public class AuditionController {
 //	}
 
 	@GetMapping("/audition/list")
-	public String audition(Model model, @PageableDefault Pageable pageable){
+	public String audition(Model model, @PageableDefault Pageable pageable, Authentication authentication){
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); 
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "auditionid"));
-		model.addAttribute("auditionlist", auditionRepository.findAll(pageable));
+		// model.addAttribute("auditionlist", auditionRepository.findAll(pageable));
+		model.addAttribute("auditionlist", auditionRepository.findByProgramid(pManager.getProgramId(),pageable));
+		
 		
 		
 		return "audition/list";
@@ -137,7 +146,10 @@ public class AuditionController {
 	public String write(@Valid Audition audition, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
 			@Nullable @RequestParam("option") String[] option,
-            @RequestParam(name = "filename") MultipartFile filename	) {
+			@RequestParam(name = "filename") MultipartFile filename, Authentication authentication	) {
+
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 		
 		
 	// 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -148,6 +160,7 @@ public class AuditionController {
 		} else if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
 			audition.setRid(member.getNo());
+			audition.setProgramid(pManager.getProgramId());
 			audition.setAusername(member.getName());
 			auditionRepository.save(audition);
 			sessionStatus.setComplete();
@@ -163,7 +176,8 @@ public class AuditionController {
 			audition.setRid(member.getNo());
 			audition.setAusername(member.getName());
 //            audience.setADate(new Date());
-            audition.setAfile(filenamePath);
+			audition.setAfile(filenamePath);
+			audition.setProgramid(pManager.getProgramId());
             auditionRepository.saveAndFlush(audition);
 
             // 파일 저장
@@ -271,7 +285,10 @@ public class AuditionController {
 			Principal principal, Model model, RedirectAttributes redirAttrs,
 			@RequestParam(name = "filename") MultipartFile filename	,
 			@Nullable @RequestParam("preAddOption") String[] preAddOptions,
-			@Nullable @RequestParam("option") String[] options ) {
+			@Nullable @RequestParam("option") String[] options, Authentication authentication ) {
+
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 
 		if(bindingResult.hasErrors()) {
 			return "/audition/update";
@@ -304,7 +321,7 @@ public class AuditionController {
 			}
 		}
 		// 새롭게 추가된 커스텀 옵셥 
-
+		audition.setProgramid(pManager.getProgramId());
 		if(options != null && !options[0].isEmpty()){
 			for(int i=0; i<options.length; i++){
 				AuditionOption newOption = new AuditionOption();

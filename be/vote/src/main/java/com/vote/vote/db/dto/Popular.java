@@ -57,6 +57,9 @@ public class Popular {
 	@Column(name="INTRODUCE", nullable=false)
 	private String intro;
 
+	// @Column(name="FID", nullable=false)
+    // private int fid;
+
 	public int getId() {
 		return id;
 	}
@@ -152,6 +155,16 @@ public class Popular {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+
+	// public int getFid() {
+	// 	return fid;
+	// }
+
+	// public void setFid(int fid) {
+	// 	this.fid = fid;
+	// }
+
+
 
 	@Override
 	public String toString() {
