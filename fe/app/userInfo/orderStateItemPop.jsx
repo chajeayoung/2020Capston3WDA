@@ -12,9 +12,9 @@ export default class OrderStateItemPop extends React.Component {
                     <tbody className="bagItem" key={index}>
                         <tr>
                             <td rowSpan="2" className="item">
-                                <div className="imgName">                        
+                                <span className="imgName">                        
                                     <img src={"/uploads/"+item.img}/>
-                                </div>
+                                </span>
                             </td>
                             <td>이름: {item.pName}</td>
                         </tr>
@@ -26,7 +26,7 @@ export default class OrderStateItemPop extends React.Component {
                  )
             })
         }else{
-            return <div>상품이 없습니다.</div>
+            return <span>상품이 없습니다.</span>
         }
         
         

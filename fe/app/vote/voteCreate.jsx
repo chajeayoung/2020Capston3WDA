@@ -32,7 +32,7 @@ class VoteCreate extends React.Component {
         var childTag2 =  
         '<tr>'+
           '<td>'+
-            '<textarea type="text" class="candidateInfo"placeholder="내용을 입력하세요"  name="info" required></textarea>'+
+            '<textarea type="text" class="candidateInfo"placeholder="내용을 입력하세요"  name="info" required>'+this.candidates[i].intro+'</textarea>'+
           '</td>'+
         '</tr>';
 

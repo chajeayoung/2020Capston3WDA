@@ -7,6 +7,7 @@ import CateTab from './CateTab';
 import Item2 from './Item2'; 
 export default class List_Section extends React.Component {
     
+
     constructor(props){
         super(props)
     }
@@ -28,11 +29,15 @@ export default class List_Section extends React.Component {
                         <div className="col-sm-9 padding-right"> {/* 오른쪽 신상품... 상품목록 */}
                             <List_Item data={this.props.data.data.prds}></List_Item>
                         </div>
-                        <div>
-                            {/* display: inline-block; */}
-                            <Pagination className="pagenation" count={this.props.data.count} page={this.props.data.pageNum} onChange={this.props.paging.bind(this, this.props.that)}> </Pagination>
-                        </div>
+                       
                     </div>
+                    <div className="pagediv">
+                        <div className="page">
+                        <Pagination className="pagenation" count={this.props.data.count} page={this.props.data.pageNum} onChange={this.props.paging.bind(this, this.props.that)}> </Pagination>
+                        </div>
+                            {/* display: inline-block; */}
+                           
+                        </div>
                 </div>
             </section>
         )

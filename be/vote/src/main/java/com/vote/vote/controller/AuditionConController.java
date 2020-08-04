@@ -181,6 +181,7 @@ public class AuditionConController {
 			Member member = memberRepository.findByUserid(principal.getName());
 			auditioncon.setRid(member.getNo());
 			auditioncon.setUsername(member.getName());
+			
 			auditioncon.setFdate(new Date());
 			auditioncon.setFusername(member.getName());
 			auditioncon.setFuserphone(member.getPhone());

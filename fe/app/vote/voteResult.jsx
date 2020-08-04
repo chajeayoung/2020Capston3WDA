@@ -218,6 +218,10 @@ class VoteResult extends Component {
     //     //     port: 3128
     //     //     }
     // }
+    blockImportant(){
+        location.href="/introduce/blockChain";
+
+    }
     verificationAdd(){
         var topDiv = $(".modalItem")
         topDiv.empty();
@@ -374,7 +378,8 @@ class VoteResult extends Component {
                                                 <div className="modalContentBox">
                                                     <div className="modalItem">
                                                         <img className="loadImg" src="/img/block_chain.gif"></img>
-                                                        <div className="infoDiv">RIRO는 여러분의 투표 정보를 블록체인으로 <br/>안전하게 관리하고있으며,<br/> 검증을 통해 손쉽게 확인하실 수 있습니다.</div>
+                                                        <img className="loadImg" src="/img/검증.png"></img>
+                                                        <button onClick={this.blockImportant.bind(this)}>블록체인이란?</button>
                                                         <button onClick={this.verificationAdd.bind(this)}>검증하기</button>
                                                         {/* <div className="addText">투표 블록체인 주소:</div>
                                                         <div>{this.state.voteAdd}</div>

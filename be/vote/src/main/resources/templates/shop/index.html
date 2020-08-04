@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-secutiry"
-th:replace="~{main_layout::layout(~{::content},~{::script},'쇼핑몰',~{::link})}">
+th:replace="~{main_layout::layout(~{::content},_,'쇼핑몰',~{::link})}">
 
 <head>
 	<meta charset="utf-8">
@@ -9,7 +9,7 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'쇼핑몰',~{::link}
 	<meta name="author" content="">
 	<title>RIRO Goods Shop</title>
 	<!-- <script src="http://125.190.146.207:4000/socket.io/socket.io.js"></script> -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 	<!-- <link href="/css/chat.css" rel="stylesheet"> -->
 	<!-- <script type="module" src="/js/chat.js"></script> -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,14 +21,9 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'쇼핑몰',~{::link}
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-	<th:block sec:authorize="isAuthenticated()">
-		<link href="/css/chat.css" rel="stylesheet">
-		<script src="/js/chat.js"></script>
-	</th:block>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	
+	
+	
 
 	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/layout.css">
@@ -39,6 +34,14 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'쇼핑몰',~{::link}
 
 <body>
 	<content>
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+
+	
 		<th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
 			<span id="username" sec:authentication="principal.name" style="display: none;"></span>
 		</th:block>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{userInfo_layout::layout(~{::content},~{::script},'마이페이지',_)}">
+th:replace="~{userInfo_layout::layout(~{::content},_,'마이페이지',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +9,12 @@ th:replace="~{userInfo_layout::layout(~{::content},~{::script},'마이페이지'
 </head>
 <body>
 <div>
-<script>
-</script>
 </div>
     <content>
 		
   			<div id="manageVote"></div>
      		<script src="/assets/manageVote.js"></script>
-            <script src="/js/side/userInfoSide.js"></script>
+            
     </content>
 
 </body>
