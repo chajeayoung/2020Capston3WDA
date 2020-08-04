@@ -6,12 +6,14 @@ import java.util.List;
 import javax.validation.Valid;
 import com.vote.vote.config.CustomUserDetails;
 import com.vote.vote.db.dto.Audition;
+import com.vote.vote.db.dto.AuditionCon;
 import com.vote.vote.db.dto.AuditionOption;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.repository.AuditionJpaRepository;
 import com.vote.vote.repository.AuditionOptionJpaRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.service.StorageService;
 import org.springframework.security.core.Authentication;
 import com.vote.vote.db.dto.Program;
@@ -54,6 +56,9 @@ public class AuditionController {
 
 	@Autowired
 	private AuditionOptionJpaRepository auditionOptionReopository;
+
+	@Autowired
+	AuditionConJpaRepository auditionConRepository;
 	
 //	@RequestMapping("/audition/list")
 //	public String list(Model model) {
@@ -117,6 +122,7 @@ public class AuditionController {
 	@GetMapping("/audition/read/{auditionid}")
 	public String read(Model model, @PathVariable int auditionid){
 		model.addAttribute("audition", auditionRepository.findByAuditionid(auditionid));
+		model.addAttribute("auditioncon", auditionConRepository.findByAuditionid(auditionid));
 		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		auditionRepository.save(audition);

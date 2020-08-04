@@ -79,7 +79,7 @@ public class AuditionResultController {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
 		// model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
-		model.addAttribute("auditionresultlist", auditionResultRepository.findByProgramid(pManager.getProgramId(),pageable));
+		 model.addAttribute("auditionresultlist", auditionResultRepository.findByProgramid(pManager.getProgramId(),pageable));
 
 		return "auditionresult/list";
 	}
@@ -156,15 +156,20 @@ public class AuditionResultController {
 	public String write(AuditionResult auditionResult, BindingResult bindingResult, SessionStatus sessionStatus,
 			Principal principal, Model model, RedirectAttributes redirAttrs,
 			// @RequestParam("auditionid") String auditionid,
-            @RequestParam(name = "filename") MultipartFile filename) {
+            @RequestParam(name = "filename") MultipartFile filename, Authentication authentication) {
 		System.out.println(auditionResult);
 		// System.out.println(auditionid);
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 		
+
+			auditionResult.setProgramid(pManager.getProgramId());
 		if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
 			auditionResult.setRid(member.getNo());
 			auditionResult.setRusername(member.getName());
 			auditionResult.setRdate(new Date());
+			
 			auditionResultRepository.save(auditionResult);
 			sessionStatus.setComplete();
 			return "redirect:/auditionresult/list";
@@ -227,10 +232,13 @@ public class AuditionResultController {
 	public String update1(@PathVariable("resultid") int resultid, 
 			Principal principal, Model model,
 			AuditionResult auditionResult2,
-            @RequestParam("filename") MultipartFile filename	) {
+            @RequestParam("filename") MultipartFile filename, Authentication authentication	) {
 				System.out.println("1");
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 		AuditionResult auditionResult = auditionResultRepository.findByResultid(resultid);
 		System.out.println(auditionResult);
+		auditionResult.setProgramid(pManager.getProgramId());
 		 if(filename.isEmpty()) {
 			 System.out.println("ss");
 			Member member = memberRepository.findByUserid(principal.getName());

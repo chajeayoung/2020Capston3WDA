@@ -604,10 +604,12 @@ public class UserInfoController {
 				
 				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 				AuditionCon auditionCon = AuditionConRepository.findByFormid(formid);
+				auditionCon.setCount(auditionCon.getCount()+1);
+				
 
 				ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 				Popular pop = new Popular();
-
+				
 				
 				pop.setName(auditionCon.getFusername());
 				pop.setImg(auditionCon.getFprofile());
