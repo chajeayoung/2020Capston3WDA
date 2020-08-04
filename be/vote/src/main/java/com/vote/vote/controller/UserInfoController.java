@@ -200,8 +200,11 @@ public class UserInfoController {
 	   	
 	    	}
 	    
-	    	 
-	 	memberRepository.saveAndFlush(cc);
+	    	
+		 	memberRepository.userUpdate(cc.getPassword(), cc.getName(), cc.getGender(), cc.getBirth(), 
+			 			cc.getNickname(), cc.getAddr(), cc.getAddr2(),thumbnailPath, cc.getNo());
+
+//	 	memberRepository.saveAndFlush(cc);
 
 		
 	            return "redirect:/userInfo";
