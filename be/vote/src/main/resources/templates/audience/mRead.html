@@ -76,13 +76,20 @@
                             <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
                             <input type="hidden" id="aPrice" name="bo_table" value="webzine" th:value="${audience.aPrice}">
                             <input type="hidden" id="aRecruits" name="bo_table" value="webzine" th:value="${audience.aRecruits}">
+                                              <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
+                    <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
+                    <input type="hidden" id="result" name="result" th:value="${audience.result}">
                             <input type="button" value="추첨인원보기" id="showResult" class="btn_submit btn">
                         </form>
                     </div>
 
                 <div>
-                    <div id="list"></div>
+                    
                     <div id="result">
+                    <h2 id="result__title">응모종료까지 남은 시간</h2>
+                    
+                    	<div id="list"></div>
+                    	
                         <th:block th:if="${result.size() >=1}">
                             <h4>당첨자</h4>
                             <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
@@ -115,16 +122,16 @@
 
 
                 <!-- 게시물 상단 버튼 시작 { -->
-                <div id="bo_v_top">
+                <!-- <div id="bo_v_top">
 
                     <ul class="bo_v_left">
                     </ul>
 
                     <ul class="bo_v_com">
-                        <!-- <form id="delete-form" th:action="@{'/audience/' + ${audience.applyId}}" method="post">
+                        <form id="delete-form" th:action="@{'/audience/' + ${audience.applyId}}" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button id="delete-btn">삭제</button>
-                    </form> -->
+                    </form>
 
                         <li><a href="/audience/mlist" class="btn_b01 btn"><i class="fa fa-list" aria-hidden="true"></i>
                                 목록</a></li>
@@ -146,7 +153,7 @@
                                 </span>
                                 <b>웹진형 게시판 공지사항입니다. </b></a> </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- } 게시물 상단 버튼 끝 -->
 
 

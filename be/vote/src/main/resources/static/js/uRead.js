@@ -24,8 +24,7 @@ function msg_time() {
     if (RemainDate < 0) {
         // 시간이 종료 되었으면..
         clearInterval(tid); // 타이머 해제
-        $("#apply").prop('disabled', true);
-        $("#cofirm").prop('disabled', false);
+        
         $("#timer__title").text("응모마감 되었습니다.");
         $("#timer__ul").hide();
     } else {
@@ -35,19 +34,38 @@ function msg_time() {
 
 
 $(document).ready(function () {
-
+	
+	
     tid = setInterval('msg_time()', 1000); // 타이머 1초간격으로 수행
     var $modalContainer = $('#modal-container'),
         $body = $('body'),
         $content = $('.content');
-
+    var aResult = $('#aResult').val();
     var audience = {
         applyId: $('#applyId').val(),
         aLimit: $('#aLimit').val(),
         aPrice: $('#aPrice').val()
     }
-
-
+    var now = new Date().getTime();
+    var sdate = new Date($("#aStartdate").val()).getTime();
+    var edate = new Date($("#aEnddate").val()).getTime();
+    if(now<sdate){
+    	$("#apply").prop('disabled', true);
+    	$("#cofirm").prop('disabled', true);
+    	$("#timer__title").text("응모전입니다!");
+    	$("#timer__ul").hide();
+    } else if(now>=sdate && now<=edate){
+    	$("#apply").prop('disabled', false);
+    	$("#cofirm").prop('disabled', true);
+    	$("#timer__title").text("응모종료까지 남은 시간");
+    	$("#timer__ul").show();
+    } else if(now>edate){
+    	$("#apply").prop('disabled', true);
+    	$("#cofirm").prop('disabled', false);
+    	$("#timer__title").text("응모마감 되었습니다!");
+    	$("#timer__ul").hide();
+    }
+    
     $('#apply').click(function () {
         $.ajax({
             url: `/audience/apply/${audience.applyId}/${audience.aLimit}/${audience.aPrice}`,
