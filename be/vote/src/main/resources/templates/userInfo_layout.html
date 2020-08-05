@@ -120,7 +120,7 @@ th:fragment="layout(content,js,title,link)">
                             <div class='sideMenu'><a href='/auditionresult/list'>심사결과</a></div>
                             <div class='sideMenu'><a href='/userInfo/audience/mlist'>방청권추첨</a></div>
                             <div class='sideMenu'><a href='/userInfo/myProgram/'>프로그램관리</a></div>
-                            <div class='sideMenu'><a href='/userInfo/myCommunity/'>후보/팬클럽관리</a></div>
+                            <div class='sideMenu'><a href='/userInfo/myCommunity/'>출연자관리</a></div>
                             <div class='sideMenu'><a href='/community/myhotclib'>핫클립관리</a></div>
                             <div class='sideMenu mobileSideMenuSubTitle'>투표</div>
                             <div class='sideMenu'><a href='/vote/create'>투표개설</a></div>
@@ -205,12 +205,14 @@ th:fragment="layout(content,js,title,link)">
             <th:block th:if="${#authentication.principal.ROLE eq '2' }">
                 <input type="hidden" value="매니저" />
                 <li class="webSideMenuTitle">매니저 메뉴</li>
+                <li><a href='/userInfo/myProgram/'>프로그램관리</a></li>
+                <li class="webSideMenuSubTitle">오디션</li>
                 <li><a href='/audition/list'>오디션개설</a></li>
                 <li><a href='/audition_con/list'>예선심사</a></li>
                 <li><a href='/auditionresult/list'>심사결과</a></li>
+                <li class="webSideMenuSubTitle">커뮤니티</li>
                 <li><a href='/userInfo/audience/mlist'>방청권추첨</a></li>
-                <li><a href='/userInfo/myProgram/'>프로그램관리</a></li>
-                <li><a href='/userInfo/myCommunity/'>후보/팬클럽관리</a></li>
+                <li><a href='/userInfo/myCommunity/'>출연자관리</a></li>
                 <li><a href='/community/myhotclib'>핫클립관리</a></li>
                 <li class="webSideMenuSubTitle">투표</li>
                 <li><a href='/vote/create'>투표개설</a></li>

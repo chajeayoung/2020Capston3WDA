@@ -136,7 +136,7 @@ class Index extends Component {
             
             <br/><br/>
             <div id="popular">
-                <div><h3>인기인</h3></div><br/>
+                <div><h3>출연자</h3></div><br/>
                 <PopularItem data={this.state.popular}/><br/><br/><br/>
                 <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}style={{placeContent : "center"}}> </Pagination>
                    
