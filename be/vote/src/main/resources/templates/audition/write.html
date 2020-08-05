@@ -24,25 +24,25 @@ th:replace="~{userInfo_layout::layout(~{::content},~{::script},'게시글 등록
                     <tbody>
                         <tr>
                             <th>분야</th>
-                            <td><input type="text" placeholder="분야을 입력하세요. " name="acategory"/></td>
+                            <td><input type="text" placeholder="분야을 입력하세요. " name="acategory" required/></td>
                             <th>모집기간</th>
-                            <td><input type="date" name="astartdate" /></td>
+                            <td><input type="date" name="astartdate" required/></td>
                             <th>    ~     </th>
-                            <td><input type="date" name="aenddate" /></td>
+                            <td><input type="date" name="aenddate" required/></td>
                             <th>인원</th>
-                            <td><input type="text" placeholder="모집인원을 입력하세요" name="arecruits" /></td>
+                            <td><input type="text" placeholder="모집인원을 입력하세요" name="arecruits" required /></td>
                             <th>발표일</th>
-                            <td><input type="date" placeholder="발표일을 입력하세요" name="aissue" /></td>
+                            <td><input type="date" placeholder="발표일을 입력하세요" name="aissue" required /></td>
                             
                         </tr>
                         <tr>
                             <th>제목</th>
                             <td>
-                                <input type="text" placeholder="제목을 입력하세요. " name="atitle" />
+                                <input type="text" placeholder="제목을 입력하세요. " name="atitle" required />
                             </td>
                             <th>첨부파일</th>
                             <td>       
-                                <input type="file" name="filename">
+                                <input type="file" name="filename" required>
                             </td>
                         </tr>
             
