@@ -68,8 +68,9 @@ class Show extends React.Component{
     }
 
     async componentDidMount(){
-        let {data} = await axios.get('/vote/axios/'+param);
         console.log("----test----");
+        let {data} = await axios.get('/vote/axios/'+param);
+        console.log(data);
 
         $("header").css("background-image","url(/uploads/"+data[2].logo+")")
         $("header").css("background-position","top")
