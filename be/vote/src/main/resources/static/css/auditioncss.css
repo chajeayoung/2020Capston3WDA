@@ -3,5 +3,12 @@
     .t23{
         display: none;
     }
+    .auditionTitleTd{
+        width: 100px !important;
+    }
 
 } 
+.auditionTitleTd{
+    width: 400px;
+    overflow: hidden;
+}

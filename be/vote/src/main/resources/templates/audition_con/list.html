@@ -50,7 +50,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		<tbody>
 		<tr th:each="auditionCon : ${auditionconlist}">
 			<td th:text="${auditionCon.formid}"></td>
-			<td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
+			<td class="auditionTitleTd"><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
 			<!-- <td th:text="${auditionCon.fname}"></td> -->
 			<td><span th:text="${auditionCon.username}"></span><span>님</span></td>
 			<td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td>
