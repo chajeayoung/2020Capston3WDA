@@ -379,6 +379,7 @@ public class AudienceController {
             audienceJpaRepository.saveAndFlush(audi);
             json.put("message", "추첨 완료");
             json.put("state", 0);
+            json.put("list", list);
             return json;
 
         } else {
@@ -412,6 +413,8 @@ public class AudienceController {
         audienceJpaRepository.saveAndFlush(audi);
         json.put("message", "추첨 완료");
         json.put("state", 0);
+        json.put("list", result2);
+        System.out.println(result2);
         return json;
     }
 
