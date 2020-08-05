@@ -153,8 +153,8 @@
          <form th:action="@{'/userInfo/hoo' + ${auditionCon.formid}}" method="post"></form>
 
              <!-- th:if 조건문 합격이 맞을때, 버튼을 출력 -->
-			 <th:block th:if="${auditionCon.confirm} == '합격'"></th:block>
-                <!-- <th:block th:if="${popular.fid} == '201'"> -->
+			 <th:block th:if="${auditionCon.confirm} == '합격'">
+                <th:block th:if="${auditionCon.count} == '0'">
                     <form action="/userInfo/hoo" method="post">
 
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -165,8 +165,8 @@
                         </div>
                         <input type="hidden" name="formid" th:value="${auditionCon.formid}"/>
                     </form>
-          <!-- </th:block> -->
-        </th:block>
+                </th:block>
+            </th:block>
 
         <script>
             var check = document.querySelector(".test").value

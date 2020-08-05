@@ -23,6 +23,9 @@ import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.service.StorageService;
+import com.vote.vote.db.dto.Program;
+import com.vote.vote.db.dto.ProgramManager;
+import org.springframework.security.core.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -99,10 +102,15 @@ public class AuditionConController {
 	// }
 
 	@GetMapping("/audition_con/list")
-	public String audition(Model model, @PageableDefault Pageable pageable) {
+	public String audition(Model model, @PageableDefault Pageable pageable, Authentication authentication) {
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "formid"));
-		model.addAttribute("auditionconlist", auditionConRepository.findAll(pageable));
+		// model.addAttribute("auditionconlist", auditionConRepository.findAll(pageable));
+		model.addAttribute("auditionconlist", auditionConRepository.findByProgramid(pManager.getProgramId(),pageable));
 		return "/audition_con/list";
 	}
 
@@ -134,11 +142,11 @@ public class AuditionConController {
 	@GetMapping("/audition_con/read/{formid}")
 	public String read(Model model, @PathVariable int formid) {
 		AuditionCon auditioncon = auditionConRepository.findByFormid(formid);
-		// Popular popular = popularRepository.findByAll();
-		// System.out.println(popular.toString());
-		// Popular popular = popularRepository.findByFid(formid);
+		// Popular popular = popularRepository.findByRid(auditioncon.getRid());
+
 		System.out.println("auditioncon.getAuditionid(): " + auditioncon.getAuditionid());
 		model.addAttribute("auditionCon", auditionConRepository.findByFormid(formid));
+		// model.addAttribute("popular", popularRepository.findByRid(auditioncon.getRid()));
 		// model.addAttribute("popular", popular);
 		model.addAttribute("options",
 				customAuditionOptionRepository.getOptionWithValue(auditioncon.getAuditionid(), formid));
@@ -171,14 +179,20 @@ public class AuditionConController {
 			@PathVariable int auditionId,
 			@RequestParam(name = "filename") MultipartFile filename	,
 			@Nullable Authentication authentication ) {
-		
-			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				
+			Member member = memberRepository.findByUserid(principal.getName());
+			Audition audition = auditionRepository.findByAuditionid(auditionId);
+			auditioncon.setProgramid(audition.getProgramid());
+			
+			
 			
 			System.out.println(" 신청인 정보 : "+auditioncon);
+
+
 		if(bindingResult.hasErrors()) {
 			return "/audition_con/form";
 		} else if(filename.isEmpty()) {
-			Member member = memberRepository.findByUserid(principal.getName());
 			auditioncon.setRid(member.getNo());
 			auditioncon.setUsername(member.getName());
 			
@@ -192,7 +206,7 @@ public class AuditionConController {
 		} else {
 			
 		    String filenamePath = StringUtils.cleanPath(filename.getOriginalFilename());
-            Member member = memberRepository.findByUserid(principal.getName());
+            // Member member = memberRepository.findByUserid(principal.getName());
 			auditioncon.setUsername(member.getName());
 			
             // 게시글저장
