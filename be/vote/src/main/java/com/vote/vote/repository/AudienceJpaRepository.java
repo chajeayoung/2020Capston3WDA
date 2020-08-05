@@ -20,7 +20,6 @@ public interface AudienceJpaRepository extends JpaRepository<Audience, Integer> 
     public Audience findById(int applyId);
 
     public Audience deleteById(int applyId);
-
     List<Audience> findByaTitleContaining(String aTitle);
 
     Page<Audience> findAllByrId(Pageable pageable, int rId);
