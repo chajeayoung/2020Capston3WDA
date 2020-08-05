@@ -79,8 +79,8 @@ Insert into COMPANY (C_ID,R_ID,C_NAME,C_content,C_READER,C_PHONE,C_PROGRAM,C_CAT
 Insert into COMPANY (C_ID,R_ID,C_NAME,C_content,C_READER,C_PHONE,C_PROGRAM,C_CATEGORY,C_STARTDATE,C_ENDDATE,C_BUDGET,C_CONFIRM) values (2,22,'ÇÑ±¹ ÃÖ°í ÈüÇÕ ¿Àµð¼Ç ÇÁ·Î±×·¥','¼î¹Ì´õ¸Ó´Ï','±è¼î¹Ì','010-0000-0000','¼î¹Ì´õ¸Ó´Ï','·¦',to_date('20/08/04','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),100000000,'1');
 
 -- ÇÁ·Î±×·¥
-Insert into PROGRAM (PROGRAM_ID,P_NAME,P_CATEGORY,p_image) values (1,'ÇÁ·Îµà½º48','¾ÆÀÌµ¹','ÇÁ·Îµà½º48.png');
-Insert into PROGRAM (PROGRAM_ID,P_NAME,P_CATEGORY,p_image) values (21,'¼î¹Ì´õ¸Ó´Ï','·¦','defaultProfile.png');
+Insert into PROGRAM (PROGRAM_ID,P_NAME,P_CATEGORY,p_image,logo) values (1,'ÇÁ·Îµà½º48','¾ÆÀÌµ¹','ÇÁ·Îµà½º48.png','ÇÁ·Îµà½º48.png');
+Insert into PROGRAM (PROGRAM_ID,P_NAME,P_CATEGORY,p_image,logo) values (21,'¼î¹Ì´õ¸Ó´Ï','·¦','¼î¹Ì´õ¸Ó´Ï.png','¼î¹Ì´õ¸Ó´Ï.png');
 
 -- ÇÁ·Î±×·¥¸Þ´ÏÀú
 Insert into P_MANAGER (R_ID,PROGRAM_ID) values (2,1);
