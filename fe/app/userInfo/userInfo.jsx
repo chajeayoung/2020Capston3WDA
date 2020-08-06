@@ -6,6 +6,15 @@ import '../smart.css';
 window.$ = window.jQuery = jQuery;
 import './profileIndex.css';
 
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+
 const axios = require('axios');
 
 class Index extends Component {
@@ -34,10 +43,11 @@ class Index extends Component {
             if (p.kakao == "1") { // 카카오톡 유저이면?
                 return (
                     <div key={'div' + index}>
-                        <table>
-                            <tbody>
-                                <tr><td key={index} >아이디<input type="text" id="id" placeholder="이메일" value={p.userid} readOnly /></td></tr>
-                                <tr><td>프로필<img src={p.profile ? p.profile : '#'} id="profile" name="profile2" alt="profile" /></td></tr>
+
+<TextField key={index} id="standard-secondary" name="name" label="아이디" placeholder="아이디" name="name" value={p.userid} color="primary" readOnly /> 
+{/* <tr><td key={index} >아이디<input type="text" id="id" placeholder="이메일" value={p.userid} readOnly /></td></tr>           */}
+
+<tr><td>프로필<img src={p.profile ? p.profile : '#'} id="profile" name="profile2" alt="profile" /></td></tr>
                                 <tr><td><input type="file" name="profile2" id="file" onClick={this.none.bind(this)} /></td></tr>
 
                                 <tr><td>닉네임<input type="text" name="nickname" placeholder="입력해주세요" defaultValue={p.nickname} /></td></tr>
@@ -53,8 +63,6 @@ class Index extends Component {
                                 <tr><td>주소<input type="text" name="addr" placeholder="입력해주세요" defaultValue={p.addr} /></td></tr>
                                 <tr><td>상세주소<input type="text" name="addr2" placeholder="입력해주세요" defaultValue={p.addr2} /></td></tr>
 
-                            </tbody>
-                        </table>
                         <input type="hidden" name="profile" value={p.profile}></input>
                         <input type="hidden" name="userid" value={p.userid}></input>
                         <input type="hidden" name="no" value={p.r_id}></input>

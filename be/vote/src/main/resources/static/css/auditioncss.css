@@ -1,7 +1,22 @@
-@media(max-width:940px){
+@media(max-width:550px){
     
     .t23{
         display: none;
     }
 
+	 .card{
+	    margin-left: 5px;
+	 }
+	 
+	 .col-lg-12 {
+    width: 100% !important;
+    margin: auto;
+    padding-left: 0px !important;
+     padding-right: 0px !important;
+		}
+
 } 
+img.cardImg{
+	object-position : top;
+}
+

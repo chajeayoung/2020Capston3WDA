@@ -236,7 +236,9 @@ th:fragment="layout(content,js,title,link)">
     
       <div class="container-fluid">
         <div class="row">
-        <a href="#" class="btn2 btn" id="menu-toggle"><span class="sideon glyphicon glyphicon-menu-hamburger"></span></a>
+	        <div class="sideBtn">
+	        	<a href="#" class="btn2 btn" id="menu-toggle"><span class="sideon glyphicon glyphicon-menu-hamburger"></span></a>
+	        </div>
           <div class="col-lg-12">
             
            <div th:replace="${content}"></div>
