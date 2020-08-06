@@ -32,7 +32,7 @@ font-size: 1.3em;
     <script src="/assets/hotclib.js"></script> -->
 
 
-	<section>
+	
 	
 	<a href="" class="btn btn-lg btn-primary"
 				th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
@@ -86,9 +86,9 @@ font-size: 1.3em;
 			<a sec:authorize="hasAnyAuthority('2')" href="" class="btn btn-lg btn-primary"
 				th:href="@{'/community/hotclib/upload'}">영상업로드</a>
 		</div>
-	</section>
+	
 
-<nav style="text-align: center;">
+  <nav style="text-align: center;">
     <ul class="pagination">
         <li class="disabled">
             <a href="#" aria-label="First">
@@ -117,7 +117,7 @@ font-size: 1.3em;
         </li>
     </ul>
 </nav>
-	    <!--   <nav style="text-align: center;">
+	      <!--  <nav style="text-align: center;">
     <ul class="pagination"
      th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >
