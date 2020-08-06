@@ -23,13 +23,13 @@ export default class Uread2 extends React.Component {
     //클래스 생성 시 최초에 한번만.. 이후 state 수정되면 바꾼 state 값으로 render만 호출
     async componentDidMount() {
 
-        let { data } = await axios.get("/audience/list/axios");
+        let { data } = await axios.get("/api/ip");
         this.setState({
             audiences: data,
             itemsCount: data.length,
             role: $("#userRole").text()
         });
-        console.log(this.state.role);
+        console.log(this.state.audiences);
     }
 
     handlePageChange(page) {

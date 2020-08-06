@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 import javax.validation.Valid;
 
@@ -41,6 +42,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,6 +56,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -100,6 +103,17 @@ public class AudienceController {
     SimpleDateFormat format1 = new SimpleDateFormat("yy-MM-dd");
     SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
+    
+    @RestController
+    @RequestMapping("/api")
+    public class TestController {
+    	
+    	@PostMapping("/ip")
+    	public ResponseEntity<String> ip (HttpServletRequest request) {
+    		// 요청을 보낸 클라이언트의 IP주소를 반환합니다.
+    		return ResponseEntity.ok(request.getRemoteAddr());
+    	}
+    }
     @RequestMapping(value = { "/main" })
     public String test2(Principal user) {
         return "audience/main";
