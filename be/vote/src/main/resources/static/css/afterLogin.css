@@ -6,15 +6,13 @@ main{
     
 }
 header{
-	background-image: url(/uploads/test.png);
+	background-image: url(/img/test.png);
     background-size: cover;
     background-position: center;
 }
 
 main{
-	background-image: url(/uploads/투표하세요.png);
-    background-size: cover;
-    background-position: center;
+
     position:relative;
 }
 img.icon{
