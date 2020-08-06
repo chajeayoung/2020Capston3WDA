@@ -65,7 +65,7 @@
                 <!-- } 본문 내용 끝 -->
                 <!-- 타이머 시작 -->
                 <div class="timer">
-                    <h1 id="timer__title">응모까지 남은 시간</h1>
+                    <h1 id="timer__title">응모종료까지 남은 시간</h1>
                     <ul id="timer__ul">
                       <li><span id="days"></span>일</li>
                       <li><span id="hours"></span>시간</li>
@@ -76,10 +76,11 @@
                   <!-- 타이머 끝 -->
                 <form style="text-align: -webkit-center">
                     <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
-                    <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
-                    <input type="hidden" id="aPrice" name="bo_table" value="webzine" th:value="${audience.aPrice}">
-                    <input type="hidden" id="aEnddate" name="wr_id" th:value="${audience.aEnddate}">
-                    <input type="hidden" name="sfl" value="">
+                    <input type="hidden" id="aLimit" name="aLimit" value="" th:value="${audience.aLimit}">
+                    <input type="hidden" id="aPrice" name="aPrice" value="webzine" th:value="${audience.aPrice}">
+                    <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
+                    <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
+                    <input type="hidden" id="result" name="result" th:value="${audience.result}">
                     <input type="hidden" name="stx" value="">
                     <input type="hidden" name="spt" value="">
                     <input type="hidden" name="sst" value="">

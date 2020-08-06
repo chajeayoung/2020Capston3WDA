@@ -28,6 +28,7 @@ public class CustomAuditionConRepositoryImpl implements CustomAuditionConReposit
         JPAQueryFactory query = new JPAQueryFactory(em); // 실제로 쿼리 되는 문장?
 
         BooleanBuilder booleanBuilder = new BooleanBuilder(); //여기다가 조건절을 단다.
+        booleanBuilder.and(auditionCon.rid.eq(rId));
 
         List<AuditionCon> audition = query.select(auditionCon).from(auditionCon).offset(page.getOffset()).limit(page.getPageSize()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
 

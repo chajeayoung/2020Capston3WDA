@@ -60,7 +60,7 @@ class Show extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = { votes: [], title: "",program:{img:"검정고무신.png",name:"검정고무신",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}
+        this.state = { votes: [], title: "",program:{img:"defaultProfile.png",name:"준비중",info:"설명"}, date:{startTime:"000",endTime:"0000",resultShowTime:"0000",selectNum:0}
                         ,modal:1};
         this.stTime;
         this.edTime;
@@ -68,11 +68,14 @@ class Show extends React.Component{
     }
 
     async componentDidMount(){
-        let {data} = await axios.get('/vote/axios/'+param);
         console.log("----test----");
+        let {data} = await axios.get('/vote/axios/'+param);
+        console.log(data);
 
         $("header").css("background-image","url(/uploads/"+data[2].logo+")")
         $("header").css("background-position","top")
+        $("header").css("background-repeat","no-repeat")
+        $("header").css("background-size","contain")
 
         console.log(data);
         this.setState({votes : data[0], title : data[1], program:data[2], date: data[3], selectNum:data[4], canNum:data[5], state:{popularid:0, option:1, data:[]}  } );

@@ -27,3 +27,6 @@
         float: none;
     }
 }
+ul.MuiPagination-ul{
+margin:auto;
+}

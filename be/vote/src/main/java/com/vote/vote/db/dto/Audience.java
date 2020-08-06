@@ -55,11 +55,11 @@ public class Audience {
     private int aLimit; // 신청횟수 제한
 
     @Column(name = "a_startdate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date aStartdate; // 응모시작일
 
     @Column(name = "a_enddate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date aEnddate; // 응모마감일
 
     @Column(nullable = false, name = "r_id")

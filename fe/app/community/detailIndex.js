@@ -36,7 +36,13 @@ class Index extends Component {
         console.log(data);
         // 프로그램 정보
         if(data.logo != '0'){
+           
             $("header").css("background-image","url(/uploads/"+data.logo+")")
+            $("header").css("background-position","center")
+            $("header").css("background-repeat","no-repeat")
+            $("header").css("background-size","contain")
+        
+    
         }
         $("header")
         // this.setState({program})    
@@ -130,7 +136,7 @@ class Index extends Component {
             
             <br/><br/>
             <div id="popular">
-                <div><h3>인기인</h3></div><br/>
+                <div><h3>출연자</h3></div><br/>
                 <PopularItem data={this.state.popular}/><br/><br/><br/>
                 <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}style={{placeContent : "center"}}> </Pagination>
                    

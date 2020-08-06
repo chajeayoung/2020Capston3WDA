@@ -16,19 +16,26 @@ class Order extends React.Component {
     constructor(props){
 
         super(props)
-        this.state = {data:[]}
+        this.state = {data:[],profile:[{addr:0,addr2:0,username:0,phone:0}]}
     }
 
     async componentDidMount(){
         this.getPrdList();
-        
+        this.getProfile();
     }
     async getPrdList(){
         
         let {data} = await axios.get(window.location.href.replace('?',"/axios?"));
-        console.log(data);
-        this.setState({data})
+         this.setState({data})
         this.setSumPrice();
+
+        
+        
+    }
+    async getProfile(){
+        let {data:profile} = await axios.get('/userInfo/axios');
+        this.setState({profile})
+        
     }
     setSumPrice(){
         var sumTag = $('#sumPrice')
@@ -47,7 +54,7 @@ class Order extends React.Component {
             e.preventDefault();
     }
     render() {
-        console.log(this.state.data)
+        console.log("d"+this.state.profile)
         return(
             <div>
                 <form  action="/shop/order" method="post">
@@ -81,19 +88,19 @@ class Order extends React.Component {
                                 <table className="userInfoTable">
                                     <tr>
                                         <td>도로명 주소</td>
-                                        <td><input type="text" name="addr" placeholder="도로명주소" required/></td>
+                                        <td><input type="text" name="addr"  defaultValue={this.state.profile[0].addr ? this.state.profile[0].addr : ''} required/></td>
                                     </tr>
                                     <tr>
                                         <td>상세 주소</td>
-                                        <td><input type="text" name="addr2" placeholder="상세주소" required/></td>
+                                        <td><input type="text" name="addr2"  defaultValue={this.state.profile[0].addr2 ? this.state.profile[0].addr2 : ''}  required/></td>
                                     </tr>
                                     <tr>
                                         <td>받는분 성함</td>
-                                        <td><input type="text" name="receiver" required/></td>
+                                        <td><input type="text" name="receiver"  defaultValue={this.state.profile[0].username ? this.state.profile[0].username : ''}  required/></td>
                                     </tr>
                                     <tr>
                                         <td>연락처</td>
-                                        <td><input type="text" name="phone" required/></td>
+                                        <td><input type="text" name="phone"  defaultValue={this.state.profile[0].phone ? this.state.profile[0].phone : ''}  required/></td>
                                     </tr>
                                 </table>
                             </div>

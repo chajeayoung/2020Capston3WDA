@@ -123,7 +123,7 @@ class ManageOrderState extends React.Component{
         barChartGender.datasets[1].values.push(0);
         barChartAge.datasets[4].values.push(0);
         // 나이 / 후보별
-        for(var i=0; i<data.pop.length;i++){
+                for(var i=0; i<data.pop.length;i++){
             for(var j=0; j<data.age.length;j++){
                 if(barChartAge.labels[i] == data.age[j].pName){
                     if(data.age[j].age==1){
@@ -192,6 +192,7 @@ class ManageOrderState extends React.Component{
     }
     render() {
         // console.log(this.state.vote)
+        console.log(barChartAge.labels)
         return(
             <div>
                 <div  className="divAlignCenter">

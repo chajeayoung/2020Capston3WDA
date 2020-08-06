@@ -12,10 +12,17 @@
     }
     .chart{
         width: auto !important;
+
+    }
+    .barChartTopDiv{
+        overflow: scroll;
     }
 }
 .chart{
     margin: auto;
+    width: auto !important;
+    min-width: 550px;
+    max-width: 900px;
 }
 .divAlignCenter{
     text-align: center;

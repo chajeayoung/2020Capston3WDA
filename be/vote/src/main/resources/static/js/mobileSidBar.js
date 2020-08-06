@@ -73,8 +73,7 @@ function w3_open() {
 
 
       $("#mobileMenus").
-      append("<a href='/vote' class='sideMenu'> <div class='sideMenu'>투표</div> </a> <div class='dropMenu sideMenu'><a href='/community'><div href='/community' class='sideMenu'>커뮤니티</div> </a><div class='drop'>"+
-" <a href='#'>팬클럽</a><a href='#'>인기투표</a><a href='/hotclib'>주간Hot Clip</a><a href='userInfo/audience/ulist'>방청권응모</a> </div> </div> <a href='/shop/index' class='sideMenu'> <div class='/shop/index'>굿즈샵</div> </a> ");
+      append("<a href='/vote' class='sideMenu'> <div class='sideMenu'>투표</div> </a> <div class='dropMenu sideMenu'><a href='/community'><div href='/community' class='sideMenu'>커뮤니티</div> </a> <a href='/shop/index' class='sideMenu'> <div class='/shop/index'>굿즈샵</div> </a> ");
     
        
 //      }

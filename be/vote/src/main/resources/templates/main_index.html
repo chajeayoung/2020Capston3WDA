@@ -37,7 +37,7 @@
                     <a href="/userInfo">내 정보 및 관리 </a>&nbsp;
                     <input type="submit" value="로그아웃" id="logoutButton"/>                    
                 </form>
-          	
+          		  <link rel="stylesheet" href="/css/afterLogin.css">
    
             </th:block>
 
@@ -136,16 +136,11 @@
                     <a href="/vote">
                         <div>투표</div>
                     </a>
-                    <div class="dropMenu">
-                        <a href="/community">
-                            <div href="/community">커뮤니티</div>
-                        </a>
-                        <div class="drop">
-                            <a href="#">팬클럽</a>
-                            <a href="/hotclib">주간Hot Clip</a>
-                            <a href="/audience/list">방청권응모</a>
-                        </div>
-                    </div>
+                    
+					<a href="/community">
+                        <div>커뮤니티</div>
+                    </a>
+ 
                     <a href="/shop/index">
                         <div>굿즈샵</div>
                     </a>
@@ -153,6 +148,16 @@
             </nav>
 
             <main>
+            
+            <th:block sec:authorize="isAuthenticated()"><!-- 로그인 되어 있는가 -->
+ 
+                    <img class="icon" src="/img/riroicon.png">
+                    <img class="font" src="/img/투표하세요.png">
+
+
+   
+            </th:block>
+            
                     <div class="center_title">
                         <h1>RIRO</h1>
                     </div>
@@ -282,7 +287,7 @@
                 <div>이용약관</div>
             </a>
             <a href="/proRegIndex">
-                <div>관리자</div>
+                <div>매니저</div>
             </a>
         </div>
 

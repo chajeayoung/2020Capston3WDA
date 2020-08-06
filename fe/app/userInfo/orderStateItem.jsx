@@ -12,11 +12,11 @@ export default class OrderStateItem extends React.Component {
                     <tbody className="bagItem" key={index}>
                         <tr>
                             <td rowSpan="2" className="item">
-                                <div className="imgName">
+                                <span className="imgName">
                                     <a href={"/shop/product/"+item.product_id}>
                                         <img src={"/uploads/"+item.image}/>
                                     </a>
-                                </div>
+                                </span>
                             </td>
                             <td><a href={"/shop/product/"+item.product_id}>상품명: {item.name}</a></td>
                         </tr>
@@ -28,7 +28,7 @@ export default class OrderStateItem extends React.Component {
                  )
             })
         }else{
-            return <div>상품이 없습니다.</div>
+            return <span>상품이 없습니다.</span>
         }
         
         

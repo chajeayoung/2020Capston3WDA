@@ -107,9 +107,14 @@ public class AuditionCon {
 			@DateTimeFormat(pattern="yyyy-MM-dd")
 			@Column(nullable=true)
 		    private Date birth;
-		    
-		    
-		    
+			
+			@Column(nullable=true, name = "count")
+  			  private int count; 
+			// @Column(nullable=true)
+			// private Int count;
+			
+			@Column(nullable=true,name="program_id")
+	    	private Integer programid;
 		    
 
 			public int getFormid() {
@@ -351,6 +356,22 @@ public class AuditionCon {
 				this.birth = birth;
 			}
 
+			public int getCount() {
+				return this.count;
+			}
+		
+			public void setCount(int count) {
+				this.count = count;
+			}
+
+			public Integer getProgramid() {
+				return programid;
+			}
+	
+			public void setProgramid(Integer programid) {
+				this.programid = programid;
+			}
+		
 
 
 			@Override

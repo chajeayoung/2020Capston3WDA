@@ -107,13 +107,13 @@ public class CustomOrderRepositoryImpl implements CustomOrderReopsitoy {
     public List<CustomOrderStatePopAge> getOrderStatePopPopAgeByProgramId(int pId) {
         String sql = " select pop.popular_id, pop.p_name, nvl(pp.count,0), nvl(pp.age,2) age "
                 +" from ( "
-                +" select p.popid  popId,sum(o.count) count, case when NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) = 0 then 2  else  NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) end  AS AGE   "
+                +" select p.popid  popId,sum(o.count) count, case when NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) = 0 then 1  else  NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) end  AS AGE   "
                 +"  from  product  p, orderlist  o,  r_order r, r_user u " 
                 +" where  p.product_id = o.product_id "
                 +" and p.popid  != 0"
                 +" and r.order_id = o.order_id "
                 +" and r.r_id(+) = u.r_id "
-                +" group by p.popid, case when NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) = 0 then 2  else  NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) end  "
+                +" group by p.popid, case when NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) = 0 then 1  else  NVL( TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, u.birth)/12)/10),0) end  "
                 +"  ) pp, popular pop "
                 +" where pp.popId(+) = pop.popular_id "
                 +" and pop.program_Id = "+pId

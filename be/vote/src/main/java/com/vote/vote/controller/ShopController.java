@@ -379,7 +379,7 @@ public class ShopController {
 		
 
 
-		return "redirect:/userInfo";
+		return "redirect:/shop/create";
 	}
 	
 
@@ -782,14 +782,15 @@ public class ShopController {
 			
 			return "/shop/order";
 		}
-
 		@ResponseBody
 		@RequestMapping(value={"/shop/order/axios","/shop/order/axios/"}, method=RequestMethod.GET)
 		public List<CustomOrderInfo> orderProductInfo(@RequestParam("productId") int[] productIds, // 주문 뷰에 상품 정보 보냄.
 		@RequestParam("optionId") int[] optionIds,
 		@RequestParam("quantity") int[] quantitys,
 		@Nullable @RequestParam("bagId") int[] bagId
-		) {
+		){
+			
+			
 			List<CustomOrderInfo> infos = new ArrayList<CustomOrderInfo>();
 
 			for(int i=0; i<productIds.length; i++){
@@ -811,7 +812,9 @@ public class ShopController {
 				}
 				
 				infos.add(item);
+				
 			}
+			
 
 
 			return infos;
