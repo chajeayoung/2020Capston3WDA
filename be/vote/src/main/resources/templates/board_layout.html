@@ -8,7 +8,7 @@
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="/css/ani.css">
     <link rel="stylesheet" href="/css/board.css">
- <!--    <link rel="stylesheet" href="/css/index.css">-->
+    <!--    <link rel="stylesheet" href="/css/index.css">-->
     <!-- <link rel="stylesheet" href="/css/layout.css"> -->
     <script type="text/javascript" th:replace="${js}"></script>
     <link rel="stylesheet" th:replace="${link}">
@@ -37,15 +37,15 @@
 
     <!-- <script src="http://125.190.146.207:4000/socket.io/socket.io.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <!-- <th:block sec:authorize="isAuthenticated()">
         <link href="/css/chat.css" rel="stylesheet">
         <script type="module" src="/js/chat.js"></script>
     </th:block>
 	 -->
-	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-	
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
 
     <title>RIRO</title>
 
@@ -199,8 +199,7 @@
   <div th:replace="${content}"></div>  	
  
       <!-- Page Content -->
-    
-    <footer>
+    <!-- <footer>
         <div class="option">
             <a href="#">
                 <div>개인정보 취급정책</div>
@@ -212,10 +211,6 @@
                 <div>관리자</div>
             </a>
         </div>
-
-        <!-- <div class="min-address">
-            <div>2020 RIRO.com</div>
-        </div> -->
         <th:block sec:authorize="isAuthenticated()">
             <link href="/css/chat.css" rel="stylesheet">
             <script type="module" src="/js/chat.js"></script>
@@ -236,8 +231,7 @@
                     </form>
                 </div>
             </div >
-        </th:block>
-        
-    </footer>
+        </th:block>  
+    </footer> -->
 </body>
 </html>
