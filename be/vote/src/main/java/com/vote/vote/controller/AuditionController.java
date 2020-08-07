@@ -13,6 +13,7 @@ import com.vote.vote.repository.AuditionJpaRepository;
 import com.vote.vote.repository.AuditionOptionJpaRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.repository.ProgramJpaRepository;
 import com.vote.vote.repository.AuditionConJpaRepository;
 import com.vote.vote.service.StorageService;
 import org.springframework.security.core.Authentication;
@@ -55,6 +56,9 @@ public class AuditionController {
 	private ProgramManagerJpaRepository pmRepository;
 
 	@Autowired
+	private ProgramJpaRepository programRepository;
+
+	@Autowired
 	private AuditionOptionJpaRepository auditionOptionReopository;
 
 	@Autowired
@@ -74,7 +78,7 @@ public class AuditionController {
 		ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); 
-		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "auditionid"));
+		pageable = PageRequest.of(page, 8, Sort.by(Sort.Direction.DESC, "auditionid"));
 		// model.addAttribute("auditionlist", auditionRepository.findAll(pageable));
 		model.addAttribute("auditionlist", auditionRepository.findByProgramid(pManager.getProgramId(),pageable));
 		
@@ -122,7 +126,7 @@ public class AuditionController {
 	@GetMapping("/audition/read/{auditionid}")
 	public String read(Model model, @PathVariable int auditionid){
 		model.addAttribute("audition", auditionRepository.findByAuditionid(auditionid));
-		model.addAttribute("auditioncon", auditionConRepository.findByAuditionid(auditionid));
+		model.addAttribute("auditionCon", auditionConRepository.findByAuditionid(auditionid));
 		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		auditionRepository.save(audition);
@@ -156,7 +160,7 @@ public class AuditionController {
 
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
-		
+			Program program = programRepository.findById(pManager.getProgramId());
 		
 	// 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     //    CustomUserDetails sessionUser = (CustomUserDetails)principal;
@@ -165,6 +169,7 @@ public class AuditionController {
 			return "/audition/write";
 		} else if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
+			audition.setPimg(program.getImg());
 			audition.setRid(member.getNo());
 			audition.setProgramid(pManager.getProgramId());
 			audition.setAusername(member.getName());
@@ -179,6 +184,7 @@ public class AuditionController {
 			
             // 게시글저장
 //            audition.setStartdate(pm.getProgramId());
+			audition.setPimg(program.getImg());
 			audition.setRid(member.getNo());
 			audition.setAusername(member.getName());
 //            audience.setADate(new Date());

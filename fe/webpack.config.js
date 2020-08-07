@@ -88,7 +88,7 @@ module.exports = {
     // buyError: path.join(__dirname, "./app/shop/buyError.jsx"),
     // managerIndex: path.join(__dirname, "./app/riroIndex/managerIndex.jsx"),
     // userIndex: path.join(__dirname, "./app/riroIndex/userIndex.jsx"),
-    // myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
+    myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
 
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
 

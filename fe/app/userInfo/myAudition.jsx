@@ -53,21 +53,8 @@ class Index extends React.Component{
         return(
                 <div id="tablebox">
  
-                         <Paper >
-                            <Table size="small" id="myTable">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell className="smart">번호</TableCell>
-                                    <TableCell>Title</TableCell>
-                                    <TableCell className="smart">오디션 ID</TableCell>
-                                    <TableCell className="smart">신청일</TableCell>
-                                </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <MyAuditionList  data={this.state.auditionCon}/>    
-                                </TableBody>
-                            </Table>
-                        </Paper>
+                    <MyAuditionList  data={this.state.auditionCon}/>    
+
                     <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
 
 
@@ -89,12 +76,26 @@ class MyAuditionList extends React.Component {
         return  this.props.data.map((auditionCon,index)=>{
             var time = auditionCon.fdate.substr(0,10)
             return (
-                <TableRow key={'div'+index}>                 
-                <TableCell  className="smart">{auditionCon.formid}</TableCell>
-                <TableCell><a href={"/audition_con/show/"+auditionCon.formid}>{auditionCon.ftitle}</a></TableCell>
-                <TableCell className="smart">{auditionCon.auditionid}</TableCell>
-                <TableCell className="smart">{time}</TableCell>
-             </TableRow>
+                    <div className="card"  key={'div'+index}>
+                        <a href={"/audition_con/show/"+auditionCon.formid}>
+                        <div className="cardGridDiv event">
+                            <div className="cardImgDiv">
+                                <img className="cardImg" src={'/uploads/'+auditionCon.fprofile} />
+                            </div>
+                            <div className="ssss">
+                                <div>{auditionCon.ftitle}</div>
+                                <div>{time}</div>
+                            </div>
+                        </div>
+                        </a>
+		            </div>
+
+                // <TableRow key={'div'+index}>                 
+                // <TableCell  className="smart">{auditionCon.formid}</TableCell>
+                // <TableCell><a href={"/audition_con/show/"+auditionCon.formid}>{auditionCon.ftitle}</a></TableCell>
+                // <TableCell className="smart">{auditionCon.auditionid}</TableCell>
+                // <TableCell className="smart">{time}</TableCell>
+            //  </TableRow>
                
                )
             
