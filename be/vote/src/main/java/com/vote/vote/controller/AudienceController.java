@@ -97,7 +97,6 @@ public class AudienceController {
         this.audienceService = audienceService;
 
     }
-
     SimpleDateFormat format1 = new SimpleDateFormat("yy-MM-dd");
     SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
@@ -105,13 +104,13 @@ public class AudienceController {
     public String test2(Principal user) {
         return "audience/main";
     }
-
     // 리액트 -------------------------------------사용자
     // 모든프로그램 게시글 리스트 보기 + ajax
-    @RequestMapping(value = { "/audience/ulist2" })
+    @RequestMapping(value = { "/audience/ulist2", "/audience/uread"  })
     public String audienceAllList2() {
         return "audience/uList2";
     }
+    
 
     @GetMapping(value = { "/audience/axios", "/audience/list/axios" })
     @ResponseBody
@@ -169,7 +168,7 @@ public class AudienceController {
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
         model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
-
+        System.out.println(applyResultRepository.findByApplyId(applyId));
         return "audience/uRead";
     }
 
