@@ -104,28 +104,13 @@ public class AudienceController {
     SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
     
-    @RestController
-    @RequestMapping("/api")
-    public class TestController {
-    	
-    	@PostMapping("/ip")
-    	public ResponseEntity<String> ip (HttpServletRequest request) {
-    		// 요청을 보낸 클라이언트의 IP주소를 반환합니다.
-    		return ResponseEntity.ok(request.getRemoteAddr());
-    	}
-    }
-    @RequestMapping(value = { "/main" })
-    public String test2(Principal user) {
-        return "audience/main";
-    }
     // 리액트 -------------------------------------사용자
     // 모든프로그램 게시글 리스트 보기 + ajax
-    @RequestMapping(value = { "/audience/ulist2", "/audience/uread"  })
+    @RequestMapping(value = { "/audience/ulist2"  })
     public String audienceAllList2() {
         return "audience/uList2";
     }
     
-
     @GetMapping(value = { "/audience/axios", "/audience/list/axios" })
     @ResponseBody
     public JSONArray audienceAllListJson() {
@@ -163,6 +148,7 @@ public class AudienceController {
         return "audience/uRead2";
     }
 
+
     // -----------------------------------------사용자
     // 모든프로그램 게시글 리스트
     @GetMapping(value = { "/audience/", "/audience/list" })
@@ -176,13 +162,16 @@ public class AudienceController {
 
     // 게시글 보기
     @RequestMapping("/audience/read/{applyId}")
-    public String read(Model model, @PathVariable int applyId) {
+    public String read(Audience audience, Model model, @PathVariable int applyId) {
+        
+        System.out.println(audience.getApplyId());
         model.addAttribute("audience", audienceJpaRepository.findById(applyId));
-        Audience audience = audienceJpaRepository.findById(applyId);
+        audience = audienceJpaRepository.findById(applyId);
+        
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
         model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
-        System.out.println(applyResultRepository.findByApplyId(applyId));
+        // System.out.println(applyResultRepository.findByApplyId(applyId));
         return "audience/uRead";
     }
 
