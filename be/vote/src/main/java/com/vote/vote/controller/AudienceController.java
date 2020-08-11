@@ -100,22 +100,23 @@ public class AudienceController {
         this.audienceService = audienceService;
 
     }
+
     SimpleDateFormat format1 = new SimpleDateFormat("yy-MM-dd");
     SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-    
     // 리액트 -------------------------------------사용자
-    // 모든프로그램 게시글 리스트 보기 + ajax
-    @RequestMapping(value = { "/audience/ulist2"  })
+    // 해당프로그램 게시글 리스트 보기 + ajax
+    @RequestMapping(value = { "/audience/ulist2" })
     public String audienceAllList2() {
         return "audience/uList2";
     }
-    
-    @GetMapping(value = { "/audience/axios", "/audience/list/axios" })
+
+    @GetMapping(value = { "/audience/axios/{programId}", "/audience/list/axios/{programId}" })
     @ResponseBody
-    public JSONArray audienceAllListJson() {
+    public JSONArray audienceAllListJson(@PathVariable int programId) {
+
         JSONArray result = new JSONArray();
-        List<Audience> audienceList = audienceJpaRepository.findAll();
+        List<Audience> audienceList = audienceJpaRepository.findByprogramId(programId);
         Date time = new Date();
         for (Audience audience : audienceList) {
             JSONObject json = new JSONObject();
@@ -126,15 +127,15 @@ public class AudienceController {
             json.put("aViewCount", audience.getAViewCount());
             json.put("img", audience.getImg());
             json.put("aContent", audience.getAContent());
-            if(time.before(audience.getAStartdate())) {
-            	json.put("badge", "응모전");
-            	json.put("badgetheme", "warning");
-            } else if(time.before(audience.getAEnddate())){
-            	json.put("badge", "응모중");
-            	json.put("badgetheme", "info");
-            } else if(time.after(audience.getAEnddate())) {
-            	json.put("badge", "마감");
-            	json.put("badgetheme", "royal-blue");
+            if (time.before(audience.getAStartdate())) {
+                json.put("badge", "응모전");
+                json.put("badgetheme", "warning");
+            } else if (time.before(audience.getAEnddate())) {
+                json.put("badge", "응모중");
+                json.put("badgetheme", "info");
+            } else if (time.after(audience.getAEnddate())) {
+                json.put("badge", "마감");
+                json.put("badgetheme", "royal-blue");
             }
 
             json.put("aStartDate", audience.getAStartdate());
@@ -147,7 +148,6 @@ public class AudienceController {
     public String test(Principal user) {
         return "audience/uRead2";
     }
-
 
     // -----------------------------------------사용자
     // 모든프로그램 게시글 리스트
@@ -163,34 +163,39 @@ public class AudienceController {
     // 게시글 보기
     @RequestMapping("/audience/read/{applyId}")
     public String read(Audience audience, Model model, @PathVariable int applyId) {
-        
+
         System.out.println(audience.getApplyId());
+        System.out.println(audience.getALimit());
+        System.out.println(audience.getAContent());
+        System.out.println(audience.getAPrice());
+        System.out.println(audience.getProgramId());
         model.addAttribute("audience", audienceJpaRepository.findById(applyId));
         audience = audienceJpaRepository.findById(applyId);
-        
+
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
         model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
-        // System.out.println(applyResultRepository.findByApplyId(applyId));
+
         return "audience/uRead";
     }
 
     // 응모 ajax
     @GetMapping("/audience/apply/{applyId}/{aLimit}/{aPrice}")
     @ResponseBody
-    public String result(Audience audience, @PathVariable int applyId, @PathVariable int aLimit, @PathVariable int aPrice,Principal principal, ADetail aDetail) {
+    public String result(Audience audience, @PathVariable int applyId, @PathVariable int aLimit,
+            @PathVariable int aPrice, Principal principal, ADetail aDetail) {
         Member member = memberRepository.findByUserid(principal.getName());
         System.out.println(applyId);
         System.out.println(aPrice);
         System.out.println(aLimit);
         Audience audi = audienceJpaRepository.findById(applyId);
-        
+
         if (audi.getResult() == 1)
             return "이미 추첨이 완료된 응모입니다.";
-      
+
         // aDetaiId.setApplyId(audience.getApplyId());
         // aDetaiId.setRId(member.getNo());
-        // aDetail.setADetaiId(aDetaiId); 
+        // aDetail.setADetaiId(aDetaiId);
         if (member.getPoint() < aPrice) {
             return "포인트가 부족합니다.";
         } else if (aDetailRepository.countByApplyIdAndRId(applyId, member.getNo()) == aLimit) {
@@ -216,7 +221,7 @@ public class AudienceController {
     public String confirm(Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String name = userDetails.getName();
-        
+
         if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
             return name + "님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
         }
@@ -232,37 +237,36 @@ public class AudienceController {
     }
 
     @PostMapping("/audience/create")
-    public String mUpload(@Valid Audience audience, SessionStatus sessionStatus,
-            Principal principal, Model model, RedirectAttributes redirAttrs,
-            @RequestParam(name = "filename") MultipartFile filename) {
-//        if (bindingResult.hasErrors()) {
-//            System.out.println("바인딩에러");
-//            return "audience/mCreate";
-//        } else {
+    public String mUpload(@Valid Audience audience, SessionStatus sessionStatus, Principal principal, Model model,
+            RedirectAttributes redirAttrs, @RequestParam(name = "filename") MultipartFile filename) {
+        // if (bindingResult.hasErrors()) {
+        // System.out.println("바인딩에러");
+        // return "audience/mCreate";
+        // } else {
 
-            // Rfile rfile = new Rfile();
-            // String filenamePath = StringUtils.cleanPath(filename.getOriginalFilename());
-            Member member = memberRepository.findByUserid(principal.getName());
-            ProgramManager pm = pmRepository.findById(member.getNo());
+        // Rfile rfile = new Rfile();
+        // String filenamePath = StringUtils.cleanPath(filename.getOriginalFilename());
+        Member member = memberRepository.findByUserid(principal.getName());
+        ProgramManager pm = pmRepository.findById(member.getNo());
 
-            // 게시글저장
-            audience.setProgramId(pm.getProgramId());
-            audience.setRId(member.getNo());
-            audience.setADate(new Date());
-            audience.setImg(storageService.store2(filename));
-            audienceJpaRepository.saveAndFlush(audience);
+        // 게시글저장
+        audience.setProgramId(pm.getProgramId());
+        audience.setRId(member.getNo());
+        audience.setADate(new Date());
+        audience.setImg(storageService.store2(filename));
+        audienceJpaRepository.saveAndFlush(audience);
 
-            // 파일 저장
+        // 파일 저장
 
-            storageService.store2(filename);
+        storageService.store2(filename);
 
-            // rfile.setApplyid(audience.getApplyId());
-            // rfile.setFilename(filenamePath);
-            // rfileRepository.saveAndFlush(rfile);
-            // sessionStatus.setComplete();
-            System.out.println("게시글업로드완료");
-            return "redirect:/userInfo/audience/mlist";
-//        }
+        // rfile.setApplyid(audience.getApplyId());
+        // rfile.setFilename(filenamePath);
+        // rfileRepository.saveAndFlush(rfile);
+        // sessionStatus.setComplete();
+        System.out.println("게시글업로드완료");
+        return "redirect:/userInfo/audience/mlist";
+        // }
     }
 
     // 게시글 삭제
