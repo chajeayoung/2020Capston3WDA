@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="/css/featherlight.css">
     <link rel="stylesheet" href="/css/moblie.css">
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
+
+
 </head>
 
 <body>
@@ -68,15 +71,15 @@
 
                             <u>
                                 <span><span class="sv_member" th:text="${list.rId}"></span></span>
-                                <span th:text="${list.aViewCount}"><i class="fa fa-eye"></i> </span>
-                                <span th:text="${list.aDate}"><i class="fa fa-clock-o"></i> </span>
+                                <i class="fa fa-eye"></i><span th:text="${list.aViewCount}"> </span>
+                                <i class="fa fa-clock-o"></i><span th:text="${#dates.format(list.aDate, 'yyyy-MM-dd HH:mm')}"></i> </span>
                             </u>
                         </li>
                     
                     </ul>
                 </div>
 
-            </form>
+              
 
             <!-- 게시판 검색 시작 { -->
             <fieldset id="bo_sch">
@@ -101,7 +104,13 @@
                     <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search"
                             aria-hidden="true"></i><span class="sound_only">검색</span></button>
                 </form>
+
+              
             </fieldset>
+            <div class="bo_fx">
+                <a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
+                                aria-hidden="true"></i> 글쓰기</a>
+            </div>
             <!-- } 게시판 검색 끝 -->
         </div>
 
@@ -156,10 +165,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="bo_fx">
-            <a href="/audience/create" class="btn_b02 btn"><i class="fa fa-pencil"
-                            aria-hidden="true"></i> 글쓰기</a>
-        </div>
+        
         <!-- } 게시판 목록 끝 -->
 
 

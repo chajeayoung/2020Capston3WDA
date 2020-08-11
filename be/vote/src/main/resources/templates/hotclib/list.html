@@ -11,60 +11,48 @@
 
 <body>
 	<content>
-  	<style>
-.gi {
-	border: 1px solid #ccc;
-	padding: 5px;
-	width: 250px;
-	height: 250px;
-	margin: 10px;
-	display: inline-block;
-	text-align: left;
-}
 
-</style>
 	<!--  <div id="hotclib"></div>
     <script src="/assets/hotclib.js"></script> -->
+    <link rel="stylesheet" href="/css/hotcliblist.css"/>
 
+	<section class="backim">
 
-	<section>
-	
-	<a href="" class="btn btn-lg btn-primary"
+	<a href="" class="riro"
 				th:href="@{'/community/'+${programid}+'/hotclib/sorthviewcount'}">조회순</a>
-			<a href="" class="btn btn-lg btn-primary"
+			<a href="" class="riro"
 				th:href="@{'/community/'+${programid}+'/hotclib/sorthdate'}">최신순</a>
 		
 		<form
 			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
 			method="get">
 			<div class="search">
-				<input name="keyword" type="text" placeholder="제목을 입력해주세요">
-				<button>검색</button>
+				<input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+				<button class="btn btn-default">Search</button>
 			</div>
 		</form>
 
 		<div class="gi" th:each="hotclib:${hotclibList}">
-			<a href=""
+			<div><a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
-				<img class="hi" width="250" height="250"
-				th:src="@{'/uploads/' + ${hotclib.filename2}}">
+				<img class="hi" width="300" height="300"
+				th:src="@{'/uploads/' + ${hotclib.filename2}}"></div>
 
 
-				<div>
-					게시물번호: <span th:utext="${hotclib.hotclibid}"></span>
-				</div>
-				<div>
-					제목: <span th:utext="${hotclib.htitle}"> (<span
+				
+				<div class="foncolor">
+					 <h1 th:utext="${hotclib.htitle}" style="margin: 5px;"></h1> (<span
 						style="color: red;" th:text="${hotclib.hreplycount}"></span>)
 				</div>
-				<div>
-					작성일: <span th:utext="${hotclib.hdate}"></span>
-				</div>
-				<div>
+				
+				<div class="foncolor">
 					조회수: <span th:utext="${hotclib.hviewcount}"></span>
 				</div>
-				<div>
+				<div class="foncolor">
 					작성자: <span th:utext="${hotclib.husername}"></span>
+                </div>
+                <div class="foncolor">
+					작성일: <span th:utext="${hotclib.hdate}"></span>
 				</div>
 			</a>
 		</div>
@@ -73,7 +61,7 @@
 			<a sec:authorize="hasAnyAuthority('2')" href="" class="btn btn-lg btn-primary"
 				th:href="@{'/community/'+${programid}+'/hotclib/upload'}">영상업로드</a>
 		</div> -->
-	</section>
+	
 <nav style="text-align: center;">
     <ul class="pagination">
         <li class="disabled">
@@ -103,7 +91,7 @@
         </li>
     </ul>
 </nav>
-
+</section>
 	   <!-- <nav style="text-align: center;">
     <ul class="pagination"
      th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},

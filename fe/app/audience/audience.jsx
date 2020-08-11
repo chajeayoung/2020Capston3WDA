@@ -18,7 +18,6 @@ class Audience extends React.Component {
       <React.Fragment>
         <Switch>
           <Route exact path="/audience/ulist2"><Ulist></Ulist></Route>
-          <Route exact path="/audience/uread"><Uread2></Uread2></Route>
         </Switch>
       </React.Fragment>
     );
