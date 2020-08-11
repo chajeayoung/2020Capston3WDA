@@ -61,7 +61,10 @@ public class Audition {
 	    private Integer rid;
 
 	    @Column(nullable=true,name="a_file")
-	    private String afile;
+		private String afile;
+		
+		@Column(nullable=true,name="p_img")
+	    private String pimg;
 		
 
 		public int getAuditionid() {
@@ -154,6 +157,14 @@ public class Audition {
 
 		public void setAfile(String afile) {
 			this.afile = afile;
+		}
+
+		public String getPimg() {
+			return pimg;
+		}
+
+		public void setPimg(String pimg) {
+			this.pimg = pimg;
 		}
 
 		public String toString() {

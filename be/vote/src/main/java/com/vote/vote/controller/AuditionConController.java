@@ -111,6 +111,7 @@ public class AuditionConController {
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "formid"));
 		// model.addAttribute("auditionconlist", auditionConRepository.findAll(pageable));
 		model.addAttribute("auditionconlist", auditionConRepository.findByProgramid(pManager.getProgramId(),pageable));
+		
 		return "/audition_con/list";
 	}
 
