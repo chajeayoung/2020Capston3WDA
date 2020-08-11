@@ -84,7 +84,7 @@ class Index extends Component {
         console.log(this.state)
     }
 
-    setUrl(){// 인기인 페이징
+    setUrl(){// 출연자 페이징
         this.url = '/community/'+param+'/popular/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
 
     }

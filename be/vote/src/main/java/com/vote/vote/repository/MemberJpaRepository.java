@@ -20,18 +20,18 @@ public interface MemberJpaRepository extends JpaRepository<Member, String> {
 	@Modifying
 	@Transactional
 	@Query("update Member set userpw = :password, username = :name, gender = :gender, birth = :birth,"
-			+ "nickname = :nickname, addr = :addr, addr2 = :addr2 , profile = :profile where r_id = :rid ")
+			+ "nickname = :nickname, addr = :addr, addr2 = :addr2 , profile = :profile , phone = :phone where r_id = :rid")
 	void userUpdate(@Param("password") String password, @Param("name") String name, @Param("gender") String gender,
 			@Param("birth") String birth, @Param("nickname") String nickname, @Param("addr") String addr,
-			@Param("addr2") String addr2, @Param("profile") String profile, @Param("rid") int rid);
+			@Param("addr2") String addr2, @Param("profile") String profile,@Param("phone") String phone, @Param("rid") int rid);
 
 	@Modifying
 	@Transactional
 	@Query("update Member set userpw = :password, username = :name, gender = :gender, birth = :birth,"
-			+ "nickname = :nickname, addr = :addr, addr2 = :addr2  where r_id = :rid ")
+			+ "nickname = :nickname, addr = :addr, addr2 = :addr2, phone = :phone  where r_id = :rid ")
 	void kakaoUpdate(@Param("password") String password, @Param("name") String name, @Param("gender") String gender,
 			@Param("birth") String birth, @Param("nickname") String nickname, @Param("addr") String addr,
-			@Param("addr2") String addr2, @Param("rid") int rid);
+			@Param("addr2") String addr2,@Param("phone") String phone, @Param("rid") int rid);
 
 	@Modifying
 	@Transactional
