@@ -11,79 +11,63 @@
 </head>
 
 <body>
-	<content>
-	<!--  --><style>
-.gi {
-	border: 1px solid #ccc;
-	padding: 5px;
-	width: 250px;
-	height: 250px;
-	margin: 10px;
-	display: inline-block;
-	text-align: left;
-}
-
-.qi{
-font-size: 1.3em;
-  text-align: center;
-}
-</style>
+	<content >
+	<link rel="stylesheet" href="/css/hotcliblist.css"/>
+	
 	<!--  <div id="hotclib"></div>
     <script src="/assets/hotclib.js"></script> -->
 
 
+    <section class="backim">
 	
-	
-	<a href="" class="btn btn-lg btn-primary"
+	<a href="" class="riro"
 				th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
-			<a href="" class="btn btn-lg btn-primary"
+			<a href="" class="riro"
 				th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
 		
 		<form
 			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
 			method="get">
 			<div class="search">
-				<input name="keyword" type="text" placeholder="제목을 입력해주세요">
-				<button>검색</button>
+				<input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+				<button class="btn btn-default">Search</button>
 			</div>
 		</form>
 
 		<div class="gi" th:each="hotclib:${hotclibList}">
-			<a href=""
+		<div>	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
-				<img class="hi" width="250" height="250"
+				<img class="hi" width="300" height="300"
 				th:src="@{'/uploads/' + ${hotclib.filename2}}">
+</div>
 
-
-				<div>
-					게시물번호: <span class="qi" th:utext="${hotclib.hotclibid}"></span>
-				</div>
-				<div>
-					제목: <span class="qi" th:utext="${hotclib.htitle}"> (<span
+				
+				<div class="foncolor">
+					 <h1 class="foncolor" th:utext="${hotclib.htitle}"></h1> (<span
 						style="color: red;" th:text="${hotclib.hreplycount}"></span>)
 				</div>
-				<div>
-					작성일: <span class="qi" th:utext="${hotclib.hdate}"></span>
+				<div class="foncolor">
+					 <span class="qi" th:utext="${hotclib.hdate}"></span>
 				</div>
-				<div>
+				<div class="foncolor">
 					조회수: <span class="qi" th:utext="${hotclib.hviewcount}"></span>
 				</div>
-				<div>
+				<div class="foncolor">
 					작성자: <span class="qi" th:utext="${hotclib.husername}"></span>	
 				</div>
 				
 			</a>
-         <a class="btn btn-lg btn-primary" sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a>
-			
-			<form  id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
+         
+			<a class="bye" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}"><span>수정</span></a>
+			<form style="display: inline;"  id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
 				<input type="hidden" name="_method" value="delete"/>
-				<button class="btn btn-lg btn-primary" sec:authorize="hasAnyAuthority('2')" id="delete-btn">삭제</button>
+				<button class="hello" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" id="delete-btn"><span>삭제</span></button>
 			</form>
 		</div>
 
 
 		<div>
-			<a sec:authorize="hasAnyAuthority('2')" href="" class="btn btn-lg btn-primary"
+			<a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
 				th:href="@{'/community/hotclib/upload'}">영상업로드</a>
 		</div>
 	
@@ -117,6 +101,7 @@ font-size: 1.3em;
         </li>
     </ul>
 </nav>
+</section>
 	      <!--  <nav style="text-align: center;">
     <ul class="pagination"
      th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
