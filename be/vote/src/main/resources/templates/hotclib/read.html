@@ -13,7 +13,7 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 	 <link rel="stylesheet" href="/css/hotclibread.css"/>
 
 	
-	<h1> <div th:utext="${hotclib.htitle}"></div></h1>
+	<h1> <strong><div th:utext="${hotclib.htitle}"></div></h1></strong>
 		<tr>		
 		<video class="video1" controls th:src="@{'/uploads/' + ${rfile.filename}}" width="1200" height="400"></video>
 			
@@ -67,7 +67,7 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 	
 
 
-	<div th:each="reply:${replyList}" varStatus="vs" style="border-style: inset">
+	<div class="reply" th:each="reply:${replyList}" varStatus="vs" >
 		
 			
 			<div>
@@ -76,17 +76,22 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 				<div>내용 : <span th:text="${reply.r_content}"></span></div>
 				<div>작성일자 : <span th:text="${reply.r_date}"></span></div>	
 			</div>
-					<span>
+					<div id="sd">
 						<form id="replydelete-form"  method="post" th:action="@{'/community/'+${hotclib.programid} +'/hotclib/read/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">						
-							<input type="hidden" name="_method" value="replydelete"/>
-							<button class="ruro" id="replydelete"><span>댓글삭제</span></button>
+							<ul id="sad">
+							<li><input type="hidden" name="_method" value="replydelete"/></li>
+							<li><button class="ruro" id="replydelete">댓글삭제</button></li>
+							<li><div class="root" ${vs.index}>
+								<button style="display:inline"class="roro" type="button" data-rno="${replyList.replyid}"  id="1btn"><span>댓글수정</span></button>
+								
+								</div></li>
+						</ul>
 						</form>
-					</span>
-					<div id="root" ${vs.index}>
-						<button style="display:inline"class="roro" type="button" data-rno="${replyList.replyid}"  id="1btn"><span>댓글수정</span></button>
 						
-						</div>
-						<div id="modal">
+					
+					
+					</div>
+						<div class="modal">
 							<form  method="POST" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
 							<div class="modal_content">									
 								<h5>댓글수정 하세요</h5>
@@ -111,13 +116,13 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
  //    $("#2btn").click(function(){
  //       $("#modal[vs.index]").fadeOut(500);
  //   });      
-     
-     $("#1btn").click(function(){
-         $("#modal").attr("style", "display:block");
+	 
+     $(".roro").click(function(){
+         $(".modal").attr("style", "display:block");
      });
     
-      $("#2btn").click(function(){
-         $("#modal").attr("style", "display:none");
+      $(".riro").click(function(){
+         $(".modal").attr("style", "display:none");
      });   
          
 </script>

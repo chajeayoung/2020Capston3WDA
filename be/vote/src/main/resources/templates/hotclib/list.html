@@ -62,35 +62,26 @@
 				th:href="@{'/community/'+${programid}+'/hotclib/upload'}">영상업로드</a>
 		</div> -->
 	
-<nav style="text-align: center;">
-    <ul class="pagination">
-        <li class="disabled">
-            <a href="#" aria-label="First">
-                <span aria-hidden="true">First</span>
-            </a>
-        </li>
-        <li class="disabled">
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&lt;</span>
-            </a>
-        </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&gt;</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" aria-label="Last">
-                <span aria-hidden="true">Last</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+    </br>
+</br>
+</br>
+  <form style="display: inline-block;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
+    <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+    <button class="btn btn-default">Search</button>
+  </form>
+  
+
+  <div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#">1</a>
+    <a href="#" class="active">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">&raquo;</a>
+  </div>
+
 </section>
 	   <!-- <nav style="text-align: center;">
     <ul class="pagination"

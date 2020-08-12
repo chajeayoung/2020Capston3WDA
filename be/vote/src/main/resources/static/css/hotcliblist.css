@@ -13,7 +13,7 @@
 	display: inline-block;
 	text-align: left;
   border: solid;
-  border-color: wheat;
+  border-color: #5F6368;;
 	
 }
 
@@ -25,7 +25,7 @@ font-size: 1.3em;
   width: 70px;
   display: inline-block;
   border-radius: 10px;
-  background-color:#e16565;
+  background-color:#8b6d6d5c;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -102,6 +102,7 @@ font-size: 1.3em;
 }
 
 .riro{
+  margin: 10px;
   background: #8965a778;
   color:#fff;
   border:none;
@@ -143,7 +144,9 @@ font-size: 1.3em;
   letter-spacing: 1px;
 }
 .hull {
-  margin: 10px;
+  
+  width: 200px;
+  margin: 20px;
   padding: 10px;
   line-height: 1.5;
   border-radius: 5px;
@@ -190,14 +193,15 @@ font-size: 1.3em;
 }
 
 .backim{
-  background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 25, 0, 0.5));
+  /* background-image: linear-gradient(rgb(112 112 211 / 50%), rgba(204, 186, 183, 0.5)); */
+  /* background-image: linear-gradient(to left,rgba(71,51, 153, 0.2), rgba(255, 255, 255, 1)); */
   /* background-image: url( "/uploads/halhal.png" ); */
-  background-size: 300px;
+  /* background-size: 500px; */
   
 }
 
 .foncolor{
-  color: white;
+  color: #5F6368;
 }
 
 .upl{
@@ -237,4 +241,30 @@ font-size: 1.3em;
 .upl:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
+}
+
+.pagination {
+  display: inline-block;
+  display: inline-flex;
+}
+
+.pagination a {
+  
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  
+  background-color: #c97a1270;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  
+  background-color: #ddd;
+  border-radius: 5px;
 }
