@@ -20,19 +20,17 @@
 
     <section class="backim">
 	
-	<a href="" class="riro"
-				th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
-			<a href="" class="riro"
-				th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      <a href="" class="riro" 
+      th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
+      <a href="" class="riro"
+      th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      <div>
+        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
+          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
+      </div>
+    
 		
-		<form
-			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
-			method="get">
-			<div class="search">
-				<input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
-				<button class="btn btn-default">Search</button>
-			</div>
-		</form>
+		
 
 		<div class="gi" th:each="hotclib:${hotclibList}">
 		<div>	<a href=""
@@ -43,8 +41,8 @@
 
 				
 				<div class="foncolor">
-					 <h1 class="foncolor" th:utext="${hotclib.htitle}"></h1> (<span
-						style="color: red;" th:text="${hotclib.hreplycount}"></span>)
+					 <h1><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
+						style="color: red;" th:text="${hotclib.hreplycount}"></span>)</h1>
 				</div>
 				<div class="foncolor">
 					 <span class="qi" th:utext="${hotclib.hdate}"></span>
@@ -63,44 +61,28 @@
 				<input type="hidden" name="_method" value="delete"/>
 				<button class="hello" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" id="delete-btn"><span>삭제</span></button>
 			</form>
-		</div>
+    </div>
+  </br>
+  </br>
+  </br>
+    <form style="display: inline-block;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
+      <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+      <button class="btn btn-default">Search</button>
+    </form>
+    
 
+    <div class="pagination">
+      <a href="#">&laquo;</a>
+      <a href="#">1</a>
+      <a href="#" class="active">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">&raquo;</a>
+    </div>
 
-		<div>
-			<a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
-				th:href="@{'/community/hotclib/upload'}">영상업로드</a>
-		</div>
-	
-
-  <nav style="text-align: center;">
-    <ul class="pagination">
-        <li class="disabled">
-            <a href="#" aria-label="First">
-                <span aria-hidden="true">First</span>
-            </a>
-        </li>
-        <li class="disabled">
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&lt;</span>
-            </a>
-        </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&gt;</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" aria-label="Last">
-                <span aria-hidden="true">Last</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+   
 </section>
 	      <!--  <nav style="text-align: center;">
     <ul class="pagination"
