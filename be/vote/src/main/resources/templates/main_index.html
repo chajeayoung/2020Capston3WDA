@@ -37,7 +37,7 @@
                     <a href="/userInfo">내 정보 및 관리 </a>&nbsp;
                     <input type="submit" value="로그아웃" id="logoutButton"/>                    
                 </form>
-          		  <link rel="stylesheet" href="/css/afterLogin.css">
+                  <link rel="stylesheet" href="/css/afterLogin.css">
    
             </th:block>
 
@@ -137,7 +137,7 @@
                         <div>투표</div>
                     </a>
                     
-					<a href="/community">
+               <a href="/community">
                         <div>커뮤니티</div>
                     </a>
  
@@ -195,76 +195,76 @@
                 </div>
 
                 <div th:case="1">
-						관리자
+                  관리자
                 </div>
 
                 <div th:case="2" id="rirodiv">
                 <div>
                 <hr>
                 <h2>오디션 모집현황</h2>
-          					
-          		<table class="table table-striped table-sm">
-					<thead>
-						<tr>
-						
-									<th>글 번호</th>
-									<th>제목</th>
-									<th class="t23">분야</th>
-									<th class="t23">모집시작일</th>
-									<th class="t23">모집종료일</th>
-									<th class="t23">모집인원</th>
-									<th class="t23">발표일</th>
+                         
+                <table class="table table-striped table-sm">
+               <thead>
+                  <tr>
+                  
+                           <th>글 번호</th>
+                           <th>제목</th>
+                           <th class="t23">분야</th>
+                           <th class="t23">모집시작일</th>
+                           <th class="t23">모집종료일</th>
+                           <th class="t23">모집인원</th>
+                           <th class="t23">발표일</th>
 
-						</tr>
-					</thead>
-					<tbody>
-									<tr th:each="audition:${auditionlist}">
-									<td th:text="${audition.auditionid}"></td>
-									<!--  <td th:text="${audition.a_title}"></td> -->
-									<td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
-									<td class="t23" th:text="${audition.acategory}"></td>
-									<td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
-									<td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
-									<td class="t23" th:text="${audition.arecruits}+ 명"></td>
-									<td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
-			
-								</tr>						
-					</tbody>
-								
-					</table> 
-					
-					<input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition/list'"/>	
-							
-					<hr>
-				<h2>오디션 심사현황</h2>		
-				
-				<table class="table table-striped table-sm">
-					<thead>
-								<tr>														
-									<th>글번호</th>
-									<th>제목</th>
-									<th>신청자</th>
-									<th class="t23">접수일</th>
-									<th>심사상태</th>
-								</tr>
-					</thead>
-					<tbody>
-							<tr th:each="auditionCon:${auditionconlist}">
-								<td th:text="${auditionCon.formid}"></td>
-								<td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
-								<!-- <td th:text="${auditionCon.fname}"></td> -->
-								<td><span th:text="${auditionCon.username}"></span><span>님</span></td>
-								<td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td>
-								<td th:text="${auditionCon.confirm}"></td>
-							</tr>
-					</tbody>	
-				</table>
-				</div>    
-				<input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition_con/list'"/>	
-				<hr>			
+                  </tr>
+               </thead>
+               <tbody>
+                           <tr th:each="audition:${auditionlist}">
+                           <td th:text="${audition.auditionid}"></td>
+                           <!--  <td th:text="${audition.a_title}"></td> -->
+                           <td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
+                           <td class="t23" th:text="${audition.acategory}"></td>
+                           <td class="t23" th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
+                           <td class="t23" th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
+                           <td class="t23" th:text="${audition.arecruits}+ 명"></td>
+                           <td class="t23" th:text="${#dates.format(audition.aissue, 'yyyy-MM-dd')}"></td>
+         
+                        </tr>                  
+               </tbody>
+                        
+               </table> 
+               
+               <input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition/list'"/>   
+                     
+               <hr>
+            <h2>오디션 심사현황</h2>      
+            
+            <table class="table table-striped table-sm">
+               <thead>
+                        <tr>                                          
+                           <th>글번호</th>
+                           <th>제목</th>
+                           <th>신청자</th>
+                           <th class="t23">접수일</th>
+                           <th>심사상태</th>
+                        </tr>
+               </thead>
+               <tbody>
+                     <tr th:each="auditionCon:${auditionconlist}">
+                        <td th:text="${auditionCon.formid}"></td>
+                        <td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
+                        <!-- <td th:text="${auditionCon.fname}"></td> -->
+                        <td><span th:text="${auditionCon.username}"></span><span>님</span></td>
+                        <td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${auditionCon.confirm}"></td>
+                     </tr>
+               </tbody>   
+            </table>
+            </div>    
+            <input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition_con/list'"/>   
+            <hr>         
 
                 <div id="managerIndex"></div> 
-               
+                <input class="btn btn-warning center" type="button" value="더보기" onclick="location.href='/audition/list'"/>   
                 <hr>
                     <script src="/assets/managerIndex.js"></script>
                  </div>
@@ -294,6 +294,8 @@
         <div class="min-address">
             <div>2020 RIRO.com</div>
         </div>
+
+        
     </footer>
 </body>
 </html>
