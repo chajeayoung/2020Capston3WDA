@@ -117,7 +117,7 @@ class Index extends Component {
     }
 
     goUrl() {
-        location.href = `/audience/ulist2/${param}`;
+        location.href = `/audience/ulist2?programId=${param}`;
     }
     render() {
 

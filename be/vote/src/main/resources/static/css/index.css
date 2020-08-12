@@ -262,7 +262,7 @@ contents div.contents{
 
 .haveProgram{text-align: center;}  
 *, *:before, *:after {
-    box-sizing: content-box !important;
+    box-sizing: content-box ;
 }
 /* 모바일 사이드바 */
 #mobileSidBarButton{

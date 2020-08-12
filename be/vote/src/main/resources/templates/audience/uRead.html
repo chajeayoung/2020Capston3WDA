@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/board.common.css">
     <link rel="stylesheet" href="/css/featherlight.css">
-    <link rel="stylesheet" href="/css/moblie.css">
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/uRead.js"></script>
@@ -66,13 +65,14 @@
                 <!-- 타이머 시작 -->
                 <div class="timer">
                     <h1 id="timer__title">응모종료까지 남은 시간</h1>
-                    <ul id="timer__ul">
-                      <li><span id="days"></span>일</li>
-                      <li><span id="hours"></span>시간</li>
-                      <li><span id="minutes"></span>분</li>
-                      <li><span id="seconds"></span>초</li>
-                    </ul>
+                    <div id="timer__ul">
+                        <div><span id="days" class="days"></span><div class="smalltext">Days</div></div>
+                        <div><span id="hours"class="hours"></span><div class="smalltext">Hours</div></div>
+                        <div><span id="minutes"class="minutes"></span><div class="smalltext">Minutes</div></div>
+                        <div><span id="seconds"class="seconds"></span><div class="smalltext">Seconds</div></div>
+                    </div>
                   </div>
+                  
                   <!-- 타이머 끝 -->
                 <form style="text-align: -webkit-center">
                     <!-- <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}"> -->

@@ -29,10 +29,10 @@ main {
 {
     padding-left: 15px !important;
 } */
-*, ::after, ::before{
+/* *, ::after, ::before{
     webkit-box-sizing: unset !important;
     box-sizing: unset !important;
-}
+} */
 .top_div a:focus,.top_div a:hover{
     color : white !important;
 }
