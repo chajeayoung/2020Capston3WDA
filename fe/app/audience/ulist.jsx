@@ -22,18 +22,22 @@ import MainFooter from "./src/components/layout/MainFooter";
 const axios = require("axios");
 const regeneratorRuntime = require("regenerator-runtime");
 
+
 export default class Ulist extends React.Component {
+
 
 
     constructor(props) {
         super(props);
-        this.state = { audiences: [], pageSize: 8, itemsCount: "", currentPage: 1, postsListOne: [], role: "" };
+        this.state = { audiences: [], pageSize: 8, itemsCount: "", currentPage: 1, postsListOne: [], role: "", programId: "" };
+
+
     }
 
     //클래스 생성 시 최초에 한번만.. 이후 state 수정되면 바꾼 state 값으로 render만 호출
     async componentDidMount() {
 
-        let { data } = await axios.get("/audience/list/axios");
+        let { data } = await axios.get(`/audience/list/axios/${this.getParams(window.location.href).programId}`);
         this.setState({
             audiences: data,
             itemsCount: data.length,
@@ -47,14 +51,33 @@ export default class Ulist extends React.Component {
         this.setState({ currentPage: page });
     }
 
+
+
+    getParams(url) {
+        const params = {};
+        const parser = document.createElement('a');
+        parser.href = url;
+        const query = parser.search.substring(1);
+        const vars = query.split('&');
+        for (let i = 0; i < vars.length; i++) {
+            const pair = vars[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+    };
+
+
     render() {
 
         const { pageSize, itemsCount, currentPage } = this.state;
         const { length: count } = this.state.audiences;
         const audiences = paginate(this.state.audiences, currentPage, pageSize);
 
+
+
         return (
             <React.Fragment>
+
                 <Container fluid className="main-content-container px-4">
                     {/* Page Header */}
                     <Row noGutters className="page-header py-4">
@@ -84,7 +107,7 @@ export default class Ulist extends React.Component {
                                                 {post.aTitle}
                                             </a>
                                         </h5>
-                                        <p className="card-text d-inline-block mb-3">{post.aContent}</p>
+
                                         <p className="text-muted">{post.aDate}</p>
                                     </CardBody>
                                 </Card>

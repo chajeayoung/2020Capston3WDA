@@ -17,3 +17,149 @@
 #modal{
     display: none;
 }
+
+.koko {
+	margin:15px;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #0ED36D;
+    padding: 8px 30px;
+    font-size: 15px;
+    border: 1px solid #2d6898;
+}
+
+.roro{
+  background:#EFD73C;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:15px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.roro:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.roro:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.roro:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.roro:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.ruro{
+  background:#06c4f3;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:15px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.ruro:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.ruro:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.ruro:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.ruro:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+.riro{
+  border-radius: 10px;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:15px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  height: 38px;
+}
+.riro:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.riro:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.riro:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.riro:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+.hull {
+    font-size: .8rem;
+    letter-spacing: 1px;
+}
+.hull {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+}
+
+.backim{
+  background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 25, 0, 0.5));
+  /* background-image: url( "/uploads/halhal.png" ); */
+  background-size: 300px;
+  
+}

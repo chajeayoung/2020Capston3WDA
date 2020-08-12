@@ -11,7 +11,7 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
     <script src="/assets/hotclibupload.js"></script> --> 
     
     
-       <link rel="stylesheet" href="/css/hotclibupload.css"/>
+       <link rel="stylesheet" href="/css/hotclibread.css"/>
         <form th:action="@{'/community/hotclib/upload' }" method="post" enctype="multipart/form-data">                
           <div>
             <tr>
@@ -42,8 +42,8 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
               영상선택<input type="file" name="filename" id="filename" capture="camera" onchange="setFilename(event);" required/>
              <div id ='preview2'></div>
                <div class="form">  
-                  <input type="submit" value="등록">
-                  <input type="reset" value="취소" onclick="history.back();">                    
+                  <input class="riro" type="submit" value="등록">
+                  <input class="ruro" type="reset" value="취소" onclick="history.back();">                    
          </div>
         </form>
         <script> 
