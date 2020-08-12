@@ -202,7 +202,7 @@ public class UserInfoController {
 	    
 	    	
 		 	memberRepository.userUpdate(cc.getPassword(), cc.getName(), cc.getGender(), cc.getBirth(), 
-			 			cc.getNickname(), cc.getAddr(), cc.getAddr2(),thumbnailPath, cc.getNo());
+			 			cc.getNickname(), cc.getAddr(), cc.getAddr2(),thumbnailPath, cc.getPhone(), cc.getNo());
 
 //	 	memberRepository.saveAndFlush(cc);
 

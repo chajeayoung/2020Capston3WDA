@@ -90,6 +90,7 @@ module.exports = {
     userIndex: path.join(__dirname, "./app/riroIndex/userIndex.jsx"),
     myAudition: path.join(__dirname, "./app/userInfo/myAudition.jsx"),
 
+
     audience: path.join(__dirname, "./app/audience/audience.jsx"),
 
     hotclib: path.join(__dirname, "./app/hotclib/hotclib.jsx"),
