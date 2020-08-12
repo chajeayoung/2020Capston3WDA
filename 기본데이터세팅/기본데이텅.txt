@@ -65,14 +65,14 @@
 
 
 -- 유저
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (22,'Show','1234','김쇼미','0',to_date('19/01/07','RR/MM/DD'),'쇼미관리자','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'2');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE,profile) values (2,'Mnet','1234','Mnet','0',to_date('20/08/03','RR/MM/DD'),'프듀관리자','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'2','/uploads/프로듀스48.png');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE,profile) values (21,'1357585315',null,'차재영','0',to_date('96/10/19','RR/MM/DD'),null,null,to_date('20/08/03','RR/MM/DD'),0,'1','http://k.kakaocdn.net/dn/dggH2t/btqDvhqnOrx/smrzVmx248Pj0S8SF1ax7K/img_110x110.jpg');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (23,'user1','1234','김아무개','1',to_date('19/06/03','RR/MM/DD'),'아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'0');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (24,'user2','1234','박아무개','0',to_date('12/06/03','RR/MM/DD'),'박아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'0');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (25,'user3','1234','이아무개','0',to_date('04/05/03','RR/MM/DD'),'이아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'0');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (26,'user4','1234','홍길동','0',to_date('85/06/03','RR/MM/DD'),'길동','010-4567-2341',to_date('20/08/03','RR/MM/DD'),0,'0');
-Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (27,'user5','1234','성춘향','1',to_date('75/05/03','RR/MM/DD'),'춘향','010-1234-4567',to_date('20/08/03','RR/MM/DD'),0,'0');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (22,'Show','1234','김쇼미','0',to_date('19/01/07','RR/MM/DD'),'쇼미관리자','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'2');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE,profile) values (2,'Mnet','1234','Mnet','0',to_date('20/08/03','RR/MM/DD'),'프듀관리자','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'2','/uploads/프로듀스48.png');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE,profile) values (21,'1357585315',null,'차재영','0',to_date('96/10/19','RR/MM/DD'),null,null,to_date('20/08/03','RR/MM/DD'),100,'1','http://k.kakaocdn.net/dn/dggH2t/btqDvhqnOrx/smrzVmx248Pj0S8SF1ax7K/img_110x110.jpg');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (23,'user1','1234','김아무개','1',to_date('19/06/03','RR/MM/DD'),'아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'0');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (24,'user2','1234','박아무개','0',to_date('12/06/03','RR/MM/DD'),'박아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'0');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (25,'user3','1234','이아무개','0',to_date('04/05/03','RR/MM/DD'),'이아무개','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'0');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (26,'user4','1234','홍길동','0',to_date('85/06/03','RR/MM/DD'),'길동','010-4567-2341',to_date('20/08/03','RR/MM/DD'),100,'0');
+Insert into R_USER (R_ID,USERID,USERPW,USERNAME,GENDER,BIRTH,NICKNAME,PHONE,JOINDATE,POINT,ROLE) values (27,'user5','1234','성춘향','1',to_date('75/05/03','RR/MM/DD'),'춘향','010-1234-4567',to_date('20/08/03','RR/MM/DD'),100,'0');
 
 -- 회사
 Insert into COMPANY (C_ID,R_ID,C_NAME,C_content,C_READER,C_PHONE,C_PROGRAM,C_CATEGORY,C_STARTDATE,C_ENDDATE,C_BUDGET,C_CONFIRM) values (1,2,'M-net','2018년 6월 15일부터 8월 31일까지 방영했던 엠넷의 아이돌 서바이벌이자 엠넷의 대표 히트작인 프로듀스 101 시리즈의 3번째 시즌이다.','김대표','010-1234-4567','프로듀스48','아이돌',to_date('18/01/01','RR/MM/DD'),to_date('21/12/25','RR/MM/DD'),100000000,'1');
