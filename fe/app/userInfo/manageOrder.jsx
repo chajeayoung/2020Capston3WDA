@@ -9,11 +9,11 @@ import TableCell from '@material-ui/core/TableCell';
 
 import Pagination from '@material-ui/lab/Pagination';
 import jQuery from "jquery";
-import './voteTableCss.css';
+import './css/voteTable.css';
 
 import '../smart.css';
-
-import './manageOrder.css'
+import './css/userInfo.css'
+import './css/manageOrder.css'
 window.$ = window.jQuery = jQuery;
 
 

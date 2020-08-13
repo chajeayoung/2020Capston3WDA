@@ -1,3 +1,6 @@
+div#sidebar-wrapper {
+background:0;
+}
 .webSideMenuTitle{
     background-color:  #924ef0;
     color: white;
@@ -15,6 +18,10 @@
     background-color:  #B7AEFC !important;
 }
 
+.sidebar-nav li:hover{
+    background:#8462;
+  }
+
 .mobileSideMenuTitle{
     background-color:  #924ef0;
     color: white;
@@ -25,3 +32,5 @@
     color: black;
     /* font-size: 15px; */
 }
+
+/*--------*/

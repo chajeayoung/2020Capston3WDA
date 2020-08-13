@@ -138,31 +138,31 @@ public class UserInfoController {
 		JSONObject memberData = new JSONObject();
 	
 		//카카오톡 유저인지? 일반 유저인지?
-		if(member.getPassword()==null) {
-			memberData.put("kakao", "1");
-			memberData.put("r_id", member.getNo());
-			memberData.put("username", member.getName());
-			memberData.put("nickname", member.getNickname());
-			memberData.put("userid", member.getUserid());
-			memberData.put("profile", member.getProfile());
-			memberData.put("gender", member.getGender());
-			memberData.put("birth", member.getBirth());
-			memberData.put("phone", member.getPhone());
-			memberData.put("joindate", member.getJoindate());
-			memberData.put("addr", member.getAddr());
-			memberData.put("addr2", member.getAddr2());
-			memberData.put("point", member.getPoint());
-			memberData.put("role", member.getRole());
+// 		if(member.getPassword()==null) {
+// 			memberData.put("kakao", "1");
+// 			memberData.put("r_id", member.getNo());
+// 			memberData.put("username", member.getName());
+// 			memberData.put("nickname", member.getNickname());
+// 			memberData.put("userid", member.getUserid());
+// 			memberData.put("profile", member.getProfile());
+// 			memberData.put("gender", member.getGender());
+// 			memberData.put("birth", member.getBirth());
+// 			memberData.put("phone", member.getPhone());
+// 			memberData.put("joindate", member.getJoindate());
+// 			memberData.put("addr", member.getAddr());
+// 			memberData.put("addr2", member.getAddr2());
+// 			memberData.put("point", member.getPoint());
+// 			memberData.put("role", member.getRole());
 
-//			memberData.put("r_id", member.getNo());
-//			memberData.put("username", member.getName());
-//			memberData.put("joindate", member.getJoindate());
-//			memberData.put("userid", member.getUserid());
-//			memberData.put("profile", member.getProfile());
-//			memberData.put("phone", member.getPhone());
+// //			memberData.put("r_id", member.getNo());
+// //			memberData.put("username", member.getName());
+// //			memberData.put("joindate", member.getJoindate());
+// //			memberData.put("userid", member.getUserid());
+// //			memberData.put("profile", member.getProfile());
+// //			memberData.put("phone", member.getPhone());
 			
-		}else {
-			memberData.put("kakao", "0");
+// 		}else {
+			//memberData.put("kakao", "0");
 			memberData.put("r_id", member.getNo());
 			memberData.put("password", member.getPassword());
 			memberData.put("username", member.getName());
@@ -178,7 +178,7 @@ public class UserInfoController {
 			memberData.put("point", member.getPoint());
 			memberData.put("role", member.getRole());
 			
-		}
+	//	}
 			
 			json.add(memberData);
 		
@@ -461,16 +461,8 @@ public class UserInfoController {
 		  
 		  ProgramManager pm = pmRepository.findById(sessionUser.getR_ID()); 
 		  
-//		  System.out.println( pm.getId());
-		 
-		  
 		  Program program = programRepository.findById(pm.getProgramId());
-	  
-//		  System.out.println(program.toString());
-		  
-		
-
-		
+	
 				JSONObject programData = new JSONObject();
 				
 				programData.put("id", program.getId());
@@ -512,7 +504,7 @@ public class UserInfoController {
 
 
 
-				String logo = "0";
+				String logo = p.getImg();
 		    	if(!file.isEmpty()) { // 프로필사진 변경을 했을시 
 		    		
 		    				    	
