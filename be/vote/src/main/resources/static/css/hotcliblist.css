@@ -22,7 +22,7 @@ font-size: 1.3em;
   text-align: center;
 }
 .bye {
-  width: 70px;
+  width: 80px;
   display: inline-block;
   border-radius: 10px;
   background-color:#8b6d6d5c;
@@ -62,7 +62,7 @@ font-size: 1.3em;
 }
 
 .hello {
-  width: 70px;
+  width: 80px;
   display: inline-block;
   border-radius: 10px;
   background-color:#d7acac63;
@@ -194,7 +194,7 @@ font-size: 1.3em;
 
 .backim{
   /* background-image: linear-gradient(rgb(112 112 211 / 50%), rgba(204, 186, 183, 0.5)); */
-  /* background-image: linear-gradient(to left,rgba(71,51, 153, 0.2), rgba(255, 255, 255, 1)); */
+  background-image: linear-gradient(to left,rgba(71,51, 153, 0.2), rgba(255, 255, 255, 1));
   /* background-image: url( "/uploads/halhal.png" ); */
   /* background-size: 500px; */
   

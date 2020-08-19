@@ -219,7 +219,7 @@ class PrdShow extends React.Component {
                         <h3 id="sumPrice">{prd.price} 원</h3>
                         
                         <input type="button" className="goBag" value="장바구니 추가" onClick={this.addMybag.bind(this)}/>
-                        <input type="button" className="goOrder" value="구매" onClick={this.order.bind(this)}/>
+                        <input type="button" className="goBag" value="구매" onClick={this.order.bind(this)}/>
                     </div>
                 </div>
                 <div className="itemDetails">

@@ -91,7 +91,7 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 					
 					
 					</div>
-						<div class="modal">
+						<div id="modal">
 							<form  method="POST" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
 							<div class="modal_content">									
 								<h5>댓글수정 하세요</h5>
@@ -117,14 +117,31 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
  //       $("#modal[vs.index]").fadeOut(500);
  //   });      
 	 
-     $(".roro").click(function(){
-         $(".modal").attr("style", "display:block");
+     $("#1btn").click(function(){
+         $("#modal").attr("style", "display:block");
      });
     
-      $(".riro").click(function(){
-         $(".modal").attr("style", "display:none");
+      $("#2btn").click(function(){
+         $("#modal").attr("style", "display:none");
      });   
-         
+	// $(".roro").click(function(){
+	// 	/* dat_edit_bt클래스 클릭시 동작(댓글 수정) */
+	// 		var obj = $(this).closest(".reply").find(".roro");
+	// 		obj.dialog({
+	// 			modal:true,
+	// 			width:650,
+	// 			height:200,
+	// 			title:"댓글 수정"});
+	// 	});
+	// 	$(".riro").click(function(){
+	// 	/* dat_edit_bt클래스 클릭시 동작(댓글 수정) */
+	// 		var obj = $(this).closest(".reply").find(".riro");
+	// 		obj.dialog({
+	// 			modal:false,
+	// 			width:650,
+	// 			height:200,
+	// 			title:"댓글 수정"});
+	// 	});
 </script>
  
 <style>
