@@ -22,6 +22,7 @@ font-size: 1.3em;
   text-align: center;
 }
 .bye {
+  text-decoration: none !important;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
@@ -102,6 +103,7 @@ font-size: 1.3em;
 }
 
 .riro{
+  text-decoration: none !important;
   margin: 10px;
   background: #8965a778;
   color:#fff;
@@ -205,6 +207,7 @@ font-size: 1.3em;
 }
 
 .upl{
+  text-decoration: none !important;
   display: inline-grid;
   background:#20073b4d;
   color:#fff;

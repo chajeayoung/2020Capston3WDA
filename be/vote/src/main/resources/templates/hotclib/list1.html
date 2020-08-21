@@ -19,18 +19,13 @@
 
 
     <section class="backim">
-	
+	<div>
       <a href="" class="riro" 
       th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
       <a href="" class="riro"
       th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
-      <div>
-        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
-          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
       </div>
-    
-		
-		
+     
 
 		<div class="gi" th:each="hotclib:${hotclibList}">
 		<div>	<a href=""
@@ -65,11 +60,8 @@
   </br>
   </br>
   </br>
-    <form style="display: inline-block;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
-      <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
-      <button class="btn btn-default">Search</button>
-    </form>
     
+	  
 
     <div class="pagination">
       <a href="#">&laquo;</a>
@@ -81,7 +73,15 @@
       <a href="#">6</a>
       <a href="#">&raquo;</a>
     </div>
-
+    <form style="display: flow-root;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
+      <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+      <button class="btn btn-default">Search</button>
+    </form>
+    
+<div>
+        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
+          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
+      </div>
    
 </section>
 	      <!--  <nav style="text-align: center;">
