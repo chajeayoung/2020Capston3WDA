@@ -7,7 +7,7 @@ import BarChart from '../items/barChart.jsx';
 import OrderStateItemPop from './OrderStateItemPop.jsx'
 window.$ = window.jQuery = jQuery;
 
-import './orderState.css'
+import './css/orderState.css'
 import '../shop/css/mybag.css'
 
 // npm i @bit/nexxtway.react-rainbow.chart

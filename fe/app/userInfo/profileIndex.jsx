@@ -11,8 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 import Pagination from '@material-ui/lab/Pagination';
 
-import './profileIndex.css';
-
+import './css/profileIndex.css';
 import '../smart.css';
 
 const regeneratorRuntime = require("regenerator-runtime");

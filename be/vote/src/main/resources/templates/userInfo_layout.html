@@ -110,13 +110,13 @@
 
                         <th:block th:if="${#authentication.principal.ROLE  eq '1' }">
                             <input type="hidden" value="관리자" />
-                            <div class='sideMenu mobileSideMenuTitle'>관리자 메뉴</div>
+                            <div class='sideMenu mobileSideMenuTitle'>관리자</div>
                             <div class='sideMenu'><a href='/userInfo/allUser'>회원관리</a></div>
                             <div class='sideMenu'><a href='/userInfo/allCompany'>서비스신청관리</a></div>
                         </th:block>
                         <th:block th:if="${#authentication.principal.ROLE eq '2' }">
                             <input type="hidden" value="매니저" />
-                            <div class='sideMenu mobileSideMenuTitle'>매니저 메뉴</div>
+                            <div class='sideMenu mobileSideMenuTitle'>매니저</div>
                             <div class='sideMenu'><a href='/audition/list'>오디션개설</a></div>
                             <div class='sideMenu'><a href='/audition_con/list'>예선심사</a></div>
                             <div class='sideMenu'><a href='/auditionresult/list'>심사결과</a></div>
@@ -201,13 +201,13 @@
 
             <th:block th:if="${#authentication.principal.ROLE  eq '1' }">
                 <input type="hidden" value="관리자" />
-                <li class="webSideMenuTitle">관리자 메뉴</li>
+                <li class="webSideMenuTitle">관리자</li>
                 <li><a href='/userInfo/allUser'>회원관리</a></li>
                 <li><a href='/userInfo/allCompany'>서비스신청관리</a></li>
             </th:block>
             <th:block th:if="${#authentication.principal.ROLE eq '2' }">
                 <input type="hidden" value="매니저" />
-                <li class="webSideMenuTitle">매니저 메뉴</li>
+                <li class="webSideMenuTitle">매니저</li>
                 <li><a href='/userInfo/myProgram/'>프로그램관리</a></li>
                 <li class="webSideMenuSubTitle">오디션</li>
                 <li><a href='/audition/list'>오디션개설</a></li>
@@ -225,6 +225,8 @@
                 <li><a href='/userInfo/manage/product'>상품관리</a></li>
                 <li><a href='/userInfo/manage/order'>주문관리</a></li>
                 <li><a href='/userInfo/manage/manageOrderState'>판매추이</a></li>
+
+  
             </th:block>
       </ul>
     </div>

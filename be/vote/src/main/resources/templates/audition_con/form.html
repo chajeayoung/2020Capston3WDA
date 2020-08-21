@@ -61,8 +61,8 @@
                                     <input type="file" name="filename" capture="camera" required/>
                                 </td>
                                 <th>주소</th>
-                                <td th:text="${member.addr}"></td>
-                                 <input type="hidden" name="faddr" th:value="${member.addr}" />
+                                <!-- <td th:text="${member.addr}"></td> -->
+                                 <td><input type="text" name="faddr" th:value="${member.addr}" /></td>
                             </tr>
                             <tr>
                                 <th>학력</th>

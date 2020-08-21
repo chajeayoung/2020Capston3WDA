@@ -1,0 +1,36 @@
+  #myTable{
+    width: 100%;
+    height: 100%; 
+    overflow: auto;
+  } 
+
+.profile_preview{
+  width: 30vmin;
+}
+
+.myProgramBox{
+  width: 60vmin;
+  height: 100%;
+  /* border: solid; */
+  text-align: -webkit-center;
+  margin-left: 22vmax;
+}
+
+p.MuiFormHelperText-root{
+  text-align: center;
+}
+
+.myProgramItem{
+  margin : 30px;
+}
+
+@media(max-width:550px){
+
+  
+.myProgramBox{
+  width : 100%;
+  margin : auto !important;
+
+}
+
+}

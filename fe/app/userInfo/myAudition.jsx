@@ -14,7 +14,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import '../smart.css';
 // import './voteTableCss.css';
 
-import './index.css';
+import './css/index.css';
 
 
 import jQuery from "jquery";

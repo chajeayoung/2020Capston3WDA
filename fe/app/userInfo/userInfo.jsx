@@ -2,19 +2,14 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 const regeneratorRuntime = require("regenerator-runtime");
 import jQuery from "jquery";
+
+
+import './css/profileIndex.css';
 import '../smart.css';
-window.$ = window.jQuery = jQuery;
-import './profileIndex.css';
-
 import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 
+window.$ = window.jQuery = jQuery;
 const axios = require('axios');
 
 class Index extends Component {
@@ -47,11 +42,11 @@ class Index extends Component {
             
                                 <TextField fullWidth key={index} id="standard-secondary" label="아이디" placeholder="아이디" value={p.userid} color="primary" readOnly />
                                 <br/> 
-                                {p.kakao==1?"":<TextField id="standard-secondary" label="비밀번호" placeholder="비밀번호" defaultValue={p.password} color="primary" /> }      
+                                {!p.password?"":<TextField fullWidth id="standard-secondary" label="비밀번호" placeholder="비밀번호" name="password" defaultValue={p.password} color="primary" /> }      
                                 <br/>
                               
                                 <img src={p.profile ? p.profile : '/img/defaultProfile.png'} id="profile" name="profile2" alt="profile" />     
-                                {p.kakao==1?<input type="file" name="profile2" id="file" onClick={this.none.bind(this)} />:<input type="file" name="profile2" />}      
+                                {p.password?<input type="file" name="profile2" id="file" onClick={this.none.bind(this)} />:<input type="file" name="profile2" />}      
                                 <br/>                               
                                 
                                 <TextField fullWidth id="standard-secondary" label="이름" placeholder="이름" value={p.username} color="primary" readOnly/> 
@@ -71,8 +66,8 @@ class Index extends Component {
                                 />
                                 <br/> 
 
-                                <input className="register_gender" className="test" type="radio" id="men" name="gender" value="0" required /><label for="men">남자</label>
-                                <input type="radio" className="test" name="gender" value="1" id="girl" required /><label for="girl">여자</label>
+                                <input className="register_gender" className="test" type="radio" id="men" name="gender" value="0" required /><label htmlFor="men">남자</label>
+                                <input type="radio" className="test" name="gender" value="1" id="girl" required /><label htmlFor="girl">여자</label>
                                 <br/> 
 
                                 <TextField fullWidth id="standard-secondary" type="tel" name="phone"  
