@@ -119,32 +119,65 @@ class Index extends Component {
     goUrl() {
         location.href = `/audience/ulist2?programId=${param}`;
     }
+    back() {
+        location.href = `/community`;
+    }
     render() {
-
+        console.log("ggg")
+        console.log(this.state.hotclib)
         return (
             <div className="community_item">
 
                 <div id="audience">
                     <div><h3>방청권</h3></div><br />
-                    <AudienceItem data={this.state.audience} /><br /><br /><br />
+                    {this.state.audience.length>0?
+                    
+                    <div>
+                    <AudienceItem data={this.state.audience} />                    
+                    <br /><br /><br />
                     <Pagination count={this.state.count3} page={this.state.pageNum3} onChange={this.pagenation3.bind(this)} style={{ placeContent: "center" }}> </Pagination>
                     <button type="button" onClick={this.goUrl.bind(this)} >더보기</button>
+                    
+                    </div>:<span>진행중인 방청권이 없습니다.</span>}
+
                 </div>
                 <br /><br />
                 <div id="hotclib">
                     <div><h3 >핫클립</h3></div><br />
-                    <HotclibItem data={this.state.hotclib} /><br /><br /><br />
+
+                    {this.state.hotclib.length>0?
+                    
+                    <div>
+                    <HotclibItem data={this.state.hotclib} />                    
+                    <br /><br /><br />
                     <Pagination count={this.state.count2} page={this.state.pageNum2} onChange={this.pagenation2.bind(this)} style={{ placeContent: "center" }}> </Pagination>
                     <button type="button" onClick={this.plus.bind(this)}>더보기</button>
+                    
+                    </div>:<span>등록된 핫클립 없습니다.</span>}
+
+               
 
                 </div>
 
                 <br /><br />
                 <div id="popular">
-                    <div><h3>출연자</h3></div><br />
-                    <PopularItem data={this.state.popular} /><br /><br /><br />
-                    <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)} style={{ placeContent: "center" }}> </Pagination>
+                    <div><h3>출연자</h3></div><br />                    
 
+                    {this.state.popular.length>0?
+                    
+                    <div>
+                    <PopularItem data={this.state.popular} />          
+                    <br /><br /><br />
+                    <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)} style={{ placeContent: "center" }}> </Pagination>
+                    
+                    </div>:
+                    <div>
+                    <span>등록된 핫클립 없습니다.</span>
+
+                    </div>}
+
+                    <br /><br /><br />
+                    <button type="button" onClick={this.back.bind(this)}>이전으로</button>
                 </div>
 
             </div>)

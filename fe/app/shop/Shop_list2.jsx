@@ -1,26 +1,19 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import Header_top from './Header_top.js';
+
 import Header_middle from './Header_middle.js';
 import Header_bottom from './Header_bottom.js';
-import SliderFrame from './SliderFrame'
-import Footer from './Footer.js';
-import Footer2 from './Footer2.js';
+
 import Chat from './Chat.jsx';
-// import Section from './Section.js'
+
 import './css/shopList.css'
-import Pagination from '@material-ui/lab/Pagination';
+
 import List_Section from './List_Section.js'
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
-// import Section from './shop/section'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import './css/animate.css';
-// import './css/main.css';
-// import './css/responsive.css';
-// import './js/jquery';
+
 class Shop_list extends React.Component {
     constructor(props) {
         super(props);
@@ -34,20 +27,14 @@ class Shop_list extends React.Component {
     }
 
     async componentDidMount() {
-        // let { data } = await axios.get("/shop/index/axios");
-        // console.log(data);
-        // this.setState({ data });
         this.initCategory();
-        this.initItem();
-        
+        this.initItem();        
     }
 
     async categoryEvent(id, dId, that){
-        console.log("카테고리 클릭");
+       console.log("카테고리 클릭");
        console.log("id",id)
-       console.log("Did",dId)
-       
-       
+       console.log("Did",dId)      
       
        that.setCategory(id, dId);
     }
@@ -128,13 +115,12 @@ class Shop_list extends React.Component {
     render() {
             return (
                 <Fragment>
-                    {/* <Header_top></Header_top> */}
-                    {/* <Header_middle></Header_middle>
-                    <Header_bottom></Header_bottom> */}
-                    {/* <SliderFrame></SliderFrame> */}
+{/* 
+                    <Header_middle></Header_middle> */}
+                    {/* <Header_bottom></Header_bottom> */}
+
                     <List_Section data={this.state} event={this.categoryEvent} that={this} paging={this.pagenation} search={this.itemSearch} proEvent={this.programEvent}> </List_Section>
-                    {/* <Footer></Footer>
-                    <Footer2></Footer2> */}
+
                     {
                         this.chat != 0 ? <Chat></Chat> : <div></div>
                     }
@@ -145,5 +131,4 @@ class Shop_list extends React.Component {
 }
 
 
-export default Shop_list
-// ReactDOM.render(<Shop_list />, document.getElementById('Shop_list'));
+ReactDOM.render(<Shop_list />, document.getElementById('Shop_list'));

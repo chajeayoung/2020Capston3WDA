@@ -1,5 +1,6 @@
-.vote_option_div{
+img.img {
 
+    width:100%;
 }
 .vote_option_div div{
     display: inline;
@@ -22,8 +23,10 @@
 
 
 /* voteIdexItem 에서 부르는 ItemCard2vertical 의 크기 */
-.vote_index_item{
+.index_item{
     display: inline-block;
+
+    margin-bottom: 100px !important;
     width:300px;
     height: 200px;
     margin: 0px 14px;

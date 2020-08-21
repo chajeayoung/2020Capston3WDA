@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard5 from '../items/itemCard5.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 
 
 import InputLabel from '@material-ui/core/InputLabel';
