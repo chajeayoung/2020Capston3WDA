@@ -26,7 +26,7 @@ class Index extends Component {
         // 인기인 url
         this.url = '/community/' + param + '/popular/axios?page=' + (this.state.pageNum - 1) + '&size=' + 10 + '&sort="id"';
         // 핫클릿 url
-        this.url2 = '/community/' + param + '/hotclip/axios?page=' + (this.state.pageNum2 - 1) + '&size=' + 5 + '&sort="id"'; // 5개씩
+        this.url2 = '/community/' + param + '/hotclip/axios?page=' + (this.state.pageNum2 - 1) + '&size=' + 3 + '&sort="id"'; // 5개씩
         this.url3 = '/community/' + param + '/audience/axios?page=' + (this.state.pageNum3 - 1) + '&size=' + 5 + '&sort="id"'; //5개씩
     }
 
@@ -74,7 +74,7 @@ class Index extends Component {
         console.log("호출", this.url2)
         let { data } = await axios.get(this.url2); // 핫클립 정보 가져오기
 
-        var count = Math.ceil((data.count * 1.0) / 5) // 5 개씩
+        var count = Math.ceil((data.count * 1.0) / 3) // 3 개씩
         this.setState({ count2: count, hotclib: data.hotclips })
     }
     async getAudience() {// 방청권 정보 들고오기
@@ -90,7 +90,7 @@ class Index extends Component {
 
     }
     setUrl2() { // 핫클립 페이징
-        this.url2 = '/community/' + param + '/hotclip/axios?page=' + (this.state.pageNum2 - 1) + '&size=' + 5 + '&sort="id"';// 5개씩
+        this.url2 = '/community/' + param + '/hotclip/axios?page=' + (this.state.pageNum2 - 1) + '&size=' + 3 + '&sort="id"';// 5개씩
     }
     setUrl3() { // 방청권 페이징
         this.url3 = '/community/' + param + '/audience/axios?page=' + (this.state.pageNum3 - 1) + '&size=' + 5 + '&sort="id"';// 5개씩
