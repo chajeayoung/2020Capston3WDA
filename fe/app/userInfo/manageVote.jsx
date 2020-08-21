@@ -9,10 +9,12 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 import '../smart.css';
+import './css/userInfo.css';
+import './css/voteTable.css';
 
 import Pagination from '@material-ui/lab/Pagination';
 import jQuery from "jquery";
-import './voteTableCss.css';
+
 window.$ = window.jQuery = jQuery;
 
 
