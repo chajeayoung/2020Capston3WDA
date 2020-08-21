@@ -209,7 +209,7 @@ nav div.dropMenu {
 nav div.drop a {
     display: block;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     padding: 10px 0px;
     color: white;
 }
@@ -233,7 +233,7 @@ nav div.dropMenu:hover .drop {
 
 nav div.drop a:hover {
     /*            background-color: #ddd;*/
-    color:red;
+    color:yellow;
 /*    rgba(66,103,178,1)*/
 }
 

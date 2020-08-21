@@ -84,7 +84,7 @@ module.exports = {
       __dirname,
       "./app/userInfo/manageOrderState.jsx"
     ),
-    Shop_list: path.join(__dirname, "./app/shop/Shop_list.jsx"),
+    Shop_list: path.join(__dirname, "./app/shop/Shop_list2.jsx"),
     buyError: path.join(__dirname, "./app/shop/buyError.jsx"),
     managerIndex: path.join(__dirname, "./app/riroIndex/managerIndex.jsx"),
     userIndex: path.join(__dirname, "./app/riroIndex/userIndex.jsx"),
