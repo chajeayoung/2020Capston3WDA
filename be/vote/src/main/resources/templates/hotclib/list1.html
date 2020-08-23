@@ -11,113 +11,80 @@
 </head>
 
 <body>
-	<content>
-	<!--  --><style>
-.gi {
-	border: 1px solid #ccc;
-	padding: 5px;
-	width: 250px;
-	height: 250px;
-	margin: 10px;
-	display: inline-block;
-	text-align: left;
-}
-
-.qi{
-font-size: 1.3em;
-  text-align: center;
-}
-</style>
+	<content >
+	<link rel="stylesheet" href="/css/hotcliblist.css"/>
+	
 	<!--  <div id="hotclib"></div>
     <script src="/assets/hotclib.js"></script> -->
 
 
-	<section>
+    <section class="backim">
 	
-	<a href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
-			<a href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      <a href="" class="riro" 
+      th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
+      <a href="" class="riro"
+      th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      <div>
+        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
+          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
+      </div>
+    
 		
-		<form
-			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
-			method="get">
-			<div class="search">
-				<input name="keyword" type="text" placeholder="제목을 입력해주세요">
-				<button>검색</button>
-			</div>
-		</form>
+		
 
 		<div class="gi" th:each="hotclib:${hotclibList}">
-			<a href=""
+		<div>	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
-				<img class="hi" width="250" height="250"
+				<img class="hi" width="300" height="300"
 				th:src="@{'/uploads/' + ${hotclib.filename2}}">
+</div>
 
-
-				<div>
-					게시물번호: <span class="qi" th:utext="${hotclib.hotclibid}"></span>
+				
+				<div class="foncolor">
+					 <h1><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
+						style="color: red;" th:text="${hotclib.hreplycount}"></span>)</h1>
 				</div>
-				<div>
-					제목: <span class="qi" th:utext="${hotclib.htitle}"> (<span
-						style="color: red;" th:text="${hotclib.hreplycount}"></span>)
+				<div class="foncolor">
+					 <span class="qi" th:utext="${hotclib.hdate}"></span>
 				</div>
-				<div>
-					작성일: <span class="qi" th:utext="${hotclib.hdate}"></span>
-				</div>
-				<div>
+				<div class="foncolor">
 					조회수: <span class="qi" th:utext="${hotclib.hviewcount}"></span>
 				</div>
-				<div>
+				<div class="foncolor">
 					작성자: <span class="qi" th:utext="${hotclib.husername}"></span>	
 				</div>
 				
 			</a>
-         <a class="btn btn-lg btn-primary" sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a>
-			
-			<form  id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
+         
+			<a class="bye" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}"><span>수정</span></a>
+			<form style="display: inline;"  id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
 				<input type="hidden" name="_method" value="delete"/>
-				<button class="btn btn-lg btn-primary" sec:authorize="hasAnyAuthority('2')" id="delete-btn">삭제</button>
+				<button class="hello" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" id="delete-btn"><span>삭제</span></button>
 			</form>
-		</div>
+    </div>
+  </br>
+  </br>
+  </br>
+    <form style="display: inline-block;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
+      <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+      <button class="btn btn-default">Search</button>
+    </form>
+    
 
+    <div class="pagination">
+      <a href="#">&laquo;</a>
+      <a href="#">1</a>
+      <a href="#" class="active">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">&raquo;</a>
+    </div>
 
-		<div>
-			<a sec:authorize="hasAnyAuthority('2')" href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/hotclib/upload'}">영상업로드</a>
-		</div>
-	</section>
-
-<nav style="text-align: center;">
-    <ul class="pagination">
-        <li class="disabled">
-            <a href="#" aria-label="First">
-                <span aria-hidden="true">First</span>
-            </a>
-        </li>
-        <li class="disabled">
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&lt;</span>
-            </a>
-        </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&gt;</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" aria-label="Last">
-                <span aria-hidden="true">Last</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-	    <!--   <nav style="text-align: center;">
+   
+</section>
+	      <!--  <nav style="text-align: center;">
     <ul class="pagination"
      th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >

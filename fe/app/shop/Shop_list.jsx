@@ -129,8 +129,8 @@ class Shop_list extends React.Component {
             return (
                 <Fragment>
                     {/* <Header_top></Header_top> */}
-                    <Header_middle></Header_middle>
-                    <Header_bottom></Header_bottom>
+                    {/* <Header_middle></Header_middle>
+                    <Header_bottom></Header_bottom> */}
                     {/* <SliderFrame></SliderFrame> */}
                     <List_Section data={this.state} event={this.categoryEvent} that={this} paging={this.pagenation} search={this.itemSearch} proEvent={this.programEvent}> </List_Section>
                     {/* <Footer></Footer>
@@ -145,5 +145,5 @@ class Shop_list extends React.Component {
 }
 
 
-
-ReactDOM.render(<Shop_list />, document.getElementById('Shop_list'));
+export default Shop_list
+// ReactDOM.render(<Shop_list />, document.getElementById('Shop_list'));

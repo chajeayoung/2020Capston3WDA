@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{main_layout::layout(~{::content},~{::script},'내가 쓴 게시글', ~{::link})}">
+    th:replace="~{userInfo_layout::layout(~{::content},~{::script},'내가 쓴 게시글', ~{::link})}">
 
 <head>
     <meta charset="UTF-8">
@@ -74,29 +74,31 @@
                         <form style="text-align: -webkit-center; display: inline;">
                             <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
                             <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
-                            <input type="hidden" id="aPrice" name="bo_table" value="webzine" th:value="${audience.aPrice}">
-                            <input type="hidden" id="aRecruits" name="bo_table" value="webzine" th:value="${audience.aRecruits}">
-                                              <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
-                    <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
-                    <input type="hidden" id="result" name="result" th:value="${audience.result}">
+                            <input type="hidden" id="aPrice" name="bo_table" value="webzine"
+                                th:value="${audience.aPrice}">
+                            <input type="hidden" id="aRecruits" name="bo_table" value="webzine"
+                                th:value="${audience.aRecruits}">
+                            <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
+                            <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
+                            <input type="hidden" id="result" name="result" th:value="${audience.result}">
                             <input type="button" value="추첨인원보기" id="showResult" class="btn_submit btn">
                         </form>
                     </div>
 
-                <div>
-                    
-                    <div id="result">
-                    <h2 id="result__title">응모종료까지 남은 시간</h2>
-                    
-                    	<div id="list"></div>
-                    	
-                        <th:block th:if="${result.size() >=1}">
-                            <h4>당첨자</h4>
-                            <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
-                        </th:block>
+                    <div>
+
+                        <div id="result">
+                            <h2 id="result__title">응모종료까지 남은 시간</h2>
+
+                            <div id="list"></div>
+
+                            <th:block th:if="${result.size() >=1}">
+                                <h4>당첨자</h4>
+                                <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
+                            </th:block>
+                        </div>
                     </div>
-                </div>
-                    
+
 
                 </section>
 

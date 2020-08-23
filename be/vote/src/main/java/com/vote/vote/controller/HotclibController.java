@@ -93,6 +93,7 @@ public class HotclibController {
 	 	return "hotclib/list1";
 	 }
 
+	
 	 @GetMapping("/community/{programid}/hotclib/sorthviewcount")
 	 public String sortHviewcount(Model model,@PathVariable int programid) {
 		 model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHviewcountDesc(programid));
@@ -116,6 +117,8 @@ public class HotclibController {
 		 model.addAttribute("hotclibList",hotclibRepository.findAllByOrderByHdateDesc());
 		 return "hotclib/list1";
 	 }
+
+
 //	@GetMapping("/community/{program}/hotclib")
 //	public String hotclib(Model model, @PageableDefault Pageable pageable,@PathVariable int program) {
 		// int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -166,7 +169,7 @@ public class HotclibController {
 	// 	model.addAttribute("hotclibList", hotclibRepository.findAll(pageable));
 	// 	return "hotclib/list1";
 	// }
-	
+	 
 	// 댓글 리스트,게시글 상세보기
 	 @GetMapping("/community/{program}/hotclib/read/{hotclibid}")
 	 public String read(Model model, @PathVariable int hotclibid,@PathVariable("program") int program,
@@ -223,7 +226,7 @@ public class HotclibController {
 	 		int r_id = member.getNo();
 	 		reply.setR_id(r_id);
 			
-	 		reply.setRusername(member.getName());	
+	 	reply.setRusername(member.getName());	
 	 	reply.setR_date(new Date());	
 	 	replyRepository.saveAndFlush(reply);
 	 	Hotclib hotclib = hotclibRepository.findById(hotclibid);
@@ -250,7 +253,7 @@ public class HotclibController {
 		ProgramManager programmanager =pmRepository.findById(userDetails.getR_ID());
 	 	model.addAttribute("hotclib", new Hotclib());
 //	 	System.out.println(programid);
-	 	
+		
 	 	if(programmanager.getId()==userDetails.getR_ID());{
 	 	 	
 		return "/hotclib/upload";	
@@ -386,10 +389,10 @@ public class HotclibController {
 	 	Member member = memberRepository.findByUserid(userid); 
 	 	int r_id = member.getNo();
 	 	reply.setR_id(r_id);
-
+		 reply.setRusername(member.getName());
 	 	replyRepository.findById(reply.getReplyid());
 	 	reply.setR_content(reply.getR_content());
-	 	reply.setR_date(new Date());	
+		reply.setR_date(new Date());	
 	 	replyRepository.save(reply);
 
 	 	Hotclib hotclib = new Hotclib();

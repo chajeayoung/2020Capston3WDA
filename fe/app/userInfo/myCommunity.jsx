@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import ItemCard4 from '../items/itemCard4.jsx';
+import ItemCard5 from '../items/ItemCard5.jsx';
 
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -13,8 +13,10 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-import './Modal.css';
+import './css/Modal.css';
+import './css/userInfo.css';
 import '../smart.css';
+import './../items/itemcard5.css';
 
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
@@ -113,17 +115,16 @@ class MyCommunity extends Component {
   render() {
     let profile_preview = null;
     let profile_preview2 = null;
-    if (this.state.file !== '') {
+    if (this.state.file != '') {
       profile_preview = <img className='profile_preview' src={this.state.previewURL}></img>
     }
 
-    if (this.state.file2 !== '') {
+    if (this.state.file2 != '') {
       profile_preview2 = <img className='profile_preview' src={this.state.previewURL2}></img>
     }
 
     return (
       <div id="tablebox">
-        <h3>후보자 and 팬클럽 목록</h3>
         {/* <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination> */}
 
         <div className="community_item">
@@ -132,18 +133,20 @@ class MyCommunity extends Component {
 
             return (
 
-              <div key={c.name + index} className="community_index_item">
+              <div key={c.name + index} className="community_index_box">
 
-                <div onClick={this.handleOpenModal2.bind(this, c)}>
-                  
-                  <ItemCard4 key={c.img} img={c.img} name={c.name} title=""/>
+                <div className="card_div"onClick={this.handleOpenModal2.bind(this, c)}>
+                  <ItemCard5 key={c.img} img={c.img} name={c.name} title=""/>
                 </div>
 
               </div>)
           })}
 
         </div>
-        <button className="add" onClick={this.handleOpenModal.bind(this)}>추가</button>
+
+        <span className="add" onClick={this.handleOpenModal.bind(this)}>＋</span>
+     
+
 
         {this.state.modal && (
           <div className="MyModal">
@@ -151,7 +154,7 @@ class MyCommunity extends Component {
 
               {this.state.UD == 0 ?
               <div className="content">
-              <h3>후보 추가</h3>
+              <h3>출연자 추가</h3>
            
 
                  <FormHelperText>세로프로필</FormHelperText>
@@ -246,7 +249,7 @@ class MyCommunity extends Component {
               
               :              
               <div className="content">
-              <h3>후보 수정</h3>
+              <h3>출연자 수정</h3>
                  <FormHelperText>세로프로필</FormHelperText>
                    <div> {this.state.file == '' ? <img src={'/uploads/'+this.state.item.img}></img> : <div>{profile_preview}</div> }</div>  
                   
@@ -261,7 +264,7 @@ class MyCommunity extends Component {
                   <br></br>
                   <hr></hr>
                
-                  <TextField id="standard-secondary" fullWidth name="name" label="이름" name="name" color="primary" defaultValue={this.state.item.name} /> 
+                  <TextField id="standard-secondary" fullWidth name="name" label="이름" color="primary" defaultValue={this.state.item.name} /> 
                   <TextField
                     fullWidth
                     id="standard-secondary"

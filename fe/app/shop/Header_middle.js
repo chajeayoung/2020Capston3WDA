@@ -10,7 +10,7 @@ class Header_middle extends React.Component {
                             <div className="logo pull-left">
                                 {/* <a href="/shop/index"><img src="/shop/images/home/logo.png" alt="" /></a> */}
                             </div>
-
+                    
                         </div>
                         <div className="col-sm-8">
                             <div className="shop-menu pull-right">

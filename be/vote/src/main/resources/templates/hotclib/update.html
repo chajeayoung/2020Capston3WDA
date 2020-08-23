@@ -5,8 +5,10 @@ th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
 	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 </head>
 <content>
+<link rel="stylesheet" href="/css/hotclibread.css"/>
 <body>  	   
 	<form th:action="@{'/community/'+${hotclib.programid} + '/hotclib/update/' + ${hotclib.hotclibid}}" method="post">     
 		<table border="1">
@@ -26,8 +28,8 @@ th:replace="~{main_layout::layout(~{::content},_,'수정 하는곳',_)}">
 			영상선택<input type="file" name="filename" id="filename" capture="camera" onchange="setFilename(event);" required/>
 		   <div id ='preview2'></div>
 		<div>
-            <input type="submit" value="수정하기" /> 
-            <a href="" th:href="@{/hotclib}">목록</a>
+            <input class="riro" type="submit" value="수정하기" /> 
+            <a href="" class="ruro" th:href="@{/hotclib}">목록</a>
 		</div>
 	</form>
 

@@ -69,6 +69,8 @@
                 <form class="top_form"action="/logout" method="post">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     <a href="/userInfo">내 정보 및 관리 </a>&nbsp;
+                    <a href="/shop/orderList">주문목록</a>
+                    <a href="/shop/mybag">장바구니</a>
                     <input type="submit" value="로그아웃" id="logoutButton"/>                    
                 </form>
                 <span style="display:none" id="userRole" sec:authentication="principal.ROLE"></span>
@@ -152,7 +154,7 @@
                             <div>소개</div>
                         </a>
                         <div class="drop">
-                            <a href="/introduce/blockChain">블록체인이란?</a>
+                            <a href="/introduce/blockChain">블록체인소개</a>
                             <a href="#">서비스소개</a>
                             <a href="#">개발자소개</a>
                         </div>
@@ -236,8 +238,10 @@
             <a href="/proRegIndex">
                 <div>매니저</div>
             </a>
+           
         </div>
-
+       
+        
         <!-- <div class="min-address">
             <div>2020 RIRO.com</div>
         </div> -->

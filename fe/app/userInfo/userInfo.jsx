@@ -2,19 +2,14 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 const regeneratorRuntime = require("regenerator-runtime");
 import jQuery from "jquery";
+
+
+import './css/profileIndex.css';
 import '../smart.css';
-window.$ = window.jQuery = jQuery;
-import './profileIndex.css';
-
 import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 
+window.$ = window.jQuery = jQuery;
 const axios = require('axios');
 
 class Index extends Component {
@@ -40,70 +35,63 @@ class Index extends Component {
         console.log(profile)
 
         return this.state.profile.map((p, index) => {
-            if (p.kakao == "1") { // 카카오톡 유저이면?
-                return (
-                    <div key={'div' + index}>
+           return (
+  
+                    <div key={'div' + index} className="userInfoBox">
 
-<TextField key={index} id="standard-secondary" name="name" label="아이디" placeholder="아이디" name="name" value={p.userid} color="primary" readOnly /> 
-{/* <tr><td key={index} >아이디<input type="text" id="id" placeholder="이메일" value={p.userid} readOnly /></td></tr>           */}
+            
+                                <TextField fullWidth key={index} id="standard-secondary" label="아이디" placeholder="아이디" value={p.userid} color="primary" readOnly />
+                                <br/> 
+                                {!p.password?"":<TextField fullWidth id="standard-secondary" label="비밀번호" placeholder="비밀번호" name="password" defaultValue={p.password} color="primary" /> }      
+                                <br/>
+                              
+                                <img src={p.profile ? p.profile : '/img/defaultProfile.png'} id="profile" name="profile2" alt="profile" />     
+                                {p.password?<input type="file" name="profile2" id="file" onClick={this.none.bind(this)} />:<input type="file" name="profile2" />}      
+                                <br/>                               
+                                
+                                <TextField fullWidth id="standard-secondary" label="이름" placeholder="이름" value={p.username} color="primary" readOnly/> 
+                                <br/> 
 
-<tr><td>프로필<img src={p.profile ? p.profile : '#'} id="profile" name="profile2" alt="profile" /></td></tr>
-                                <tr><td><input type="file" name="profile2" id="file" onClick={this.none.bind(this)} /></td></tr>
+                                <TextField fullWidth id="standard-secondary" name="nickname" label="닉네임" placeholder="닉네임" defaultValue={p.nickname} color="primary" /> 
+                                <br/> 
+                                <TextField
+                                fullWidth
+                                    id="standard-secondary"
+                                    name="birth"
+                                    label="생년월일"
+                                    InputLabelProps={{ shrink: true, required: true }}
+                                    type="date"  
+                                    defaultValue={p.birth}
+                                    required    
+                                />
+                                <br/> 
 
-                                <tr><td>닉네임<input type="text" name="nickname" placeholder="입력해주세요" defaultValue={p.nickname} /></td></tr>
-                                <tr> <td colSpan="2"><hr></hr></td></tr>
-                                <tr><td>이름<input type="text" id="name" placeholder="이름" value={p.username} readOnly /></td></tr>
-                                <tr> <td>생년월일<input type="date" name="birth" defaultValue={p.birth} /></td></tr>
-                                <tr>
-                                    <td className="register_left_td"><input className="register_gender" className="test" type="radio" name="gender" value="0" required />남자</td>
-                                    <td className="register_right_td"><input type="radio" className="test" name="gender" value="1" required />여자</td>
-                                </tr>
-                                <tr><td colSpan="2"><hr></hr></td></tr>
-                                <tr><td>연락처<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="입력해주세요" defaultValue={p.phone} /></td></tr>
-                                <tr><td>주소<input type="text" name="addr" placeholder="입력해주세요" defaultValue={p.addr} /></td></tr>
-                                <tr><td>상세주소<input type="text" name="addr2" placeholder="입력해주세요" defaultValue={p.addr2} /></td></tr>
+                                <input className="register_gender" className="test" type="radio" id="men" name="gender" value="0" required /><label htmlFor="men">남자</label>
+                                <input type="radio" className="test" name="gender" value="1" id="girl" required /><label htmlFor="girl">여자</label>
+                                <br/> 
+
+                                <TextField fullWidth id="standard-secondary" type="tel" name="phone"  
+                                 inputProps={{ className: TextField, pattern: "[0-9]{3}-[0-9]{4}-[0-9]{4}" }}
+                                label="연락처" placeholder="연락처" defaultValue={p.phone} color="primary" /> 
+                                <br/>
+
+
+                                <TextField fullWidth id="standard-secondary" name="addr" label="주소" placeholder="주소" defaultValue={p.addr} color="primary" /> 
+                                <br/> 
+                                <TextField fullWidth id="standard-secondary" name="addr2" label="상세주소" placeholder="상세주소" defaultValue={p.addr2} color="primary" /> 
 
                         <input type="hidden" name="profile" value={p.profile}></input>
                         <input type="hidden" name="userid" value={p.userid}></input>
                         <input type="hidden" name="no" value={p.r_id}></input>
                         <input type="hidden" name="name" value={p.username}></input>
 
+                        <br/> 
                         <button className="submit_button" type="submit">수정하기</button>
                     </div>
+            
 
-                )
-            } else {
-                return (
-                    <div key={'div' + index}>
-                        <table>
-                            <tbody>
-                                <tr><td key={index} >아이디<input type="text" id="id" placeholder="이메일" value={p.userid} readOnly /></td></tr>
-                                <tr><td>비밀번호<input type="password" name="password" placeholder="비밀번호" defaultValue={p.password ? p.password : ''} required /></td></tr>
-                                <tr><td key={index} >프로필<img id="profile" src={p.profile ? p.profile : '/img/defaultProfile.png'} /></td></tr>
-                                <tr><td><input type="file" name="profile2" /></td></tr>
-                                <tr><td>닉네임<input type="text" name="nickname" placeholder="입력해주세요" defaultValue={p.nickname} /></td></tr>
-                                <tr><td colSpan="2"><hr></hr></td></tr>
-                                <tr><td>이름<input type="text" name="name" placeholder="이름" defaultValue={p.username} /></td></tr>
-                                <tr><td>생년월일<input type="date" name="birth" defaultValue={p.birth} /></td></tr>
-                                <tr>
-                                    <td className="register_left_td"><input className="register_gender" className="test" type="radio" name="gender" value="0" required />남자</td>
-                                    <td className="register_right_td"><input type="radio" className="test" name="gender" value="1" required />여자</td>
-                                </tr>
-                                <tr><td colSpan="2"><hr></hr></td></tr>
-                                <tr><td>연락처<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="입력해주세요" defaultValue={p.phone} /></td></tr>
-                                <tr><td>주소<input type="text" name="addr" placeholder="입력해주세요" defaultValue={p.addr} /></td></tr>
-                                <tr><td>상세주소<input type="text" name="addr2" placeholder="입력해주세요" defaultValue={p.addr2} /></td></tr>
-                            </tbody>
-                        </table>
-                        <input type="hidden" name="profile" value={p.profile ? p.profile : '/img/defaultProfile.png'}></input>
-                        <input type="hidden" name="userid" value={p.userid}></input>
-                        <input type="hidden" name="no" value={p.r_id}></input>
-                        {/* <input type="hidden" name="name" value={p.username}></input> */}
-                        <button className="submit_button" type="submit">수정하기</button>
-                    </div>
-                )
-            }
-        })
+                ) 
+            })
 
     }
 }

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/board.common.css">
     <link rel="stylesheet" href="/css/featherlight.css">
-    <link rel="stylesheet" href="/css/moblie.css">
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/uRead.js"></script>
@@ -66,16 +65,17 @@
                 <!-- 타이머 시작 -->
                 <div class="timer">
                     <h1 id="timer__title">응모종료까지 남은 시간</h1>
-                    <ul id="timer__ul">
-                      <li><span id="days"></span>일</li>
-                      <li><span id="hours"></span>시간</li>
-                      <li><span id="minutes"></span>분</li>
-                      <li><span id="seconds"></span>초</li>
-                    </ul>
+                    <div id="timer__ul">
+                        <div><span id="days" class="days"></span><div class="smalltext">Days</div></div>
+                        <div><span id="hours"class="hours"></span><div class="smalltext">Hours</div></div>
+                        <div><span id="minutes"class="minutes"></span><div class="smalltext">Minutes</div></div>
+                        <div><span id="seconds"class="seconds"></span><div class="smalltext">Seconds</div></div>
+                    </div>
                   </div>
+                  
                   <!-- 타이머 끝 -->
                 <form style="text-align: -webkit-center">
-                    <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
+                    <!-- <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}"> -->
                     <input type="hidden" id="aLimit" name="aLimit" value="" th:value="${audience.aLimit}">
                     <input type="hidden" id="aPrice" name="aPrice" value="webzine" th:value="${audience.aPrice}">
                     <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
@@ -87,8 +87,8 @@
                     <input type="hidden" name="sod" value="">
                     <input type="hidden" name="page" value="">
                     <input type="hidden" value="html1" name="html">
-                    <input type="button" value="응모하기" id="apply" class="btn_submit btn">
-                    <input type="button" value="당첨확인" id="confirm" class="btn_submit btn">
+                    <input type="button" disabled value="응모하기" id="apply" class="btn_submit btn">
+                    <input type="button" disabled value="당첨확인" id="confirm" class="btn_submit btn">
                 </form>
                 <div id="modal-container">
                     <div class="modal-background">
@@ -98,13 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div id="result">
-                    <th:block th:if="${result.size() >=1}">
-                        
-                        <h4>당첨자</h4>
-                        <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
-                    </th:block>
-                </div> -->
+               
             </section>
 
             <div id="bo_v_share">
@@ -112,17 +106,6 @@
                 <!--  추천 비추천 시작 { -->
                 <!-- }  추천 비추천 끝 -->
 
-
-
-                <!-- <div class="bo_v_snswr">
-        <button type="button" class="btn btn_b03 btn_share"><i class="fa fa-share-alt" aria-hidden="true"></i> SNS공유</button>
-        
-        <ul id="bo_v_sns">
-            <li><a href="http://sample.paged.kr/purewhite/bbs/sns_send.php?longurl=http%3A%2F%2Fsample.paged.kr%2Fpurewhite%2Fbbs%2Fboard.php%3Fbo_table%3Dwebzine%26wr_id%3D7&amp;title=%EC%9B%B9%EC%A7%84%ED%98%95+%EA%B2%8C%EC%8B%9C%ED%8C%90%EC%9E%85%EB%8B%88%EB%8B%A4.&amp;sns=twitter" target="_blank" class="sns_t"><img src="http://sample.paged.kr/purewhite/plugin/sns/icon/twitter.png" alt="트위터로 보내기" width="20"></a></li>
-            <li><a href="http://sample.paged.kr/purewhite/bbs/sns_send.php?longurl=http%3A%2F%2Fsample.paged.kr%2Fpurewhite%2Fbbs%2Fboard.php%3Fbo_table%3Dwebzine%26wr_id%3D7&amp;title=%EC%9B%B9%EC%A7%84%ED%98%95+%EA%B2%8C%EC%8B%9C%ED%8C%90%EC%9E%85%EB%8B%88%EB%8B%A4.&amp;sns=facebook" target="_blank" class="sns_f"><img src="http://sample.paged.kr/purewhite/plugin/sns/icon/facebook.png" alt="페이스북으로 보내기" width="20"></a></li>
-            <li><a href="http://sample.paged.kr/purewhite/bbs/sns_send.php?longurl=http%3A%2F%2Fsample.paged.kr%2Fpurewhite%2Fbbs%2Fboard.php%3Fbo_table%3Dwebzine%26wr_id%3D7&amp;title=%EC%9B%B9%EC%A7%84%ED%98%95+%EA%B2%8C%EC%8B%9C%ED%8C%90%EC%9E%85%EB%8B%88%EB%8B%A4.&amp;sns=gplus" target="_blank" class="sns_g"><img src="http://sample.paged.kr/purewhite/plugin/sns/icon/gplus.png" alt="구글플러스로 보내기" width="20"></a></li>
-            </ul>
-        </div> -->
             </div>
 
 
@@ -138,330 +121,8 @@
 
                     <li><a href="/audience/list" class="btn_b01 btn"><i class="fa fa-list"
                                 aria-hidden="true"></i> 목록</a></li>
-                    <!-- <li><a href="./write.php?bo_table=webzine" class="btn_b02 btn"><i class="fa fa-pencil"
-                                aria-hidden="true"></i> 글쓰기</a></li> -->
-                </ul>
-
-                <ul class="bo_v_nb">
-                    <li class="btn_prev transOJ"><a href="#"><i
-                                class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sound_only"> 이전글</span>
-                            <b>웹진형 게시판입니다. </b></a> </li>
-                    <li class="btn_next transOJ"> <a href="#"><i
-                                class="fa fa-arrow-right" aria-hidden="true"></i> <span class="sound_only">다음글 </span>
-                            <b>웹진형 게시판 공지사항입니다. </b></a> </li>
                 </ul>
             </div>
-
-            <!-- } 게시물 상단 버튼 끝 -->
-
-
-            <!-- <script>
-                // 글자수 제한
-                var char_min = parseInt(0); // 최소
-                var char_max = parseInt(0); // 최대
-            </script> -->
-            <!-- 댓글 시작 { -->
-            <!-- <hr class="dashHr">
-            <button type="button" class="cmt_btn"><i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글목록 <i
-                    class="fa fa-chevron-up" aria-hidden="true"></i><i class="fa fa-chevron-down"
-                    aria-hidden="true"></i> </button>
-            <section id="bo_vc">
-                <h2>댓글목록</h2>
-                <p id="bo_vc_empty">등록된 댓글이 없습니다.</p>
-            </section> -->
-            <!-- } 댓글 끝 -->
-
-            <!-- 댓글 쓰기 시작 { -->
-            <!-- <aside id="bo_vc_w" class="bo_vc_w">
-                <h2>댓글쓰기</h2>
-
-                <form name="fviewcomment" id="fviewcomment"
-                    action="http://sample.paged.kr/purewhite/bbs/write_comment_update.php"
-                    onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
-                    <input type="hidden" name="w" value="c" id="w">
-                    <input type="hidden" name="bo_table" value="webzine">
-                    <input type="hidden" name="wr_id" value="7">
-                    <input type="hidden" name="comment_id" value="" id="comment_id">
-                    <input type="hidden" name="sca" value="">
-                    <input type="hidden" name="sfl" value="">
-                    <input type="hidden" name="stx" value="">
-                    <input type="hidden" name="spt" value="">
-                    <input type="hidden" name="page" value="">
-                    <input type="hidden" name="is_good" value="">
-
-                    <span class="sound_only">내용</span>
-                    <textarea id="wr_content" name="wr_content" maxlength="10000" required="" class="required"
-                        title="내용" placeholder="내용을 입력해 주세요."></textarea>
-                    <script>
-                        $(document).on("keyup change", "textarea#wr_content[maxlength]", function () {
-                            var str = $(this).val()
-                            var mx = parseInt($(this).attr("maxlength"))
-                            if (str.length > mx) {
-                                $(this).val(str.substr(0, mx));
-                                return false;
-                            }
-                        });
-                    </script>
-                    <div class="bo_vc_w_wr">
-                        <div class="btn_confirm">
-                            <input type="checkbox" name="wr_secret" value="secret" id="wr_secret">
-                            <label for="wr_secret" class="btn btn_b01" title="비밀글사용"> <i class="fa fa-lock"
-                                    aria-hidden="true"></i> <i class="fa fa-unlock" aria-hidden="true"></i> <span
-                                    class="sound_only">비밀글사용</span></label>
-                            <input type="submit" id="btn_submit" class="btn_submit" value="댓글등록">
-                        </div>
-                        <div class="bo_vc_w_info">
-                            <label for="wr_name" class="sound_only">이름<strong> 필수</strong></label>
-                            <input type="text" name="wr_name" value="" id="wr_name" required=""
-                                class="frm_input required" size="25" placeholder="이름">
-                            <label for="wr_password" class="sound_only">비밀번호<strong> 필수</strong></label>
-                            <input type="password" name="wr_password" id="wr_password" required=""
-                                class="frm_input required" size="25" placeholder="비밀번호">
-                            <fieldset id="captcha" class="captcha recaptcha">
-                                <script src="https://www.google.com/recaptcha/api.js?hl=ko"></script>
-                                <script src="http://sample.paged.kr/purewhite/plugin/recaptcha/recaptcha.js"></script>
-                                <div class="g-recaptcha" data-sitekey="6LeuK0wUAAAAAPjl3Se_sedBwESPliGdmhzhRqgq">
-                                    <div style="width: 304px; height: 78px;">
-                                        <div><iframe
-                                                src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeuK0wUAAAAAPjl3Se_sedBwESPliGdmhzhRqgq&amp;co=aHR0cDovL3NhbXBsZS5wYWdlZC5rcjo4MA..&amp;hl=ko&amp;v=ADnAC3ZykfbIOflWgrKNsVVT&amp;size=normal&amp;cb=vhrgxh9d8aer"
-                                                width="304" height="78" role="presentation" name="a-bxfyyl3vqu4n"
-                                                frameborder="0" scrolling="no"
-                                                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                                        </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
-                                            class="g-recaptcha-response"
-                                            style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                                    </div><iframe style="display: none;"></iframe>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </form>
-            </aside>
-
-            <script>
-                var save_before = '';
-                var save_html = document.getElementById('bo_vc_w').innerHTML;
-
-                function good_and_write() {
-                    var f = document.fviewcomment;
-                    if (fviewcomment_submit(f)) {
-                        f.is_good.value = 1;
-                        f.submit();
-                    } else {
-                        f.is_good.value = 0;
-                    }
-                }
-
-                function fviewcomment_submit(f) {
-                    var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-
-                    f.is_good.value = 0;
-
-                    var subject = "";
-                    var content = "";
-                    $.ajax({
-                        url: g5_bbs_url + "/ajax.filter.php",
-                        type: "POST",
-                        data: {
-                            "subject": "",
-                            "content": f.wr_content.value
-                        },
-                        dataType: "json",
-                        async: false,
-                        cache: false,
-                        success: function (data, textStatus) {
-                            subject = data.subject;
-                            content = data.content;
-                        }
-                    });
-
-                    if (content) {
-                        alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
-                        f.wr_content.focus();
-                        return false;
-                    }
-                   
-                    // 양쪽 공백 없애기
-                    var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-                    document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
-                    if (char_min > 0 || char_max > 0) {
-                        check_byte('wr_content', 'char_count');
-                        var cnt = parseInt(document.getElementById('char_count').innerHTML);
-                        if (char_min > 0 && char_min > cnt) {
-                            alert("댓글은 " + char_min + "글자 이상 쓰셔야 합니다.");
-                            return false;
-                        } else if (char_max > 0 && char_max < cnt) {
-                            alert("댓글은 " + char_max + "글자 이하로 쓰셔야 합니다.");
-                            return false;
-                        }
-                    }
-                    else if (!document.getElementById('wr_content').value) {
-                        alert("댓글을 입력하여 주십시오.");
-                        return false;
-                    }
-
-                    if (typeof (f.wr_name) != 'undefined') {
-                        f.wr_name.value = f.wr_name.value.replace(pattern, "");
-                        if (f.wr_name.value == '') {
-                            alert('이름이 입력되지 않았습니다.');
-                            f.wr_name.focus();
-                            return false;
-                        }
-                    }
-
-                    if (typeof (f.wr_password) != 'undefined') {
-                        f.wr_password.value = f.wr_password.value.replace(pattern, "");
-                        if (f.wr_password.value == '') {
-                            alert('비밀번호가 입력되지 않았습니다.');
-                            f.wr_password.focus();
-                            return false;
-                        }
-                    }
-
-                    if (!chk_captcha()) return false;
-
-                    set_comment_token(f);
-
-                    document.getElementById("btn_submit").disabled = "disabled";
-
-                    return true;
-                }
-
-                function comment_box(comment_id, work) {
-                    var el_id,
-                        form_el = 'fviewcomment',
-                        respond = document.getElementById(form_el);
-
-                    // 댓글 아이디가 넘어오면 답변, 수정
-                    if (comment_id) {
-                        if (work == 'c')
-                            el_id = 'reply_' + comment_id;
-                        else
-                            el_id = 'edit_' + comment_id;
-                    }
-                    else
-                        el_id = 'bo_vc_w';
-
-                    if (save_before != el_id) {
-                        if (save_before) {
-                            document.getElementById(save_before).style.display = 'none';
-                        }
-
-                        document.getElementById(el_id).style.display = '';
-                        document.getElementById(el_id).appendChild(respond);
-                        //입력값 초기화
-                        document.getElementById('wr_content').value = '';
-
-                        // 댓글 수정
-                        if (work == 'cu') {
-                            document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
-                            if (typeof char_count != 'undefined')
-                                check_byte('wr_content', 'char_count');
-                            if (document.getElementById('secret_comment_' + comment_id).value)
-                                document.getElementById('wr_secret').checked = true;
-                            else
-                                document.getElementById('wr_secret').checked = false;
-                        }
-
-                        document.getElementById('comment_id').value = comment_id;
-                        document.getElementById('w').value = work;
-
-                        if (save_before)
-                            $("#captcha_reload").trigger("click");
-
-                        save_before = el_id;
-                    }
-                }
-
-                function comment_delete() {
-                    return confirm("이 댓글을 삭제하시겠습니까?");
-                }
-
-                comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
-
-                $(function () {
-                    //댓글열기
-                    $(".cmt_btn").click(function () {
-                        $(this).toggleClass("cmt_btn_op");
-                        $("#bo_vc").toggle();
-                    });
-                });
-            </script> -->
-            <!-- } 댓글 쓰기 끝 -->
-            <!-- <script src="http://sample.paged.kr/purewhite/js/md5.js"></script>
-
-
-        </article> -->
-        <!-- } 게시판 읽기 끝 -->
-
-        <!-- <script>
-
-            function board_move(href) {
-                window.open(href, "boardmove", "left=50, top=50, width=500, height=550, scrollbars=1");
-            }
-        </script>
-
-        <script>
-            $(function () {
-                $("a.view_image").click(function () {
-                    window.open(this.href, "large_image", "location=yes,links=no,toolbar=no,top=10,left=10,width=10,height=10,resizable=yes,scrollbars=no,status=no");
-                    return false;
-                });
-
-                // 추천, 비추천
-                $("#good_button, #nogood_button").click(function () {
-                    var $tx;
-                    if (this.id == "good_button")
-                        $tx = $("#bo_v_act_good");
-                    else
-                        $tx = $("#bo_v_act_nogood");
-
-                    excute_good(this.href, $(this), $tx);
-                    return false;
-                });
-
-                // 이미지 리사이즈
-                $("#bo_v_atc").viewimageresize();
-
-                //sns공유
-                $(".btn_share").click(function () {
-                    $("#bo_v_sns").fadeIn();
-
-                });
-
-                $(document).mouseup(function (e) {
-                    var container = $("#bo_v_sns");
-                    if (!container.is(e.target) && container.has(e.target).length === 0) {
-                        container.css("display", "none");
-                    }
-                });
-            });
-
-            function excute_good(href, $el, $tx) {
-                $.post(
-                    href,
-                    { js: "on" },
-                    function (data) {
-                        if (data.error) {
-                            alert(data.error);
-                            return false;
-                        }
-
-                        if (data.count) {
-                            $el.find("strong").text(number_format(String(data.count)));
-                            if ($tx.attr("id").search("nogood") > -1) {
-                                $tx.text("이 글을 비추천하셨습니다.");
-                                $tx.fadeIn(200).delay(2500).fadeOut(200);
-                            } else {
-                                $tx.text("이 글을 추천하셨습니다.");
-                                $tx.fadeIn(200).delay(2500).fadeOut(200);
-                            }
-                        }
-                    }, "json"
-                );
-            }
-        </script> -->
-        <!-- } 게시글 읽기 끝 -->
 
     </div>
 </content>

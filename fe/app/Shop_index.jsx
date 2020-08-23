@@ -8,6 +8,11 @@ const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
+
+
+import './shop_index.css';
+
+import Shop_list from './shop/Shop_list.jsx';
 // import Section from './shop/section'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import './css/animate.css';
@@ -26,22 +31,28 @@ class Shop_index extends React.Component {
         let { data } = await axios.get("/shop/index/axios");
         console.log(data);
         this.setState({ data });
+
+        $('header').toggleClass('changed');
+        $("header").css("background-image","url('/uploads/goods.png')")
+        $("header").css("background-position","center")
+        // $("header").css("background-repeat","no-repeat")
+        // $("header").css("background-size","contain")
     }
 
     render() {
             return (
-                <Fragment>
+                <Fragment className="shop_index">
                     {/* <Header_top></Header_top> */}
-                    <Header_middle></Header_middle>
-                    <Header_bottom></Header_bottom>
+                    {/* <Header_middle></Header_middle> */}
+                    {/* <Header_bottom></Header_bottom> */}
                     {/* <SliderFrame></SliderFrame> */}
                     <Section data={this.state.data}></Section>
                     {/* <Footer></Footer>
                     <Footer2></Footer2> */}
-                    {
+                    {/* {
                         this.chat != 0 ? <Chat></Chat> : <div></div>
-                    }
-                    
+                    } */}
+                    <Shop_list></Shop_list>
                 </Fragment>
             )
         

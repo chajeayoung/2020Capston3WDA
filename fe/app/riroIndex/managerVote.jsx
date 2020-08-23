@@ -17,8 +17,6 @@ import jQuery from "jquery";
 
 window.$ = window.jQuery = jQuery;
 
-
-
 const axios = require('axios');
 
 class VoteTable extends Component{

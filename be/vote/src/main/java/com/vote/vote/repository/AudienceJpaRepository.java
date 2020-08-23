@@ -20,25 +20,22 @@ public interface AudienceJpaRepository extends JpaRepository<Audience, Integer> 
     public Audience findById(int applyId);
 
     public Audience deleteById(int applyId);
+
     List<Audience> findByaTitleContaining(String aTitle);
 
     Page<Audience> findAllByrId(Pageable pageable, int rId);
 
     public List<Audience> findByrId(int rId);
 
+    public List<Audience> findByprogramId(int programId);
+
     @Modifying
     @Transactional
     @Query("update Audience set a_title =:title, a_startdate=:startdate, a_enddate=:enddate, a_recruits=:recruits, a_limit=:limit, a_price=:price, img=:img, a_content=:content where apply_id=:applyid")
-    void audienceUpdate(@Param("title") String title, 
-            @Param("startdate") Date startdate,
-            @Param("enddate") Date enddate, 
-            @Param("recruits") int recruits,
-            @Param("limit") int limit,
-            @Param("price") int price, 
-            @Param("img") String img, 
-            @Param("content") String content,
-            @Param("applyid") int applyid
-            );
+    void audienceUpdate(@Param("title") String title, @Param("startdate") Date startdate,
+            @Param("enddate") Date enddate, @Param("recruits") int recruits, @Param("limit") int limit,
+            @Param("price") int price, @Param("img") String img, @Param("content") String content,
+            @Param("applyid") int applyid);
 
     // @Modifying
     // @Transactional

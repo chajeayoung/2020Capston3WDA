@@ -6,28 +6,28 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<body>
 <content>
 	<!-- <div id="hotclibread"></div>
     <script src="/assets/hotclibread.js"></script> --> 
 	 <link rel="stylesheet" href="/css/hotclibread.css"/>
-<body>
-	<h1> <span th:utext="${hotclib.htitle}"></span></h1>
-		<tr>		
-		<video class="video1" controls th:src="@{'/uploads/' + ${rfile.filename}}" width="800" height="500"></video>
-			
-		</tr>
+
 	
-		<div class="gi">		
-	<tr> 
+	<h1> <strong><div th:utext="${hotclib.htitle}"></div></h1></strong>
+		<tr>		
+		<video class="video1" controls th:src="@{'/uploads/' + ${rfile.filename}}" width="1200" height="400"></video>
+			
 		
-	</tr>
-		<tr>
-			<li class="rcontent">내용: <span th:utext="${hotclib.h_content}"></span></li>
-		</tr>
-			<tr>
-				<li>조회수: <span th:utext="${hotclib.hviewcount}"></span></li>
-			</tr>
-			<li>작성자: <span th:utext="${hotclib.husername}"></span></li>
+		<section class="backim">
+		<div class="gi">		
+	
+		
+			<div class="rcontent">내용: <span th:utext="${hotclib.h_content}"></span></div>
+	
+		
+				<div>조회수: <span th:utext="${hotclib.hviewcount}"></span></div>
+			
+			<div>작성자: <span th:utext="${hotclib.husername}"></span></div>
 		</div>
 	
 	 <!--  <div  th:each="hotclib:${hotclibList}">
@@ -45,7 +45,7 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 	
 	
 		<div>
-			<a class="btn btn-lg btn-primary" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib'}">목록</a><br>
+			<a class="koko" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib'}">목록</a><br>
 		</div>
 			
 		<!-- 	<span><a sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}">수정</a></span>
@@ -57,9 +57,9 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 			 -->
 		
 			 <form id="replyList" method="post" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
-				<tr>댓글 
-				<td><input type="textarea" placeholder="내용을 입력하세요" name="r_content"></td>
-					<input type="submit" value="등록" ><hr>
+				<tr>
+				<td><input class="hull" style="width:200px"type="textarea" placeholder="댓글을 입력하세요" name="r_content"></td>
+					<input class="riro" type="submit" value="등록" >
 			</tr>
 			</form>  
 		    
@@ -67,38 +67,46 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
 	
 
 
-	<tr th:each="reply:${replyList}" varStatus="vs">
+	<div class="reply" th:each="reply:${replyList}" varStatus="vs" >
 		
-			<p>
-			 
-			    <li>작성자 : <td th:text="${reply.rusername}"></span></li>
-				<li>작성일자 : <td th:text="${reply.r_date}"></td></li>
-				<li>내용 : <td th:text="${reply.r_content}"></td></li>
-					<div>
+			
+			<div>
+				
+			    <div><strong>작성자</strong> : <strong th:text="${reply.rusername}"></strong></div>	
+				<div>내용 : <span th:text="${reply.r_content}"></span></div>
+				<div>작성일자 : <span th:text="${reply.r_date}"></span></div>	
+			</div>
+					<div id="sd">
 						<form id="replydelete-form"  method="post" th:action="@{'/community/'+${hotclib.programid} +'/hotclib/read/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">						
-							<input type="hidden" name="_method" value="replydelete"/>
-							<button id="replydelete">댓글삭제</button>
+							<ul id="sad">
+							<li><input type="hidden" name="_method" value="replydelete"/></li>
+							<li><button class="ruro" id="replydelete">댓글삭제</button></li>
+							<li><div class="root" ${vs.index}>
+								<button style="display:inline"class="roro" type="button" data-rno="${replyList.replyid}"  id="1btn"><span>댓글수정</span></button>
+								
+								</div></li>
+						</ul>
 						</form>
-					<div id="root"${vs.index}>
-						<button type="button" data-rno="${replyList.replyid}"  id="1btn">댓글수정</button> 
-						</div>
-						<div id="modal" ${vs.index}>
-							<form id="replyupdate-form"  method="POST" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
+						
+					
+					
+					</div>
+						<div id="modal">
+							<form  method="POST" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/replyupdate/' + ${hotclib.hotclibid}+'/' + ${reply.replyid}}">		
 							<div class="modal_content">									
-								<h5>댓글수정하는곳</h5>
-								<input type="textarea" placeholder="내용을 입력하세요" name="r_content">
-								<input type="submit" value="등록" >
-								<button type="button" id="2btn">닫기</button>
+								<h5>댓글수정 하세요</h5>
+								<input class="hull" type="textarea" placeholder="내용을 입력하세요" name="r_content">
+								<input class="riro"type="submit" value="등록" >
+								<button class="riro" type="button" id="2btn">닫기</button>
 							</div>
 							</form>
 							
 						</div>
-						</div>
 						
-						<hr>
-					</p>
-				</tr>
-				
+						
+					
+				</div>
+			</section>
 <script>
 	
 	//$("#1btn").click(function(){
@@ -108,7 +116,7 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
  //    $("#2btn").click(function(){
  //       $("#modal[vs.index]").fadeOut(500);
  //   });      
-     
+	 
      $("#1btn").click(function(){
          $("#modal").attr("style", "display:block");
      });
@@ -116,7 +124,24 @@ th:replace="~{main_layout::layout(~{::content},_,'게시글조회',_)}">
       $("#2btn").click(function(){
          $("#modal").attr("style", "display:none");
      });   
-         
+	// $(".roro").click(function(){
+	// 	/* dat_edit_bt클래스 클릭시 동작(댓글 수정) */
+	// 		var obj = $(this).closest(".reply").find(".roro");
+	// 		obj.dialog({
+	// 			modal:true,
+	// 			width:650,
+	// 			height:200,
+	// 			title:"댓글 수정"});
+	// 	});
+	// 	$(".riro").click(function(){
+	// 	/* dat_edit_bt클래스 클릭시 동작(댓글 수정) */
+	// 		var obj = $(this).closest(".reply").find(".riro");
+	// 		obj.dialog({
+	// 			modal:false,
+	// 			width:650,
+	// 			height:200,
+	// 			title:"댓글 수정"});
+	// 	});
 </script>
  
 <style>

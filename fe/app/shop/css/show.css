@@ -1,3 +1,19 @@
+#selectOption{
+        margin: 5px;
+        width: 200px; 
+        padding: .8em .5em; 
+        font-family: inherit;  /* 폰트 상속 */
+        background: url('https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg') no-repeat 95% 50%; 
+        border: 1px solid #999;
+        border-radius: 0px; 
+        -webkit-appearance: none; 
+        -moz-appearance: none;
+        appearance: none;
+}
+.infoImage{
+    width: 900px;
+    height: 900px;
+}
 .topDiv{
     width: 100%;
     margin: auto;
@@ -13,6 +29,7 @@
 
 .itemInfo{
     margin: auto;
+    font-size: 25px;
 }
 .itemDetails{
     margin: auto;
@@ -40,13 +57,51 @@
     height: 50px;
 }
 
-.goBag{
+/* .goBag{
     background: #CED8F6;    
     border: 1px solid gray;
     border-radius: 15px;
     padding: 5px;
     margin: 5px;
-}
+} */
+.goBag{
+    margin: 10px;
+    border-radius: 4px;
+    background: #978e8e63;
+    color: #716978;
+    border:none;
+    position:relative;
+    font-size:15px;
+    padding:0.6em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    height: 38px;
+  }
+.goBag:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  .goBag:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .goBag:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .goBag:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
 .goOrder{
     background: #F6CECE;
     border: 1px solid gray;
@@ -66,6 +121,7 @@
 }
 .infoImage_item{
     text-align: center;
+    
 }
 .prd_detail{
     text-align: center;
@@ -73,23 +129,95 @@
 }
 #sumPrice{
     margin: 10px;
-    color: #FE2E2E;
+    color: #914949;
 }
 
 .linkDiv{
     text-align: end;
     margin-bottom: 30px;
 }
+/* .list{
+    padding: 5px;
+    margin: 5px;
+    font-size: 18px;
+} */
+
 .list{
-    padding: 5px;
-    margin: 5px;
-    font-size: 18px;
-}
-.myBag{
-    padding: 5px;
-    margin: 5px;
-    font-size: 18px;
-}
+    margin: 10px;
+    border-radius: 4px;
+    background: #978e8e63;
+    color: #716978;
+    border:none;
+    position:relative;
+    font-size:18px;
+    padding:0.6em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    height: 38px;
+  }
+.list:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  .list:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .list:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .list:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  .myBag{
+    margin: 10px;
+    border-radius: 4px;
+    background: #978e8e63;
+    color: #716978;
+    border:none;
+    position:relative;
+    font-size:18px;
+    padding:0.6em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    height: 38px;
+  }
+.myBag:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  .myBag:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  .myBag:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .myBag:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
 .seller{
     font-size: 20px;
     color: #819FF7;
@@ -105,5 +233,8 @@
     .imgs{
         align-content: center;
         margin-bottom: 30px;
+    }
+    .infoImage{
+        width: 100%;
     }
 }

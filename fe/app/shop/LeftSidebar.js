@@ -9,6 +9,16 @@ export default class LeftSidebar extends React.Component {
         console.log(this.props);
         return (
             <div className="left-sidebar">
+                <div className="brands_products">
+                    <h2>프로그램 별</h2>
+                    <div className="brands-name">
+                        <ul className="nav nav-pills nav-stacked">
+                            {/* 카테고리 6번은 프로그램 목록입니다. */}
+                            <ProgramList data={this.props.category[6]} event={this.props.proEvent} that={this.props.that}/>
+                        </ul>
+                    </div>
+                </div>
+                
                 <h2>카테고리</h2>
                 <div className="panel-group category-products" id="accordian">
                     <div className="panel panel-default">
@@ -119,15 +129,7 @@ export default class LeftSidebar extends React.Component {
                     </div>
                 </div>
 
-                <div className="brands_products">
-                    <h2>프로그램 별</h2>
-                    <div className="brands-name">
-                        <ul className="nav nav-pills nav-stacked">
-                            {/* 카테고리 6번은 프로그램 목록입니다. */}
-                            <ProgramList data={this.props.category[6]} event={this.props.proEvent} that={this.props.that}/>
-                        </ul>
-                    </div>
-                </div>
+                
             </div>
         )
     }

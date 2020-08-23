@@ -168,32 +168,32 @@ class ItemCreate extends React.Component {
                     <input type="hidden" name="_csrf" value={document.cookie.split("=")[1]}/>
                     <div className="item">
                         <div className="leftBox">
-                            <div>분류</div>
+                            <strong><div>분류</div></strong>
                             <select id="category_select"  name="category" onChange={this.categoryDSet.bind(this)} required>                
                             </select>
                             <select id="categoryD_select"  name="categoryD" required>                
                             </select>
-                            <div>관련 출연자</div>
+                            <strong><div>관련 출연자</div></strong>
                             <select id="pop_select"  name="pop" onChange={this.categoryDSet.bind(this)} required>                
                             </select>
-                            <div>상품판매 종료날짜</div>
+                            <strong><div>상품판매 종료날짜</div></strong>
                             <input type="date" name="endTime" required/>
-                            <div>상품명</div>
+                            <strong><div>상품명</div></strong>
                             <input type="text" name="title" placeholder="상품명" required/>
-                            <div>간단설명</div>
+                            <strong><div>간단설명</div></strong>
                             <textarea name="info1" placeholder="간단한 설명을 입력하세요" required/>
-                            <div>상세설명</div>
-                            <textarea name="info2" placeholder="자세한 설명을 입력하세요" required/>
+                            <strong><div>상세설명</div></strong>
+                            <textarea className="text1" name="info2"  placeholder="상세설명을 입력하세요" required/>
                         </div>
                         <div className="rightBox">
-                            <label>대표 이미지</label>    
+                            <label>대표 이미지</label>   
                             <input type="file" name="file1" required/>
                             <label>부가 이미지</label>    
                             <input type="file" name="file2" multiple required/>
                             <div>재고</div>
-                            <input type="number" name="stock" placeholder="개수" min="1" required/>개
+                            <input className="raribi" type="number" name="stock" placeholder="개수" min="1" required/>개
                             <div>개당 가격</div>
-                            <input type="number" name="price" placeholder="가격" min="1" required/>원
+                            <input className="raribi" type="number" name="price" placeholder="가격" min="1" required/>원
                             <div> 선택 항목 </div>
                             <label>상세 이미지</label>    
                             <input type="file" name="file3"multiple/>

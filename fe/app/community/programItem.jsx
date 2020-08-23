@@ -1,7 +1,7 @@
 import React, {Component}from 'react'
 import ReactDOM from 'react-dom';
 import ItemCard3 from '../items/itemCard3_big.jsx';
-import './voteIndex.css';
+import './css/communityIndex.css';
 
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
@@ -17,7 +17,7 @@ class ProgramItem extends Component {
         const { data } = this.props;
           return data.map((program,index)=>{
             return (
-                <div key={'div'+index} className="vote_index_item">
+                <div key={'div'+index} className="index_item">
                     <a href={"/community/"+program.id}>
                        <ItemCard3 img={program.img} title={program.name}/>
                     </a>
