@@ -40,6 +40,7 @@ import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.db.dto.Member;
 import com.vote.vote.db.dto.Rfile;
 import com.vote.vote.repository.ProgramManagerJpaRepository;
+import com.vote.vote.repository.ProgramJpaRepository;
 import com.vote.vote.service.StorageService;
 
 @Controller
@@ -56,6 +57,9 @@ public class AuditionResultController {
 
 	@Autowired
 	private ProgramManagerJpaRepository pmRepository;
+
+	@Autowired
+	private ProgramJpaRepository programRepository;
 
 	@Autowired
 	private AuditionConJpaRepository auditionConRepository;
@@ -76,10 +80,13 @@ public class AuditionResultController {
 		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 		ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
 
+
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
 		// model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
 		 model.addAttribute("auditionresultlist", auditionResultRepository.findByProgramid(pManager.getProgramId(),pageable));
+
+		 
 
 		return "auditionresult/list";
 	}
@@ -161,9 +168,11 @@ public class AuditionResultController {
 		// System.out.println(auditionid);
 		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 			ProgramManager pManager = pmRepository.findById(userDetails.getR_ID());
+			Program program = programRepository.findById(pManager.getProgramId());
 		
 
 			auditionResult.setProgramid(pManager.getProgramId());
+			auditionResult.setRimg(program.getImg());
 		if(filename.isEmpty()) {
 			Member member = memberRepository.findByUserid(principal.getName());
 			auditionResult.setRid(member.getNo());

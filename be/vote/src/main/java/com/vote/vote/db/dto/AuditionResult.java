@@ -53,6 +53,9 @@ public class AuditionResult {
 		@Column(nullable=true, name="audition_id")
 		private int auditionid;
 
+		@Column(nullable=true,name="r_img")
+	    private String rimg;
+
 		public int getResultid() {
 			return resultid;
 		}
@@ -146,6 +149,13 @@ public class AuditionResult {
 			this.auditionid = auditionid;
 		}
 
+		public String getRimg() {
+			return rimg;
+		}
+
+		public void setRimg(String rimg) {
+			this.rimg = rimg;
+		}
 		
 
 		
