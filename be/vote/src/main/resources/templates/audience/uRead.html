@@ -75,7 +75,7 @@
                   
                   <!-- 타이머 끝 -->
                 <form style="text-align: -webkit-center">
-                    <!-- <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}"> -->
+                    <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
                     <input type="hidden" id="aLimit" name="aLimit" value="" th:value="${audience.aLimit}">
                     <input type="hidden" id="aPrice" name="aPrice" value="webzine" th:value="${audience.aPrice}">
                     <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
@@ -102,6 +102,7 @@
             </section>
 
             <div id="bo_v_share">
+                
 
                 <!--  추천 비추천 시작 { -->
                 <!-- }  추천 비추천 끝 -->
@@ -118,9 +119,9 @@
                 </ul>
 
                 <ul class="bo_v_com">
-
-                    <li><a href="/audience/list" class="btn_b01 btn"><i class="fa fa-list"
-                                aria-hidden="true"></i> 목록</a></li>
+                    <button onclick=window.history.back() class="btn_submit btn">목록</button>
+                    <!-- <li><a href="/audience/ulist2" class="btn_b01 btn"><i class="fa fa-list"
+                                aria-hidden="true"></i> 목록</a></li> -->
                 </ul>
             </div>
 
