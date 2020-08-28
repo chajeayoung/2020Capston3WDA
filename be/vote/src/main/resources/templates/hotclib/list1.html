@@ -18,15 +18,15 @@
     <script src="/assets/hotclib.js"></script> -->
 
 
-    <section class="backim">
+  
 	<div>
       <a href="" class="riro" 
       th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
       <a href="" class="riro"
       th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
       </div>
-     
-
+    
+<section class="backim">
 		<div class="gi" th:each="hotclib:${hotclibList}">
 		<div>	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
@@ -56,37 +56,42 @@
 				<input type="hidden" name="_method" value="delete"/>
 				<button class="hello" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" id="delete-btn"><span>삭제</span></button>
 			</form>
+			
     </div>
+ 	
+    </section>
   </br>
   </br>
   </br>
     
-	  
+
+        
+<section style="margin-top: 400px;">
+<div>
+        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
+          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
+      </div>
 
     <div class="pagination">
-      <a href="#">&laquo;</a>
+      <a th:href="#">&laquo;</a>
       <a href="#">1</a>
-      <a href="#" class="active">2</a>
+      <a href="#">2</a>
       <a href="#">3</a>
       <a href="#">4</a>
       <a href="#">5</a>
       <a href="#">6</a>
       <a href="#">&raquo;</a>
     </div>
+    
     <form style="display: flow-root;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
       <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
-      <button class="btn btn-default">Search</button>
+      <button class="btn btn-default">검색</button>
     </form>
-    
-<div>
-        <a sec:authorize="hasAnyAuthority('2')" href="" class="upl"
-          th:href="@{'/community/hotclib/upload'}">영상업로드</a>
-      </div>
-   
-</section>
-	      <!--  <nav style="text-align: center;">
+   </section>
+
+	        <!-- <nav style="text-align: center;">
     <ul class="pagination"
-     th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
+     th:with="start=${T(Math).floor(hotclibList./10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >
           <li>
             <a th:href="@{'/community/myhotclib(page=1)'}" aria-label="First">
@@ -116,7 +121,7 @@
             </a>
          </li>
        </ul>
-     </nav> -->
+     </nav>   -->
      </content>
 </body>
 </html>

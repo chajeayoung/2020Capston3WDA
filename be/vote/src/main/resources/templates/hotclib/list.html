@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	th:replace="~{main_layout::layout(~{::content},_,'주간 핫클립',_)}">
+	th:replace="~{main_layout::layout(~{::content},_,'핫클립 관리',_)}">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,113 +11,113 @@
 </head>
 
 <body>
-	<content>
-
+	<content >
+	<link rel="stylesheet" href="/css/hotcliblist.css"/>
+	
 	<!--  <div id="hotclib"></div>
     <script src="/assets/hotclib.js"></script> -->
-    <link rel="stylesheet" href="/css/hotcliblist.css"/>
 
-	<section class="backim">
 
-	<a href="" class="riro"
-				th:href="@{'/community/'+${programid}+'/hotclib/sorthviewcount'}">조회순</a>
-			<a href="" class="riro"
-				th:href="@{'/community/'+${programid}+'/hotclib/sorthdate'}">최신순</a>
-		
-		<form
-			th:action="@{'/community/'+${programid}+'/hotclib/search'}"
-			method="get">
-			<div class="search">
-				<input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
-				<button class="btn btn-default">Search</button>
-			</div>
-		</form>
-
+  
+	<div>
+      <a href="" class="riro" 
+      th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
+      <a href="" class="riro"
+      th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      </div>
+    
+<section class="backim">
 		<div class="gi" th:each="hotclib:${hotclibList}">
-			<div><a href=""
+		<div>	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
 				<img class="hi" width="300" height="300"
-				th:src="@{'/uploads/' + ${hotclib.filename2}}"></div>
-
+				th:src="@{'/uploads/' + ${hotclib.filename2}}">
+</div>
 
 				
 				<div class="foncolor">
-					 <h1 th:utext="${hotclib.htitle}" style="margin: 5px;"></h1> (<span
-						style="color: red;" th:text="${hotclib.hreplycount}"></span>)
+					 <h1><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
+						style="color: red;" th:text="${hotclib.hreplycount}"></span>)</h1>
+				</div>
+				<div class="foncolor">
+					 <span class="qi" th:utext="${hotclib.hdate}"></span>
+				</div>
+				<div class="foncolor">
+					조회수: <span class="qi" th:utext="${hotclib.hviewcount}"></span>
+				</div>
+				<div class="foncolor">
+					작성자: <span class="qi" th:utext="${hotclib.husername}"></span>	
 				</div>
 				
-				<div class="foncolor">
-					조회수: <span th:utext="${hotclib.hviewcount}"></span>
-				</div>
-				<div class="foncolor">
-					작성자: <span th:utext="${hotclib.husername}"></span>
-                </div>
-                <div class="foncolor">
-					작성일: <span th:utext="${hotclib.hdate}"></span>
-				</div>
 			</a>
-		</div>
-		
-		<!-- <div>
-			<a sec:authorize="hasAnyAuthority('2')" href="" class="btn btn-lg btn-primary"
-				th:href="@{'/community/'+${programid}+'/hotclib/upload'}">영상업로드</a>
-		</div> -->
-	
-    </br>
-</br>
-</br>
-  <form style="display: inline-block;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
-    <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
-    <button class="btn btn-default">Search</button>
-  </form>
-  
+         
+			<!-- <a class="bye" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" href="" th:href="@{'/community/'+${hotclib.programid}+'/hotclib/update/' + ${hotclib.hotclibid}}"><span>수정</span></a>
+			<form style="display: inline;"  id="delete-form" th:action="@{'/community/'+${hotclib.programid}+'/hotclib/' + ${hotclib.hotclibid}}" method="post">
+				<input type="hidden" name="_method" value="delete"/>
+				<button class="hello" style="vertical-align:middle" sec:authorize="hasAnyAuthority('2')" id="delete-btn"><span>삭제</span></button>
+			</form>
+			 -->
+    </div>
+ 	
+    </section>
+  </br>
+  </br>
+  </br>
+    
 
-  <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="#">1</a>
-    <a href="#" class="active">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">&raquo;</a>
-  </div>
+        
+<section style="margin-top: 400px;">
 
-</section>
-	   <!-- <nav style="text-align: center;">
+    <div class="pagination">
+      <a href="#">&laquo;</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">&raquo;</a>
+    </div>
+    
+    <form style="display: flow-root;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
+      <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
+      <button class="btn btn-default">검색</button>
+    </form>
+   </section>
+
+	        <!-- <nav style="text-align: center;">
     <ul class="pagination"
-     th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
+     th:with="start=${T(Math).floor(hotclibList./10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >
           <li>
-            <a th:href="@{'/community/'+${programid}+'/hotclib(page=1)'}" aria-label="First">
+            <a th:href="@{'/community/myhotclib(page=1)'}" aria-label="First">
                 <span aria-hidden="true">First</span>
               </a>
           </li>
 
           <li th:class="${hotclibList.first} ? 'disabled'">
-            <a th:href="${hotclibList.first} ? '#' :@{'/community/'+${programid}+'/hotclib(page=${hotclibList.number})'}" aria-label="Previous">
+            <a th:href="${hotclibList.first} ? '#' :@{'/community/myhotclib(page=${hotclibList.number})'}" aria-label="Previous">
                 <span aria-hidden="true">&lt;</span>
             </a>
           </li>       
             
           <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == hotclibList.number + 1} ? 'active'">
-            <a th:text="${page}" th:href="@{'/community/'+${programid}+'/hotclib(page=${page})'}"></a>
+            <a th:text="${page}" th:href="@{'/community/myhotclib(page=${page})'}"></a>
           </li>
 
           <li th:class="${hotclibList.last} ? 'disabled'">
-            <a th:href="${hotclibList.last} ? '#' : @{'/community/'+${programid}+'/hotclib(page=${hotclibList.number + 2})'}" aria-label="Next">
+            <a th:href="${hotclibList.last} ? '#' : @{'/community/myhotclib(page=${hotclibList.number + 2})'}" aria-label="Next">
                 <span aria-hidden="true">&gt;</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{'/community/'+${programid}+'/hotclib(page=${hotclibList.totalPages})'}" aria-label="Last">
+            <a th:href="@{'/community/myhotclib(page=${hotclibList.totalPages})'}" aria-label="Last">
               <span aria-hidden="true">Last</span>
             </a>
          </li>
        </ul>
-     </nav> -->
+     </nav>   -->
      </content>
-    
 </body>
 </html>
