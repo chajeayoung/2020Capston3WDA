@@ -64,6 +64,7 @@ $(document).ready(function () {
         $("#timer__ul").hide();
     }
 
+
     $('#apply').click(function () {
         $.ajax({
             url: `/audience/apply/${audience.applyId}/${audience.aLimit}/${audience.aPrice}`,
@@ -72,7 +73,7 @@ $(document).ready(function () {
             dataType: "text",
             data: $('#userRid').text(),
             success: function (data) {
-
+                
                 alert(data);
 
             },

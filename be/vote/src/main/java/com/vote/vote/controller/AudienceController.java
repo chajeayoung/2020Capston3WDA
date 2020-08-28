@@ -159,9 +159,9 @@ public class AudienceController {
 
     // 게시글 보기
     @RequestMapping("/audience/read/{applyId}")
-    public String read(Audience audience, Model model, @PathVariable int applyId) {
+    public String read( Model model, @PathVariable int applyId) {
 
-        audience = audienceJpaRepository.findById(applyId);
+        Audience audience = audienceJpaRepository.findById(applyId);
         model.addAttribute("audience", audience);
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
@@ -172,12 +172,12 @@ public class AudienceController {
     // 응모 ajax
     @GetMapping("/audience/apply/{applyId}/{aLimit}/{aPrice}")
     @ResponseBody
-    public String result(Audience audience, @PathVariable int applyId, @PathVariable int aLimit,
-            @PathVariable int aPrice, Principal principal, ADetail aDetail, @Nullable Authentication authentication) {
+    public String result(@PathVariable int applyId, @PathVariable int aLimit,
+            @PathVariable int aPrice, Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Member member = memberRepository.findByNo(userDetails.getR_ID());
         Audience audi = audienceJpaRepository.findById(applyId);
-
+        ADetail aDetail = new ADetail();
         if (audi.getResult() == 1)
             return "이미 추첨이 완료된 응모입니다.";
 
@@ -196,7 +196,7 @@ public class AudienceController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            aDetail.setApplyId(audience.getApplyId());
+            aDetail.setApplyId(audi.getApplyId());
             aDetail.setRId(member.getNo());
             aDetailRepository.saveAndFlush(aDetail);
             return "응모완료!";
@@ -225,7 +225,7 @@ public class AudienceController {
     }
 
     @PostMapping("/audience/create")
-    public String mUpload(@Valid Audience audience, SessionStatus sessionStatus, Principal principal, Model model,
+    public String mUpload(Audience audience, SessionStatus sessionStatus, Principal principal, Model model,
             RedirectAttributes redirAttrs, @RequestParam(name = "filename") MultipartFile filename,
             @Nullable Authentication authentication) {
         // if (bindingResult.hasErrors()) {
@@ -238,7 +238,7 @@ public class AudienceController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Member member = memberRepository.findByNo(userDetails.getR_ID());
         ProgramManager pm = pmRepository.findById(member.getNo());
-
+        
         // 게시글, 파일저장
         audience.setProgramId(pm.getProgramId());
         audience.setRId(member.getNo());
