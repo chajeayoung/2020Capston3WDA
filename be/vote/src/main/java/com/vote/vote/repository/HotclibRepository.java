@@ -1,10 +1,12 @@
 package com.vote.vote.repository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.vote.vote.db.dto.Hotclib;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

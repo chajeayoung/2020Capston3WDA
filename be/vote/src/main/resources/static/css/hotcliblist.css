@@ -1,3 +1,8 @@
+@media(max-width:940px){
+    .upl{
+        width: 70%;
+    }
+}
 .bong {
 			background-image:linear-gradient ;
 			
@@ -5,10 +10,9 @@
 
 .gi {
 
-	border-radius: 20px;
 	padding: 0px;
-	width: 300px;
-	height: 300px;
+	width: 305px;
+	height: 305px;
 	margin: 10px;
 	display: inline-block;
 	text-align: left;
@@ -22,6 +26,7 @@ font-size: 1.3em;
   text-align: center;
 }
 .bye {
+  text-decoration: none !important;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
@@ -102,6 +107,7 @@ font-size: 1.3em;
 }
 
 .riro{
+  text-decoration: none !important;
   margin: 10px;
   background: #8965a778;
   color:#fff;
@@ -118,7 +124,7 @@ font-size: 1.3em;
   background:#fff;
   color:#1AAB8A;
 }
-.riro:before,button:after{
+.riro:before,riro:after{
   content:'';
   position:absolute;
   top:0;
@@ -134,7 +140,7 @@ font-size: 1.3em;
   left:0;
   bottom:0;
 }
-.riro:hover:before,button:hover:after{
+.riro:hover:before,riro:hover:after{
   width:100%;
   transition:800ms ease all;
 }
@@ -171,7 +177,7 @@ font-size: 1.3em;
   background:#fff;
   color:#1AAB8A;
 }
-.gall:before,button:after{
+.gall:before,gall:after{
   content:'';
   position:absolute;
   top:0;
@@ -187,7 +193,7 @@ font-size: 1.3em;
   left:0;
   bottom:0;
 }
-.gall:hover:before,button:hover:after{
+.gall:hover:before,gall:hover:after{
   width:100%;
   transition:800ms ease all;
 }
@@ -205,6 +211,8 @@ font-size: 1.3em;
 }
 
 .upl{
+  float: right;
+  text-decoration: none !important;
   display: inline-grid;
   background:#20073b4d;
   color:#fff;
@@ -222,7 +230,7 @@ font-size: 1.3em;
   background:#fff;
   color:#1AAB8A;
 }
-.upl:before,button:after{
+.upl:before,upl:after{
   content:'';
   position:absolute;
   top:0;
@@ -238,7 +246,7 @@ font-size: 1.3em;
   left:0;
   bottom:0;
 }
-.upl:hover:before,button:hover:after{
+.upl:hover:before,upl:hover:after{
   width:100%;
   transition:800ms ease all;
 }
