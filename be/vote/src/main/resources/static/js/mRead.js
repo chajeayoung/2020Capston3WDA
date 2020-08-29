@@ -2,7 +2,8 @@ $(document).ready(function () {
 
     var audience = {
         applyId: $('#applyId').val(),
-        aRecruits: $('#aRecruits').val()
+        aRecruits: $('#aRecruits').val(),
+        result: $('#result').val(),
     }
 
     var now = new Date().getTime();
@@ -11,22 +12,27 @@ $(document).ready(function () {
     if(now<sdate){
     	$("#showList").prop('disabled', true);
     	$("#showResult").prop('disabled', true);
-    	$("#result__title").text("응모전입니다!");
+    	$("#result__title").text("응모전입니다! 응모 시작 전 까지 수정·삭제가 가능합니다.");
     	
     } else if(now>=sdate && now<=edate){
     	$("#showList").prop('disabled', false);
-    	$("#showResult").prop('disabled', true);
+        $("#showResult").prop('disabled', true);
+        $("#delete-btn").prop('disabled', true);
+        $("#update-btn").prop('disabled', true);
     	$("#result__title").text("응모중 입니다. 응모 종료시 추첨이 가능합니다.");
     	
     } else if(now>edate){
     	$("#showList").prop('disabled', false);
-    	$("#showResult").prop('disabled', false);
+        $("#showResult").prop('disabled', false);
+        $("#delete-btn").prop('disabled', true);
+        $("#update-btn").prop('disabled', true);
     	if($("#result").val()=='0'){
     		$("#result__title").text("응모마감 되었습니다. 추첨을 해주세요.");
     		$("#showResult").val("추첨하기");
-    	} else {
+    	} else if($("#result").val()=='1'){
     		$("#result__title").text("추첨이 완료되었습니다. 추첨된인원을 확인 해주세요.");
-    		$("#showResult").prop('disabled', true);
+            $("#showResult").prop('disabled', true);
+            $("#showList").prop('disabled', true);
     		$("#showResult").val("추첨인원보기");
     	}
     		
@@ -41,14 +47,16 @@ $(document).ready(function () {
             data: audience,
             success: function (data) {
                 var tableData = "";
-                $("#list").empty();
+                $("#applylist").empty();
+                tableData += "<tr><th>이름</th><th>전화번호</th></tr>";
+            
                 $.each(data, function (key, value) {
                     tableData += '<tr>';
                     tableData += '<td>' + value.name + '</td>';
                     tableData += '<td>' + value.phone + '</td>';
                     tableData += '</tr>';
                 });
-                $("#list").append(tableData);
+                $("#applylist").append(tableData);
             },
             error: function (request, status, error) {
                 alert("code = " + request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
@@ -73,18 +81,20 @@ $(document).ready(function () {
                     return alert(data.message);
                 }
                 alert(data.message);
-                $("#list").empty();
+                $("#resultlist").empty();
                 var tableData = "";
                 console.log(data.list);
                 $("#showResult").prop('disabled', true);
-                $.each(data.list, function (key, value) {
+                $("#showList").prop('disabled', true);
+                tableData += "<tr><th>이름</th><th>전화번호</th></tr>";
+                $.each(data.list, function (key, value) {   
                     tableData += '<tr>';
                     tableData += '<td>' + value.name + '</td>';
                     tableData += '<td>' + value.phone + '</td>';
                     tableData += '</tr>';
                 });
 
-                $("#list").append(tableData);
+                $("#resultlist").append(tableData);
 
             },
             error: function (request, status, error) {

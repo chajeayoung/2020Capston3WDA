@@ -23,111 +23,50 @@
             <!-- 게시물 작성/수정 시작 { -->
             <form name="fwrite" id="fwrite" th:action="@{/audience/update}" method="post" enctype="multipart/form-data"
                 autocomplete="off" style="width:100%">
-                <!-- onsubmit="return fwrite_submit(this);" -->
-                <!-- <input type="hidden" name="uid" value="20060618071533">
-                <input type="hidden" name="w" value="">
-                <input type="hidden" name="bo_table" value="webzine">
-                <input type="hidden" name="wr_id" value="0">
-                <input type="hidden" name="sca" value="">
-                <input type="hidden" name="sfl" value="">
-                <input type="hidden" name="stx" value="">
-                <input type="hidden" name="spt" value="">
-                <input type="hidden" name="sst" value="">
-                <input type="hidden" name="sod" value="">
-                <input type="hidden" name="page" value="">
-                <input type="hidden" value="html1" name="html"> -->
 
-                <!-- <div class="bo_w_info write_div">
-                    <label for="wr_name" class="sound_only">이름<strong>필수</strong></label>
-                    <input type="text" name="wr_name" value="" id="wr_name" required="" class="frm_input required"
-                        placeholder="이름">
-                </div> -->
-
-                <!-- <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">프로그램</label>
-                    <select style="height: 40px;" name="programId">
-                        <option value="">프로그램선택</option>
-                    </select>
-                </div> -->
 
                 <div class="write_div">
                     <label for="wr_homepage" class="sound_only">제목</label>
-                    <input type="text" name="aTitle" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="text" name="aTitle" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="제목" th:placeholder=${audience.aTitle}>
                 </div>
 
                 <div class="bo_w_info write_div">
                     <label for="wr_homepage" class="sound_only">응모시작시간</label>
-                    <input type="date" name="aStartdate" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="date" name="aStartdate" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="">
 
                     <label for="wr_homepage" class="sound_only">응모마감시간</label>
-                    <input type="date" name="aEnddate" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="date" name="aEnddate" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="">
                 </div>
 
 
                 <div class="write_div">
                     <label for="wr_homepage" class="sound_only">추첨인원</label>
-                    <input type="text" name="aRecruits" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="text" name="aRecruits" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="추첨인원" th:placeholder=${audience.aRecruits}>
                 </div>
 
                 <div class="write_div">
                     <label for="wr_homepage" class="sound_only">응모제한횟수</label>
-                    <input type="text" name="aLimit" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="text" name="aLimit" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="응모제한횟수" th:placeholder=${audience.aLimit}>
                 </div>
 
                 <div class="write_div">
                     <label for="wr_homepage" class="sound_only">응모시 소모포인트</label>
-                    <input type="text" name="aPrice" value="" id="wr_homepage" class="frm_input full_input" size="50"
+                    <input required type="text" name="aPrice" value="" id="wr_homepage" class="frm_input full_input" size="50"
                         placeholder="응모시 소모포인트" th:placeholder=${audience.aPrice}>
                 </div>
 
                 <div class="write_div">
                     <label for="wr_homepage" class="sound_only">내용</label>
-                    <input type="text" name="aContent" value="" id="wr_homepage" class="frm_input full_input"
+                    <input required type="text" name="aContent" value="" id="wr_homepage" class="frm_input full_input"
                         style="height: 300px;" size="50" placeholder="내용" th:value=${audience.aContent}>
                 </div>
                 <input style="visibility: hidden;" name="applyId" th:value=${audience.applyId}>
 
-
-
-                <!-- <div class="write_div">
-                    <label for="wr_content" class="sound_only">내용<strong>필수</strong></label>
-                    <div class="wr_content smarteditor2">
-                        <span class="sound_only">웹에디터 시작</span>
-                        <script>document.write("<div class='cke_sc'><button type='button' class='btn_cke_sc'>단축키 일람</button></div>");</script>
-                        <div class="cke_sc"><button type="button" class="btn_cke_sc">단축키 일람</button></div>
-                        <script
-                            src="http://sample.paged.kr/purewhite/plugin/editor/smarteditor2/js/service/HuskyEZCreator.js"></script>
-                        <script>var g5_editor_url = "http://sample.paged.kr/purewhite/plugin/editor/smarteditor2", oEditors = [], ed_nonce = "hldaTcxHmi|1591438035|fc99e06aa42c4920374dfb34dab28c0f753b5241";</script>
-                        <script src="http://sample.paged.kr/purewhite/plugin/editor/smarteditor2/config.js"></script>
-                        <script>
-                            $(function () {
-                                $(".btn_cke_sc").click(function () {
-                                    if ($(this).next("div.cke_sc_def").length) {
-                                        $(this).next("div.cke_sc_def").remove();
-                                        $(this).text("단축키 일람");
-                                    } else {
-                                        $(this).after("<div class='cke_sc_def' />").next("div.cke_sc_def").load("http://sample.paged.kr/purewhite/plugin/editor/smarteditor2/shortcut.html");
-                                        $(this).text("단축키 일람 닫기");
-                                    }
-                                });
-                                $(document).on("click", ".btn_cke_sc_close", function () {
-                                    $(this).parent("div.cke_sc_def").remove();
-                                });
-                            });
-                        </script>
-                        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="65536"
-                            style="width: 100%; height: 300px; display: none;"
-                            placeholder="내용을 입력해 주세요."></textarea><iframe frameborder="0" scrolling="no"
-                            style="width: 100%; height: 349px;"
-                            src="http://sample.paged.kr/purewhite/plugin/editor/smarteditor2/SmartEditor2Skin.html"></iframe>
-                        <span class="sound_only">웹 에디터 끝</span>
-                    </div>
-                </div> -->
 
                 <div class="bo_w_info"><b>썸네일이미지</b> </div>
         
@@ -135,30 +74,12 @@
                     <div class="file_wr write_div">
                         <label for="bf_file_1" class="lb_icon"><i class="fa fa-download" aria-hidden="true"></i><span
                                 class="sound_only"> 파일 #1</span></label>
-                        <input type="file" name="filename" id="bf_file_1" title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능"
+                        <input required type="file" name="filename" id="bf_file_1" title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능"
                             class="frm_file ">
                     </div>
                 </div> 
 
-                <!-- <div class="write_div">
-                    <fieldset id="captcha" class="captcha recaptcha">
-                        <script src="https://www.google.com/recaptcha/api.js?hl=ko"></script>
-                        <script src="http://sample.paged.kr/purewhite/plugin/recaptcha/recaptcha.js"></script>
-                        <div class="g-recaptcha" data-sitekey="6LeuK0wUAAAAAPjl3Se_sedBwESPliGdmhzhRqgq">
-                            <div style="width: 304px; height: 78px;">
-                                <div><iframe
-                                        src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeuK0wUAAAAAPjl3Se_sedBwESPliGdmhzhRqgq&amp;co=aHR0cDovL3NhbXBsZS5wYWdlZC5rcjo4MA..&amp;hl=ko&amp;v=ADnAC3ZykfbIOflWgrKNsVVT&amp;size=normal&amp;cb=f7mpjiu60164"
-                                        width="304" height="78" role="presentation" name="a-7abk83gwmdq4"
-                                        frameborder="0" scrolling="no"
-                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                                </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
-                                    class="g-recaptcha-response"
-                                    style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                            </div><iframe style="display: none;"></iframe>
-                        </div>
-                    </fieldset>
-                </div>  -->
-
+            
 
                 <div class="btn_confirm write_div">
                     <a href="/audience/mlist" class="btn_cancel btn">취소</a>
@@ -166,80 +87,7 @@
                 </div>
             </form>
 
-            <!-- <script>
-                function html_auto_br(obj) {
-                    if (obj.checked) {
-                        result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
-                        if (result)
-                            obj.value = "html2";
-                        else
-                            obj.value = "html1";
-                    }
-                    else
-                        obj.value = "";
-                }
-
-
-                function fwrite_submit(f) {
-                    var wr_content_editor_data = oEditors.getById['wr_content'].getIR();
-                    oEditors.getById['wr_content'].exec('UPDATE_CONTENTS_FIELD', []);
-                    if (jQuery.inArray(document.getElementById('wr_content').value.toLowerCase().replace(/^\s*|\s*$/g, ''), ['&nbsp;', '<p>&nbsp;</p>', '<p><br></p>', '<div><br></div>', '<p></p>', '<br>', '']) != -1) { document.getElementById('wr_content').value = ''; }
-                    if (!wr_content_editor_data || jQuery.inArray(wr_content_editor_data.toLowerCase(), ['&nbsp;', '<p>&nbsp;</p>', '<p><br></p>', '<p></p>', '<br>']) != -1) { alert("내용을 입력해 주십시오."); oEditors.getById['wr_content'].exec('FOCUS'); return false; }
-
-                    var subject = "";
-                    var content = "";
-                    $.ajax({
-                        url: g5_bbs_url + "/ajax.filter.php",
-                        type: "POST",
-                        data: {
-                            "subject": f.wr_subject.value,
-                            "content": f.wr_content.value
-                        },
-                        dataType: "json",
-                        async: false,
-                        cache: false,
-                        success: function (data, textStatus) {
-                            subject = data.subject;
-                            content = data.content;
-                        }
-                    });
-
-                    if (subject) {
-                        alert("제목에 금지단어('" + subject + "')가 포함되어있습니다");
-                        f.wr_subject.focus();
-                        return false;
-                    }
-
-                    if (content) {
-                        alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
-                        if (typeof (ed_wr_content) != "undefined")
-                            ed_wr_content.returnFalse();
-                        else
-                            f.wr_content.focus();
-                        return false;
-                    }
-
-                    if (document.getElementById("char_count")) {
-                        if (char_min > 0 || char_max > 0) {
-                            var cnt = parseInt(check_byte("wr_content", "char_count"));
-                            if (char_min > 0 && char_min > cnt) {
-                                alert("내용은 " + char_min + "글자 이상 쓰셔야 합니다.");
-                                return false;
-                            }
-                            else if (char_max > 0 && char_max < cnt) {
-                                alert("내용은 " + char_max + "글자 이하로 쓰셔야 합니다.");
-                                return false;
-                            }
-                        }
-                    }
-
-                    if (!chk_captcha()) return false;
-
-                    document.getElementById("btn_submit").disabled = "disabled";
-
-                    return true;
-                }
-            </script> -->
+         
         </section>
         <!-- } 게시물 작성/수정 끝 -->
 

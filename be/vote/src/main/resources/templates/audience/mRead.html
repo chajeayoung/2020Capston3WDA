@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/board.common.css">
     <link rel="stylesheet" href="/css/featherlight.css">
-    <link rel="stylesheet" href="/css/moblie.css">
+    <link rel="stylesheet" href="/css/mobile.css">
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/mRead.js"></script>
+
 </head>
 
 <body>
@@ -28,21 +29,17 @@
             <article id="bo_v" style="width:100%">
 
                 <h2 id="bo_v_title">
-                    <span class="bo_v_tit" th:text="${audience.aTitle}">
-                        웹진형 게시판입니다.</span>
+                    <span class="bo_v_tit" th:text="${audience.aTitle}">게시글 제목</span>
                 </h2>
 
 
                 <section id="bo_v_info">
                     <h2>페이지 정보</h2>
-                    <span class="sound_only">작성자</span> <strong><span class="sv_member"
-                            th:text="${audience.rId}">웹사이팅</span></strong>
-                    <span class="sound_only">댓글</span><strong><a href="#bo_vc"> <i class="fa fa-commenting-o"
-                                aria-hidden="true"></i> 0건</a></strong>
-                    <span class="sound_only">조회</span><strong th:text="${audience.aViewCount}"><i class="fa fa-eye"
-                            aria-hidden="true"></i> 393회</strong>
-                    <strong class="if_date" th:text="${audience.aDate}"><span class="sound_only">작성일</span><i
-                            class="fa fa-clock-o" aria-hidden="true"></i> 18-02-07 09:23</strong>
+                    <i class="fas fa-pencil-alt"></i><strong><span class="sv_member" th:text="${audience.rId}">작성자</span></strong>
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i><strong th:text=${audience.aViewCount}> 참여자</strong>
+                    <i class="fa fa-eye"></i><strong th:text="${audience.aViewCount}"> 조회수</strong>
+                    <i class="fa fa-clock-o"></i><strong class="if_date" th:text="${#dates.format(audience.aDate, 'yyyy-MM-dd HH:mm')}">
+                         작성일</strong>
                 </section>
 
                 <section id="bo_v_atc">
@@ -65,38 +62,69 @@
                         <p th:text="${audience.aContent}"></p>
                     </div>
                     <!-- } 본문 내용 끝 -->
-                    <div style="text-align: -webkit-center">
-                        <!-- <form style="text-align: -webkit-center; display: inline;">
-                        <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
-                        <input type="button" value="응모인원보기" id="showRecruits" class="btn_submit btn">
-                    </form> -->
+                    <div style="text-align: center;">
                         <input type="button" value="응모인원보기" id="showList" class="btn_submit btn">
-                        <form style="text-align: -webkit-center; display: inline;">
-                            <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
-                            <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
-                            <input type="hidden" id="aPrice" name="bo_table" value="webzine"
-                                th:value="${audience.aPrice}">
-                            <input type="hidden" id="aRecruits" name="bo_table" value="webzine"
-                                th:value="${audience.aRecruits}">
-                            <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
-                            <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
-                            <input type="hidden" id="result" name="result" th:value="${audience.result}">
-                            <input type="button" value="추첨인원보기" id="showResult" class="btn_submit btn">
+                        <input type="button" value="추첨인원보기" id="showResult" class="btn_submit btn">
+                        <form style="display: inline;" id="modify-form"
+                            th:action="@{'/audience/update/' + ${audience.applyId}}">
+                            <button class="btn_submit btn" id="update-btn">수정</button>
                         </form>
+                        <form style="display: inline;" id="delete-form"
+                            th:action="@{'/audience/delete/' + ${audience.applyId}}" method="delete">
+                            <button class="btn_submit btn" id="delete-btn">삭제</button>
+                        </form>
+                        <input type="hidden" id="applyId" name="applyId" value="" th:value="${audience.applyId}">
+                        <input type="hidden" id="aLimit" name="w" value="" th:value="${audience.aLimit}">
+                        <input type="hidden" id="aPrice" name="bo_table" value="webzine" th:value="${audience.aPrice}">
+                        <input type="hidden" id="aRecruits" name="bo_table" value="webzine"
+                            th:value="${audience.aRecruits}">
+                        <input type="hidden" id="aEnddate" name="aEnddate" th:value="${audience.aEnddate}">
+                        <input type="hidden" id="aStartdate" name="aStartdate" th:value="${audience.aStartdate}">
+                        <input type="hidden" id="result" name="result" th:value="${audience.result}">
                     </div>
 
-                    <div>
 
+                    <div style="text-align: center;">
                         <div id="result">
                             <h2 id="result__title">응모종료까지 남은 시간</h2>
-
-                            <div id="list"></div>
-
-                            <th:block th:if="${result.size() >=1}">
-                                <h4>당첨자</h4>
-                                <div th:each="winner : ${result}" th:text="${winner.getName()}"></div>
-                            </th:block>
                         </div>
+                        <div style="display:inline-block; border: 1px solid black; width:70%;">
+                            <h2>응모인원 명단</h2>
+                            <table style="display: inline-block;" id="applylist">
+                                <tr>
+                                    <th>이름</th>
+                                    <th>전화번호</th>
+                                </tr>
+                                <th:block th:if="${audience.result==1}">
+                                    <tr th:each="apply:${apply}">
+                                        <td th:text="${apply.name}">
+                                        </td>
+                                        <td th:text="${apply.phone}">
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </div>
+                        <div style="font-size: 40px;">
+                            <i class="fas fa-arrow-circle-down"></i>
+                        </div>
+                        <div style="display:inline-block; border: 1px solid black; width:70%;">
+                            <h2>추첨인원 명단</h2>
+                            <table style="display: inline-block;" id="resultlist">
+                                <tr>
+                                    <td>이름</td>
+                                    <td>전화번호</td>
+                                </tr>
+                                <th:block th:if="${audience.result==1}">
+                                    <tr th:each="result:${result}">
+                                        <td th:text="${result.name}">
+                                        </td>
+                                        <td th:text="${result.phone}">
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </div>                    
                     </div>
 
 
@@ -129,11 +157,7 @@
                     <ul class="bo_v_left">
                     </ul>
 
-                    <ul class="bo_v_com">
-                        <form id="delete-form" th:action="@{'/audience/' + ${audience.applyId}}" method="post">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button id="delete-btn">삭제</button>
-                    </form>
+                    
 
                         <li><a href="/audience/mlist" class="btn_b01 btn"><i class="fa fa-list" aria-hidden="true"></i>
                                 목록</a></li>
