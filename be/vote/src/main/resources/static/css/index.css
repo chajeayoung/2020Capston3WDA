@@ -5,6 +5,8 @@ body {
   background-image: linear-gradient(to left,rgba(71,51, 153, 0.2), rgba(255, 255, 255, 1));
 
 }
+
+
 #logoutButton{
     color: white;
     background: none;
@@ -404,12 +406,21 @@ contents div.contents{
         width:210px !important;
     }
 
-
+    a.hiddenA {
+        display: none;
+    }
 
     top .top_div{
         width:100%;
         text-align: center;
+        font-size:50%;
     }
+
+    #logoutButton {
+        font-size:50%;
+
+    }
+
     .center_title h1{
         padding: 20px;
         font-size: 4rem;

@@ -4,6 +4,12 @@
     max-height: 100%;
 }
 
+div#userIndex {
+    text-align: center;
+    margin : 10px;
+  }
+  
+  
 
 .userInfoBox {
 
