@@ -1,5 +1,7 @@
 package com.vote.vote.repository;
 
+import java.util.List;
+
 import com.vote.vote.db.dto.ADetaiId;
 import com.vote.vote.db.dto.ADetail;
 
@@ -16,6 +18,7 @@ public interface ADetailRepository extends JpaRepository<ADetail, Long> {
     // Long countByApplyIdAndRId(int applyId, int rId);
     // @Query("SELECT b FROM Board b WHERE b.title like %?1% and b.bno > 0 ORDER BY b.bno desc")
 
+    public List<ADetail> findByApplyId(int applyId);
     @Query(value = "select COUNT(*) from a_detail where apply_id = ?1 and r_id = ?2", nativeQuery=true)
     public Long countByApplyIdAndRId(@Param("applyId")int applyId, @Param("rId")int rId);
 

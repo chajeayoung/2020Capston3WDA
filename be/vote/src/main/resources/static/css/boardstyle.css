@@ -306,6 +306,10 @@ body.modal-active {
     color: #999;
 }
 
+table, th, td {
+    border: 1px solid black;
+  }
+
 
 
 
