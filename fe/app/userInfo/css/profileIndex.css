@@ -6,10 +6,16 @@
 
 div#userIndex {
     text-align: center;
-    margin : 10px;
+
   }
+
+  button.submit_button {
+
+    margin : 10px;
+}
   
-  
+
+
 
 .userInfoBox {
 
