@@ -179,15 +179,15 @@ public class AudienceController {
         Audience audi = audienceJpaRepository.findById(applyId);
         ADetail aDetail = new ADetail();
         if (audi.getResult() == 1)
-            return "이미 추첨이 완료된 응모입니다.";
+            return "1";
 
         // aDetaiId.setApplyId(audience.getApplyId());
         // aDetaiId.setRId(member.getNo());
         // aDetail.setADetaiId(aDetaiId);
         if (member.getPoint() < aPrice) {
-            return "포인트가 부족합니다.";
+            return "2";
         } else if (aDetailRepository.countByApplyIdAndRId(applyId, member.getNo()) == aLimit) {
-            return "응모횟수를 초과하셨습니다.";
+            return "3";
         } else {
             int a = member.getPoint() - aPrice;
             try {
@@ -199,7 +199,7 @@ public class AudienceController {
             aDetail.setApplyId(audi.getApplyId());
             aDetail.setRId(member.getNo());
             aDetailRepository.saveAndFlush(aDetail);
-            return "응모완료!";
+            return "4";
         }
     }
 

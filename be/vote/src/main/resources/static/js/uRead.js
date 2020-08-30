@@ -1,8 +1,8 @@
 
 
 
- //타이머
- function msg_time() {
+//타이머
+function msg_time() {
     var date = $("#aEnddate").val();
     var rdate = date.substr(0, 19);
     var stDate = new Date().getTime();
@@ -32,7 +32,7 @@
 
 
 $(document).ready(function () {
-   
+
 
     var tid = setInterval('msg_time()', 1000); // 타이머 1초간격으로 수행
     var $modalContainer = $('#modal-container'),
@@ -58,10 +58,18 @@ $(document).ready(function () {
         $("#timer__title").text("응모종료까지 남은 시간");
         $("#timer__ul").show();
     } else if (now > edate) {
-        $("#apply").prop('disabled', true);
+        if ($("#result").val() == '0') {
+            $("#apply").prop('disabled', true);
+            $("#confirm").prop('disabled', true);
+            $("#timer__title").text("응모마감 되었습니다! 추첨 중이니 기다려주세요.");
+            $("#timer__ul").hide();
+        } else if($("#result").val() == '1'){
+            $("#apply").prop('disabled', true);
         $("#confirm").prop('disabled', false);
-        $("#timer__title").text("응모마감 되었습니다!");
+        $("#timer__title").text("응모마감 되었습니다! 추첨을 확인해 주세요.");
         $("#timer__ul").hide();
+        }
+        
     }
 
 
@@ -73,8 +81,18 @@ $(document).ready(function () {
             dataType: "text",
             data: $('#userRid').text(),
             success: function (data) {
+
+                if(data=='1'){
+                    swal("이미 추첨이 완료된 응모입니다.", "", "warning");
+                } else if(data=='2'){
+                    swal("포인트가 부족합니다.", "", "warning");
+                } else if(data=='3'){
+                    swal("응모횟수를 초과하셨습니다.", "", "warning");
+                } else if(data=='4'){
+                    swal("응모완료!", "추첨이 완료되면 당첨내역을 확인하실 수 있습니다.", "success");
+                }
+
                 
-                alert(data);
 
             },
 
