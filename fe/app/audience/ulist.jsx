@@ -1,24 +1,19 @@
-import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import Pagination from "./pagination.jsx";
 import { paginate } from "./paginate.jsx";
-import SortButton from './SortButton.jsx';
 import "./css/audience.css";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import {
     Container,
     Row,
     Col,
     Card,
     CardBody,
-    CardFooter,
     Badge,
-    Button
 } from "shards-react";
 import PageTitle from "./src/components/common/PageTitle";
-import MainFooter from "./src/components/layout/MainFooter";
 const axios = require("axios");
 const regeneratorRuntime = require("regenerator-runtime");
 
