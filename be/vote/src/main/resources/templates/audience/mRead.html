@@ -32,9 +32,9 @@
 
             <article id="bo_v" style="width:100%">
 
-                <h2 id="bo_v_title">
+                <h3 id="bo_v_title">
                     <span class="bo_v_tit" th:text="${audience.aTitle}">게시글 제목</span>
-                </h2>
+                </h3>
 
 
                 <section id="bo_v_info">
@@ -50,14 +50,14 @@
                     <h2 id="bo_v_atc_title">본문</h2>
 
 
-                    <div id="bo_v_img">
+                    <div style="text-align: center;" id="bo_v_img">
                         <img src="#" th:src="@{'/uploads/' + ${audience.img}}" alt="">
                     </div>
 
                     <!-- 본문 내용 시작 { -->
 
                     <label>응모기간&nbsp;&nbsp;</label><span
-                        th:text="@{${audience.aStartdate} + '  ~  ' + ${audience.aEnddate}}"></span><br>
+                        th:text="@{${#dates.format(audience.aStartdate, 'yyyy-MM-dd HH:mm')} + '  ~  ' + ${#dates.format(audience.aEnddate, 'yyyy-MM-dd HH:mm')}}"></span><br>
                     <label>추첨인원&nbsp;&nbsp;</label><span th:text="@{${audience.aRecruits} + '  명  '}"></span><br>
                     <label>응모제한&nbsp;&nbsp;</label><span th:text="@{${audience.aLimit} + '  회  '}"></span><br>
                     <label>응모시 소모 포인트&nbsp;&nbsp;</label><span th:text="@{${audience.aPrice} + ' p  '}"></span><br>
