@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import PopularItem from './popularItem.jsx';
 import HotclibItem from './hotclibItem.jsx'
 import AudienceItem from './audienceItem.jsx'
+import Ulist from './../audience/ulist2.jsx'
 
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -133,12 +134,15 @@ class Index extends Component {
                     {this.state.audience.length>0?
                     
                     <div>
-                    <AudienceItem data={this.state.audience} />                    
+                    <Ulist param={param}></Ulist>                 
                     <br /><br /><br />
                     <Pagination count={this.state.count3} page={this.state.pageNum3} onChange={this.pagenation3.bind(this)} style={{ placeContent: "center" }}> </Pagination>
                     <button type="button" onClick={this.goUrl.bind(this)} >더보기</button>
                     
                     </div>:<span>진행중인 방청권이 없습니다.</span>}
+
+                    
+
 
                 </div>
                 <br /><br />
