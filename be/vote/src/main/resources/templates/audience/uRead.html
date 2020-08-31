@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/uRead.js"></script>
+    <link rel="stylesheet" href="/css/mobile.css">
+
 </head>
 
 <body>
@@ -40,24 +42,24 @@
                 </section>
 
             <section id="bo_v_atc">
-                <h2 id="bo_v_atc_title">본문</h2>
+                <h3 id="bo_v_atc_title">본문</h3>
 
 
-                <div id="bo_v_img">
+                <div id="bo_v_img" style="text-align: center;">
                     <img src="#" th:src="@{'/uploads/' + ${audience.img}}" alt="">
                 </div>
 
                 <!-- 본문 내용 시작 { -->
-                    
                 <label>응모기간&nbsp;&nbsp;</label><span
                 th:text="${#dates.format(audience.aStartdate, 'yyyy-MM-dd HH:mm') + ' ~ ' + #dates.format(audience.aEnddate, 'yyyy-MM-dd HH:mm')}"></span><br>
                 <label>추첨인원&nbsp;&nbsp;</label><span th:text="@{${audience.aRecruits} + '  명  '}"></span><br>
                 <label>응모제한&nbsp;&nbsp;</label><span th:text="@{${audience.aLimit} + '  회  '}"></span><br>
                 <label>응모시 소모 포인트&nbsp;&nbsp;</label><span th:text="@{${audience.aPrice} + ' p  '}"></span><br>
                 <label>세부내용&nbsp;&nbsp;</label><br>
-                <div id="bo_v_con">
+                <!-- <div id="bo_v_con">
                     <p th:text="${audience.aContent}"></p>
-                </div>
+                </div> -->
+                <textarea style="cursor: default;" th:inline="text" th:text="${audience.aContent}" class="form-control" rows="3" readonly="readonly"></textarea>
                 <!-- } 본문 내용 끝 -->
                 <!-- 타이머 시작 -->
                 <div class="timer">

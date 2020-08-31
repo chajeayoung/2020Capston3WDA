@@ -25,5 +25,7 @@ public interface ADetailRepository extends JpaRepository<ADetail, Long> {
     @Query(value = "delete from a_detail where apply_id = ?1", nativeQuery=true)
     public void deleteByApplyId(@Param("applyId")int applyId);
 
+    
+
 
 }

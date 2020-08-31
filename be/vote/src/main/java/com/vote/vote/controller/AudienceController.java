@@ -208,12 +208,18 @@ public class AudienceController {
     @ResponseBody
     public String confirm(Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        String name = userDetails.getName();
+        // String name = userDetails.getName();
 
+        
+        
         if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
-            return name + "님 아쉽네요 ㅠ.ㅠ 다음에도 참여해 주실거죠?";
+            return "1";
+        } else {
+            return "2";
         }
-        return name + "님 당첨을 축하 드립니다! 자세한 내용은 문자로 알려드립니다!";
+
+        
+        
     }
 
     // --------------------------------------------------------관리자

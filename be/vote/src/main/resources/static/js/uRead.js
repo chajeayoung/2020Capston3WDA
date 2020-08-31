@@ -113,13 +113,15 @@ $(document).ready(function () {
             dataType: "text",
             data: audience,
             success: function (data) {
-
-                if (data.length < 35) {
-                    $(".modal__message").text(data);
+                console.log(data);
+                if (data=="1") {
+                    $(".modal__message").text("안타깝네요 다음에도 참여해 주실 거죠?");
                     $(".modal__img").attr("src", "/uploads/불쌍.gif");
+                } else if (data=="2"){
+                    $(".modal__message").text("축하드립니다! 자세한 사항은 문자로 알려드립니다.");
                 }
 
-                $(".modal__message").text(data);
+                
                 $modalContainer
                     .removeAttr('class')
                     .addClass('one');
