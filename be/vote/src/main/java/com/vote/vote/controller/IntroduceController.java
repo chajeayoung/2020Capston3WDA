@@ -11,6 +11,13 @@ public class IntroduceController {
 		
 		return "/introduce/blockChain";
 	}
+
+	@RequestMapping(value={"/developer","/developer/"})
+	public String developer(){
+		return "/introduce/developerIntroduction";
+	}
+
 }
+
 
 
