@@ -21,13 +21,15 @@ public interface AudienceJpaRepository extends JpaRepository<Audience, Integer> 
 
     public Audience deleteById(int applyId);
 
-    List<Audience> findByaTitleContaining(String aTitle);
+    public List<Audience> findByaTitleContaining(String aTitle);
 
-    Page<Audience> findAllByrId(Pageable pageable, int rId);
+    public Page<Audience> findAllByrId(Pageable pageable, int rId);
 
     public List<Audience> findByrId(int rId);
 
     public List<Audience> findByprogramId(int programId);
+
+    public List<Audience> findByProgramIdOrderByApplyIdDesc(int progrmaId);
 
     @Modifying
     @Transactional

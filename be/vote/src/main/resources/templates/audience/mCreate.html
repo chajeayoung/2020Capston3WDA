@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout::layout(~{::content},_,'글쓰기', ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{main_layout::layout(~{::content},_,'글쓰기', ~{::link})}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,93 +12,96 @@
     <link rel="stylesheet" href="/css/board.common.css">
     <link rel="stylesheet" href="/css/featherlight.css">
     <link rel="stylesheet" href="/css/mobile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <!--CDN 링크 -->
 </head>
 
 <body>
     <content>
-    <div id="container">
-        <!-- skin : theme/webzine -->
-        <section id="bo_w">
-            <h2 class="sound_only">웹진형게시판 글쓰기</h2>
+        <div id="container">
+            <!-- skin : theme/webzine -->
+            <section id="bo_w">
+                <h2 class="sound_only">웹진형게시판 글쓰기</h2>
 
-            <!-- 게시물 작성/수정 시작 { -->
-            <form name="fwrite" id="fwrite" th:action="@{/audience/create}" method="post" enctype="multipart/form-data"
-                autocomplete="off" style="width:100%">
-              
-
-                <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">제목</label>
-                    <input required type="text" name="aTitle" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="제목">
-                </div>
-
-                <div class="bo_w_info write_div">
-                    <label for="wr_homepage" class="sound_only">응모시작시간</label>
-                    <input required type="date" name="aStartdate" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="">
-
-                    <label for="wr_homepage" class="sound_only">응모마감시간</label>
-                    <input required type="date" name="aEnddate" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="">
-                </div>
+                <!-- 게시물 작성/수정 시작 { -->
+                <form name="fwrite" id="fwrite" th:action="@{/audience/create}" method="post"
+                    enctype="multipart/form-data" autocomplete="off" style="width:100%">
 
 
-                <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">추첨인원</label>
-                    <input required type="text" name="aRecruits" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="추첨인원">
-                </div>
-
-                <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">응모제한횟수</label>
-                    <input required type="text" name="aLimit" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="응모제한횟수">
-                </div>
-
-                <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">응모시 소모포인트</label>
-                    <input required type="text" name="aPrice" value="" id="wr_homepage" class="frm_input full_input" size="50"
-                        placeholder="응모시 소모포인트">
-                </div>
-
-                <div class="write_div">
-                    <label for="wr_homepage" class="sound_only">내용</label>
-                    <input required type="text" name="aContent" value="" id="wr_homepage" class="frm_input full_input"
-                        style="height: 300px;" size="50" placeholder="방청 제한연령, 티켓 배부장소, 유의사항 등">
-                </div>
-
-
-
-
-              
-
-                <div class="bo_w_info"><b>썸네일이미지</b> </div>
-        
-                 <div class="bo_w_flie write_div">
-                    <div class="file_wr write_div">
-                        <label for="bf_file_1" class="lb_icon"><i class="fa fa-download" aria-hidden="true"></i><span
-                                class="sound_only"> 파일 #1</span></label>
-                        <input required type="file" name="filename" id="bf_file_1" title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능"
-                            class="frm_file ">
+                    <div class="write_div">
+                        <label for="wr_homepage" class="sound_only">제목</label>
+                        <input required type="text" name="aTitle" value="" id="wr_homepage" class="frm_input full_input"
+                            size="50" placeholder="제목">
                     </div>
-                </div> 
 
-            
+                    <div class="bo_w_info write_div">
+                        <label for="wr_homepage" class="sound_only">응모시작시간</label>
+                        <input required type="date" name="aStartdate" value="" id="wr_homepage"
+                            class="frm_input full_input" size="50" placeholder="">
+
+                        <label for="wr_homepage" class="sound_only">응모마감시간</label>
+                        <input required type="date" name="aEnddate" value="" id="wr_homepage"
+                            class="frm_input full_input" size="50" placeholder="">
+                    </div>
 
 
-                <div class="btn_confirm write_div">
-                    <a href="/audience/list" class="btn_cancel btn">취소</a>
-                    <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit btn">
-                </div>
-            </form>
+                    <div class="write_div">
+                        <label for="wr_homepage" class="sound_only">추첨인원</label>
+                        <input required type="text" name="aRecruits" value="" id="wr_homepage"
+                            class="frm_input full_input" size="50" placeholder="추첨인원">
+                    </div>
 
-        
-        </section>
-        <!-- } 게시물 작성/수정 끝 -->
+                    <div class="write_div">
+                        <label for="wr_homepage" class="sound_only">응모제한횟수</label>
+                        <input required type="text" name="aLimit" value="" id="wr_homepage" class="frm_input full_input"
+                            size="50" placeholder="응모제한횟수">
+                    </div>
 
-    </div>
+                    <div class="write_div">
+                        <label for="wr_homepage" class="sound_only">응모시 소모포인트</label>
+                        <input required type="text" name="aPrice" value="" id="wr_homepage" class="frm_input full_input"
+                            size="50" placeholder="응모시 소모포인트">
+                    </div>
 
-</content>
+                    <div class="write_div">
+                        <label for="wr_homepage" class="sound_only">내용</label>
+                        <input required type="text" name="aContent" value="" id="wr_homepage"
+                            class="frm_input full_input" style="height: 300px;" size="50"
+                            placeholder="방청 제한연령, 티켓 배부장소, 유의사항 등">
+                    </div>
+
+
+
+
+
+
+                    <div class="bo_w_info"><b>썸네일이미지</b> </div>
+
+                    <div class="bo_w_flie write_div">
+                        <div class="file_wr write_div">
+                            <label for="bf_file_1" class="lb_icon"><i class="fa fa-download"
+                                    aria-hidden="true"></i><span class="sound_only"> 파일 #1</span></label>
+                            <input required type="file" name="filename" id="bf_file_1"
+                                title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능" class="frm_file ">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="btn_confirm write_div">
+                        <a href="javascript:hitory.back();" class="btn_cancel btn">취소</a>
+                        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit btn">
+                    </div>
+                </form>
+
+
+            </section>
+            <!-- } 게시물 작성/수정 끝 -->
+
+        </div>
+
+    </content>
 </body>
 
 </html>

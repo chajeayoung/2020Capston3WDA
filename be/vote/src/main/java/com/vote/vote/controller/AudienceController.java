@@ -106,6 +106,7 @@ public class AudienceController {
     SimpleDateFormat format1 = new SimpleDateFormat("yy-MM-dd");
     SimpleDateFormat format2 = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
     String audienceModel = "audience";
+
     // 리액트 -------------------------------------사용자
     // 해당프로그램 게시글 리스트 보기 + ajax
     @RequestMapping(value = { "/audience/ulist2" })
@@ -119,7 +120,7 @@ public class AudienceController {
         JSONArray result = new JSONArray();
         Date time = new Date();
 
-        List<Audience> audienceList = audienceJpaRepository.findByprogramId(programId);
+        List<Audience> audienceList = audienceJpaRepository.findByProgramIdOrderByApplyIdDesc(programId);
         for (Audience audience : audienceList) {
             JSONObject json = new JSONObject();
             json.put("applyId", audience.getApplyId());
@@ -159,7 +160,7 @@ public class AudienceController {
 
     // 게시글 보기
     @RequestMapping("/audience/read/{applyId}")
-    public String read( Model model, @PathVariable int applyId) {
+    public String read(Model model, @PathVariable int applyId) {
 
         Audience audience = audienceJpaRepository.findById(applyId);
         model.addAttribute(audienceModel, audience);
@@ -172,8 +173,8 @@ public class AudienceController {
     // 응모 ajax
     @GetMapping("/audience/apply/{applyId}/{aLimit}/{aPrice}")
     @ResponseBody
-    public String result(@PathVariable int applyId, @PathVariable int aLimit,
-            @PathVariable int aPrice, Principal principal, @Nullable Authentication authentication) {
+    public String result(@PathVariable int applyId, @PathVariable int aLimit, @PathVariable int aPrice,
+            Principal principal, @Nullable Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Member member = memberRepository.findByNo(userDetails.getR_ID());
         Audience audi = audienceJpaRepository.findById(applyId);
@@ -210,16 +211,12 @@ public class AudienceController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         // String name = userDetails.getName();
 
-        
-        
         if (applyResultRepository.countByRno(userDetails.getR_ID()) == 0) {
             return "1";
         } else {
             return "2";
         }
 
-        
-        
     }
 
     // --------------------------------------------------------관리자
@@ -244,7 +241,7 @@ public class AudienceController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Member member = memberRepository.findByNo(userDetails.getR_ID());
         ProgramManager pm = pmRepository.findById(member.getNo());
-        
+
         // 게시글, 파일저장
         audience.setProgramId(pm.getProgramId());
         audience.setRId(member.getNo());
@@ -252,7 +249,7 @@ public class AudienceController {
         audience.setImg(storageService.store2(filename));
         audienceJpaRepository.saveAndFlush(audience);
         storageService.store2(filename);
-       
+
         return "redirect:/userInfo/audience/mlist";
         // }
     }
@@ -277,12 +274,11 @@ public class AudienceController {
     public String update(@Valid Audience audience, BindingResult bindingResult, SessionStatus sessionStatus,
             Principal principal, Model model, RedirectAttributes redirAttrs,
             @RequestParam(name = "filename") MultipartFile filename) {
-   
+
         storageService.store2(filename);
         audienceJpaRepository.audienceUpdate(audience.getATitle(), audience.getAStartdate(), audience.getAEnddate(),
                 audience.getARecruits(), audience.getALimit(), audience.getAPrice(), storageService.store2(filename),
                 audience.getAContent(), audience.getApplyId());
-    
 
         return "redirect:/userInfo/audience/mlist";
     }
@@ -307,7 +303,7 @@ public class AudienceController {
         Audience audience = audienceJpaRepository.findById(applyId);
         audience.setAViewCount(audience.getAViewCount() + 1);
         audienceJpaRepository.saveAndFlush(audience);
-        model.addAttribute("apply",  mr.getInfo(audience.getApplyId()));
+        model.addAttribute("apply", mr.getInfo(audience.getApplyId()));
         model.addAttribute("result", applyResultRepository.findByApplyId(applyId));
 
         return "audience/mRead";
@@ -334,8 +330,7 @@ public class AudienceController {
     @GetMapping("/audience/showResult")
     @ResponseBody
     public JSONObject showResult(Audience audience, Model model) {
-        
-        
+
         Audience audi = audienceJpaRepository.findById(audience.getApplyId());
 
         JSONObject json = new JSONObject();
@@ -352,7 +347,7 @@ public class AudienceController {
         List<Member> result2 = new ArrayList<>(); // 최종결과명단
         list = mr.getInfo(audi.getApplyId());// 중복제거
 
-        if (people >= list.size()) {  //응모인원이 추첨인원 보다 적을 때
+        if (people >= list.size()) { // 응모인원이 추첨인원 보다 적을 때
 
             for (Member list2 : list) {
 
@@ -383,7 +378,7 @@ public class AudienceController {
                     }
                 }
             }
-            
+
             for (Member list2 : result2) {
                 ApplyResult applyResult = new ApplyResult();
                 applyResult.setApplyId(audi.getApplyId());

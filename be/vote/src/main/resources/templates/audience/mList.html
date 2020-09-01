@@ -1,8 +1,10 @@
-
 </body>
+
 </html>
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{userInfo_layout::layout(~{::content},_,'내가 쓴 게시글', ~{::link})}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{userInfo_layout::layout(~{::content},_,'내가 쓴 게시글', ~{::link})}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,31 +16,32 @@
     <link rel="stylesheet" href="/css/featherlight.css">
     <link rel="stylesheet" href="/css/mobile.css">
     <link rel="stylesheet" href="/shop/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
+    <script src="https://kit.fontawesome.com/6fd62b4121.js" crossorigin="anonymous"></script>
 
 
 </head>
 
 <body>
-  <content>
-      <style>
-          .bo_fx{
-            display: block;
-            width: 100%;
-            text-align: center;
-          }
-      </style>
-    <div id="container">
-        <!-- 게시판 목록 시작 { -->
-        <div id="bo_list" style="width:100%">
-            <!-- 게시판 페이지 정보 및 버튼 시작 { -->
-            <div id="bo_btn_top">
-                <div id="bo_list_total">
-                    <span th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
-                </div>
+    <content>
+        <style>
+            .bo_fx {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+        <div id="container">
+            <!-- 게시판 목록 시작 { -->
+            <div id="bo_list" style="width:100%">
+                <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+                <div id="bo_btn_top">
+                    <div id="bo_list_total">
+                        <span
+                            th:text="${'total  '}+${boardList.totalPages} + ${' /  '}+${boardList.number + 1} + ${' page  '}"></span>
+                    </div>
 
-            </div>
-            <!-- } 게시판 페이지 정보 및 버튼 끝 -->
+                </div>
+                <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
 
 
@@ -56,7 +59,8 @@
                             </a>
 
                             <u>
-                                <i class="fas fa-pencil-alt"></i><span class="sv_member" th:text="${list.rId}"></span></span>
+                                <i class="fas fa-pencil-alt"></i><span class="sv_member"
+                                    th:text="${list.rId}"></span></span>
                                 <i class="fa fa-eye"></i><span th:text="${list.aViewCount}"> </span>
                                 <i class="fa fa-clock-o"></i><span th:text="${#dates.format(list.aDate, 'yyyy-MM-dd HH:mm')}"></i> </span>
                             </u>
