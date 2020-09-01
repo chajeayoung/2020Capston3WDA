@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{main_layout::layout(~{::content},_,'서비스소개',_)}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <content>
+<style>
+
+img {
+  max-width: 100%; }
+
+.bg-fixed {
+  background-size: cover; }
+
+.bg-grey {
+  background-color: #f7f8f9; }
+
+.fs-40 {
+  font-size: 40px; }
+
+
+
+.title-wrap,
+.section-title {
+  text-align: center; }
+
+.shadow {
+  box-shadow: 0 10px 30px 0 rgba(67, 80, 98, 0.24), 0 2px 4px 0 rgba(67, 80, 98, 0.1) !important; }
+
+#header-navbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 11;
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); }
+
+.navbar-brand {
+  font-size: 40px;
+  color: #000; }
+
+.navbar-nav .nav-link {
+  color: #fff;
+  transition: .3s ease; }
+
+.navbar-nav:hover li a {
+  opacity: 0.5; }
+  .navbar-nav:hover li a:hover {
+    opacity: 1; }
+
+.navbar-toggler {
+  font-size: 2rem;
+  color: #fff; }
+
+.jumbotron {
+  color: #fff;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+  border-radius: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  min-height: 100vh; }
+  @media (max-width: 767px) and (orientation: landscape) {
+    .jumbotron {
+      min-height: 500px; } }
+  .jumbotron .container {
+    position: relative;
+    z-index: 1; }
+  .jumbotron:before {
+    position: absolute;
+    display: block;
+    content: "";
+    opacity: 0.8;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  .jumbotron h1 {
+    line-height: .9;
+    font-weight: bold;
+    display: inline-block;
+    border: 15px solid #fff;
+    padding: 30px;
+    font-size: 9rem;
+    opacity: 0;
+    animation: 1s fadeInFromTop cubic-bezier(0.785, 0.135, 0.15, 0.86) 1s forwards;
+    animation-delay: .8s; }
+
+.jumbotron-single h1 {
+  font-size: 3rem !important; }
+
+.overlay {
+  color: #fff; }
+  .overlay:before {
+    position: absolute;
+    display: block;
+    content: "";
+    opacity: 0.9;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  .overlay.bg-white {
+    color: #000; }
+    .overlay.bg-white:before {
+      background: #fff;
+      opacity: .7; }
+
+.text-white {
+  color: #fff; }
+
+
+
+
+
+.feature-item {
+  transition: all .2s ease-in-out 0s !important; }
+  .feature-item:hover {
+    transform: translateY(-13px); }
+
+.progress-bar {
+  background-color: #ff00cc; }
+
+.client-slider .owl-nav {
+  display: none; }
+
+.client-slider .client-item {
+  padding: 0 40px; }
+
+/*=====  End of CLIENT  ======*/
+/*==================================
+=            RESPONSIVE            =
+==================================*/
+@media (max-width: 992px) {
+  .not-on-top #header-navbar {
+    position: fixed;
+    top: 0;
+    height: auto;
+    width: 100%;
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    z-index: 11; }
+  #header-navbar {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important; }
+  .navbar-transparent .navbar-collapse {
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 10px; } }
+
+@media (max-width: 767px) {
+  .jumbotron h1 {
+    font-size: 6rem; }
+  .grid-item {
+    width: 100%; }
+  .progress {
+    height: 30px;
+    font-size: 16px; } }
+
+/*=====  End of RESPONSIVE  ======*/
+
+</style>
+<section id="features" class="bg-white">
+    <div class="container">
+        <div class="section-content">
+            <!-- Section Title -->
+            <div class="title-wrap mb-5" data-aos="fade-up">
+                <h2 class="section-title">
+                    서비스 소개 
+                </h2>
+                <br>
+                <br>
+                <br>
+                <br>
+                
+            </div>
+            <!-- End of Section Title -->
+            <div class="row">
+                <!-- Features Holder-->
+                <div class="col-md-10 offset-md-1 features-holder">
+                    <div class="row">
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-cog fs-40"></i>
+                                </div>
+                                <img src="/uploads/춤1.png">
+                                <h4>오디션참가신청</h4>
+                                <br>
+                                <p>RIRO의 오디션 참가신청 서비스는 시간과 장소에 관계없이 어디서나 온라인/모바일을 통해 본인의 프로필,사진과 정보를 입력하여 직접업로드하여 지원하는 서비스입니다.</p>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-frame-contract fs-40"></i>
+                                </div>
+                                <img src="/uploads/채팅.png">
+                               <h4>실시간채팅</h4>
+                               <br>
+                                <p>RIRO 실시간채팅 실시간으로 서비스를 이용하는 유저끼리 소통할수있는 서비스이며 로그인하여 이용할수있습니다.</p>
+                            </div>
+                        </div>
+                        <!-- End of Feature Item -->
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-bubble fs-40"></i>
+                                </div>
+                                <img src="/uploads/티켓.png">
+                                <h4>방청권응모</h4>
+                                <br>
+                                <p>RIRO의 방청권 응모서비스는 회원가입을 하면 무료로 신청이 가능하며 회원가입하신분에 포인트를 적립하여 응모시 포인트를 소모한뒤  방청권을 추첨 합니다</p>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-magic-wand fs-40"></i>
+                                </div>
+                                <img src="/uploads/팬클럽1.png">
+                                <h4>팬클럽</h4>
+                                <br>
+                                <p>RIRO의 팬클럽서비스는 출연자별로 팬클럽이 등록되어있으며 팬들끼리 모여 정보공유를 하여 소통할 수 있는 서비스입니다.</p>
+                            </div>
+                        </div>
+                        <!-- End of Feature Item -->
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-clock fs-40"></i>
+                                </div>
+                                <img src="/uploads/핫클립1.png">
+                                <h4>핫클립</h4>
+                                <br>
+                                <p>RIRO의 핫클립서비스는 프로그램 영상 중 사용자들에게 인기가 많은 영상이 주로 등록됩니다 특히 짧은 시간에 사용자 반응이 높은 영상이 등록되는 커뮤니티입니다. </p>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" data-aos="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-thumbs-up fs-40"></i>
+                                </div>
+                                <img src="/uploads/쇼핑몰1.png">
+                                <h4>굿즈샵</h4>
+                                <br>
+                                <p>아이돌 스타의 상품을 구입할 수 있습니다 프로그램별로 상품이 나늬며 자신이 좋아하는 아이돌의 상품이 등록되어있습니다. </p>
+                            </div>
+                        </div>
+                        
+                        <!-- End of Feature Item -->
+                    </div>
+                </div>
+                <!-- End of Features Holder-->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+	
+	
+</body>
+</html>
+
+        
+    </content>
+</body>
+</html>
