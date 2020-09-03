@@ -27,12 +27,12 @@
       </div>
     
 <section class="backim">
-		<div class="gi" th:each="hotclib:${hotclibList}">
-		<div>	<a href=""
+		<div class="gi2" th:each="hotclib:${hotclibList}">
+		<div class="hotclibBox">	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
 				<img class="hi" width="300" height="300"
 				th:src="@{'/uploads/' + ${hotclib.filename2}}">
-</div>
+  </div>
 
       <div class="foncolor">
         <h3><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
@@ -46,7 +46,8 @@
       조회수 : <span class="qi" th:utext="${hotclib.hviewcount}"></span>
       </div>
       <div class="foncolor">
-      작성자 : <span class="qi" th:utext="${hotclib.husername}"></span>	
+      
+      <span class="qi" th:utext="${hotclib.husername}"></span>	
       </div>
 				
 			</a>

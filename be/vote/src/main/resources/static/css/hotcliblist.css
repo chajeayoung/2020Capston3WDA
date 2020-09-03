@@ -9,18 +9,38 @@
 		}
 .hi{
   object-fit: cover;
+  width:100%;
+  height:100%;
 }
-.gi {
 
-	padding: 0px;
-	width: 305px;
-	height: 305px;
+.hotclibBox{
+  width: 300px;
+  inline-size: auto;
+
+}
+.gi2{
+
+	padding: 10px;
+
 	margin: 20px;
 	display: inline-block;
 	text-align: left;
-  border: solid;
   border-color: #5F6368;;
+  background-color:white;
+  text-align : center;
 
+}
+.gi {
+
+	padding: 10px;
+	width: 305px;
+	/* height: 305px; */
+	margin: 20px;
+	display: inline-block;
+	text-align: left;
+  
+  border-color: #5F6368;;
+  background-color:white;
   text-align : center;
 
 }
@@ -113,7 +133,8 @@ font-size: 1.3em;
 .riro{
   text-decoration: none !important;
   margin: 10px;
-  background: #8965a778;
+  border-radius: 10px;
+  background: #8b6dfdff;
   color:#fff;
   border:none;
   position:relative;
@@ -222,13 +243,14 @@ font-size: 1.3em;
   color:#fff;
   border:none;
   position:relative;
-  height:50px;
   font-size:25px;
   padding:0 2em;
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
   margin: 18px;
+  border-radius: 10px;
+  text-align :center;
 }
 .upl:hover{
   background:#fff;
