@@ -2,7 +2,7 @@
 
     tr{
         display: grid;
-        grid-template-columns: 35% 65%;
+        /* grid-template-columns: 35% 65%; */
     }
     tr input{
        width: 80%; 
@@ -10,7 +10,34 @@
     tr textarea{
         width: 80%;
     }
+    img.im {
+        width:100% !important;
+    }
+    th{
+        width:auto !important;
+    }
 
+}
+.profile {
+    width: 300px;
+}
+img.im {
+    width:100%;
+}
+tr{
+    vertical-align: middle !important;
+}
+th{
+    width: 20%;
+    vertical-align: middle !important;
+}
+td{
+    vertical-align: middle !important;
+}
+
+table{
+    background:white;
+   
 }
 
 .im{

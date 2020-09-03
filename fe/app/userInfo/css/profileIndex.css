@@ -14,7 +14,9 @@ div#userIndex {
     margin : 10px;
 }
   
-
+td.MuiTableCell-root.MuiTableCell-body {
+    width: 150px;
+}
 
 
 .userInfoBox {

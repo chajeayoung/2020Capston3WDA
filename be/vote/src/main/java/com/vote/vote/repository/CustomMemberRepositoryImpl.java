@@ -31,7 +31,7 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
 
         BooleanBuilder booleanBuilder = new BooleanBuilder(); //여기다가 조건절을 단다.
 
-        List<Member> member = query.select(qm).from(qm).offset(pageable.getOffset()).limit(pageable.getPageSize()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
+        List<Member> member = query.select(qm).from(qm).offset(pageable.getOffset()).limit(pageable.getPageSize()).orderBy(qm.no.desc()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
 
         count = query.select(qm).from(qm).where(booleanBuilder).fetchCount();
 

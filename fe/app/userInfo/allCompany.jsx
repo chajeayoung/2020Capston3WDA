@@ -137,7 +137,7 @@ class Index extends Component{
                             
                             <TableRow key={'div'+index}>
                              
-                                <TableCell key={index}>{index+1}</TableCell>
+                                <TableCell key={index}>{c.rownum}</TableCell>
                                 <TableCell className="smart">{c.c_category}</TableCell>
                                 <TableCell>{c.c_program} </TableCell>
                                 <TableCell className="smart">{c.c_startdate}</TableCell>

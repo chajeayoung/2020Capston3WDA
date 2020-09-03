@@ -17,7 +17,7 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
     <th:block th:each="audition:${auditionuserlist}">
-        <div class="card" >
+        <div class="card2" >
         	<a th:href="@{'/audition/readuser/' + ${audition.auditionid}}">
 	            <div class="cardGridDiv">
 	                <div class="cardImgDiv">

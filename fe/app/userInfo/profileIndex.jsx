@@ -95,8 +95,8 @@ class Index extends Component{
                         return (
                             
                             <TableRow key={'div'+index}>
-                                <TableCell  key={index}>{p.r_id}</TableCell>
-                                <TableCell><img id="profile" src={p.profile} alt="profile"/></TableCell>
+                                <TableCell  key={index}>{p.rownum}</TableCell>
+                                <TableCell><img id="profile" src={p.profile?p.profile:"/img/defaultProfile2.png"} alt="profile"/></TableCell>
                                 <TableCell className="smart">{p.username}</TableCell>
                                 <TableCell>{p.userid}</TableCell>
                                 <TableCell className="smart">{p.nickname}</TableCell>

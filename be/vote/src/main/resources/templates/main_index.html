@@ -197,7 +197,7 @@
                 </div>
 
                 <div th:case="1">
-                  관리자
+                  관리자권한
                 </div>
 
                 <div th:case="2" id="rirodiv">
@@ -220,8 +220,8 @@
                   </tr>
                </thead>
                <tbody>
-                           <tr th:each="audition:${auditionlist}">
-                           <td th:text="${audition.auditionid}"></td>
+                           <tr th:each="audition, i:${auditionlist}">
+                           <td th:text="${i.size-i.index}"></td>
                            <!--  <td th:text="${audition.a_title}"></td> -->
                            <td><a href="" th:href="@{'/audition/read/' + ${audition.auditionid}}" th:text="${audition.atitle}"></a></td>
                            <td class="t23" th:text="${audition.acategory}"></td>
@@ -251,8 +251,8 @@
                         </tr>
                </thead>
                <tbody>
-                     <tr th:each="auditionCon:${auditionconlist}">
-                        <td th:text="${auditionCon.formid}"></td>
+                     <tr th:each="auditionCon, i:${auditionconlist}">
+                        <td th:text="${i.size-i.index}"></td>
                         <td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td>
                         <!-- <td th:text="${auditionCon.fname}"></td> -->
                         <td><span th:text="${auditionCon.username}"></span><span>님</span></td>
