@@ -18,6 +18,7 @@ public interface AuditionConJpaRepository  extends JpaRepository<AuditionCon, St
 	public ArrayList<AuditionCon> findByConfirm(String confirm);
 	public AuditionCon findByAuditionid(Integer auditionid);
 	public AuditionCon findByRid(int rid);
+	public AuditionCon findByRidOrderByFormidDesc(int rid);
 	public List<AuditionCon> findByProgramid(int programid, Pageable pageable);
 
 }

@@ -7,18 +7,22 @@
 			background-image:linear-gradient ;
 			
 		}
-
+.hi{
+  object-fit: cover;
+}
 .gi {
 
 	padding: 0px;
 	width: 305px;
 	height: 305px;
-	margin: 10px;
+	margin: 20px;
 	display: inline-block;
 	text-align: left;
   border: solid;
   border-color: #5F6368;;
-	
+
+  text-align : center;
+
 }
 
 .qi{
@@ -30,7 +34,7 @@ font-size: 1.3em;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
-  background-color:#8b6d6d5c;
+  background-color:#8b6dfdff;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -70,7 +74,7 @@ font-size: 1.3em;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
-  background-color:#d7acac63;
+  background-color:#ffafffff;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -207,14 +211,14 @@ font-size: 1.3em;
 }
 
 .foncolor{
-  color: #5F6368;
+  color: black;
 }
 
 .upl{
   float: right;
   text-decoration: none !important;
   display: inline-grid;
-  background:#20073b4d;
+  background:#8b6dfdff;
   color:#fff;
   border:none;
   position:relative;

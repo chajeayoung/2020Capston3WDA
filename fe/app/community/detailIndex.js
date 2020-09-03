@@ -137,7 +137,7 @@ class Index extends Component {
                     <Ulist param={param}></Ulist>                 
                     <br /><br /><br />
                     <Pagination count={this.state.count3} page={this.state.pageNum3} onChange={this.pagenation3.bind(this)} style={{ placeContent: "center" }}> </Pagination>
-                    <button type="button" onClick={this.goUrl.bind(this)} >더보기</button>
+                    <button class="plus" type="button" onClick={this.goUrl.bind(this)} >더보기</button>
                     
                     </div>:<span>진행중인 방청권이 없습니다.</span>}
 
@@ -155,7 +155,7 @@ class Index extends Component {
                     <HotclibItem data={this.state.hotclib} />                    
                     <br /><br /><br />
                     <Pagination count={this.state.count2} page={this.state.pageNum2} onChange={this.pagenation2.bind(this)} style={{ placeContent: "center" }}> </Pagination>
-                    <button type="button" onClick={this.plus.bind(this)}>더보기</button>
+                    <button class="plus" type="button" onClick={this.plus.bind(this)}>더보기</button>
                     
                     </div>:<span>등록된 핫클립 없습니다.</span>}
 

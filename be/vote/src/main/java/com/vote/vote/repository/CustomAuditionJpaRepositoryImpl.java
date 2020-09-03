@@ -51,7 +51,7 @@ public class CustomAuditionJpaRepositoryImpl implements CustomAuditionJpaReposit
 			}
 	        
 	        
-	        List<AuditionCon> auditionCon = query.select(am).from(am).offset(pageable.getOffset()).limit(pageable.getPageSize()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
+	        List<AuditionCon> auditionCon = query.select(am).from(am).offset(pageable.getOffset()).limit(pageable.getPageSize()).orderBy(am.formid.desc()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
 
 //	        count = query.select(cm).from(cm).where(booleanBuilder).fetchCount();
 

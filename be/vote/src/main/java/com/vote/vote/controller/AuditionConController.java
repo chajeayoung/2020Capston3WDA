@@ -128,7 +128,7 @@ public class AuditionConController {
 		CustomUserDetails sessionUser = (CustomUserDetails) principal;
 
 		System.out.println(sessionUser.getR_ID());
-		AuditionCon auditioncon = auditionConRepository.findByRid(sessionUser.getR_ID());
+		AuditionCon auditioncon = auditionConRepository.findByRidOrderByFormidDesc(sessionUser.getR_ID());
 
 		System.out.println(auditioncon.toString());
 		model.addAttribute("auditionconlistm", auditioncon);

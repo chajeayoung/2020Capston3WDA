@@ -18,5 +18,7 @@ public interface AuditionJpaRepository  extends JpaRepository<Audition, String>{
 	public ArrayList<Audition> findByAtitle(String keyword);
 	public List<Audition> findByRid(int rid);
 	public List<Audition> findByProgramid(int programid, Pageable pageable);
+
+	public List<Audition> findByProgramidOrderByAuditionidDesc(int programid, Pageable pageable);
 	public List<Audition> findByProgramid(int programid);
 }

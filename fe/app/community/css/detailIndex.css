@@ -5,6 +5,30 @@
   padding: 0px !important;
 }
 
+.plus {
+  text-decoration: none !important;
+  width: 80px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color:#8b6dfdff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.plus  {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+
 .jVFVRr {
 
     margin  : auto !important;
