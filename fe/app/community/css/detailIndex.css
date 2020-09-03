@@ -5,6 +5,10 @@
   padding: 0px !important;
 }
 
+.communityTitle{
+  font-size: 30px;
+  color: black;
+}
 .plus {
   text-decoration: none !important;
   width: 80px;

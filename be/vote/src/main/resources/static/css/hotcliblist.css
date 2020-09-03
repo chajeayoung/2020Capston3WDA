@@ -129,7 +129,9 @@ font-size: 1.3em;
   opacity: 1;
   right: 0;
 }
-
+.commentColor{
+  color:blue;
+}
 .riro{
   text-decoration: none !important;
   margin: 10px;

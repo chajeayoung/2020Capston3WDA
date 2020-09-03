@@ -130,7 +130,7 @@ class Index extends Component {
             <div className="community_item">
 
                 <div id="audience">
-                    <div className="communityTitle">방청권</div><br />
+                    <hr/><div className="communityTitle">방청권</div><hr/>
                     {this.state.audience.length>0?
                     
                     <div>
@@ -147,7 +147,7 @@ class Index extends Component {
                 </div>
                 <br /><br />
                 <div id="hotclib">
-                <div className="communityTitle">핫클립</div><br /><hr></hr>
+                <hr/>  <div className="communityTitle">핫클립</div><hr/>
 
                     {this.state.hotclib.length>0?
                     
@@ -165,7 +165,7 @@ class Index extends Component {
 
                 <br /><br />
                 <div id="popular">
-                <div className="communityTitle">출연자</div><br />                    
+                <hr/>  <div className="communityTitle">출연자 게시판</div><hr/>               
 
                     {this.state.popular.length>0?
                     
