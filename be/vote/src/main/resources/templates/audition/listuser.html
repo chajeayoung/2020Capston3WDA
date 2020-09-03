@@ -44,7 +44,7 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
             <td>
               <input type="button" value="처음으로" onclick="location.href='/audition/listuser'"/>
                                     </td>
-           <center>
+        <!-- <center> -->
 		<form action="/audition/serchuser" method="GET">
 		   
 		        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
@@ -53,11 +53,11 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
 		    <button>검색하기</button>
 
 		</form>
-		</center>
+		<!-- </center> -->
 		
 </div>
 
-<nav style=text-align: center; >
+<nav style=text-align:center; >
 
     <ul class="pagination"
         th:with="start=${T(Math).floor(auditionlist.number/10)*10 + 1},

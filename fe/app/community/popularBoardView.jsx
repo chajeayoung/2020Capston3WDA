@@ -9,9 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 import Pagination from '@material-ui/lab/Pagination';
-import ItemCard4 from '../items/itemCard4.jsx';
+import ItemCard4 from '../items/ItemCard5.jsx';
 
 import './Modal.css';
+import './css/view.css';
 
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');

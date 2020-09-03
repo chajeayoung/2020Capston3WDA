@@ -34,52 +34,71 @@ class PopularBoard extends Component {
         
         super(props);
         this.state = { popularBoard: [] , pageNum: 1 , count: 0, allCount:0, modal : false, file : '', previewURL:'',sessionUser:''}
-        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"';
+        // this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"';
+        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
 
     }
     setUrl(){
-
         this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
-        
- 
     }
+
+
+
     pagenation(e,page){
-      console.log(1)
         this.state.pageNum = page
         this.setUrl()   
         this.componentDidMount()
     }
+    
+    onSearchEvnet(){
+      console.log("버튼 클릭");
+      const text = document.getElementById("searchInput").value
+      
+      this.state.text = text;
+
+  
+      this.setUrl()
+      this.componentDidMount()
+
+  }
 
     async componentDidMount(){
+      this.getItem()
+
       console.log("dd: "+$("#popLogoImg").val())
-      $('header').toggleClass('changed');
+      $('header').addClass('changed');
       $("header").css("background-image","url('/uploads/"+$("#popLogoImg").val()+"')")
+      
       $("header").css("background-position","center")
       $("header").css("background-repeat","no-repeat")
-      $("header").css("background-size","contain")
+      $("header").css("background-size","contain")     
 
-        if(url.indexOf("hash")!=-1){
-      console.log(2)  
-                param3 = url.split("hash=")[1];
-      console.log(3)
-
-          var sliceUrl = url.split("?");
-          // this.url= sliceUrl[0]+"/axios?page="+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
-          this.setUrl()
-        }
-        
-        let {data : popularBoard} = await axios.get(this.url)
-        
-        this.state.allCount = (popularBoard.pop())
-        this.state.count = Math.ceil((this.state.allCount*1.0)/10)
-        
-        this.state.sessionUser = (popularBoard.pop())
-
-        this.setState({popularBoard})
-
-       
 
     }
+
+    async getItem(){
+
+      if(url.indexOf("hash")!=-1){
+        console.log("----")
+                  param3 = url.split("hash=")[1];
+        console.log(param3)
+  
+            var sliceUrl = url.split("?");
+            // this.url= sliceUrl[0]+"/axios?page="+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
+            this.setUrl()
+          }
+
+      let {data : popularBoard} = await axios.get(this.url)
+        
+      this.state.allCount = (popularBoard.pop())
+      this.state.count = Math.ceil((this.state.allCount*1.0)/10)
+      this.state.sessionUser = (popularBoard.pop())
+
+      this.setState({popularBoard})
+     
+
+    }
+
     handleOpenModal(){
         this.setState({modal:true});  
     
@@ -88,15 +107,13 @@ class PopularBoard extends Component {
       handleCloseModal(){
         this.setState({modal:false});
       };  
-  
 
 
     render() {
      
         return(
         <div>
-            <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
- 
+
                          <Paper >
                             <Table size="small" id="myTable">
                             <TableHead>
@@ -139,6 +156,12 @@ class PopularBoard extends Component {
                                      {this.state.modal &&  <Modal2 boardItem={this.state.boardItem}></Modal2> }{} 
             
 
+        <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
+        
+        <div className="search">
+        <input type="text" id="searchInput" placeholder="검색"/>
+        <button type="click" className="searchButton"onClick={this.onSearchEvnet.bind(this)}>검색</button>
+        </div>
         </div> 
          )
     }
