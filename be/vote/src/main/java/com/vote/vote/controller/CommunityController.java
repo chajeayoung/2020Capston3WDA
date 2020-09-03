@@ -223,21 +223,10 @@ public class CommunityController {
 					if( hash!=null && !hash.equals("")){
 					  nullCheck = hash;
 					}
-		  
-		System.out.println("1");
 		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable, nullCheck);
 	
 		//long count = customPopularBoardRepository.CountById(popularNum);
-		
-		System.out.println("2");
-		//System.out.println(popularNum);
-		//System.out.println(count);
-		
-
-		//System.out.println("pageable : " + pageable);
-
-		//System.out.println("getOffset : " + pageable.getOffset());
-		
+	
 		int gob;
 		int rownum;
 		
