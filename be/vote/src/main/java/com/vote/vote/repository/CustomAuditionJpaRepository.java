@@ -14,4 +14,5 @@ public interface CustomAuditionJpaRepository{
 
 	public List<AuditionCon> findByRid(List<Audition> audition,Pageable page);
 
+
 }

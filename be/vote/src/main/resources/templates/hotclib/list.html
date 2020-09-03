@@ -21,33 +21,34 @@
   
 	<div>
       <a href="" class="riro" 
-      th:href="@{'/community/myhotclib/sorthviewcount'}">조회순</a>
+      th:href="@{'/community/'+${programid}+'/hotclib/sorthviewcount'}">조회순</a>
       <a href="" class="riro"
-      th:href="@{'/community/myhotclib/sorthdate'}">최신순</a>
+      th:href="@{'/community/'+${programid}+'/hotclib/sorthdate'}">최신순</a>
       </div>
     
 <section class="backim">
-		<div class="gi" th:each="hotclib:${hotclibList}">
-		<div>	<a href=""
+		<div class="gi2" th:each="hotclib:${hotclibList}">
+		<div class="hotclibBox">	<a href=""
 				th:href="@{'/community/'+${hotclib.programid}+'/hotclib/read/' + ${hotclib.hotclibid}}">
 				<img class="hi" width="300" height="300"
 				th:src="@{'/uploads/' + ${hotclib.filename2}}">
-</div>
+  </div>
 
-				
-				<div class="foncolor">
-					 <h1><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
-						style="color: red;" th:text="${hotclib.hreplycount}"></span>)</h1>
-				</div>
-				<div class="foncolor">
-					 <span class="qi" th:utext="${hotclib.hdate}"></span>
-				</div>
-				<div class="foncolor">
-					조회수: <span class="qi" th:utext="${hotclib.hviewcount}"></span>
-				</div>
-				<div class="foncolor">
-					작성자: <span class="qi" th:utext="${hotclib.husername}"></span>	
-				</div>
+      <div class="foncolor">
+        <h3><span class="foncolor" th:utext="${hotclib.htitle}"></span>(<span
+       class="commentColor" th:text="${hotclib.hreplycount}"></span>)</h3>
+      </div>
+      <div class="foncolor">
+        <!-- <span class="qi" th:utext="${hotclib.hdate}"></span> -->
+      등록일 : <span class="qi" th:text="${#dates.format(hotclib.hdate,'yyyy-MM-dd')}"></span>
+      </div>
+      <div class="foncolor">
+      조회수 : <span class="qi" th:utext="${hotclib.hviewcount}"></span>
+      </div>
+      <div class="foncolor">
+      
+      <span class="qi" th:utext="${hotclib.husername}"></span>	
+      </div>
 				
 			</a>
          
@@ -66,7 +67,7 @@
     
 
         
-<section style="margin-top: 400px;">
+<section>
 
     <div class="pagination">
       <a href="#">&laquo;</a>

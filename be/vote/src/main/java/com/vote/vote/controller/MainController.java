@@ -58,7 +58,7 @@ public class MainController {
 				if(sessionUser.getROLE().equals("2")) {
 					int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); 
 					pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "auditionid"));
-					model.addAttribute("auditionlist", auditionRepository.findByProgramid(pManager.getProgramId(),pageable));
+					model.addAttribute("auditionlist", auditionRepository.findByProgramidOrderByAuditionidDesc(pManager.getProgramId(),pageable));
 					
 									
 					System.out.println(auditionRepository.findAll(pageable));

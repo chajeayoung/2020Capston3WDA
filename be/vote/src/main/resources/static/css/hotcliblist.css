@@ -7,18 +7,42 @@
 			background-image:linear-gradient ;
 			
 		}
+.hi{
+  object-fit: cover;
+  width:100%;
+  height:100%;
+}
 
-.gi {
+.hotclibBox{
+  width: 300px;
+  inline-size: auto;
 
-	padding: 0px;
-	width: 305px;
-	height: 305px;
-	margin: 10px;
+}
+.gi2{
+
+	padding: 10px;
+
+	margin: 20px;
 	display: inline-block;
 	text-align: left;
-  border: solid;
   border-color: #5F6368;;
-	
+  background-color:white;
+  text-align : center;
+
+}
+.gi {
+
+	padding: 10px;
+	width: 305px;
+	/* height: 305px; */
+	margin: 20px;
+	display: inline-block;
+	text-align: left;
+  
+  border-color: #5F6368;;
+  background-color:white;
+  text-align : center;
+
 }
 
 .qi{
@@ -30,7 +54,7 @@ font-size: 1.3em;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
-  background-color:#8b6d6d5c;
+  background-color:#8b6dfdff;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -70,7 +94,7 @@ font-size: 1.3em;
   width: 80px;
   display: inline-block;
   border-radius: 10px;
-  background-color:#d7acac63;
+  background-color:#ffafffff;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -105,11 +129,14 @@ font-size: 1.3em;
   opacity: 1;
   right: 0;
 }
-
+.commentColor{
+  color:blue;
+}
 .riro{
   text-decoration: none !important;
   margin: 10px;
-  background: #8965a778;
+  border-radius: 10px;
+  background: #8b6dfdff;
   color:#fff;
   border:none;
   position:relative;
@@ -207,24 +234,25 @@ font-size: 1.3em;
 }
 
 .foncolor{
-  color: #5F6368;
+  color: black;
 }
 
 .upl{
   float: right;
   text-decoration: none !important;
   display: inline-grid;
-  background:#20073b4d;
+  background:#8b6dfdff;
   color:#fff;
   border:none;
   position:relative;
-  height:50px;
   font-size:25px;
   padding:0 2em;
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
   margin: 18px;
+  border-radius: 10px;
+  text-align :center;
 }
 .upl:hover{
   background:#fff;

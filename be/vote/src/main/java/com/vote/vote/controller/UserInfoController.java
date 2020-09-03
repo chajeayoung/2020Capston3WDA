@@ -230,10 +230,26 @@ public class UserInfoController {
 
 			System.out.println("getOffset : " + pageable.getOffset());
 
+			int gob;
+			int rownum;
+			
+			if(pageable.getPageNumber()==0) {
+				 gob = 0;
+				
+			}else {
+				 gob = 10;
+			}
+
+			int i = 0;
+			rownum = (int)count - (pageable.getPageNumber() * gob) ;
+
+
 			JSONArray json = new JSONArray();
+			
 
 			for( Member member : members){
 				JSONObject memberData = new JSONObject();
+				memberData.put("rownum", rownum-i);
 				memberData.put("r_id", member.getNo());
 				memberData.put("username", member.getName());
 				memberData.put("nickname", member.getNickname());
@@ -249,6 +265,7 @@ public class UserInfoController {
 				memberData.put("role", member.getRole());
 				
 				json.add(memberData);
+				i++;
 			}
 			json.add(count);
 					
@@ -276,10 +293,24 @@ public class UserInfoController {
 
 				JSONArray json = new JSONArray();
 
+				int gob;
+				int rownum;
+				
+				if(pageable.getPageNumber()==0) {
+					 gob = 0;
+					
+				}else {
+					 gob = 10;
+				}
+				int i = 0;
+				rownum = (int)count - (pageable.getPageNumber() * gob) ;
+				System.out.println(count);
+				System.out.println(rownum);
 
 				for( Company company : companies){
 					JSONObject companyData = new JSONObject();
 					
+					companyData.put("rownum", rownum-i);
 					companyData.put("c_id", company.getId());
 					companyData.put("r_id", company.getRid());
 					companyData.put("c_name", company.getCname());
@@ -295,6 +326,7 @@ public class UserInfoController {
 
 					
 					json.add(companyData);
+					i++;
 				}
 				json.add(count);
 						

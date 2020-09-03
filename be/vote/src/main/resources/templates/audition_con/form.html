@@ -18,115 +18,145 @@
             
             <form th:action="@{'/audition_con/form/'+${auditionId}} " method="post" name = "fname" enctype="multipart/form-data"> 
                 <div class="container">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="text-align: center;">
                         <tbody class='table_body'>
                             <tr >
-                                <th>성명</th>
+                                <!-- <td rowspan="6"> 프로필 사진 </td> -->
+                                <td rowspan="6" class="profile">
+                                    <div id="image_container"></div>
+                                    <input type="file" name="filename" capture="camera" onchange="setThumbnail(event);" required/>
+                                   
+                                </td>
+
+                                <th style="text-align: center;">성명</th>
                                 
-                                    <td sec:authentication="principal.name"></td>
+                                    <td colspan="2" sec:authentication="principal.name"></td>
                                     <!-- <input type="text" name="fusername" required/> -->
                                     <!-- <input type="hidden" name="fusername" th:value="${principal.name}" required/> -->
                                 
-                                <th>휴대전화번호</th>
-                                <td th:text="${member.phone}"></td>
-                                <!-- <td sec:authentication="principal.number"></td> -->
-                                
-                                    <!-- <input type="hidden" name="fuserphone" th:value="${member.phone}"required/> -->
-                                
-                                
-                                <th>이메일</th>
                                
-
-                                </th:block>
-                                <td>
-                                    <input type="text" name="fusermail"  required/>
-                                </td>
+                                
                             </tr>
                             <tr>
-                                <th>제목</th>
-                                 <td name="ftitle" th:text="${audition.atitle}+지원"></td>
+                            <th style="text-align: center;">휴대전화번호</th>
+                            <td colspan="2" th:text="${member.phone}"></td>
+                            <!-- <td sec:authentication="principal.number"></td> -->
+                            
+                                <!-- <input type="hidden" name="fuserphone" th:value="${member.phone}"required/> -->
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">생년월일</th>
+                          
+                                <td colspan="2" th:text="${member.birth}"></td>
+                                 <input type="hidden" name="birth" th:value="${member.birth}" />
+                            </tr>
+
+                            <tr>
+                                <th style="text-align: center;">이메일</th>
+                            
+                                <td colspan="2">
+                                    <input type="text" name="fusermail" style="width: 370px; text-align:center;" required/>
+                                </td>
                                
-                              <input type="hidden" name="ftitle" th:value="${audition.atitle}+지원" />
+                               
+                            </tr>
+
+                            <tr>
                              
-                                
-                                <th>생년월일</th>
-                              
-                                 <td th:text="${member.birth}"></td>
-                                  <input type="hidden" name="birth" th:value="${member.birth}" />
+                              <th style="text-align: center;">주소</th>
+                              <!-- <td th:text="${member.addr}"></td> -->
+                              <td colspan="2"><input type="text" name="faddr" style="width: 370px; text-align:center;" th:value="${member.addr}" /></td> 
+                             
 
                             </tr>
+                        
                             <tr>
-                                <th>사진 </th>
-                                <td>
-                                    <input type="file" name="filename" capture="camera" required/>
+                                <th style="text-align: center;">가족관계</th>
+                                <td colspan="2">
+                                    <input type="text" name="ffamily" style="width: 370px; text-align:center;" required/>
                                 </td>
-                                <th>주소</th>
-                                <!-- <td th:text="${member.addr}"></td> -->
-                                 <td><input type="text" name="faddr" th:value="${member.addr}" /></td>
+                               
+                               
                             </tr>
                             <tr>
-                                <th>학력</th>
-                                <td>
-                                    <input type="text" name="feducation" required />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>성별</th>
+                                <th style="text-align: center;">성별</th>
                                 <td>
                                 	
-					                                    남성<input type="radio" name="fgender" value="m" checked required/>
-					                     <br>
+					                                    남성<input type="radio" name="fgender" value="m" style="margin-right: 25px;" checked required/>
+					                     <!-- <br> -->
 					                                    여성<input type="radio" name="fgender" value="g"  required/>
                                    
                               </td>
+
+                                <th style="text-align: center;">혈액형</th>
+                                <td>
+                                    A   <input type="radio" name="fblood" value="A" style="margin-right: 25px;" checked required/>
+                                    B   <input type="radio" name="fblood" value="B" style="margin-right: 25px;" required/>
+                                    AB   <input type="radio" name="fblood" value="AB" style="margin-right: 25px;" required/>
+                                    O   <input type="radio" name="fblood" value="O" style="margin-right: 25px;" required/>
+                                    <!-- <input type="text" name="fblood" required/> -->
+                                </td>
+                                
+
+                                
+                                
+                                
+                               
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">키</th>
+                                <td>
+                                    <input type="text" name="fheight" size="8" style="text-align:center;" required/>　cm
+                                </td>
+                                
+                                <th style="text-align: center;">특기</th>
+                                <td>
+                                    <input type="text" name="fability" style="width: 280px; text-align:center;" required/>
+                                </td>
+                            </tr>
+                           <tr>
+
+                            <th style="text-align: center;">몸무게</th>
+                            <td>
+                                <input type="text" name="fweight" style="text-align:center;" size="8" required/>　kg
+                            </td>
+
+                            <th style="text-align: center;">취미</th>
+                            <td>
+                                <input type="text" name="fhobby" style="width: 280px; text-align:center;" required/>
+                            </td>
+                            <input type="hidden" name="ftitle" th:value="${audition.atitle}+지원" />
+                            
+                            
+                           </tr>
+                            <tr>
+                                
                                 <!-- <td>
                                     <input type="text" name="fgender">
                                 </td> -->
-                                
-                                <th>키</th>
-                                <td>
-                                    <input type="text" name="fheight" required/>
+                                <th style="text-align: center;">학력</th>
+                                <td colspan="3">
+                                    <input type="text" name="feducation" style="width: 630px; text-align:center;" required />
                                 </td>
                                 
-                                <th>몸무게</th>
-                                <td>
-                                    <input type="text" name="fweight" required/>
-                                </td>
                                 
-                                <th>혈액형</th>
-                                <td>
-                                    <input type="text" name="fblood" required/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>가족관계</th>
-                                <td>
-                                    <input type="text" name="ffamily" required/>
-                                </td>
-                                
-                                <th>취미</th>
-                                <td>
-                                    <input type="text" name="fhobby" required/>
-                                </td>
-                                
-                                <th>특기</th>
-                                <td>
-                                    <input type="text" name="fability" required/>
-                                </td>
-
-                                <th>한마디</th>
-                                <td>
-                                    <input type="text" name="introduce" required/>
-                                </td>
-
                                
+                            </tr>
+                          
+                            <tr>
+
+                                <th style="text-align: center;">한마디</th>
+                                <td colspan="3">
+                                    <input type="text" name="introduce" style="width: 630px; text-align:center;" required/>
+                                </td>
+
                             </tr>
                             
                             <th:block th:each="option : ${options}" >
                                 <tr>
-                                    <th th:text="${option.name}"></th>
-                                    <td>
-                                        <input type="text" name="option" required/>
+                                    <th style="text-align: center;"  th:text="${option.name}"></th>
+                                    <td colspan="3">
+                                        <input type="text" name="option" style="width: 630px; text-align:center;" required/>
                                     </td>
                                 </tr>
                             </th:block>
@@ -139,6 +169,7 @@
                     
                 </div>
                 <tr>
+                    <center>
                     <td colspan="3">
                         
                         <input type="submit" value="등록">
@@ -149,10 +180,20 @@
                         <input type="button" value="자기소개 추가" onclick="introduction_add();">
                         <input type="button" value="직업 추가" onclick="job_add();"> -->
                     </td>
+                    </center>
                 </tr>  
             </form>
             <script>
-            
+                function setThumbnail(event) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event){
+                        var img = document.createElement("img");
+                        img.setAttribute("src", event.target.result);
+                        document.querySelector("div#image_container").appendChild(img);
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                }
                 // function career_add() {
                 //     console.log("aa");
                 //     var career = '<tr>' +

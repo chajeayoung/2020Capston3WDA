@@ -106,14 +106,21 @@ public class HotclibController {
 	 }
 	 
 	 @GetMapping("/community/myhotclib/sorthviewcount")
-	 public String sortHviewcount1(Model model) {
-		 model.addAttribute("hotclibList",hotclibRepository.findAllByOrderByHviewcountDesc());
-		 return "hotclib/list1";
+	 public String sortHviewcount1(Model model,@Nullable Authentication authentication) {
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager programmanager =pmRepository.findById(userDetails.getR_ID()); 
+
+		model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHviewcountDesc(programmanager.getProgramId()));
+		return "hotclib/list1";
 	 }
 	 
 	 @GetMapping("/community/myhotclib/sorthdate")
-	 public String sortHdate1(Model model) {
-		 model.addAttribute("hotclibList",hotclibRepository.findAllByOrderByHdateDesc());
+	 public String sortHdate1(Model model,@Nullable Authentication authentication) {
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		ProgramManager programmanager =pmRepository.findById(userDetails.getR_ID()); 
+
+		model.addAttribute("hotclibList",hotclibRepository.findByProgramidOrderByHdateDesc(programmanager.getProgramId()));
+
 		 return "hotclib/list1";
 	 }
 

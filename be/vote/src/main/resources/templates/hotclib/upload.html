@@ -11,23 +11,21 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
     <script src="/assets/hotclibupload.js"></script> --> 
     
     
-       <link rel="stylesheet" href="/css/hotclibread.css"/>
+       <link rel="stylesheet" href="/css/hotclibupload.css"/>
         <form th:action="@{'/community/hotclib/upload' }" method="post" enctype="multipart/form-data">                
           <div>
-            <tr>
-				<th><label for="htitle">제목</label></th>
-				<td><input name="htitle" required/></td>
-            </tr>
+            
+				<label for="htitle">제목</label>
+				<input type="text" name="htitle" required/>
+           
             </div> 
             <div>
-			<tr>
-				<th><label for="h_content">내용</label></th>
-                <td><textarea class="contentarea" rows="8" cols="50" name="h_content" required></textarea></td>
-            </tr>     
+			
+				<label for="h_content">내용</label>
+                <textarea class="contentarea" rows="8" cols="50" name="h_content" required></textarea>
+              
         </div>
-            <tr>
-          </tr>
-
+         <br>
          <fieldset>
                 댓글공개
                 허용 <input type="radio" name="h_reply" value="0" checked />
@@ -39,10 +37,11 @@ th:replace="~{main_layout::layout(~{::content},_,'영상 업로드',_)}">
             <div id ='preview'> 
               미리보는공간
             </div>
+            <br>
               영상선택<input type="file" name="filename" id="filename" capture="camera" onchange="setFilename(event);" required/>
              <div id ='preview2'></div>
-               <div class="form">  
-                  <input class="riro" type="submit" value="등록">
+               <div class="form">  <br>
+                  <input class="ruro" type="submit" value="등록">
                   <input class="ruro" type="reset" value="취소" onclick="history.back();">                    
          </div>
         </form>

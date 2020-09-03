@@ -22,6 +22,9 @@
 }
 .modalItem{
     overflow: scroll;
+
+    text-align: -webkit-center;
+
 }
 
 .closeBtn{
@@ -43,9 +46,19 @@
 
 .shopImg{
     max-width: 250px;
-    max-height: 250px;
+    max-height: 100%;
     overflow: hidden;
 }
+
+.smartImg{
+    max-width: 180px;
+    max-height: 180px;
+}
+
+#tablebox {
+    text-align: -webkit-center;
+}
+
 @media(max-width:950px){
     .modalContentBox{
         width: 100%;
