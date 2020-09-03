@@ -20,75 +20,71 @@
         </style> -->
 
         <form th:action="@{'/audition_con/update/' + ${auditionCon.formid}}" method="post">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="text-align: center;">
 
                 <tbody>
 
                     <tr>
-                        <th>성명</th>
-
-                        <td> <input type="hidden" name="fusername" th:text="${auditionCon.fusername}" th:value="${auditionCon.fusername}" /></td>
-                        <th>휴대전화번호</th>
-                        <td> <input type="hidden" name="fuserphone" th:text="${auditionCon.fuserphone}" th:value="${auditionCon.fuserphone}" /></td>
-                        <th>이메일</th>
-                        <td> <input type="hidden" name="fusermail" th:text="${auditionCon.fusermail}" th:value="${auditionCon.fusermail}" /></td>
-
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td> <input type="hidden" name="ftitle" th:text="${auditionCon.ftitle}" th:value="${auditionCon.ftitle}" /></td>
-                        
-                        <th>생년월일</th>
-                        <td> <input type="hidden" name="birth" th:text="${auditionCon.birth}" th:value="${auditionCon.birth}" /></td>
-                  
-                    </tr>
-                    <tr>
-
-                        <!--  <div id="bo_v_img">
-                    <img src="#" th:src="@{'/uploads/' + ${audience.img}}" alt="">
-                </div>-->
-
-                        <th>사진 </th>
-                        <td> <a><img class="im" th:src="@{'/uploads/' + ${auditionCon.fprofile}}"></a>
+                        <td rowspan="6"> <a><img style="width:auto; height: 100%;" class="im" th:src="@{'/uploads/' + ${auditionCon.fprofile}}"></a>
 
                             <input type="hidden" name="fprofile" th:value="${auditionCon.fprofile}" /></td>
-                        <th>주소</th>
-                        <td> <input type="hidden" name="faddr" th:text="${auditionCon.faddr}" th:value="${auditionCon.faddr}" /></td>
+
+                        <th style="text-align: center;">성명</th>
+                        <td colspan="2"> <input type="hidden" name="fusername" th:text="${auditionCon.fusername}" th:value="${auditionCon.fusername}" /></td>
                     </tr>
                     <tr>
-                        <th>학력</th>
-                        <td> <input type="hidden" name="feducation" th:text="${auditionCon.feducation}" th:value="${auditionCon.feducation}" /></td>
+                        <th style="text-align: center;">휴대전화번호</th>
+                        <td colspan="2"> <input type="hidden" name="fuserphone" th:text="${auditionCon.fuserphone}" th:value="${auditionCon.fuserphone}" /></td>
                     </tr>
                     <tr>
-                        <th>성별</th>
+                        <th style="text-align: center;">생년월일</th>
+                        <td colspan="2"> <input type="hidden" name="birth" th:text="${auditionCon.birth}" th:value="${auditionCon.birth}" /></td>
+                    </tr>                      
+                    <tr>
+                        <th style="text-align: center;">이메일</th>
+                        <td colspan="2"> <input type="hidden" name="fusermail" th:text="${auditionCon.fusermail}" th:value="${auditionCon.fusermail}" /></td>  
+                    </tr>
+                    <tr>                
+                        <th style="text-align: center;">주소</th>
+                        <td colspan="2"> <input type="hidden" name="faddr" th:text="${auditionCon.faddr}" th:value="${auditionCon.faddr}" /></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center;">가족관계</th>
+                        <td colspan="2"> <input type="hidden" name="ffamily" th:text="${auditionCon.ffamily}" th:value="${auditionCon.ffamily}" /></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center;">성별</th>
                         <td class="tgender"> </td>
                         <input type="hidden" class="fgender" name="fgender" th:value="${auditionCon.fgender}" />
-                        <th>키</th>
-                        <td> <input type="hidden" name="fheight" th:text="${auditionCon.fheight}" th:value="${auditionCon.fheight}" /></td>
-                        <th>몸무게</th>
-                        <td> <input type="hidden" name="fweight" th:text="${auditionCon.fweight}" th:value="${auditionCon.fweight}" /></td>
-                        <th>혈액형</th>
-                        <td> <input type="hidden" name="fblood" th:text="${auditionCon.fblood}" th:value="${auditionCon.fblood}" /></td>
+                        <th style="text-align: center;">혈액형</th>
+                        <td> <input type="hidden" name="fblood" th:text="${auditionCon.fblood}+형" th:value="${auditionCon.fblood}" /></td>
                     </tr>
                     <tr>
-                        <th>가족관계</th>
-                        <td> <input type="hidden" name="ffamily" th:text="${auditionCon.ffamily}" th:value="${auditionCon.ffamily}" /></td>
-                        <th>취미</th>
-                        <td> <input type="hidden" name="fhobby" th:text="${auditionCon.fhobby}" th:value="${auditionCon.fhobby}" /></td>
-                        <th>특기</th>
+                        <th style="text-align: center;">키</th>
+                        <td> <input type="hidden" name="fheight" th:text="${auditionCon.fheight}+cm" th:value="${auditionCon.fheight}" /></td>
+                        <th style="text-align: center;">특기</th>
                         <td> <input type="hidden" name="fability" th:text="${auditionCon.fability}" th:value="${auditionCon.fability}" /></td>
-                        
+                    </tr>
+                    <tr>
+                        <th style="text-align: center;">몸무게</th>
+                        <td> <input type="hidden" name="fweight" th:text="${auditionCon.fweight}+kg" th:value="${auditionCon.fweight}" /></td>
+                        <th style="text-align: center;">취미</th>
+                        <td> <input type="hidden" name="fhobby" th:text="${auditionCon.fhobby}" th:value="${auditionCon.fhobby}" /></td>                                              
+                    </tr>
+                    <tr>                        
+                        <th style="text-align: center;">학력</th>
+                        <td colspan="3"> <input type="hidden" name="feducation" th:text="${auditionCon.feducation}" th:value="${auditionCon.feducation}" /></td>
                     </tr>
                     
                     <tr>
-                        <th>한마디</th>
-                        <td> <input type="hidden" name="introduce" th:text="${auditionCon.introduce}" th:value="${auditionCon.introduce}" /></td>
+                        <th style="text-align: center;">한마디</th>
+                        <td colspan="3"> <input type="hidden" name="introduce" th:text="${auditionCon.introduce}" th:value="${auditionCon.introduce}" /></td>
                     </tr>
 
                     <th:block th:each="option : ${options}">
                         <tr>
-                            <th th:text="${option.name}"></th>
-                            <td th:text="${option.value}"></td>
+                            <th style="text-align: center;" th:text="${option.name}"></th>
+                            <td colspan="3" th:text="${option.value}"></td>
                         </tr>
                     </th:block>
                     <input type="hidden" class="test" th:value="${auditionCon.confirm}" />

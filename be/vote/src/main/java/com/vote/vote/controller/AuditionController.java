@@ -90,7 +90,7 @@ public class AuditionController {
 	@GetMapping("/audition/listuser")
 	public String auditionuser(Model model, @PageableDefault Pageable pageable){
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); 
-		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "auditionid"));
+		pageable = PageRequest.of(page, 8, Sort.by(Sort.Direction.DESC, "auditionid"));
 		model.addAttribute("auditionuserlist", auditionRepository.findAll(pageable));
 		return "audition/listuser";
 	}
@@ -126,8 +126,8 @@ public class AuditionController {
 	@GetMapping("/audition/read/{auditionid}")
 	public String read(Model model, @PathVariable int auditionid){
 		model.addAttribute("audition", auditionRepository.findByAuditionid(auditionid));
-		model.addAttribute("auditionCon", auditionConRepository.findByAuditionid(auditionid));
-		model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
+		// model.addAttribute("auditionCon", auditionConRepository.findByAuditionid(auditionid));
+		// model.addAttribute("options", auditionOptionReopository.findByAuditionIdOrderByNo(auditionid));
 		Audition audition = auditionRepository.findByAuditionid(auditionid);
 		auditionRepository.save(audition);
 
@@ -175,6 +175,17 @@ public class AuditionController {
 			audition.setAusername(member.getName());
 			auditionRepository.save(audition);
 			sessionStatus.setComplete();
+
+			if(option!=null && !option[0].isEmpty()){// 데이터가 있으면,	
+				for(int i=0; i<option.length; i++){
+					AuditionOption auditionOption = new AuditionOption();
+					auditionOption.setAuditionId(audition.getAuditionid());
+					auditionOption.setName(option[i]);
+					
+					auditionOptionReopository.saveAndFlush(auditionOption);
+				}
+			}
+			
 			return "redirect:/audition/list";
 		} else {
 			
