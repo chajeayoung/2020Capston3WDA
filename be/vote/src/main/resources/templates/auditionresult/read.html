@@ -6,83 +6,76 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 된 글',_)}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 
-</head>
+</head>	
 <content>
-<body>
-<!--     <table border="1">
-		<tr>
-			<th>제목</th>
-			<td th:text="${audition.a_title}">제목입니다.</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td th:text="${audition.a_category}">분야입니다.</td>
-		</tr>
-	</table> -->
-   
-    <center>
-        <h1><td th:text="${auditionResult.rtitle}"></td></h1>
-         
-
+    <body>
+    <!--     <table border="1">
+            <tr>
+                <th>제목</th>
+                <td th:text="${audition.a_title}">제목입니다.</td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td th:text="${audition.a_category}">분야입니다.</td>
+            </tr>
+        </table> -->
+       
+        <center>
+            <h1><td th:text="${auditionResult.rtitle}"></td></h1>
+             
     
-
-<span style="float:right;">
-    
-<a href="" th:href="@{'/uploads/' + ${auditionResult.rfile}}">
-[[${auditionResult.rfile}]]</a>
-
-
-</span><br><br>
-
-<br>
-
-
-
-<br>
-<td><h2>최종합격</h2></td>
-<br>
-<table>
         
-
-   <tr th:each="auditionCon : ${auditionconlist}">
-     <td th:text="${auditionCon.fusername}"></td>
-    <h3>  <td th:text="${auditionCon.fusermail}"></td></h3>
-        <!-- <td><a href="" th:href="@{'/audition_con/read/' + ${auditionCon.formid}}" th:text="${auditionCon.ftitle}"></a></td> -->
-        <!-- <td><span th:text="${auditionCon.username}"></span><span>님</span></td> -->
-        <!-- <td class="t23" th:text="${#dates.format(auditionCon.fdate, 'yyyy-MM-dd')}"></td> -->
-        <!-- <td th:text="${auditionCon.confirm}"></td> -->
-    </tr>
- <!-- <tr>
-                <th>내용 : </th>
-                
-                  <td th:text="${auditionResult.rcontent}"></td>
-                  
-              // <td><textarea cols="150" rows="20" placeholder="내용을 입력하세요. " name="a_content"></textarea></td>
-            </tr> -->
-</table>
-</center>
-	
-<br><br>
-	
-	
-	
-	
-	
-	
-	
-    <div>
-    <button>
-        <a href="" th:href="@{'/auditionresult/update/' + ${auditionResult.Resultid}}">수정</a> 
-    </button>
-             <form id="delete-form" th:action="@{'/auditionresult/' + ${auditionResult.Resultid}}" method="post">
-            <input type="hidden" name="_method" value="delete"/> 
-            <button id="delete-btn">삭제</button>
-        </form>
+    
+    <span style="float:right;">
+        
+    <a href="" th:href="@{'/uploads/' + ${auditionResult.rfile}}">
+    [[${auditionResult.rfile}]]</a>
+    
+    
+    </span><br><br>
+    
+    <br>
+    
+    
+    
+    <br>
+    <span style="font-size:22pt"><td>최종합격</h2></td></span>
+    <br><br><br>
+    
+            
+    <p style="font-size:15pt"> 
+       <tr th:each="auditionCon : ${auditionconlist}" >
+           
+         <td th:text="${auditionCon.fusername}"></td>
+         <td><span>　　</span></td>
+          <td th:text="${auditionCon.fusermail}"></td>
+        <br>
+        </tr>
+    </p>
+    
+    </center>
+        
+    <br><br>
+        
+    
         
 	<button>
         <a href="" th:href="@{/auditionresult/list}">게시글 목록</a>
-</button>
-	</div>
+    </button>
+    <div style="float:right;">
+    
+
+    <form id="delete-form" th:action="@{'/auditionresult/' + ${auditionResult.Resultid}}" method="post">
+        <button>
+            <a href="" th:href="@{'/auditionresult/update/' + ${auditionResult.Resultid}}">수정</a> 
+        </button>
+         <input type="hidden" name="_method" value="delete"/> 
+         <button id="delete-btn">삭제</button>
+       
+    </form>
+
+    </div>
+
 </body>
 </content>
 </html>

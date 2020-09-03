@@ -38,16 +38,20 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 개설 게
             <a href="" th:href="@{'/uploads/' + ${audition.afile}}">[[${audition.afile}]]</a>		
         </span>
         <br><br>
-                    
-        <table>
+        
+        
+            <center>
+                <table>
             <br>
 
             <tr>
-                <th>내용</th>
+                
                 <td th:text="${audition.acontent}"></td>
             </tr>
-
         </table>
+            </center>
+        
+        
         <br><br>
 
         <!-- <th:block th:if="${auditionCon.auditionid} == '245'"> -->
@@ -61,21 +65,26 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 개설 게
         
         <br><br>
         
-        
-        <div>
+        <button>
+            <a href="" th:href="@{/audition/list}">게시글 목록</a>
+        </button>
+
+        <div style="float:right;">
+            <form id="delete-form" th:action="@{'/audition/' + ${audition.auditionid}}" method="post">
+
             <button>
                 <a href="" th:href="@{'/audition/update/' + ${audition.auditionid}}">수정</a> 
             </button>
-            <form id="delete-form" th:action="@{'/audition/' + ${audition.auditionid}}" method="post">
+           
                 <input type="hidden" name="_method" value="delete"/> 
                 <button id="delete-btn">삭제</button>
             </form>
             
-            <button>
-                <a href="" th:href="@{/audition/list}">게시글 목록</a>
-            </button>
+            
         </div>
 
+        
+    
     </body>
 </content>
 </html>
