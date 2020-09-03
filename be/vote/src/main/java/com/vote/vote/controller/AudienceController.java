@@ -255,7 +255,8 @@ public class AudienceController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/audience/delete/{applyId}")
+    // @DeleteMapping("/audience/delete/{applyId}")
+    @RequestMapping(value="/audience/delete/{applyId}")
     public String delete(@PathVariable int applyId, Model model) {
         aDetailRepository.deleteByApplyId(applyId);
         audienceJpaRepository.deleteById(applyId);
