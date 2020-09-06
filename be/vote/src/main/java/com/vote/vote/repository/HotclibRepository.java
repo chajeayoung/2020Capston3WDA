@@ -1,7 +1,6 @@
 package com.vote.vote.repository;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.vote.vote.db.dto.Hotclib;

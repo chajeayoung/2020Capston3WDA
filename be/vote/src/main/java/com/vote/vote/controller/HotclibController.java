@@ -88,7 +88,8 @@ public class HotclibController {
 	 	int r_id = member.getNo();
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 	 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
-	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programmanager.getProgramId(), pageable));
+	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programmanager.getProgramId(),pageable));
+	 	System.out.println(pageable);
 	 	return "hotclib/list1";
 	 }
 
