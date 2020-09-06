@@ -70,16 +70,15 @@
 <section>
 
     <div class="pagination">
-      <a href="#">&laquo;</a>
-      <a href="#">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">&raquo;</a>
-    </div>
-    
+      
+      <a th:href="@{'/community/'+${programid}+'/hotclib?page=1'}">1</a>
+      <a th:href="@{'/community/'+${programid}+'/hotclib?page=2'}">2</a>
+      <!-- <a th:href="@{'/community/'+${programid}+'/hotclib?page=1'}">1</a>
+      <a th:href="@{'/community/'+${programid}+'/hotclib?page=1'}">1</a>
+      <a th:href="@{'/community/'+${programid}+'/hotclib?page=1'}">1</a>
+      <a th:href="@{'/community/'+${programid}+'/hotclib?page=1'}">1</a> -->
+      
+    </div> 
     <form style="display: flow-root;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
       <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
       <button class="btn btn-default">검색</button>

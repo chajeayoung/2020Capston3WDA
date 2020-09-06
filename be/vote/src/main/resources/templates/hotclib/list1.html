@@ -73,56 +73,58 @@
           th:href="@{'/community/hotclib/upload'}">영상업로드</a>
       </div>
 
-    <div class="pagination">
-      <a href="">&laquo;</a>
-      <a href="#">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">&raquo;</a>
-    </div>
+   <div class="pagination">
+      
+      <a th:href="@{/community/myhotclib(page=1)}">1</a>
+      <a th:href="@{/community/myhotclib(page=2)}">2</a>
+     <!--   <a th:href="@{/community/myhotclib(page=3)}">3</a>
+      <a th:href="@{/community/myhotclib(page=4)}">4</a>
+      <a th:href="@{/community/myhotclib(page=5)}">5</a>
+      <a th:href="@{/community/myhotclib(page=6)}">6</a>-->
+      
+    </div> 
     
     <form style="display: flow-root;" th:action="@{'/community/'+${programid}+'/hotclib/search'}"method="get">
       <input class="hull" name="keyword" type="text" placeholder="제목을 입력해주세요">
       <button class="btn btn-default">검색</button>
     </form>
    </section>
-
-	        <!-- <nav style="text-align: center;">
+<!-- <div>
+	         <nav style="text-align: center;">
     <ul class="pagination"
-     th:with="start=${T(Math).floor(hotclibList./10)*10 + 1},
+     th:with="start=${T(Math).floor(hotclibList.number/10)*10 + 1},
                     last=(${start + 9 < hotclibList.totalPages ? start + 9 : hotclibList.totalPages})" >
           <li>
-            <a th:href="@{'/community/myhotclib(page=1)'}" aria-label="First">
+            <a th:href="@{/community/myhotclib(page=1)}" aria-label="First">
                 <span aria-hidden="true">First</span>
               </a>
           </li>
 
           <li th:class="${hotclibList.first} ? 'disabled'">
-            <a th:href="${hotclibList.first} ? '#' :@{'/community/myhotclib(page=${hotclibList.number})'}" aria-label="Previous">
+            <a th:href="${hotclibList.first} ? '#' :@{/community/myhotclib(page=${hotclibList.number})}" aria-label="Previous">
                 <span aria-hidden="true">&lt;</span>
             </a>
           </li>       
             
           <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == hotclibList.number + 1} ? 'active'">
-            <a th:text="${page}" th:href="@{'/community/myhotclib(page=${page})'}"></a>
+            <a th:text="${page}" th:href="@{/community/myhotclib(page=${page})}"></a>
           </li>
 
           <li th:class="${hotclibList.last} ? 'disabled'">
-            <a th:href="${hotclibList.last} ? '#' : @{'/community/myhotclib(page=${hotclibList.number + 2})'}" aria-label="Next">
+            <a th:href="${hotclibList.last} ? '#' : @{/community/myhotclib(page=${hotclibList.number + 2})}" aria-label="Next">
                 <span aria-hidden="true">&gt;</span>
             </a>
           </li>
 
           <li>
-            <a th:href="@{'/community/myhotclib(page=${hotclibList.totalPages})'}" aria-label="Last">
+            <a th:href="@{/community/myhotclib(page=${hotclibList.totalPages})}" aria-label="Last">
               <span aria-hidden="true">Last</span>
             </a>
          </li>
        </ul>
-     </nav>   -->
+     </nav> 
+     </div>
+        -->
      </content>
 </body>
 </html>
