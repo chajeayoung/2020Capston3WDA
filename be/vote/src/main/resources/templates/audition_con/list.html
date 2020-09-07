@@ -34,6 +34,44 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		 </div>
 		 </th:block>
 		 </div>
+		 <br><br>
+        <center>
+        <ul th:fragment="pagination" class="pagination">
+            <li>
+                <a th:href="@{/audition_con/list(page=1)}" aria-label="First">
+                    <span aria-hidden="true">First</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/audition_con/list(page=1)}" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/audition_con/list(page=1)}">
+                    <span aria-hidden="true">1</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/audition_con/list(page=2)}">
+                    <span aria-hidden="true">2</span>
+                </a>
+            </li>
+            
+                
+            <li>
+                    <a th:href="@{/audition_con/list(page=2)}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+            </li>
+            <li>
+                <a th:href="@{/audition_con/list(page=2)}" aria-label="Last">
+                    <span aria-hidden="true">Last</span>
+                </a>
+            </li>
+            
+            </ul>
+                </center>
     
 		<td>
 			<input type="button" value="처음으로" onclick="location.href='/audition_con/list'"/>
@@ -53,7 +91,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		 
 		</form>
 		
-		<nav style=text-align:center; >
+		<!-- <nav style=text-align:center; >
 
 			<ul class="pagination"
 				th:with="start = ${T(Math).floor(auditionconlist.number/10)*10 + 1},
@@ -86,7 +124,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 				</li>
 			</ul>
 			
-		</nav>
+		</nav> -->
 			
 
        </content>

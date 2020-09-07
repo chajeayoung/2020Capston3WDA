@@ -11,6 +11,10 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
 
 
     <content>
+
+
+               
+            
     
     <link rel="stylesheet" href="/css/auditioncss.css" />
     <link rel="stylesheet" href="/css/item/item2.css" />
@@ -38,7 +42,70 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
         </div>
     </th:block>
   
+    <br><br>
+    <center>
+    <ul th:fragment="pagination" class="pagination">
+        <li>
+            <a th:href="@{/audition/listuser(page=1)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+        <li th:class="${auditionuserlist.first} ? 'disabled'">
+            <a th:href="${auditionuserlist.first} ? '#' :@{/audition/listuser(page=${auditionuserlist.number})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
 
+        <li th:each="no:${#numbers.sequence(0, auditionuserlist.totalPages-1)}" th:class="${auditionuserlist.number eq no}?'active':''">
+             <a th:href="@{__${#httpServletRequest.requestURI}__(page=${no})}" th:inline="text">[[${no+1}]]</a> </li>
+
+            
+        <li th:class="${auditionuserlist.last} ? 'disabled'">
+                <a th:href="${auditionuserlist.last} ? '#' : @{/audition/listuser(page=${auditionuserlist.number + 2})}" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+        </li>
+        <li>
+            <a th:href="@{/audition/listuser(page=${auditionuserlist.totalPages})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+        </ul>
+            </center>
+
+
+   
+    <!-- <li>
+        <a th:href="@{/audition/listuser(page=1)}" aria-label="First">
+            <span aria-hidden="true">First</span>
+        </a>
+    </li>
+</li>
+
+<li th:class="${auditionuserlist.first} ? 'disabled'">
+    <a th:href="${auditionuserlist.first} ? '#' :@{/audition/listuser(page=${auditionuserlist.number})}" aria-label="Previous">
+        <span aria-hidden="true">&lt;</span>
+    </a>
+</li>
+
+<li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == auditionuserlist.number + 1} ? 'active'">
+    <a th:text="${page}" th:href="@{/audition/listuser(page=${page})}"></a>
+</li>
+
+<li th:class="${auditionuserlist.last} ? 'disabled'">
+    <a th:href="${auditionuserlist.last} ? '#' : @{/audition/listuser(page=${auditionuserlist.number + 2})}" aria-label="Next">
+        <span aria-hidden="true">&gt;</span>
+    </a>
+</li>
+
+    
+    
+    <li>
+        <a th:href="@{/audition/listuser(page=${auditionuserlist.totalPages})}" aria-label="Last">
+            <span aria-hidden="true">Last</span>
+        </a>
+    </li> -->
+        
 		<div>
             	
             <td>
@@ -57,42 +124,6 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 신청 게시판',_)
 		
 </div>
 
-<nav style=text-align: center; >
-
-    <ul class="pagination"
-        th:with="start=${T(Math).floor(auditionlist.number/10)*10 + 1},
-                    last=(${start + 9 < auditionlist.totalPages ? start + 9 : auditionlist.totalPages})">
-        <li>
-            <a th:href="@{/audition/list(page=1)}" aria-label="First">
-                <span aria-hidden="true">First</span>
-            </a>
-        </li>
-
-        <li th:class="${auditionlist.first} ? 'disabled'">
-            <a th:href="${auditionlist.first} ? '#' :@{/audition/list(page=${auditionlist.number})}" aria-label="Previous">
-                <span aria-hidden="true">&lt;</span>
-            </a>
-        </li>
-
-        <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == auditionlist.number + 1} ? 'active'">
-            <a th:text="${page}" th:href="@{/audition/list(page=${page})}"></a>
-        </li>
-
-        <li th:class="${auditionlist.last} ? 'disabled'">
-            <a th:href="${auditionlist.last} ? '#' : @{/audition/list(page=${auditionlist.number + 2})}" aria-label="Next">
-                <span aria-hidden="true">&gt;</span>
-            </a>
-        </li>
-
-        <li>
-            <a th:href="@{/audition/list(page=${auditionlist.totalPages})}" aria-label="Last">
-                <span aria-hidden="true">Last</span>
-            </a>
-        </li>
-    </ul>
-  
-</nav>
-	
 
 
        </content>
