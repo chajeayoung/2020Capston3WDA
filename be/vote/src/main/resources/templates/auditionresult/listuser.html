@@ -33,6 +33,37 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과안내',_)}">
             </a>
         </div>
         </th:block>
+
+        <br><br>
+    <center>
+    <ul th:fragment="pagination" class="pagination">
+        <li>
+            <a th:href="@{/auditionresult/listuser(page=1)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+        <li th:class="${auditionresultuserlist.first} ? 'disabled'">
+            <a th:href="${auditionresultuserlist.first} ? '#' :@{/auditionresult/listuser(page=${auditionresultuserlist.number})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+
+        <li th:each="no:${#numbers.sequence(0, auditionresultuserlist.totalPages-1)}" th:class="${auditionresultuserlist.number eq no}?'active':''">
+             <a th:href="@{__${#httpServletRequest.requestURI}__(page=${no})}" th:inline="text">[[${no+1}]]</a> </li>
+
+            
+        <li th:class="${auditionresultuserlist.last} ? 'disabled'">
+                <a th:href="${auditionresultuserlist.last} ? '#' : @{/auditionresult/listuser(page=${auditionresultuserlist.number + 2})}" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+        </li>
+        <li>
+            <a th:href="@{/auditionresult/listuser(page=${auditionresultuserlist.totalPages})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+        </ul>
+            </center>
         
         <div>
             
@@ -52,7 +83,7 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과안내',_)}">
         </div>
 		
 		
-        <nav style=text-align: center; >
+        <!-- <nav style=text-align: center; >
 
             <ul class="pagination"
                 th:with="start=${T(Math).floor(auditionresultlist.number/10)*10 + 1},
@@ -86,7 +117,7 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과안내',_)}">
                 </li>
             </ul>
           
-        </nav>
+        </nav> -->
 
        </content>
 

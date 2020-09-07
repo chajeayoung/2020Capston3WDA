@@ -82,7 +82,7 @@ public class AuditionResultController {
 
 
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
+		pageable = PageRequest.of(page, 8, Sort.by(Sort.Direction.DESC, "resultid"));
 		// model.addAttribute("auditionresultlist", auditionResultRepository.findAll(pageable));
 		 model.addAttribute("auditionresultlist", auditionResultRepository.findByProgramid(pManager.getProgramId(),pageable));
 
@@ -94,7 +94,7 @@ public class AuditionResultController {
 	@GetMapping("/auditionresult/listuser")
 	public String resultuser(Model model, @PageableDefault Pageable pageable) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-		pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "resultid"));
+		pageable = PageRequest.of(page, 8, Sort.by(Sort.Direction.DESC, "resultid"));
 		model.addAttribute("auditionresultuserlist", auditionResultRepository.findAll(pageable));
 		return "auditionresult/listuser";
 	}
