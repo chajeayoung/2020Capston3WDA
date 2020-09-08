@@ -12,4 +12,6 @@ public interface CustomProgramRepository {
 
     public Program findByPK(String programName);
 
+    public List<Program> findAll(Pageable page);
+
 }

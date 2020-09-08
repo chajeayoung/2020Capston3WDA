@@ -40,7 +40,19 @@ public class CustomProgramRepositoryImpl implements CustomProgramRepository {
         return program;
 	}
     
-   
+    @Override
+    public List<Program> findAll(Pageable pageable) {
+        
+        JPAQueryFactory query = new JPAQueryFactory(em); // 실제로 쿼리 되는 문장?
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder(); //여기다가 조건절을 단다.
+
+        List<Program> programList = query.select(pm).from(pm).offset(pageable.getOffset()).limit(pageable.getPageSize()).orderBy(pm.id.desc()).where(booleanBuilder).fetch();  //fetch 반환값이 list다
+
+        count = query.select(pm).from(pm).where(booleanBuilder).fetchCount();
+
+        return programList;
+    }
 
     
 }

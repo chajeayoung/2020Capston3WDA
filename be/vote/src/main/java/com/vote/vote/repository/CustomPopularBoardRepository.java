@@ -12,7 +12,8 @@ public interface CustomPopularBoardRepository {
 
     public List<PopularBoard> findAll(Pageable pageable);
     
-    public CustomPopularBoard findById(int c,Pageable pageable, String hash);
+    public CustomPopularBoard findById(int c,Pageable pageable, int option, String text);
+    
 
     public long CountAll();
     

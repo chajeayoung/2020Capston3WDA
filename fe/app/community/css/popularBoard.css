@@ -1,0 +1,46 @@
+nav.MuiPagination-root {
+    place-content: center;
+}
+
+.search {
+    text-align: center;
+}
+
+.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded {
+    margin-bottom: 15px;
+}
+input#searchInput {
+
+    
+text-decoration: none !important;
+width: auto;
+display: inline-block;
+border-radius: 10px;
+background-color: fffff;
+text-align: center;
+font-size: 20px;
+margin: 5px;
+}
+
+
+button{
+    text-decoration: none !important;
+    width: 80px;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #8b6dfdff;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+.createBoard{
+
+        float: right;
+        margin: 5px;
+
+}

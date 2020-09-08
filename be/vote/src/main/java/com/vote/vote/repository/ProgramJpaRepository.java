@@ -4,12 +4,17 @@ import com.vote.vote.db.dto.Program;
 
 import javax.transaction.Transactional;
 
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-public interface ProgramJpaRepository extends JpaRepository<Program, String> {
+public interface ProgramJpaRepository extends JpaRepository<Program, Long> {
 
     public Program findById(int id);
     
@@ -21,6 +26,9 @@ public interface ProgramJpaRepository extends JpaRepository<Program, String> {
     					@Param("image") String image,
                         @Param("category") String category,
                         @Param("logo") String logo
-    					);
+                        );
+                        
+
+    
     
 }

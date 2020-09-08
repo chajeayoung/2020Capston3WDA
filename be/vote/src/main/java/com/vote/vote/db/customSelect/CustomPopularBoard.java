@@ -24,5 +24,10 @@ public class CustomPopularBoard {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "CustomPopularBoard [count=" + count + ", popularBoard=" + popularBoard + "]";
+    }
+
     
 }

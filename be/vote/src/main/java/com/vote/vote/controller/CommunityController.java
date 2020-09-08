@@ -20,6 +20,7 @@ import com.vote.vote.repository.CustomAudienceRepository;
 import com.vote.vote.repository.CustomHotClibRepository;
 import com.vote.vote.repository.CustomPopularBoardRepository;
 import com.vote.vote.repository.CustomPopularRepository;
+import com.vote.vote.repository.CustomProgramRepository;
 import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
 import com.vote.vote.repository.PopularBoardJpaRepository;
@@ -82,6 +83,9 @@ public class CommunityController {
 
 	@Autowired
 	CustomAudienceRepository customAudienceRepository;
+
+	@Autowired
+	CustomProgramRepository customProgramRepository;
 	
 	@Autowired
 	HashTagRepository hashTagRepository;
@@ -99,11 +103,13 @@ public class CommunityController {
     
     @ResponseBody
 	@RequestMapping(value={"/axios","/axios/"})
-	public JSONArray createAxios() {
-		
+	public JSONArray createAxios(@PageableDefault Pageable pageable){		
+	
+
 		JSONArray result = new JSONArray();
 
-		List<Program> programList = programRepository.findAll();
+		List<Program> programList = customProgramRepository.findAll(pageable);      
+
 
 		for(Program program : programList){
 			JSONObject json = new JSONObject();
@@ -118,7 +124,7 @@ public class CommunityController {
     
 		
     @RequestMapping(value={"/{program}","/{program}/"}, method = RequestMethod.GET)
-  	public String detailIndex(@PathVariable("program") int programNum,Model model) {
+  	public String detailIndex(@PathVariable("program") int programNum,Model model ) {
     	
     	Program program = programRepository.findById(programNum);
 		model.addAttribute("programName", program.getName());
@@ -216,16 +222,19 @@ public class CommunityController {
 			    @PathVariable("program") int programNum,
 				@PathVariable("popular") int popularNum,				
 				@PageableDefault Pageable pageable, Model model
-				, @Nullable String hash){
+				, @Nullable String text
+				, @Nullable int option){
 	
 
 					String nullCheck = "";
-					if( hash!=null && !hash.equals("")){
-					  nullCheck = hash;
+					if( text!=null && !text.equals("")){
+					  nullCheck = text;
 					}
-		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable, nullCheck);
+
+		System.out.println("백엔드 text :"+text);
+		CustomPopularBoard popularboards = customPopularBoardRepository.findById(popularNum,pageable,option,nullCheck);
 	
-		//long count = customPopularBoardRepository.CountById(popularNum);
+				
 	
 		int gob;
 		int rownum;
@@ -277,14 +286,14 @@ public class CommunityController {
 		
 		
 		
-		int countList= 10;
-		int totalPage= (int)((int)popularboards.getCount()) / countList;
+		// int countList= 10;
+		// int totalPage= (int)((int)popularboards.getCount()) / countList;
 		
-		if ((int)popularboards.getCount()%countList>0) {
+		// if ((int)popularboards.getCount()%countList>0) {
 			
-			totalPage++;
+		// 	totalPage++;
 			
-		}
+		// }
 				
 		return json;
 	}

@@ -12,8 +12,12 @@ import Pagination from '@material-ui/lab/Pagination';
 
 import TextField from '@material-ui/core/TextField';
 
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 import './Modal.css';
 import '../smart.css';
+import './css/popularBoard.css'
 
 const regeneratorRuntime = require("regenerator-runtime");
 const axios = require('axios');
@@ -33,39 +37,43 @@ class PopularBoard extends Component {
     constructor(props){
         
         super(props);
-        this.state = { popularBoard: [] , pageNum: 1 , count: 0, allCount:0, modal : false, file : '', previewURL:'',sessionUser:''}
-        // this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"';
-        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
-
+        this.state = { popularBoard: [] , pageNum: 1 , count: 0, allCount:0, modal : false, file : '', previewURL:'',sessionUser:'',option:'0',text:''} 
+        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&option='+this.state.option+'&text='+this.state.text;
+      //  this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&option='+this.state.option+'&text='+this.text;
+       
     }
     setUrl(){
-        this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
+      this.url = '/community/'+param2+'/'+param+'/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="date"&option='+this.state.option+'&text='+this.state.text;
     }
-
-
-
+    setText(e){
+      this.state.text=e
+    }
     pagenation(e,page){
         this.state.pageNum = page
         this.setUrl()   
         this.componentDidMount()
     }
-    
-    onSearchEvnet(){
-      console.log("버튼 클릭");
-      const text = document.getElementById("searchInput").value
-      
-      this.state.text = text;
 
-  
+    selectOption(event){
+      this.setState({option : event.target.value});
+    };
+
+    async onSearchEvnet(){
+      console.log("버튼 클릭");
+      var text = document.getElementById("searchInput").value
+      
+      this.setText(text)
       this.setUrl()
+
+      console.log(this.state.text)
+      console.log(this.url)
+
       this.componentDidMount()
 
-  }
+       }
 
     async componentDidMount(){
-      this.getItem()
 
-      console.log("dd: "+$("#popLogoImg").val())
       $('header').addClass('changed');
       $("header").css("background-image","url('/uploads/"+$("#popLogoImg").val()+"')")
       
@@ -73,20 +81,12 @@ class PopularBoard extends Component {
       $("header").css("background-repeat","no-repeat")
       $("header").css("background-size","contain")     
 
+      // if(url.indexOf("text")!=-1){
+      //   console.log("----")
+      //             this.text = url.split("text=")[1];
 
-    }
-
-    async getItem(){
-
-      if(url.indexOf("hash")!=-1){
-        console.log("----")
-                  param3 = url.split("hash=")[1];
-        console.log(param3)
-  
-            var sliceUrl = url.split("?");
-            // this.url= sliceUrl[0]+"/axios?page="+(this.state.pageNum-1)+'&size='+10+'&sort="date"&hash='+param3;
-            this.setUrl()
-          }
+      //       this.setUrl()
+      //     }
 
       let {data : popularBoard} = await axios.get(this.url)
         
@@ -95,18 +95,17 @@ class PopularBoard extends Component {
       this.state.sessionUser = (popularBoard.pop())
 
       this.setState({popularBoard})
-     
 
     }
 
     handleOpenModal(){
-        this.setState({modal:true});  
-    
-       
+        this.setState({modal:true});             
       };
+
       handleCloseModal(){
         this.setState({modal:false});
       };  
+
 
 
     render() {
@@ -153,14 +152,30 @@ class PopularBoard extends Component {
                                     </Table>
                                     </Paper>
                                      {this.state.sessionUser!='' &&  <Modal sessionUser={this.state.sessionUser}></Modal> }{} 
-                                     {this.state.modal &&  <Modal2 boardItem={this.state.boardItem}></Modal2> }{} 
-            
+                                     {/* {this.state.modal &&  <Modal2 boardItem={this.state.boardItem}></Modal2> }{} 
+             */}
 
         <Pagination count={this.state.count} page={this.state.pageNum} onChange={this.pagenation.bind(this)}> </Pagination>
         
         <div className="search">
+
+
+                            <Select name="option" 
+                            value={this.state.option}
+                              onChange={this.selectOption.bind(this)}
+                              label="옵션"
+                            >
+                              <MenuItem value="0">
+                                <em>선택없음</em>
+                              </MenuItem>
+                              <MenuItem value="1">제목</MenuItem>
+                              <MenuItem value="2">제목+내용</MenuItem>
+                              <MenuItem value="3">해쉬태그</MenuItem>
+                              <MenuItem value="4">작성자</MenuItem>
+                            </Select>
+
         <input type="text" id="searchInput" placeholder="검색"/>
-        <button type="click" className="searchButton"onClick={this.onSearchEvnet.bind(this)}>검색</button>
+        <button type="button" className="searchButton"onClick={this.onSearchEvnet.bind(this)}>검색</button>
         </div>
         </div> 
          )
@@ -172,8 +187,8 @@ class Modal extends Component{
     constructor(props){
         super(props);
         
-       this.state = { modal : false ,file : '', previewURL:'' , sessionUser : this.props.sessionUser , boardItem:this.props.boardItem}
-        
+       this.state = { modal : false ,file : '', previewURL:'' , sessionUser : this.props.sessionUser }
+        //, boardItem:this.props.boardItem
        
 
     }
@@ -212,7 +227,7 @@ class Modal extends Component{
               
                         return (
                             <div>
-                            <button type="button" onClick={this.handleOpenModal.bind(this)}>등록</button>
+                            <button className="createBoard" type="button" onClick={this.handleOpenModal.bind(this)}>등록</button>
                                 {this.state.modal && (
                    <div className="MyModal"> 
                       <div className="content">

@@ -1,0 +1,19 @@
+nav.MuiPagination-root {
+    place-content: center;
+}
+
+.voteItem {
+    margin-top: 20px;
+}
+
+.communityIndexBox {
+    display: inline-block;
+
+    margin-bottom: 100px !important;
+    height: 200px;
+    margin: 0px 14px;
+    /* background-size: cover;
+    background-position: center; */
+    height:200px !important;
+    width:auto !important;
+}
