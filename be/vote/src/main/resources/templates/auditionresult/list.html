@@ -78,15 +78,11 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'심사결과등록',_)}">
         
         <div>
             
-                <td>
-              <input type="button" value="등록" onclick="location.href='/auditionresult/write'"/>
-                                    </td>
+                
        
-            	<tr>
+            	
+           
             
-              <input type="button" value="처음으로" onclick="location.href='/auditionresult/list'"/>
-                                    </td>
-            </tr>
             <center>
 		<form action="/auditionresult/serch" method="GET">
 		    <div>
@@ -98,7 +94,14 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'심사결과등록',_)}">
         </form>
         </center>
         </div>
-		
+        <td>
+            <input type="button" value="처음으로" onclick="location.href='/auditionresult/list'"/>
+        </td>
+        <div style="float:right;">
+            <td>
+                <input type="button" value="등록" onclick="location.href='/auditionresult/write'"/>
+            </td>
+        </div>    
 <!-- 		
         <nav style=text-align: center; >
 

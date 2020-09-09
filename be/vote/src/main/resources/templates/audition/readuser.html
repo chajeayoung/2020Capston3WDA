@@ -11,58 +11,52 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 신청 게
 </head>
 <content>
     <body>
+        <input type="hidden" id="auditionId" th:value="${audition.auditionid}">
 
-        <table class="table table-bordered; margin:auto; text-align:center;">
-           <input type="hidden" id="auditionId" th:value="${audition.auditionid}">
- 
-            <tbody>
-                <tr>
-                    <th>제목</th>
-                    <td th:text="${audition.atitle}"></td>
-                </tr>
-                <tr>
-                    <th>기간</th>
-                    <td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
-                    <th>  ~  </th>
-                    <td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
-                </tr>
-            </tbody>
-        </table>
+        <center>
+            <h1><td th:text="${audition.atitle}"></td></h1>
+            <h3><td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td> ~ <td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td></h3>
+            <hr style="border: solid 1px black;">
+            
 
-	    <span style="float:right;">
-            <a href="" th:href="@{'/uploads/' + ${audition.afile}}">[[${audition.afile}]]</a>
+            
+        </center>
+       
+
+        <span style="float:right;">
+            <a href="" th:href="@{'/uploads/' + ${audition.afile}}"><h4>[[${audition.afile}]]</h4></a>		
         </span>
         <br><br>
         
         
             <center>
-                <table>
-            <br>
-
-            <tr>
                 
-                <td th:text="${audition.acontent}"></td>
-            </tr>
-        </table>
+            
+
+           
+                
+             <h4><td th:text="${audition.acontent}"></td></h4>   
+            
+        
             </center>
         
         
         <br><br>
 
-	    <div>
-			<tr>
-                <center>
-                    <td colspan="2">
-                        <input type="button"  id="apply" value="신청서" />  
-                    </td>
-                </center>         
-            </tr>        
-	</div>
-	
-    <div>
-    
-		<button><a href="" th:href="@{/audition/listuser}">게시글 목록</a></button>
-    </div>
+        <!-- <th:block th:if="${auditionCon.auditionid} == '245'"> -->
+        <div>
+            
+            <center>
+                <input style="WIDTH: 100pt; HEIGHT: 40pt; font-size : 25px;" type="button" id="apply" value="신청서"/>  
+            </center> 
+        </div>
+        <!-- </th:block> -->
+        
+        <br>
+        <hr style="border: solid 1px black;">
+        <button>
+            <a href="" th:href="@{/audition/listuser}">게시글 목록</a>
+        </button>
     
 </body>
 </content>

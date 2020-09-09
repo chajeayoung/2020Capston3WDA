@@ -80,14 +80,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'오디션 개설',_)}">
 	
 		<div>
 		
-
-              <input type="button" value="등록" onclick="location.href='/audition/write'"/>
-                                    </td>
-       
-            	
-                <td>
-              <input type="button" value="처음으로" onclick="location.href='/audition/list'"/>
-                                    </td>
+            
            <center>
 		<form action="/audition/serch" method="GET">
 		   
@@ -97,9 +90,19 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'오디션 개설',_)}">
 		    <button>검색하기</button>
 
 		</form>
-		</center>
+        </center>    
+    </div>     
+        <td>
+            <input type="button" value="처음으로" onclick="location.href='/audition/list'"/>
+        </td>
+        <div style="float:right;">
+        <td>
+            <input type="button" value="등록" onclick="location.href='/audition/write'"/>
+        </td>
+      </div>
+        
 		
-</div>
+
 
     <!-- <nav>
 

@@ -12,14 +12,14 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 안내',_)}">
 
             <center>
                 <h1><td th:text="${auditionResult.rtitle}"></td></h1>
-                
+                <hr style="border: solid 1px black;">
 
             
 
         <span style="float:right;">
             
         <a href="" th:href="@{'/uploads/' + ${auditionResult.rfile}}">
-        [[${auditionResult.rfile}]]</a>
+        <h4>[[${auditionResult.rfile}]]</h4></a>
 
         </span><br><br>
 
@@ -29,7 +29,9 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 안내',_)}">
 
         <br>
         <span style="font-size:22pt"><td>최종합격</h2></td></span>
-        <br><br><br>
+        <br>
+        <hr width="40%" style="border: solid 1px red;">
+        <br>
 
                 
         <p style="font-size:15pt"> 
@@ -44,7 +46,9 @@ th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 안내',_)}">
 
         </center>
             
-        <br><br>
+        <br>
+        <hr style="border: solid 1px black;">
+        <br>
 	
 	
 	<div>

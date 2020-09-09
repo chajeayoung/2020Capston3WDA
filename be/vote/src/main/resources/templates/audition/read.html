@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 개설 게시글',_)}">
+th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 신청 게시글',_)}">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,43 +12,33 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 개설 게
 </head>
 <content>
     <body>
+        <input type="hidden" id="auditionId" th:value="${audition.auditionid}">
 
+        <center>
+            <h1><td th:text="${audition.atitle}"></td></h1>
+            <h3><td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td> ~ <td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td></h3>
+            <hr style="border: solid 1px black;">
+            
 
-        
-        <table class="table table-bordered; margin:auto; text-align:center;">
-
-            <input type="hidden" id="auditionId" th:value="${audition.auditionid}">
-
-            <tbody>
-                    <tr>
-                        <th>제목</th>
-                            <td th:text="${audition.atitle}"></td>
-                    </tr>
-                    <tr>
-                        <th>기간</th>
-                            <td th:text="${#dates.format(audition.astartdate, 'yyyy-MM-dd')}"></td>
-                        <th>  ~  </th>
-                        <td th:text="${#dates.format(audition.aenddate, 'yyyy-MM-dd')}"></td>
-                    </tr>
-            </tbody>
-
-        </table>
+            
+        </center>
+       
 
         <span style="float:right;">
-            <a href="" th:href="@{'/uploads/' + ${audition.afile}}">[[${audition.afile}]]</a>		
+            <a href="" th:href="@{'/uploads/' + ${audition.afile}}"><h4>[[${audition.afile}]]</h4></a>		
         </span>
         <br><br>
         
         
             <center>
-                <table>
-            <br>
-
-            <tr>
                 
-                <td th:text="${audition.acontent}"></td>
-            </tr>
-        </table>
+            
+
+           
+                
+             <h4><td th:text="${audition.acontent}"></td></h4>   
+            
+        
             </center>
         
         
@@ -58,13 +48,13 @@ th:replace="~{main_layout::layout(~{::content},~{::script},'오디션 개설 게
         <div>
             
             <center>
-                <input type="button" id="apply" value="신청서"/>  
+                <input style="WIDTH: 100pt; HEIGHT: 40pt; font-size : 25px;" type="button" id="apply" value="신청서"/>  
             </center> 
         </div>
         <!-- </th:block> -->
         
-        <br><br>
-        
+        <br>
+        <hr style="border: solid 1px black;">
         <button>
             <a href="" th:href="@{/audition/list}">게시글 목록</a>
         </button>
