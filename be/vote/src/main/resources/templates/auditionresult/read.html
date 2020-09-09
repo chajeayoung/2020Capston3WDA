@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{main_layout::layout(~{::content},_,'업로드 된 글',_)}">
+th:replace="~{main_layout::layout(~{::content},_,'오디션 결과 안내',_)}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 
 </head>	
-<content>
-    <body>
 
+    <body>
+        
+        <content>
+            
        
         <center>
             <h1><td th:text="${auditionResult.rtitle}"></td></h1>
-             
+            <hr style="border: solid 1px black;">
     
         
     
     <span style="float:right;">
         
     <a href="" th:href="@{'/uploads/' + ${auditionResult.rfile}}">
-    [[${auditionResult.rfile}]]</a>
+    <h3>[[${auditionResult.rfile}]]</h3></a>
     
     
     </span><br><br>
@@ -31,7 +33,9 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 된 글',_)}">
     
     <br>
     <span style="font-size:22pt"><td>최종합격</h2></td></span>
-    <br><br><br>
+    <br>
+    <hr width="40%" style="border: solid 1px red;">
+    <br>
     
             
     <p style="font-size:15pt"> 
@@ -46,7 +50,9 @@ th:replace="~{main_layout::layout(~{::content},_,'업로드 된 글',_)}">
     
     </center>
         
-    <br><br>
+    <br>
+    <hr style="border: solid 1px black;">
+    <br>
         
     
         

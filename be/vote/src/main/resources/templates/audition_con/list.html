@@ -73,9 +73,7 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
             </ul>
                 </center>
     
-		<td>
-			<input type="button" value="처음으로" onclick="location.href='/audition_con/list'"/>
-								  </td>
+		
 				<form action="/audition_con/serch" method="GET">
 		    <div><center>
 		    <select name="sim">
@@ -86,7 +84,10 @@ th:replace="~{userInfo_layout::layout(~{::content},_,'예선심사',_)}">
 		        <input name="합격" type="text" placeholder="심사결과를 입력해주세요">
 		        <button>검색하기</button></center>
 		        
-		    </div>
+			</div>
+			<td>
+				<input type="button" value="처음으로" onclick="location.href='/audition_con/list'"/>
+									  </td>
 		
 		 
 		</form>
