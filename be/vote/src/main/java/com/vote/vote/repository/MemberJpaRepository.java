@@ -38,6 +38,11 @@ public interface MemberJpaRepository extends JpaRepository<Member, String> {
 	@Query("update Member set role = 2 where r_id = :rid ")
 	void managerUpdate(@Param("rid") int rid);
 
+	@Modifying
+	@Transactional
+	@Query("update Member set point = point+1 where r_id = :rid ")
+	void pointUpdate(@Param("rid") int rid);
+
 	@Transactional
 	@Modifying
 	@Query(value = " update r_user "

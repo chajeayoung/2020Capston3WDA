@@ -1,6 +1,7 @@
 import React, {Component}from 'react'
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import './proRegIndex.css';
 
 const axios = require('axios');
 const regeneratorRuntime = require("regenerator-runtime");
@@ -66,8 +67,8 @@ class Modal extends Component {
       render() {
         // console.log(this.state.modal)
            return (
-            <div>
-                <button onClick={this.handleOpenModal.bind(this)}>신청하기</button>
+            <div className="proRegBut">
+                <button  onClick={this.handleOpenModal.bind(this)}>신청하기</button>
 
                 {this.state.modal && (
                    <div className="MyModal"> 

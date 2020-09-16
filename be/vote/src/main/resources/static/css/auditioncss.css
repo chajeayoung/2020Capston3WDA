@@ -20,6 +20,10 @@ img.cardImg{
         .card{
         margin-left: 15px;
         }
+
+        .card2{
+            inline-size: -webkit-fill-available !important;
+        }
         .col-lg-12{
             width: auto !important;
         }

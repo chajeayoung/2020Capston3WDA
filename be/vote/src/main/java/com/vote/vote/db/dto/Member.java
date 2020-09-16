@@ -179,9 +179,14 @@ public class Member{
         return this.point;
     }
 
-    public String toString(){
-        return "no["+no+"] userid["+userid+"] password["+password+"] name[ "+name+"] gender[ "+gender+"] birth["+birth+"] nickname["+nickname+"] phone[ "+phone+"] addr[ "+addr+"] addr2["+addr2+"] profile["+profile+"]";
+    @Override
+    public String toString() {
+        return "Member [addr=" + addr + ", addr2=" + addr2 + ", birth=" + birth + ", gender=" + gender + ", joindate="
+                + joindate + ", name=" + name + ", nickname=" + nickname + ", no=" + no + ", password=" + password
+                + ", phone=" + phone + ", point=" + point + ", profile=" + profile + ", role=" + role + ", userid="
+                + userid + "]";
     }
+
 
 
 
