@@ -73,7 +73,7 @@ public class HotclibController {
 	 	Member member = memberRepository.findByUserid(userid); 
 	 	int r_id = member.getNo();
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-	 	pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "hotclibid"));
+	 	pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "hotclibid"));
 	 	model.addAttribute("hotclibList", hotclibRepository.findByProgramid(programid, pageable));
 //	 	model.addAttribute("rfile", rfileRepository.findAll());
 	 	return "hotclib/list";
