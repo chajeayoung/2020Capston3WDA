@@ -23,6 +23,7 @@ import com.vote.vote.repository.CustomPopularRepository;
 import com.vote.vote.repository.CustomProgramRepository;
 import com.vote.vote.repository.HashTagRepository;
 import com.vote.vote.repository.MemberJpaRepository;
+import com.vote.vote.repository.MemberRepository;
 import com.vote.vote.repository.PopularBoardJpaRepository;
 import com.vote.vote.repository.PopularJpaRepository;
 import com.vote.vote.repository.ProgramJpaRepository;
@@ -392,7 +393,12 @@ public class CommunityController {
      	Popular popular = popularRepository.findById(popularNum);
      	//PopularBoard board2 = popularBoardRepository.findById(popularNum);
      	Rfile rfile = new Rfile();    	
-    	
+		
+		Member user = memberRepository.findByNo(board.getRid()); 
+		 System.out.println("---------");
+		 System.out.println(user.toString());
+ 
+	
    
      	
      	System.out.println(board.toString());
@@ -422,18 +428,23 @@ public class CommunityController {
      	 rfile.setPid(board.getId());
      	 rfileRepository.saveAndFlush(rfile);
      	 }
-     	
+		 
+	
+
+		  memberRepository.pointUpdate(board.getRid());
+		  
  		return "redirect:/community/{program}/{popular}";
  	}	
     
-    @RequestMapping(value={"/{program}/{popular}/update"}) //프로그램>인기인>게시글작성
+    @RequestMapping(value={"/{program}/{popular}/update"}) //프로그램>인기인>게시글업데이트
    	public String popularBoardUpdate(@PathVariable("program") int programNum,
    									@PathVariable("popular") int popularNum,  									
    									PopularBoard board,
    								Model model) {
      	
-     	Program program = programRepository.findById(programNum);
-     	Popular popular = popularRepository.findById(popularNum);
+     	// Program program = programRepository.findById(programNum);
+		// Popular popular = popularRepository.findById(popularNum);
+
      	//PopularBoard board2 = popularBoardRepository.findById(boardNum);
      	//Rfile rfile = new Rfile();    	
     	
@@ -444,16 +455,14 @@ public class CommunityController {
 
 		String nowTime = format.format(time);
 	
-		
-		System.out.println(board.getDate());
+
 		board.setMdate(nowTime);
+			
+
+		popularBoardRepository.saveAndFlush(board);
+
 		
-     	System.out.println(board.toString());
-     	
-     	
-		
-     	popularBoardRepository.saveAndFlush(board);
-     	
+     	     	
      	
      	//if(file != null) {
     	//rfile.setFilename(storageService.store2(file)); 

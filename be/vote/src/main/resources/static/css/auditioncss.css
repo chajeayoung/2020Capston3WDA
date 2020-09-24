@@ -7,7 +7,10 @@ img.cardImg{
     padding-left: 0px !important;
      padding-right: 0px !important;
         }
-
+        .info {
+            font-weight: 700;
+            font-size: 20px;
+        }
 @media(max-width:550px){
 
     .t23{
@@ -16,6 +19,10 @@ img.cardImg{
 
         .card{
         margin-left: 15px;
+        }
+
+        .card2{
+            inline-size: -webkit-fill-available !important;
         }
         .col-lg-12{
             width: auto !important;

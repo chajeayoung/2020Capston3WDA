@@ -4,7 +4,6 @@ html{font-size: 15px !important ;}
   z-index:1;
   position: absolute;
   width:0;
-  height:160%;
   overflow-y:hidden;
   background: #ffffff;
   opacity:0.9;
@@ -42,6 +41,12 @@ html{font-size: 15px !important ;}
 	width:100%;
 	text-align:center;
 }
+
+.sidebar-nav li:last-child{
+ height:100px;
+ /* line-height: 140px; */
+}
+
 
 .sidebar-nav li{
   line-height:40px;  
