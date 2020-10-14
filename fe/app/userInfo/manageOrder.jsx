@@ -23,12 +23,12 @@ const axios = require('axios');
 class ManageOrder extends React.Component{
     constructor(props){
         super(props);
-        this.state = { order: [], pageNum: 1 , count: 0, modal:1, orderIndex:0};
-        this.url = '/userInfo/manage/order/axios?page='+(this.state.pageNum-1)+'&size='+5+'&sort="id"';
+        this.state = { order: [], pageNum: 1 , count: 0, modal:1, orderIndex:0, allCount:0};
+        this.url = '/userInfo/manage/order/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
         
     }
     setUrl(){
-        this.url = '/userInfo/manage/order/axios?page='+(this.state.pageNum-1)+'&size='+5+'&sort="id"';
+        this.url = '/userInfo/manage/order/axios?page='+(this.state.pageNum-1)+'&size='+10+'&sort="id"';
     }
     async componentDidMount(){
         
@@ -38,7 +38,8 @@ class ManageOrder extends React.Component{
     async getOrders(){
         let {data} = await axios.get(this.url)
         console.log("----------",data);
-        this.state.count = Math.ceil((data.count*1.0)/5)
+        this.setState({allCount:data.count})
+        this.state.count = Math.ceil((data.count*1.0)/10)
         this.setState({order:data.orderList})
     }
     pagenation(e,page){
@@ -93,7 +94,7 @@ class ManageOrder extends React.Component{
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <OrderList   data={this.state.order} modal={this.modalOn} that ={this}/>    
+                                    <OrderList   data={this.state.order} modal={this.modalOn} that ={this} count={this.state.allCount}/>    
                                 </TableBody>
                             </Table>
                         </Paper>
@@ -145,7 +146,7 @@ class OrderList extends React.Component {
             return (
                 <TableRow key={'div'+index}>
                              
-                    <TableCell className="smart" key={index}>{order.productId}</TableCell>
+                    <TableCell className="smart" key={index}>{this.props.count-index}</TableCell>
                     <TableCell><a href={"/shop/product/"+order.productId}>{order.name}</a></TableCell>
                     <TableCell className="smart">{order.itemPrice}</TableCell>
                     <TableCell>{order.count}</TableCell>

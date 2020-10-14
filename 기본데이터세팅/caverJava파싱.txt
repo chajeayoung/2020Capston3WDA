@@ -1,0 +1,5 @@
+
+ 
+./solc riro.sol --bin --abi --optimize -o . 
+
+./caver-java solidity generate -b riro.bin -a riro.abi -o . -p riro 

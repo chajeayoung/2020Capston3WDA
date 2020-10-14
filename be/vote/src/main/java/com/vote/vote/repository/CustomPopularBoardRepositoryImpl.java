@@ -73,25 +73,27 @@ public class CustomPopularBoardRepositoryImpl implements CustomPopularBoardRepos
 
 
             case 2: //제목+내용
-            // booleanBuilder.and(pm.popularid.eq(c));
+            booleanBuilder.and(pm.popularid.eq(c));
             booleanBuilder2.or(pm.title.contains(text));
             booleanBuilder2.or(pm.content.contains(text));
 
-            booleanBuilder.and(pm.id.in(query.select(pm.id).from(pm).where(booleanBuilder2).fetch()));
+            booleanBuilder.and(pm.id.in(query.select(pm.id).from(pm).offset(pageable.getOffset()).limit(pageable.getPageSize()).where(booleanBuilder2).fetch()));
             //booleanBuilder.and(pm.popularid.eq(c));
             break;
 
             case 3: //해쉬태그
+            booleanBuilder.and(pm.popularid.eq(c));
             booleanBuilder2.and(hm.hashtag.contains(text));
             booleanBuilder2.and(hm.popularid.eq(c));
-            booleanBuilder.and(pm.id.in(query.select(hm.pid).from(hm).where(booleanBuilder2).fetch()));
+            booleanBuilder.and(pm.id.in(query.select(hm.pid).from(hm).offset(pageable.getOffset()).limit(pageable.getPageSize()).where(booleanBuilder2).fetch()));
             break;
 
             case 4: //작성자
+            booleanBuilder.and(pm.popularid.eq(c));
             booleanBuilder2.or(mm.nickname.contains(text));
             booleanBuilder2.or(mm.name.contains(text));
            // booleanBuilder2.and(mm.no.in(query.select(mm.no).from(mm).where(booleanBuilder3).fetch()));
-            booleanBuilder.and(pm.rid.in(query.select(mm.no).from(mm).where(booleanBuilder2).fetch()));
+            booleanBuilder.and(pm.rid.in(query.select(mm.no).from(mm).offset(pageable.getOffset()).limit(pageable.getPageSize()).where(booleanBuilder2).fetch()));
 
             // booleanBuilder.and(pm.popularid.eq(c));
             // booleanBuilder.and(pm.title.eq(text));
