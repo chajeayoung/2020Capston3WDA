@@ -21,10 +21,58 @@ th:replace="~{auth_layout::auth_layout(~{::content},_,~{::ss},~{::subTitle},~{::
         <div class="flash_message" th:text="${message}"></div>
         <form method="post" action="/auth/register" id="register_form">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <div id="register"></div>
+            <div>
+               
+                <table className="register_table">
+                    <tbody>
+                        <tr>
+                            <td><input className="register_input" type="e-mail" id="e-mail" name="userid"  placeholder="이메일"  required/></td>
+                            <td><input className="check_button"  type="button" value="중복확인" onClick={this.checkId.bind(this)} /></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="password" name="password" id="pwd" placeholder="비밀번호" required/></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="password" name="password_check" id="pwd_check" placeholder="비밀번호 확인" required/></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"><hr></hr></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="text" name="name" placeholder="이름"  required/></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_birth" type="date" name="birth"  required/></td>
+                        </tr>
+                        <tr>
+                            <td className="register_left_td"><input className="register_gender" type="radio" id="male" name="gender" value="0" required/>남자</td>
+                            <td className="register_right_td"><input type="radio" id="female" name="gender" value="1" required/>여자</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"><hr></hr></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="tel" name="phone"  placeholder="010-0000-0000"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required/></td>
+                        </tr>
+                        <tr>
+                            <td ><input className="register_input" type="text" name="addr" placeholder="도로명 주소" required/></td>
+                            {/* <td colSpan="0.3"><input className="addr_input" type="text" name="addr" placeholder="시 도"/></td>
+                            <td colSpan="0.3"><input className="addr_input" type="text" name="addr" placeholder="시 군 구"/></td>
+                            <td colSpan="0.3"><input className="addr_input" type="text" name="addr" placeholder="동 명 읍"/></td> */}
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="text" name="addr2" placeholder="기타주소" required/></td>
+                        </tr>
+                        <tr>
+                            <td><input className="register_input" type="text" name="nickname" placeholder="닉네임"  required/></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <button className="submit_button" type="submit">회원가입</button>
+            </div>
         </form>
-        <script src="../assets/register.js"></script>
-    </content>
+       </content>
     <footer>
         <footer>
             <div class="footer">
