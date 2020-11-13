@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{auth_layout::auth_layout(~{::content},_,~{::ss},~{::subTitle},~{::footer})}">
+th:replace="~{auth_layout::auth_layout(~{::content},_,_,~{::subTitle},~{::footer})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <ss>
+    <!-- <ss>
         <link rel="stylesheet" href="/css/auth/login.css">
-    </ss>
+    </ss> -->
 </head>
 <body>
     <subTitle>
@@ -17,12 +17,23 @@ th:replace="~{auth_layout::auth_layout(~{::content},_,~{::ss},~{::subTitle},~{::
     </subTitle>
         
     <content>
+
+        <link rel="stylesheet" href="/css/auth/login.css">
+
         <div class="auth_left">
             <div class="item_left">
                 <form method="post" th:action="@{/auth}">
-                    <div id="login"></div>
+                    <div>
+                        <div>
+                            <input class="login_input" type="text" id="username"name="username" placeholder="이메일"/>
+                        </div>
+                        <div>
+                            <input class="login_input" type="password" id="password" name="password" placeholder="비밀번호" />
+                        </div>
+                        <button type="submit" class="login_button">로그인</button>
+                    </div>
                 </form>
-                <script src="../assets/login.js"></script>
+             
             </div>
         </div>
         <div class="auth_right">
