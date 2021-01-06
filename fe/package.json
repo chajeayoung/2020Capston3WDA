@@ -46,7 +46,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.54",
     "@material-ui/styles": "^4.10.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-jsonp-pro": "^1.1.8",
     "bit": "^1.0.20",
     "bootstrap": "^4.4.1",
